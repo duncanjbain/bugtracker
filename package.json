@@ -1,6 +1,6 @@
 {
-    "private": true,
-    "name": "bugtracker",
-    "workspaces": [],
-    "scripts": {}
- }
+  "private": true,
+  "name": "bugtracker",
+  "workspaces": ["packages/*"],
+  "scripts": {}
+}
