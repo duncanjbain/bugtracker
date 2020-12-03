@@ -1,6 +1,9 @@
 {
   "private": true,
   "name": "bugtracker",
-  "workspaces": ["packages/*"],
-  "scripts": {"build": "yarn workspace frontend run build"}
+  "workspaces": ["packages/frontend", "packages/backend"],
+  "scripts": {
+      "build": "yarn workspace frontend run build",
+      "start-backend": "yarn workspace backend run start"
+    }
 }
