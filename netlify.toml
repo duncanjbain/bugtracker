@@ -1,4 +1,3 @@
 [build]
-  command = "yarn run build"
+  command = "yarn build"
   publish="packages/frontend/build"
-  base = "packages/frontend"
