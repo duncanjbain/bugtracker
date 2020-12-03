@@ -2,5 +2,5 @@
   "private": true,
   "name": "bugtracker",
   "workspaces": ["packages/*"],
-  "scripts": {}
+  "scripts": {"build": "yarn workspace frontend run build"}
 }
