@@ -3,7 +3,7 @@ const app = express()
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.send('Hello World! Github workflow test')
+  res.send('Hello World! Github workflow test 2')
 })
 
 app.listen(PORT, () => {
