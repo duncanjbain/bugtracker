@@ -1,3 +1,4 @@
+const { UserInputError } = require('apollo-server-express')
 
 const resolvers = {
   Mutation: {
@@ -6,7 +7,7 @@ const resolvers = {
         const user = await User.findOne({email})
         console.log('run signup')
         if(user) {
-          throw new UserInputError('User already exists')
+          throw new UserInputError('User with this email already exists')
         }
 
         const newUser = await new User({
