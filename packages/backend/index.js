@@ -1,16 +1,13 @@
 require("dotenv").config();
 const express = require('express')
 const mongoose = require('mongoose')
-const { ApolloServer, AuthenticationError, makeExecutableSchema } = require('apollo-server-express')
-const typeDefs = require('./graphql/schema');
-const resolvers = require('./graphql/resolvers')
+const { ApolloServer, AuthenticationError, UserInputError, makeExecutableSchema, gql } = require('apollo-server-express')
 const User = require('./models/User')
-
-
+const jwt = require('jsonwebtoken');
 const MONGODB_URI = process.env.MONGODB_URI;
-
+const typeDefs = require('./graphql/schema')
+const resolvers = require('./graphql/resolvers')
 const app = express();
-
 const path = '/graphql';
 
 mongoose
@@ -23,11 +20,6 @@ mongoose
   })
   .catch((error) => {
     console.log("error connection to MongoDB:", error.message);
-  });
-
-  const schema = makeExecutableSchema({
-    typeDefs,
-    resolvers
   });
 
  const getCurrentUser = async (req) => {
@@ -44,7 +36,9 @@ mongoose
   }
 
 const apolloServer = new ApolloServer({
-  schema,
+  typeDefs,
+  resolvers,
+  uploads: false,
   context: async ({req }) => {
     //pass User MongoDB model and currentUser into Apollo context
     const currentUser = await getCurrentUser(req)
@@ -54,8 +48,6 @@ const apolloServer = new ApolloServer({
     }
   }
 });
-
-
 
 apolloServer.applyMiddleware({ app, path})
 
