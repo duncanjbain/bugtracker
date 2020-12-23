@@ -38,7 +38,7 @@ const resolvers = {
         email,
         password,
       }).save()
-      return newUser
+      return { user: newUser, token: createToken(newUser, JWT_SECRET) }
     },
     signinUser: async (root, { email, password }, { User }) => {
       const user = await User.findOne({ email })
@@ -48,7 +48,7 @@ const resolvers = {
         throw new AuthenticationError('Invalid email or password')
       }
 
-      return { token: createToken(user, JWT_SECRET) }
+      return { user: user, token: createToken(user, JWT_SECRET) }
     },
   },
 }

@@ -14,8 +14,9 @@ const typeDefs = gql`
     joinDate: String!
   }
 
-  type Token {
-    token: String
+  type AuthInfo {
+    token: String!
+    user: User!
   }
 
   type Mutation {
@@ -24,8 +25,8 @@ const typeDefs = gql`
       lastName: String!
       email: String!
       password: String!
-    ): User
-    signinUser(email: String!, password: String!): Token
+    ): AuthInfo
+    signinUser(email: String!, password: String!): AuthInfo
   }
 `
 
