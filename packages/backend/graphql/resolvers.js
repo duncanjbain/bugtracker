@@ -7,8 +7,10 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const createToken = (user, secret) => {
-  const { email, firstName, lastName } = user;
-  return jwt.sign({ email, firstName, lastName }, secret, { expiresIn: "1d" });
+  const { id, email, firstName, lastName } = user;
+  return jwt.sign({ id, email, firstName, lastName }, secret, {
+    expiresIn: "1d",
+  });
 };
 
 const resolvers = {
@@ -39,7 +41,7 @@ const resolvers = {
         throw new AuthenticationError("Invalid email or password");
       }
 
-      return {token: createToken(user, JWT_SECRET)}
+      return { token: createToken(user, JWT_SECRET) };
     },
   },
 };
