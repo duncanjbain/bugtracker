@@ -1,9 +1,10 @@
-const { gql } = require("apollo-server-express");
+const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
   type Query {
     _dummy: String
   }
+
   type User {
     id: ID!
     firstName: String!
@@ -26,6 +27,6 @@ const typeDefs = gql`
     ): User
     signinUser(email: String!, password: String!): Token
   }
-`;
+`
 
-module.exports = typeDefs;
+module.exports = typeDefs
