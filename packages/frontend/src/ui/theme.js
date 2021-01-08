@@ -18,7 +18,7 @@ export const theme = {
     "2xl": `min-width: ${screenSize["2xl"]}`,
   },
   colors: {
-    white: 'hsl(0, 0%, 100%',
+    white: 'hsl(0, 0%, 100%)',
     black: 'hsl(0, 0%, 4%)',
     light: 'hsl(0, 0%, 96%)',
     dark: 'hsl(0, 0%, 21%)',
