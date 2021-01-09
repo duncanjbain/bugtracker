@@ -36,16 +36,22 @@ const SignupFormContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 const FormGroup = styled.div`
   padding: 0.5rem;
   justify-content: space-between;
   display: flex;
+  flex-direction: column;
 `;
 
 const InputLabel = styled.label`
   padding-right: 0.5rem;
+`;
+
+const SubmitButton = styled.button`
+  align-self: center;
 `;
 
 const UserLogin = () => {
@@ -60,6 +66,7 @@ const UserLogin = () => {
         <StyledBugFixLogo />
       </CallToAction>
       <SignupFormContainer>
+        <h2>Sign Up</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormGroup>
             <InputLabel htmlFor="firstName">First Name</InputLabel>
@@ -102,8 +109,9 @@ const UserLogin = () => {
             />
           </FormGroup>
 
-          <input type="submit" value="Sign Up" />
+          <SubmitButton type="submit">Sign Up</SubmitButton>
         </form>
+        <p>Already have an account? Click here to sign in.</p>
       </SignupFormContainer>
     </LoginContainer>
   );
