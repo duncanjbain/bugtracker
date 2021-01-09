@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import { ReactComponent as BugFixLogo } from '../assets/svg/undraw_bug_fixing.svg';
 
 const LoginContainer = styled.div`
@@ -31,14 +32,81 @@ const StyledBugFixLogo = styled(BugFixLogo)`
   height: auto;
 `;
 
-const UserLogin = () => (
-  <LoginContainer>
-    <CallToAction>
-      <CtaHeader>Bug Tracker</CtaHeader>
-      <CtaSubHeader>Track, manage and squash those bugs!</CtaSubHeader>
-      <StyledBugFixLogo />
-    </CallToAction>
-  </LoginContainer>
-);
+const SignupFormContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const FormGroup = styled.div`
+  padding: 0.5rem;
+  justify-content: space-between;
+  display: flex;
+`;
+
+const InputLabel = styled.label`
+  padding-right: 0.5rem;
+`;
+
+const UserLogin = () => {
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => console.log(data);
+  console.log(errors);
+  return (
+    <LoginContainer>
+      <CallToAction>
+        <CtaHeader>Bug Tracker</CtaHeader>
+        <CtaSubHeader>Track, manage and squash those bugs!</CtaSubHeader>
+        <StyledBugFixLogo />
+      </CallToAction>
+      <SignupFormContainer>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormGroup>
+            <InputLabel htmlFor="firstName">First Name</InputLabel>
+            <input
+              id="firstName"
+              type="text"
+              placeholder="First name"
+              name="First name"
+              ref={register({ required: true, maxLength: 80 })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="lastName">Last Name</InputLabel>
+            <input
+              id="lastName"
+              type="text"
+              placeholder="Last name"
+              name="Last name"
+              ref={register({ required: true, maxLength: 100 })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <input
+              id="email"
+              type="text"
+              placeholder="Email"
+              name="Email"
+              ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <input
+              id="password"
+              type="text"
+              placeholder="Password"
+              name="Password"
+              ref={register({ required: true })}
+            />
+          </FormGroup>
+
+          <input type="submit" value="Sign Up" />
+        </form>
+      </SignupFormContainer>
+    </LoginContainer>
+  );
+};
 
 export default UserLogin;
