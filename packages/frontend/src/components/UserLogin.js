@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { gql, useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { ReactComponent as BugFixLogo } from '../assets/svg/undraw_bug_fixing.svg';
+
 
 const LoginContainer = styled.div`
   height: 100vh;
@@ -37,6 +39,7 @@ const SignupFormContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
 `;
 
 const FormGroup = styled.div`
@@ -50,14 +53,40 @@ const InputLabel = styled.label`
   padding-right: 0.5rem;
 `;
 
+const TextInput = styled.input`
+padding: 0.5rem;
+width:100%;
+`;
+
 const SubmitButton = styled.button`
   align-self: center;
 `;
 
+const ADD_USER = gql`
+mutation SignupUser($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+  signupUser(
+    firstName: $firstName,
+    lastName: $lastName,
+    email: $email,
+    password: $password
+  ) {
+			user {
+        email
+      }
+    token
+  }
+} 
+`
+
 const UserLogin = () => {
+  // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+  // eslint-disable-next-line no-unused-vars
+  const [addUser] = useMutation(ADD_USER);
+  const onSubmit = async (event) => {
+    const {firstName, lastName, email, password} = event;
+    addUser({ variables: { firstName, lastName, email, password } });
+  }
   return (
     <LoginContainer>
       <CallToAction>
@@ -70,41 +99,41 @@ const UserLogin = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormGroup>
             <InputLabel htmlFor="firstName">First Name</InputLabel>
-            <input
+            <TextInput
               id="firstName"
               type="text"
               placeholder="First name"
-              name="First name"
+              name="firstName"
               ref={register({ required: true, maxLength: 80 })}
             />
           </FormGroup>
           <FormGroup>
             <InputLabel htmlFor="lastName">Last Name</InputLabel>
-            <input
+            <TextInput
               id="lastName"
               type="text"
               placeholder="Last name"
-              name="Last name"
+              name="lastName"
               ref={register({ required: true, maxLength: 100 })}
             />
           </FormGroup>
           <FormGroup>
             <InputLabel htmlFor="email">Email Address</InputLabel>
-            <input
+            <TextInput
               id="email"
               type="text"
               placeholder="Email"
-              name="Email"
+              name="email"
               ref={register({ required: true, pattern: /^\S+@\S+$/i })}
             />
           </FormGroup>
           <FormGroup>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <input
+            <TextInput
               id="password"
               type="text"
               placeholder="Password"
-              name="Password"
+              name="password"
               ref={register({ required: true })}
             />
           </FormGroup>
