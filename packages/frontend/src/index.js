@@ -10,13 +10,9 @@ import App from './App';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  fetchOptions: {
-    mode: 'no-cors',
-  },
   link: new HttpLink({
-    uri: process.env.REACT_APP_GRAPHQL_URI,
+    uri: '/graphql',
   }),
-  
 });
 
 ReactDOM.render(

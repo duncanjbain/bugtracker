@@ -52,7 +52,10 @@ const apolloServer = new ApolloServer({
   },
 });
 
-apolloServer.applyMiddleware({ app, path });
+apolloServer.applyMiddleware({
+  app,
+  path,
+});
 
 const PORT = process.env.PORT || 3000;
 
