@@ -67,7 +67,7 @@ const UserLogin = () => {
   const [addUser] = useMutation(ADD_USER);
   const onSubmit = async (data) => {
     const { firstName, lastName, email, password } = data;
-    addUser({ variables: { firstName, lastName, email, password } });
+    await addUser({ variables: { firstName, lastName, email, password } });
   };
   return (
     <LoginContainer>
