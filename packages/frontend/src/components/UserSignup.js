@@ -44,12 +44,14 @@ const ADD_USER = gql`
   mutation SignupUser(
     $firstName: String!
     $lastName: String!
+    $username: String!
     $email: String!
     $password: String!
   ) {
     signupUser(
       firstName: $firstName
       lastName: $lastName
+      username: $username
       email: $email
       password: $password
     ) {
@@ -66,8 +68,8 @@ const UserLogin = () => {
   const { register, handleSubmit, errors } = useForm();
   const [addUser] = useMutation(ADD_USER);
   const onSubmit = async (data) => {
-    const { firstName, lastName, email, password } = data;
-    await addUser({ variables: { firstName, lastName, email, password } });
+    const { firstName, lastName, username, email, password } = data;
+    await addUser({ variables: { firstName, lastName, username, email, password } });
   };
   return (
     <LoginContainer>
@@ -96,6 +98,16 @@ const UserLogin = () => {
               type="text"
               placeholder="Last name"
               name="lastName"
+              ref={register({ required: true, maxLength: 100 })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="username">Username</InputLabel>
+            <TextInput
+              id="username"
+              type="text"
+              placeholder="Username"
+              name="username"
               ref={register({ required: true, maxLength: 100 })}
             />
           </FormGroup>

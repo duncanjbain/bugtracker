@@ -8,11 +8,12 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 
 const createToken = (user, secret) => {
-  const { id, email, firstName, lastName } = user;
+  const { id, email, firstName, lastName, username } = user;
   return jwt.sign(
     {
       id,
       email,
+      username,
       firstName,
       lastName,
     },
@@ -27,24 +28,25 @@ const resolvers = {
   Mutation: {
     signupUser: async (
       root,
-      { firstName, lastName, email, password },
+      { firstName, lastName, email, password, username },
       { User }
     ) => {
-      const foundUser = await User.findOne({ email });
+      const foundUser = await User.findOne({ username });
       if (foundUser) {
-        throw new UserInputError('User with this email already exists');
+        throw new UserInputError('User with this username already exists');
       }
 
       const newUser = await new User({
         firstName,
         lastName,
+        username,
         email,
         password,
       }).save();
       return { user: newUser, token: createToken(newUser, JWT_SECRET) };
     },
-    signinUser: async (root, { email, password }, { User }) => {
-      const foundUser = await User.findOne({ email });
+    signinUser: async (root, { username, password }, { User }) => {
+      const foundUser = await User.findOne({ username });
       const isValidPassowrd = bcrypt.compare(password, foundUser.password);
 
       if (!foundUser || !isValidPassowrd) {

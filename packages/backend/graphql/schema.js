@@ -9,6 +9,7 @@ const typeDefs = gql`
     id: ID!
     firstName: String!
     lastName: String!
+    username: String!
     password: String!
     email: String!
     joinDate: String!
@@ -23,10 +24,11 @@ const typeDefs = gql`
     signupUser(
       firstName: String!
       lastName: String!
+      username: String!
       email: String!
       password: String!
     ): AuthInfo
-    signinUser(email: String!, password: String!): AuthInfo
+    signinUser(username: String!, password: String!): AuthInfo
   }
 `;
 

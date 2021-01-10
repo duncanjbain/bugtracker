@@ -41,8 +41,8 @@ const StyledBugFixLogo = styled(BugFixLogo)`
 `;
 
 const SIGNIN_USER = gql`
-  mutation signinUser($email: String!, $password: String!) {
-    signinUser(email: $email, password: $password) {
+  mutation signinUser($username: String!, $password: String!) {
+    signinUser(username: $username, password: $password) {
       token
     }
   }
@@ -54,8 +54,8 @@ const UserLogin = () => {
   const [signinUser, { data }] = useMutation(SIGNIN_USER);
 
   const onSubmit = async (formData) => {
-    const { email, password } = formData;
-    await signinUser({ variables: { email, password } });
+    const { username, password } = formData;
+    await signinUser({ variables: { username, password } });
     console.log(data);
   };
 
@@ -70,13 +70,13 @@ const UserLogin = () => {
         <h2>Log In</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormGroup>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <InputLabel htmlFor="username">Username</InputLabel>
             <TextInput
-              id="email"
+              id="Username"
               type="text"
-              placeholder="Email"
-              name="email"
-              ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+              placeholder="Username"
+              name="username"
+              ref={register({ required: true})}
             />
           </FormGroup>
           <FormGroup>
