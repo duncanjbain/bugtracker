@@ -51,12 +51,13 @@ const SIGNIN_USER = gql`
 const UserLogin = () => {
   // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, errors } = useForm();
-  const [signinUser, { data }] = useMutation(SIGNIN_USER);
+  const [signinUser] = useMutation(SIGNIN_USER);
 
   const onSubmit = async (formData) => {
     const { username, password } = formData;
-    await signinUser({ variables: { username, password } });
-    console.log(data);
+    const {data} = await signinUser({ variables: { username, password } });
+    await localStorage.setItem('token', data.signinUser.token);
+
   };
 
   return (
