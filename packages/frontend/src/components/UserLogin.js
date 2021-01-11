@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 import { ReactComponent as BugFixLogo } from '../assets/svg/undraw_bug_fixing.svg';
 import {
@@ -56,9 +56,8 @@ const UserLogin = () => {
 
   const onSubmit = async (formData) => {
     const { username, password } = formData;
-    const {data} = await signinUser({ variables: { username, password } });
+    const { data } = await signinUser({ variables: { username, password } });
     await localStorage.setItem('token', data.signinUser.token);
-
   };
 
   return (
@@ -78,7 +77,7 @@ const UserLogin = () => {
               type="text"
               placeholder="Username"
               name="username"
-              ref={register({ required: true})}
+              ref={register({ required: true })}
             />
           </FormGroup>
           <FormGroup>
@@ -94,7 +93,10 @@ const UserLogin = () => {
 
           <SubmitButton type="submit">Log In</SubmitButton>
         </form>
-        <p>Don&apos;t have an account? Click <Link to="/signup">here</Link> create one.</p>
+        <p>
+          Don&apos;t have an account? Click <Link to="/signup">here</Link>{' '}
+          create one.
+        </p>
       </SignupFormContainer>
     </LoginContainer>
   );

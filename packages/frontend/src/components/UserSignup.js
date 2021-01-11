@@ -74,7 +74,7 @@ const UserLogin = () => {
     await addUser({
       variables: { firstName, lastName, username, email, password },
     });
-    history.push("/login")
+    history.push('/login');
   };
   return (
     <LoginContainer>
@@ -139,7 +139,10 @@ const UserLogin = () => {
 
           <SubmitButton type="submit">Sign Up</SubmitButton>
         </form>
-        <p>Already have an account? Click <Link to="/login">here</Link> to log in.</p>
+        <p>
+          Already have an account? Click <Link to="/login">here</Link> to log
+          in.
+        </p>
       </SignupFormContainer>
     </LoginContainer>
   );
