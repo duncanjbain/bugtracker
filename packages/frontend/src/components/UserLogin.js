@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client';
 import { ReactComponent as BugFixLogo } from '../assets/svg/undraw_bug_fixing.svg';
 import {
@@ -93,7 +94,7 @@ const UserLogin = () => {
 
           <SubmitButton type="submit">Log In</SubmitButton>
         </form>
-        <p>Don&apos;t have an account? Click here create one.</p>
+        <p>Don&apos;t have an account? Click <Link to="/signup">here</Link> create one.</p>
       </SignupFormContainer>
     </LoginContainer>
   );

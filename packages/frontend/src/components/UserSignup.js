@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { gql, useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import { useHistory, Link } from 'react-router-dom';
 import { ReactComponent as BugFixLogo } from '../assets/svg/undraw_bug_fixing.svg';
 import {
   SignupFormContainer,
@@ -64,12 +65,16 @@ const ADD_USER = gql`
 `;
 
 const UserLogin = () => {
+  const history = useHistory();
   // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, errors } = useForm();
   const [addUser] = useMutation(ADD_USER);
   const onSubmit = async (data) => {
     const { firstName, lastName, username, email, password } = data;
-    await addUser({ variables: { firstName, lastName, username, email, password } });
+    await addUser({
+      variables: { firstName, lastName, username, email, password },
+    });
+    history.push("/login")
   };
   return (
     <LoginContainer>
@@ -134,7 +139,7 @@ const UserLogin = () => {
 
           <SubmitButton type="submit">Sign Up</SubmitButton>
         </form>
-        <p>Already have an account? Click here to sign in.</p>
+        <p>Already have an account? Click <Link to="/login">here</Link> to log in.</p>
       </SignupFormContainer>
     </LoginContainer>
   );

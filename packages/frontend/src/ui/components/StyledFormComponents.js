@@ -1,6 +1,4 @@
-
 import styled from 'styled-components';
-
 
 export const SubmitButton = styled.button`
   align-self: center;
