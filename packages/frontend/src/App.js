@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { GlobalStyle, theme } from './ui/theme';
 import UserLogin from './components/UserLogin';
 import UserSignup from './components/UserSignup';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -12,11 +13,14 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Switch>
-          <Route exact path="/signup">
+          <Route path="/signup">
             <UserSignup />
           </Route>
-          <Route exact path="/login">
+          <Route path="/login">
             <UserLogin />
+          </Route>
+          <Route  path="/dashboard">
+            <Dashboard />
           </Route>
         </Switch>
       </ThemeProvider>
