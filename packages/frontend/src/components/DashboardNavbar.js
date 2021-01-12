@@ -5,19 +5,31 @@ const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: ${(props) => props.theme.colors.primary};
 `;
 
 const NavLinks = styled.ul`
   display: flex;
-  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 `;
 
 const NavItem = styled.li`
-  list-style: none;
   padding: 0.5rem;
 `;
 
-const NavLink = styled.a``;
+const NavLink = styled.a`
+  color: ${(props) => props.theme.colors.light};
+  padding: 0.5rem;
+  display: block;
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.colors.white};
+    background-color: #00b89c;
+    transition: all 0.15s ease-in;
+  }
+`;
 
 const DashboardNavbar = () => (
   <NavContainer>
