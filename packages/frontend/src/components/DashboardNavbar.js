@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const NavContainer = styled.nav`
   display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
   justify-content: space-between;
   align-items: center;
   background-color: ${(props) => props.theme.colors.primary};
@@ -20,6 +22,7 @@ const NavItem = styled.li`
 `;
 
 const NavLink = styled.a`
+  border-radius: 5px;
   color: ${(props) => props.theme.colors.light};
   padding: 0.5rem;
   display: block;
