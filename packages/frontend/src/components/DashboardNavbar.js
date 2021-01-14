@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NavContainer = styled.nav`
+ grid-area: header;
   display: flex;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -27,6 +28,7 @@ const NavLink = styled.a`
   padding: 0.5rem;
   display: block;
   text-decoration: none;
+  font-weight: 600;
   &:hover {
     color: ${(props) => props.theme.colors.white};
     background-color: #00b89c;
