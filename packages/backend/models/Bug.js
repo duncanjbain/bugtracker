@@ -19,8 +19,8 @@ const BugSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  project: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
+  project: { type: Schema.Types.ObjectId, ref: 'Project' },
   labels: [{ type: Schema.Types.ObjectId, ref: 'BugLabels' }],
   created: {
     type: Date,
