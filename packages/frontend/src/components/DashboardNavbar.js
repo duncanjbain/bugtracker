@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Avatar from 'react-avatar';
+import {ReactComponent as NotificationIcon} from '../assets/svg/icons/bell.svg'
+import {ReactComponent as SettingsIcon} from '../assets/svg/icons/settings.svg'
 
 const NavContainer = styled.nav`
  grid-area: header;
@@ -8,7 +11,7 @@ const NavContainer = styled.nav`
   padding-right: 1rem;
   justify-content: space-between;
   align-items: center;
-  background-color: ${(props) => props.theme.colors.primary};
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,.2);
 `;
 
 const NavLinks = styled.ul`
@@ -16,6 +19,7 @@ const NavLinks = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 `;
 
 const NavItem = styled.li`
@@ -24,7 +28,7 @@ const NavItem = styled.li`
 
 const NavLink = styled.a`
   border-radius: 5px;
-  color: ${(props) => props.theme.colors.light};
+  color: ${(props) => props.theme.colors.dark};
   padding: 0.5rem;
   display: block;
   text-decoration: none;
@@ -34,6 +38,17 @@ const NavLink = styled.a`
     background-color: #00b89c;
     transition: all 0.15s ease-in;
   }
+`;
+
+const StyledNotificationIcon = styled(NotificationIcon)`
+  display: inline-block;
+  vertical-align: text-bottom;
+`;
+
+
+const StyledSettingsIcon = styled(SettingsIcon)`
+  display: inline-block;
+  vertical-align: text-bottom;
 `;
 
 const DashboardNavbar = () => (
@@ -50,14 +65,17 @@ const DashboardNavbar = () => (
       </NavItem>
     </NavLinks>
     <NavLinks>
-      <NavItem>
-        <NavLink href="#">Notifications</NavLink>
-      </NavItem>
-      <NavItem>
+    <NavItem>
         <NavLink href="#">Search</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="#">Profile</NavLink>
+        <NavLink href="#"><StyledNotificationIcon /></NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink href="#"><StyledSettingsIcon /></NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink href="#"><Avatar name="Duncan Bain" round size="30px" /></NavLink>
       </NavItem>
     </NavLinks>
   </NavContainer>

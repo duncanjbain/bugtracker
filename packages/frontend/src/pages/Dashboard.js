@@ -11,7 +11,7 @@ const DashboardWrapper = styled.main`
   grid-template-areas:
     'header header'
     'projects  mybugs';
-  grid-gap: 1rem;
+  grid-gap: 2rem;
 `;
 
 const Dashboard = () => (
