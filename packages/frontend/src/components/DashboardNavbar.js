@@ -69,13 +69,13 @@ const DashboardNavbar = () => (
         <NavLink href="#">Search</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="#"><StyledNotificationIcon /></NavLink>
+        <NavLink href="#"><StyledNotificationIcon alt='Bell Notification Icon' aria-label="Link to Notifications" /></NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="#"><StyledSettingsIcon /></NavLink>
+        <NavLink href="#"><StyledSettingsIcon alt='Cog Wheel Settings Icon' aria-label="Link to Settings"/></NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="#"><Avatar name="Duncan Bain" round size="30px" /></NavLink>
+        <NavLink href="#"><Avatar name="Duncan Bain" round size="30px" alt="Initials of Name Avatar Icon" /></NavLink>
       </NavItem>
     </NavLinks>
   </NavContainer>

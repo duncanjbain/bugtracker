@@ -6,7 +6,7 @@ const CardWrapper = styled.article`
   grid-area: mybugs;
   display: flex;
   flex-direction: column;
-  margin-right: 2rem;
+  margin-right: 1.5rem;
   border-radius: 3px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   border-top: 5px solid ${(props) => props.theme.colors.primary};
@@ -18,13 +18,15 @@ const CardWrapper = styled.article`
 
 const CardTitle = styled.h3`
   font-weight: 600;
-  padding-right: 0.75rem;
-  padding-bottom: 0.75rem;
+  margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
 `;
 
 const StyledReloadIcon = styled(ReloadIcon)`
-  height: 16px;
+  display: inline-block;
+  vertical-align: text-bottom;
   width: 16px;
+  height: 16px;
 `;
 
 const CardHeader = styled.div`
@@ -61,7 +63,7 @@ const DashboardMyBugsCard = () => {
   return (
     <CardWrapper>
       <CardHeader>
-        <CardTitle>My Bugs</CardTitle>
+        <CardTitle><a href="https://localhost/bugs/user" >My Bugs</a></CardTitle>
         <StyledReloadIcon />
       </CardHeader>
       <BugListTable>
