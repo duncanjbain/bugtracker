@@ -20,6 +20,17 @@ const typeDefs = gql`
     user: User!
   }
 
+  type Bug {
+    id: ID!
+    key: String!
+    summary: String!
+    description: String!
+    priority: String!
+    author: String!
+    project: String!
+    labels: [String!]
+  }
+
   type Mutation {
     signupUser(
       firstName: String!
@@ -29,6 +40,15 @@ const typeDefs = gql`
       password: String!
     ): AuthInfo
     signinUser(username: String!, password: String!): AuthInfo
+    createBug(
+      key: String!
+      summary: String!
+      description: String!
+      priority: String!
+      author: String!
+      project: String!
+      labels: [String!]
+    ): Bug
   }
 `;
 

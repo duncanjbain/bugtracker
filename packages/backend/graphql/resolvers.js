@@ -55,6 +55,27 @@ const resolvers = {
 
       return { user: foundUser, token: createToken(foundUser, JWT_SECRET) };
     },
+    createBug: async (
+      root,
+      { key, summary, description, priority, author, project, labels },
+      { Bug }
+    ) => {
+      const foundKey = await Bug.findOne({ key });
+      if (foundKey) {
+        throw new UserInputError('Bug with this key already exists');
+      }
+
+      const newBug = await new Bug({
+        key,
+        summary,
+        description,
+        priority,
+        author,
+        project,
+        labels,
+      }).save();
+      return newBug;
+    },
   },
 };
 

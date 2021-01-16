@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { ApolloServer, AuthenticationError } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
+const Bug = require('./models/Bug');
 
 const { MONGODB_URI } = process.env;
 const typeDefs = require('./graphql/schema');
@@ -48,6 +49,7 @@ const apolloServer = new ApolloServer({
     return {
       currentUser,
       User,
+      Bug,
     };
   },
 });
@@ -58,10 +60,6 @@ apolloServer.applyMiddleware({
 });
 
 const PORT = process.env.PORT || 3000;
-
-app.get('/', (req, res) => {
-  res.send('Hello World! Github workflow test 2');
-});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}${path}`);

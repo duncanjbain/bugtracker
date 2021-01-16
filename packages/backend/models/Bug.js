@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose.Schema;
-
 const BugSchema = new mongoose.Schema({
   key: {
     type: String,
@@ -18,13 +16,15 @@ const BugSchema = new mongoose.Schema({
   priority: {
     type: String,
     required: true,
+    default: 'Medium',
   },
-  author: { type: Schema.Types.ObjectId, ref: 'User' },
-  project: { type: Schema.Types.ObjectId, ref: 'Project' },
-  labels: [{ type: Schema.Types.ObjectId, ref: 'BugLabels' }],
+  author: { type: String, required: true },
+  project: { type: String, required: true },
+  labels: [{ type: String, required: true }],
   created: {
     type: Date,
     default: Date.now,
+    required: true,
   },
 });
 
