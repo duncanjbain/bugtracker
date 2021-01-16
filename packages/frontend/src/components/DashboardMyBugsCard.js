@@ -1,37 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ReloadIcon } from '../assets/svg/icons/refresh-ccw.svg';
-import { CardWrapper, CardTitle, CardHeader } from '../ui/components/StyledDashboardCard'
-
-const StyledReloadIcon = styled(ReloadIcon)`
-  display: inline-block;
-  vertical-align: text-bottom;
-  width: 16px;
-  height: 16px;
-`;
-
-const BugListTable = styled.table`
-  border-collapse: collapse;
-`;
-
-const BugListTableHeader = styled.th`
-  text-align: left;
-`;
-
-const BugListTableRow = styled.tr`
-  &:hover {
-    background: ${(props) => props.theme.colors.light};
-  }
-`;
-
-const BugListTableLink = styled.a`
-  color: ${(props) => props.theme.colors.link};
-  text-decoration: none;
-  &:hover {
-    color: ${(props) => props.theme.colors.dark};
-    text-decoration: underline;
-  }
-`;
+import {
+  CardWrapper,
+  CardTitle,
+  CardHeader,
+} from '../ui/components/StyledDashboardCard';
 
 // eslint-disable-next-line arrow-body-style
 const DashboardMyBugsCard = () => {
@@ -100,3 +74,33 @@ const DashboardMyBugsCard = () => {
 };
 
 export default DashboardMyBugsCard;
+
+const StyledReloadIcon = styled(ReloadIcon)`
+  display: inline-block;
+  vertical-align: text-bottom;
+  width: 16px;
+  height: 16px;
+`;
+
+const BugListTable = styled.table`
+  border-collapse: collapse;
+`;
+
+const BugListTableHeader = styled.th`
+  text-align: left;
+`;
+
+const BugListTableRow = styled.tr`
+  &:hover {
+    background: ${(props) => props.theme.colors.light};
+  }
+`;
+
+const BugListTableLink = styled.a`
+  color: ${(props) => props.theme.colors.link};
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.colors.dark};
+    text-decoration: underline;
+  }
+`;
