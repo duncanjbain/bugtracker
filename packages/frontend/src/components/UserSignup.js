@@ -10,7 +10,7 @@ import {
   SubmitButton,
   TextInput,
   InputLabel,
-} from '../ui/components/StyledFormComponents';
+} from '../ui/components/StyledForm';
 
 const LoginContainer = styled.div`
   height: 100vh;
