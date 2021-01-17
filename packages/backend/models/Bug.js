@@ -18,9 +18,9 @@ const BugSchema = new mongoose.Schema({
     required: true,
     default: 'Medium',
   },
-  author: { type: String, required: true },
-  project: { type: String, required: true },
-  labels: [{ type: String, required: true }],
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
+  labels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Labels' }],
   created: {
     type: Date,
     default: Date.now,
