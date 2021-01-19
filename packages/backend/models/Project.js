@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const ProjectSchema = new mongoose.Schema({
-  projectName: {
+  projectKey: {
     type: String,
     required: true,
   },
-  projectKey: {
+  projectName: {
     type: String,
     required: true,
   },

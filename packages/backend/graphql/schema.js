@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Query {
-    _dummy: String
+    getAllBugs: [Bug!]!
   }
 
   type User {
@@ -33,8 +33,8 @@ const typeDefs = gql`
     summary: String!
     description: String!
     priority: String!
-    author: User!
-    project: Project!
+    author: User
+    project: Project
     labels: [BugLabel]
   }
 
@@ -68,6 +68,11 @@ const typeDefs = gql`
       project: String!
       labels: [String!]
     ): newBugDetails
+    createProject(
+      projectKey: String!
+      projectName: String!
+      projectLead: String!
+    ): Project
     createBugLabel(
       labelName: String!
       labelDescription: String!
