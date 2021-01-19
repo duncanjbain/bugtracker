@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Query {
-    _dummy: String
+    getAllBugs: [Bug!]!
   }
 
   type User {
@@ -20,6 +20,36 @@ const typeDefs = gql`
     user: User!
   }
 
+  type Project {
+    id: ID!
+    projectKey: String!
+    projectName: String!
+    projectLead: User!
+  }
+
+  type Bug {
+    id: ID!
+    key: String!
+    summary: String!
+    description: String!
+    priority: String!
+    author: User
+    project: Project
+    labels: [BugLabel]
+  }
+
+  type BugLabel {
+    id: ID!
+    labelName: String!
+    labelDescription: String!
+    bugsWithLabel: [Bug]
+  }
+
+  type newBugDetails {
+    Bug: Bug!
+    BugAuthor: User!
+  }
+
   type Mutation {
     signupUser(
       firstName: String!
@@ -29,6 +59,25 @@ const typeDefs = gql`
       password: String!
     ): AuthInfo
     signinUser(username: String!, password: String!): AuthInfo
+    createBug(
+      key: String!
+      summary: String!
+      description: String!
+      priority: String!
+      author: String!
+      project: String!
+      labels: [String!]
+    ): newBugDetails
+    createProject(
+      projectKey: String!
+      projectName: String!
+      projectLead: String!
+    ): Project
+    createBugLabel(
+      labelName: String!
+      labelDescription: String!
+      bugsWithLabel: [String]
+    ): BugLabel
   }
 `;
 

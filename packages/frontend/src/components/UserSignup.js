@@ -10,36 +10,7 @@ import {
   SubmitButton,
   TextInput,
   InputLabel,
-} from '../ui/components/StyledFormComponents';
-
-const LoginContainer = styled.div`
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 0.75fr 1fr;
-`;
-
-const CallToAction = styled.div`
-  background-color: ${(props) => props.theme.colors.primary};
-  padding: 1rem;
-`;
-
-const CtaHeader = styled.h1`
-  color: ${(props) => props.theme.colors.white};
-  padding: 1rem;
-  font-weight: bold;
-  font-size: 3.75rem;
-  line-height: 1;
-`;
-
-const CtaSubHeader = styled.h2`
-  color: ${(props) => props.theme.colors.dark};
-  padding: 1rem;
-`;
-
-const StyledBugFixLogo = styled(BugFixLogo)`
-  width: 100%;
-  height: auto;
-`;
+} from '../ui/components/StyledForm';
 
 const ADD_USER = gql`
   mutation SignupUser(
@@ -149,3 +120,32 @@ const UserLogin = () => {
 };
 
 export default UserLogin;
+
+const LoginContainer = styled.div`
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 0.75fr 1fr;
+`;
+
+const CallToAction = styled.div`
+  background-color: ${(props) => props.theme.colors.primary};
+  padding: 1rem;
+`;
+
+const CtaHeader = styled.h1`
+  color: ${(props) => props.theme.colors.white};
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 3.75rem;
+  line-height: 1;
+`;
+
+const CtaSubHeader = styled.h2`
+  color: ${(props) => props.theme.colors.dark};
+  padding: 1rem;
+`;
+
+const StyledBugFixLogo = styled(BugFixLogo)`
+  width: 100%;
+  height: auto;
+`;
