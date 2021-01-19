@@ -58,11 +58,15 @@ const resolvers = {
     createBug: async (
       root,
       { key, summary, description, priority, author, project, labels },
-      { Bug }
+      { Bug, User }
     ) => {
       const foundKey = await Bug.findOne({ key });
       if (foundKey) {
         throw new UserInputError('Bug with this key already exists');
+      }
+      const bugAuthor = await User.findOne({ username: author });
+      if (!bugAuthor) {
+        throw new UserInputError('An author is required when creating a bug');
       }
 
       const newBug = await new Bug({
@@ -70,11 +74,12 @@ const resolvers = {
         summary,
         description,
         priority,
-        author,
+        author: bugAuthor.id,
         project,
         labels,
       }).save();
-      return newBug;
+      await newBug.populate('author').execPopulate();
+      return { Bug: newBug, BugAuthor: bugAuthor };
     },
   },
 };

@@ -31,6 +31,11 @@ const typeDefs = gql`
     labels: [String!]
   }
 
+  type newBugDetails {
+    Bug: Bug!
+    BugAuthor: User!
+  }
+
   type Mutation {
     signupUser(
       firstName: String!
@@ -46,9 +51,9 @@ const typeDefs = gql`
       description: String!
       priority: String!
       author: String!
-      project: String!
+      project: String
       labels: [String!]
-    ): Bug
+    ): newBugDetails
   }
 `;
 

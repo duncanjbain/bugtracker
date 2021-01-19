@@ -4,6 +4,7 @@ const BugSchema = new mongoose.Schema({
   key: {
     type: String,
     required: true,
+    unique: true,
   },
   summary: {
     type: String,
