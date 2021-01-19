@@ -81,6 +81,25 @@ const resolvers = {
       await newBug.populate('author').execPopulate();
       return { Bug: newBug, BugAuthor: bugAuthor };
     },
+    createBugLabel: async (
+      root,
+      { labelName, labelDescription, bugsWithLabel },
+      { Bug, BugLabel }
+    ) => {
+      const foundLabel = await BugLabel.findOne({ labelName });
+      if (foundLabel) {
+        throw new UserInputError('This bug label already exists');
+      }
+
+      const foundBug = await Bug.findOne({ _id: bugsWithLabel });
+      const newBugLabel = await new BugLabel({
+        labelName,
+        labelDescription,
+        bugsWithLabel: [foundBug.id],
+      }).save();
+      await newBugLabel.populate('bugsWithLabel').execPopulate();
+      return newBugLabel;
+    },
   },
 };
 

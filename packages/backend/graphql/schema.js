@@ -20,15 +20,29 @@ const typeDefs = gql`
     user: User!
   }
 
+  type Project {
+    id: ID!
+    projectKey: String!
+    projectName: String!
+    projectLead: User!
+  }
+
   type Bug {
     id: ID!
     key: String!
     summary: String!
     description: String!
     priority: String!
-    author: String!
-    project: String!
-    labels: [String!]
+    author: User!
+    project: Project!
+    labels: [BugLabel]
+  }
+
+  type BugLabel {
+    id: ID!
+    labelName: String!
+    labelDescription: String!
+    bugsWithLabel: [Bug]
   }
 
   type newBugDetails {
@@ -51,9 +65,14 @@ const typeDefs = gql`
       description: String!
       priority: String!
       author: String!
-      project: String
+      project: String!
       labels: [String!]
     ): newBugDetails
+    createBugLabel(
+      labelName: String!
+      labelDescription: String!
+      bugsWithLabel: [String]
+    ): BugLabel
   }
 `;
 
