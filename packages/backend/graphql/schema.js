@@ -25,6 +25,7 @@ const typeDefs = gql`
     projectKey: String!
     projectName: String!
     projectLead: User!
+    projectBugs: [Bug]
   }
 
   type Bug {

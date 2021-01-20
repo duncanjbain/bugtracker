@@ -13,6 +13,7 @@ const ProjectSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  projectBugs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bug' }],
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
