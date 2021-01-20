@@ -28,8 +28,8 @@ const resolvers = {
   Query: {
     getAllBugs: async (root, args, { Bug }) =>
       Bug.find({}).populate('author').populate('project').populate('labels'),
-    getAllProjects: async (root, args { Project }) =>
-      Project.find({})
+    getAllProjects: async (root, args, { Project }) =>
+      Project.find({}).populate('projectLead'),
   },
   Mutation: {
     signupUser: async (
@@ -107,6 +107,8 @@ const resolvers = {
         project: bugProject.id,
         labels,
       }).save();
+      bugProject.projectBugs.push(newBug.id);
+      await bugProject.save();
       return { Bug: newBug, BugAuthor: bugAuthor };
     },
     createBugLabel: async (

@@ -2,7 +2,8 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Query {
-    getAllBugs: [Bug!]!
+    getAllBugs: [Bug]
+    getAllProjects: [Project]
   }
 
   type User {
