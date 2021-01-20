@@ -10,7 +10,7 @@ const typeDefs = gql`
     firstName: String!
     lastName: String!
     username: String!
-    password: String!
+    password: String
     email: String!
     joinDate: String!
   }
@@ -33,8 +33,8 @@ const typeDefs = gql`
     summary: String!
     description: String!
     priority: String!
-    author: User
-    project: Project
+    author: User!
+    project: Project!
     labels: [BugLabel]
   }
 

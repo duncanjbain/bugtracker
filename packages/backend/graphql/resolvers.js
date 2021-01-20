@@ -50,7 +50,7 @@ const resolvers = {
       return { user: newUser, token: createToken(newUser, JWT_SECRET) };
     },
     signinUser: async (root, { username, password }, { User }) => {
-      const foundUser = await User.findOne({ username });
+      const foundUser = await User.findOne({ username }).select('+password');
       const isValidPassowrd = bcrypt.compare(password, foundUser.password);
 
       if (!foundUser || !isValidPassowrd) {
