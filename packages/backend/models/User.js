@@ -29,6 +29,11 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  siteRole: {
+    type: String,
+    enum: ['ADMIN', 'USER'],
+    default: 'USER',
+  },
 });
 
 UserSchema.pre('save', function (next) {

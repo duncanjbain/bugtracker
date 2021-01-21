@@ -26,10 +26,29 @@ const createToken = (user, secret) => {
 
 const resolvers = {
   Query: {
-    getAllBugs: async (root, args, { Bug }) =>
-      Bug.find({}).populate('author').populate('project').populate('labels'),
-    getAllProjects: async (root, args, { Project }) =>
-      Project.find({}).populate('projectLead'),
+    getAllBugs: async (root, args, { Bug, currentUser }) => {
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return Bug.find({});
+    },
+    getBug: async (root, { bugId }, { Bug }) =>
+      Bug.findOne({ _id: bugId })
+        .populate('author')
+        .populate('project')
+        .populate('labels'),
+    getAllProjects: async (root, args, { Project, currentUser }) => {
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return Project.find({}).populate('projectLead');
+    },
+    getProject: async (root, { projectID }, { Project }) =>
+      Project.findOne({ _id: projectID }).populate('projectLead'),
   },
   Mutation: {
     signupUser: async (

@@ -34,6 +34,7 @@ const getCurrentUser = async (req) => {
     try {
       const decodedToken = await jwt.verify(auth.substring(7), JWT_SECRET);
       const currentUser = await User.findById(decodedToken.id);
+      console.log('Current user', currentUser);
       return currentUser;
     } catch (error) {
       throw new AuthenticationError('Unable to authenticate');
