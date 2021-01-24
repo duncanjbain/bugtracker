@@ -27,6 +27,7 @@ mongoose
   .catch((error) => {
     console.log('error connection to MongoDB:', error.message);
   });
+mongoose.set('useFindAndModify', false);
 
 const getCurrentUser = async (req) => {
   const auth = req.headers.authorization ? req.headers.authorization : null;
@@ -63,7 +64,7 @@ apolloServer.applyMiddleware({
   path,
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}${path}`);

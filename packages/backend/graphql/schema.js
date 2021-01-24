@@ -2,17 +2,21 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Query {
-    getAllBugs: [Bug!]!
+    getAllBugs: [Bug]
+    getBug(bugId: String!): Bug
+    getAllProjects: [Project]
+    getProject(projectID: String!): Project
   }
 
   type User {
-    id: ID!
+    _id: ID!
     firstName: String!
     lastName: String!
     username: String!
-    password: String!
+    password: String
     email: String!
     joinDate: String!
+    siteRole: String!
   }
 
   type AuthInfo {
@@ -21,33 +25,35 @@ const typeDefs = gql`
   }
 
   type Project {
-    id: ID!
+    _id: ID!
     projectKey: String!
     projectName: String!
     projectLead: User!
+    projectBugs: [Bug]
+    projectMembers: [ProjectMember]
+  }
+
+  type ProjectMember {
+    user: User!
+    role: String!
   }
 
   type Bug {
-    id: ID!
+    _id: ID!
     key: String!
     summary: String!
     description: String!
     priority: String!
-    author: User
-    project: Project
+    author: User!
+    project: Project!
     labels: [BugLabel]
   }
 
   type BugLabel {
-    id: ID!
+    _id: ID!
     labelName: String!
     labelDescription: String!
     bugsWithLabel: [Bug]
-  }
-
-  type newBugDetails {
-    Bug: Bug!
-    BugAuthor: User!
   }
 
   type Mutation {
@@ -67,7 +73,18 @@ const typeDefs = gql`
       author: String!
       project: String!
       labels: [String!]
-    ): newBugDetails
+    ): Bug
+    updateExistingBug(
+      _id: ID!
+      key: String
+      summary: String
+      description: String
+      priority: String
+      author: String
+      project: String
+      labels: [String]
+    ): Bug
+    deleteExistingBug(_id: ID!): Bug
     createProject(
       projectKey: String!
       projectName: String!

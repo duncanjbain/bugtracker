@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
   email: {
     type: String,
@@ -27,6 +28,11 @@ const UserSchema = new mongoose.Schema({
   joinDate: {
     type: Date,
     default: Date.now,
+  },
+  siteRole: {
+    type: String,
+    enum: ['ADMIN', 'USER'],
+    default: 'USER',
   },
 });
 

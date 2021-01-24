@@ -26,8 +26,29 @@ const createToken = (user, secret) => {
 
 const resolvers = {
   Query: {
-    getAllBugs: async (root, args, { Bug }) =>
-      Bug.find({}).populate('author').populate('project').populate('labels'),
+    getAllBugs: async (root, args, { Bug, currentUser }) => {
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return Bug.find({});
+    },
+    getBug: async (root, { bugId }, { Bug }) =>
+      Bug.findOne({ _id: bugId })
+        .populate('author')
+        .populate('project')
+        .populate('labels'),
+    getAllProjects: async (root, args, { Project, currentUser }) => {
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return Project.find({}).populate('projectLead');
+    },
+    getProject: async (root, { projectID }, { Project }) =>
+      Project.findOne({ _id: projectID }).populate('projectLead'),
   },
   Mutation: {
     signupUser: async (
@@ -50,10 +71,10 @@ const resolvers = {
       return { user: newUser, token: createToken(newUser, JWT_SECRET) };
     },
     signinUser: async (root, { username, password }, { User }) => {
-      const foundUser = await User.findOne({ username });
-      const isValidPassowrd = bcrypt.compare(password, foundUser.password);
+      const foundUser = await User.findOne({ username }).select('+password');
+      const isValidPassword = bcrypt.compare(password, foundUser.password);
 
-      if (!foundUser || !isValidPassowrd) {
+      if (!foundUser || !isValidPassword) {
         throw new AuthenticationError('Invalid email or password');
       }
 
@@ -105,8 +126,20 @@ const resolvers = {
         project: bugProject.id,
         labels,
       }).save();
+      bugProject.projectBugs.push(newBug.id);
+      await bugProject.save();
       return { Bug: newBug, BugAuthor: bugAuthor };
     },
+    updateExistingBug: async (root, { _id, ...args }, { Bug }) =>
+      Bug.findByIdAndUpdate(
+        _id,
+        {
+          $set: args,
+        },
+        { new: true }
+      ),
+    deleteExistingBug: async (root, { _id }, { Bug }) =>
+      Bug.findByIdAndRemove(_id),
     createBugLabel: async (
       root,
       { labelName, labelDescription, bugsWithLabel },
