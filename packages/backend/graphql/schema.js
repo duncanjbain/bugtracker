@@ -56,11 +56,6 @@ const typeDefs = gql`
     bugsWithLabel: [Bug]
   }
 
-  type newBugDetails {
-    Bug: Bug!
-    BugAuthor: User!
-  }
-
   type Mutation {
     signupUser(
       firstName: String!
@@ -78,7 +73,18 @@ const typeDefs = gql`
       author: String!
       project: String!
       labels: [String!]
-    ): newBugDetails
+    ): Bug
+    updateExistingBug(
+      _id: ID!
+      key: String
+      summary: String
+      description: String
+      priority: String
+      author: String
+      project: String
+      labels: [String]
+    ): Bug
+    deleteExistingBug(_id: ID!): Bug
     createProject(
       projectKey: String!
       projectName: String!

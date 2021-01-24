@@ -72,9 +72,9 @@ const resolvers = {
     },
     signinUser: async (root, { username, password }, { User }) => {
       const foundUser = await User.findOne({ username }).select('+password');
-      const isValidPassowrd = bcrypt.compare(password, foundUser.password);
+      const isValidPassword = bcrypt.compare(password, foundUser.password);
 
-      if (!foundUser || !isValidPassowrd) {
+      if (!foundUser || !isValidPassword) {
         throw new AuthenticationError('Invalid email or password');
       }
 
@@ -130,6 +130,16 @@ const resolvers = {
       await bugProject.save();
       return { Bug: newBug, BugAuthor: bugAuthor };
     },
+    updateExistingBug: async (root, { _id, ...args }, { Bug }) =>
+      Bug.findByIdAndUpdate(
+        _id,
+        {
+          $set: args,
+        },
+        { new: true }
+      ),
+    deleteExistingBug: async (root, { _id }, { Bug }) =>
+      Bug.findByIdAndRemove(_id),
     createBugLabel: async (
       root,
       { labelName, labelDescription, bugsWithLabel },
