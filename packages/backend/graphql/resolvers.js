@@ -72,7 +72,10 @@ const resolvers = {
     },
     signinUser: async (root, { username, password }, { User }) => {
       const foundUser = await User.findOne({ username }).select('+password');
-      const isValidPassword = bcrypt.compare(password, foundUser.password);
+      const isValidPassword = await bcrypt.compare(
+        password,
+        foundUser.password
+      );
 
       if (!foundUser || !isValidPassword) {
         throw new AuthenticationError('Invalid email or password');
