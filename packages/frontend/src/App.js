@@ -1,30 +1,23 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-// eslint-disable-next-line import/no-unresolved
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useUser } from './context/UserContext';
+import Dashboard from './pages/Dashboard';
 import { GlobalStyle, theme } from './ui/theme';
 import UserLogin from './components/UserLogin';
-import UserSignup from './components/UserSignup';
-import Dashboard from './pages/Dashboard';
 
 function App() {
-  return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Switch>
-          <Route path="/signup">
-            <UserSignup />
-          </Route>
-          <Route path="/login">
-            <UserLogin />
-          </Route>
-          <Route  path="/dashboard">
-            <Dashboard />
-          </Route>
-        </Switch>
-      </ThemeProvider>
-    </Router>
+  const user = useUser();
+  console.log('<App />', { user });
+  return user ? (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Dashboard />
+    </ThemeProvider>
+  ) : (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <UserLogin />
+    </ThemeProvider>
   );
 }
 

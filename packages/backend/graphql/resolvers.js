@@ -26,6 +26,14 @@ const createToken = (user, secret) => {
 
 const resolvers = {
   Query: {
+    getWhoAmI: async (root, args, { User, currentUser }) => {
+      if (!currentUser) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return User.findById(currentUser.id);
+    },
     getAllBugs: async (root, args, { Bug, currentUser }) => {
       if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
         throw new AuthenticationError(
@@ -70,7 +78,7 @@ const resolvers = {
       }).save();
       return { user: newUser, token: createToken(newUser, JWT_SECRET) };
     },
-    signinUser: async (root, { username, password }, { User }) => {
+    loginUser: async (root, { username, password }, { User }) => {
       const foundUser = await User.findOne({ username }).select('+password');
       const isValidPassword = await bcrypt.compare(
         password,
