@@ -46,6 +46,10 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   uploads: false,
+  // for development use
+  introspection: true,
+  playground: true,
+  //
   context: async ({ req }) => {
     // pass User MongoDB model and currentUser into Apollo context
     const currentUser = await getCurrentUser(req);
