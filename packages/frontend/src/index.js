@@ -11,7 +11,7 @@ import App from './App';
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: '/graphql',
+    uri: process.env.REACT_APP_GRAPHQL_URI,
   }),
 });
 
