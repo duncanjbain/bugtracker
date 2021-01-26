@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { gql, useMutation } from '@apollo/client';
 import { ReactComponent as BugFixLogo } from '../assets/svg/undraw_bug_fixing.svg';
 import {
   SignupFormContainer,
@@ -11,24 +9,18 @@ import {
   TextInput,
   InputLabel,
 } from '../ui/components/StyledForm';
+import {useAuth} from '../context/AuthContext'
 
-const SIGNIN_USER = gql`
-  mutation signinUser($username: String!, $password: String!) {
-    signinUser(username: $username, password: $password) {
-      token
-    }
-  }
-`;
+
 
 const UserLogin = () => {
+    const {signin} = useAuth()
   // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, errors } = useForm();
-  const [signinUser] = useMutation(SIGNIN_USER);
 
   const onSubmit = async (formData) => {
     const { username, password } = formData;
-    const { data } = await signinUser({ variables: { username, password } });
-    await localStorage.setItem('token', data.signinUser.token);
+signin(username,password);
   };
 
   return (
@@ -64,10 +56,6 @@ const UserLogin = () => {
 
           <SubmitButton type="submit">Log In</SubmitButton>
         </form>
-        <p>
-          Don&apos;t have an account? Click <Link to="/signup">here</Link>{' '}
-          create one.
-        </p>
       </SignupFormContainer>
     </LoginContainer>
   );

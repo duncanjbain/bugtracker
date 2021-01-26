@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Query {
+    getWhoAmI: User
     getAllBugs: [Bug]
     getBug(bugId: String!): Bug
     getAllProjects: [Project]
@@ -64,7 +65,7 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): AuthInfo
-    signinUser(username: String!, password: String!): AuthInfo
+    loginUser(username: String!, password: String!): AuthInfo
     createBug(
       key: String!
       summary: String!

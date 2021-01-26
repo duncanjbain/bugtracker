@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import Avatar from 'react-avatar';
 import {ReactComponent as NotificationIcon} from '../assets/svg/icons/bell.svg'
 import {ReactComponent as SettingsIcon} from '../assets/svg/icons/settings.svg'
+import { useAuth } from '../context/AuthContext'
 
 
-const DashboardNavbar = () => (
+const DashboardNavbar = () => {
+  const { logout } = useAuth()
+  return (
   <NavContainer>
     <NavLinks>
       <NavItem>
@@ -31,9 +34,13 @@ const DashboardNavbar = () => (
       <NavItem>
         <NavLink href="#"><Avatar name="Duncan Bain" round size="30px" alt="Initials of Name Avatar Icon" /></NavLink>
       </NavItem>
+      <NavItem>
+        <NavLink onClick={logout}>Logout</NavLink>
+      </NavItem>
     </NavLinks>
   </NavContainer>
-);
+  )
+};
 
 export default DashboardNavbar;
 
