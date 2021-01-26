@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "build": "yarn workspace frontend run build",
-    "start-backend": "yarn workspace backend run start",
-    "start-frontend": "yarn workspace frontend run start",
+    "start-backend": "yarn workspace backend run start_dev",
+    "start-frontend": "yarn workspace frontend run start_dev",
     "dev": "concurrently \"yarn start-backend\" \"yarn start-frontend\""
   },
   "devDependencies": {
