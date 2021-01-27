@@ -6,7 +6,7 @@ const CardWrapper = styled.article`
   display: flex;
   margin-left: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,.2);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   color: #4a4a4a;
   padding: 1rem;
   height: auto;

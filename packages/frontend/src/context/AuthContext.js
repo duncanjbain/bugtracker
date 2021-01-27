@@ -1,12 +1,13 @@
 import React from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
 const WHOAMI_QUERY = gql`
   query {
-      getWhoAmI {
-    _id
-    username
-  }
+    getWhoAmI {
+      _id
+      username
+    }
   }
 `;
 
@@ -60,7 +61,6 @@ const AuthProvider = (props) => {
       } else {
         throw Error('No token returned');
       }
-      console.log(res)
       return res;
     });
 
@@ -78,9 +78,12 @@ const AuthProvider = (props) => {
       return res;
     });
 
+  const history = useHistory();
   const logout = () => {
     localStorage.removeItem('AUTH_TOKEN');
     refetch();
+    history.push('/');
+    history.go();
   };
 
   if (loading) {
@@ -92,6 +95,6 @@ const AuthProvider = (props) => {
   );
 };
 
-const useAuth = () => React.useContext(AuthContext)
+const useAuth = () => React.useContext(AuthContext);
 
-export { AuthProvider, useAuth}
+export { AuthProvider, useAuth };

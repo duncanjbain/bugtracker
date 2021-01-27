@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import DashboardNavbar from '../components/DashboardNavbar';
 import DashboardMyBugsCard from '../components/DashboardMyBugsCard';
-import DashboardProjectsCard from '../components/DashboardProjectsCard'
-
+import DashboardProjectsCard from '../components/DashboardProjectsCard';
 
 const Dashboard = () => (
   <DashboardWrapper>
-    <DashboardNavbar />
     <DashboardMyBugsCard />
     <DashboardProjectsCard />
   </DashboardWrapper>
