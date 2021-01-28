@@ -48,7 +48,7 @@ const LOGIN_USER_MUTATION = gql`
 const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
-  const { loading, data, refetch } = useQuery(WHOAMI_QUERY);
+  const { loading, data, refetch } = useQuery(WHOAMI_QUERY, { errorPolicy: 'none'});
   const [loginUser] = useMutation(LOGIN_USER_MUTATION);
   const [signupUser] = useMutation(SIGNUP_USER_MUTATION);
 
@@ -83,7 +83,6 @@ const AuthProvider = (props) => {
     localStorage.removeItem('AUTH_TOKEN');
     refetch();
     history.push('/');
-    history.go();
   };
 
   if (loading) {

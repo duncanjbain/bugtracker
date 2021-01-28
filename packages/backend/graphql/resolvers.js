@@ -8,14 +8,12 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 
 const createToken = (user, secret) => {
-  const { id, email, firstName, lastName, username } = user;
+  const { id, email, username } = user;
   return jwt.sign(
     {
       id,
       email,
       username,
-      firstName,
-      lastName,
     },
     secret,
     {
@@ -28,9 +26,7 @@ const resolvers = {
   Query: {
     getWhoAmI: async (root, args, { User, currentUser }) => {
       if (!currentUser) {
-        throw new AuthenticationError(
-          'You do not have permission for this request'
-        );
+        return null;
       }
       return User.findById(currentUser.id);
     },
