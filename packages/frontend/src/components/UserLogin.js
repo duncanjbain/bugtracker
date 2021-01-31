@@ -11,8 +11,7 @@ import { useAuth } from '../context/AuthContext';
 
 const UserLogin = () => {
   const { signin } = useAuth();
-  // eslint-disable-next-line no-unused-vars
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = async (formData) => {
     const { username, password } = formData;

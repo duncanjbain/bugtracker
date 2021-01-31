@@ -30,6 +30,22 @@ const resolvers = {
       }
       return User.findById(currentUser.id);
     },
+    getUser: async (root, { userId }, { User, currentUser }) => {
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return User.findById(userId);
+    },
+    getAllUsers: async (root, args, { User, currentUser }) => {
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return User.find({});
+    },
     getAllBugs: async (root, args, { Bug, currentUser }) => {
       if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
         throw new AuthenticationError(
@@ -86,6 +102,20 @@ const resolvers = {
       }
 
       return { user: foundUser, token: createToken(foundUser, JWT_SECRET) };
+    },
+    updateUser: async (root, { _id, ...args }, { User, currentUser }) => {
+      if (!_id === currentUser.id || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      return User.findByIdAndUpdate(
+        _id,
+        {
+          $set: args,
+        },
+        { new: true }
+      );
     },
     createProject: async (
       root,
