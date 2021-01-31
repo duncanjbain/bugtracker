@@ -43,7 +43,7 @@ const DashboardNavbar = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#">
+          <NavLink to="/profile">
             <Avatar
               name="Duncan Bain"
               round
