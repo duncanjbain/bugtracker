@@ -5,6 +5,7 @@ import AuthenticatedApp from './AuthenticatedApp';
 import { GlobalStyle, theme } from './ui/theme';
 import UnauthenticatedApp from './UnauthenticatedApp';
 
+
 function App() {
   const user = useUser();
   return user ? (

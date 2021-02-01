@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import styled from 'styled-components';
+import { useToasts } from 'react-toast-notifications';
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { useUser } from '../context/UserContext';
@@ -42,6 +43,7 @@ const UPDATE_PROFILE = gql`
 
 const UserProfile = () => {
   const user = useUser();
+  const { addToast } = useToasts();
   const { register, handleSubmit } = useForm();
   const { loading, data } = useQuery(GET_PROFILE);
   const [updateUser] = useMutation(UPDATE_PROFILE);
@@ -58,66 +60,72 @@ const UserProfile = () => {
       // eslint-disable-next-line no-underscore-dangle
       variables: { _id: user._id, ...falsyRemoved },
     });
+    addToast('Profile updated Successfully', {
+      autoDismiss: true,
+      appearance: 'success',
+    });
   };
 
   if (loading) {
     return <p>Loading...</p>;
   }
   return (
-    <ProfileContainer>
-      <CardHeader>
-        <CardTitle>Profile</CardTitle>
-      </CardHeader>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
-        <FormGroup>
-          <InputLabel htmlFor="firstName">First name</InputLabel>
-          <TextInput
-            id="firstName"
-            type="text"
-            placeholder={data.getWhoAmI.firstName}
-            autocomplete="given-name"
-            name="firstName"
-            ref={register({ required: false })}
-          />
-        </FormGroup>
-        <FormGroup>
-          <InputLabel htmlFor="lastName">Last name</InputLabel>
-          <TextInput
-            id="lastName"
-            type="text"
-            placeholder={data.getWhoAmI.lastName}
-            autocomplete="family-name"
-            name="lastName"
-            ref={register({ required: false })}
-          />
-        </FormGroup>
-        <FormGroup>
-          <InputLabel htmlFor="email">Email</InputLabel>
-          <TextInput
-            id="email"
-            type="email"
-            placeholder={data.getWhoAmI.email}
-            autocomplete="email"
-            name="email"
-            ref={register({ required: false })}
-          />
-        </FormGroup>
-        <FormGroup>
-          <InputLabel htmlFor="newPassword">Password</InputLabel>
-          <TextInput
-            id="newPassword"
-            type="password"
-            placeholder="Enter new password"
-            autocomplete="new-password"
-            name="newPassword"
-            ref={register({ required: false })}
-          />
-        </FormGroup>
-        <UpdateButton style={{ padding: '0.5rem' }} type="submit">
-          Update
-        </UpdateButton>
-      </form>
-    </ProfileContainer>
+    <>
+      <ProfileContainer>
+        <CardHeader>
+          <CardTitle>Profile</CardTitle>
+        </CardHeader>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
+          <FormGroup>
+            <InputLabel htmlFor="firstName">First name</InputLabel>
+            <TextInput
+              id="firstName"
+              type="text"
+              placeholder={data.getWhoAmI.firstName}
+              autocomplete="given-name"
+              name="firstName"
+              ref={register({ required: false })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="lastName">Last name</InputLabel>
+            <TextInput
+              id="lastName"
+              type="text"
+              placeholder={data.getWhoAmI.lastName}
+              autocomplete="family-name"
+              name="lastName"
+              ref={register({ required: false })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <TextInput
+              id="email"
+              type="email"
+              placeholder={data.getWhoAmI.email}
+              autocomplete="email"
+              name="email"
+              ref={register({ required: false })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="newPassword">Password</InputLabel>
+            <TextInput
+              id="newPassword"
+              type="password"
+              placeholder="Enter new password"
+              autocomplete="new-password"
+              name="newPassword"
+              ref={register({ required: false })}
+            />
+          </FormGroup>
+          <UpdateButton style={{ padding: '0.5rem' }} type="submit">
+            Update
+          </UpdateButton>
+        </form>
+      </ProfileContainer>
+    </>
   );
 };
 

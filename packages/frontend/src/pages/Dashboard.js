@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import DashboardMyBugsCard from '../components/DashboardMyBugsCard';
 import DashboardProjectsCard from '../components/DashboardProjectsCard';
 
-const Dashboard = () => (
+const Dashboard = () =>
+
   <DashboardWrapper>
     <DashboardMyBugsCard />
     <DashboardProjectsCard />
   </DashboardWrapper>
-);
+
 
 export default Dashboard;
 
