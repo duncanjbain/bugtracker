@@ -69,6 +69,16 @@ const resolvers = {
     },
     getProject: async (root, { projectID }, { Project }) =>
       Project.findOne({ _id: projectID }).populate('projectLead'),
+    getUserProjects: async (root, { userID }, { Project, User }) => {
+      const foundUser = await User.findById(userID);
+      const foundProjects = await Project.find({
+        $or: [
+          { projectLead: foundUser._id },
+          { projectMembers: foundUser._id },
+        ],
+      }).populate('projectLead');
+      return foundProjects;
+    },
   },
   Mutation: {
     signupUser: async (
@@ -119,11 +129,11 @@ const resolvers = {
     },
     createProject: async (
       root,
-      { projectKey, projectName, projectLead },
-      { Project, User }
+      { projectKey, projectName },
+      { Project, currentUser, User }
     ) => {
+      const projectOwner = await User.findById(currentUser._id);
       const foundProject = await Project.findOne({ projectKey });
-      const newProjectLead = await User.findOne({ username: projectLead });
       if (foundProject) {
         throw new AuthenticationError('A project with this key already exists');
       }
@@ -131,8 +141,13 @@ const resolvers = {
       const newProject = await new Project({
         projectKey,
         projectName,
-        projectLead: newProjectLead.id,
+        projectLead: currentUser._id,
       }).save();
+      projectOwner.memberOfProjects = [
+        ...projectOwner.memberOfProjects,
+        newProject._id,
+      ];
+      await projectOwner.save();
       await newProject.populate('projectLead').execPopulate();
       return newProject;
     },

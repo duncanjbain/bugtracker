@@ -9,6 +9,7 @@ const typeDefs = gql`
     getBug(bugId: String!): Bug
     getAllProjects: [Project]
     getProject(projectID: String!): Project
+    getUserProjects(userID: String!): [Project]
   }
 
   type User {
@@ -20,6 +21,7 @@ const typeDefs = gql`
     email: String!
     joinDate: String!
     siteRole: String!
+    memberOfProjects: [Project]
   }
 
   type AuthInfo {
@@ -95,11 +97,7 @@ const typeDefs = gql`
       labels: [String]
     ): Bug
     deleteExistingBug(_id: ID!): Bug
-    createProject(
-      projectKey: String!
-      projectName: String!
-      projectLead: String!
-    ): Project
+    createProject(projectKey: String!, projectName: String!): Project
     createBugLabel(
       labelName: String!
       labelDescription: String!

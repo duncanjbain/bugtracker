@@ -34,6 +34,7 @@ const UserSchema = new mongoose.Schema({
     enum: ['ADMIN', 'USER'],
     default: 'USER',
   },
+  memberOfProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
 });
 
 UserSchema.pre('save', function (next) {

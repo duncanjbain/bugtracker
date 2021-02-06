@@ -48,9 +48,9 @@ const LOGIN_USER_MUTATION = gql`
 const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
-  const { loading, data, refetch } = useQuery(WHOAMI_QUERY, { errorPolicy: 'none'});
-  const [loginUser] = useMutation(LOGIN_USER_MUTATION);
-  const [signupUser] = useMutation(SIGNUP_USER_MUTATION);
+  const { loading, data, refetch } = useQuery(WHOAMI_QUERY, { errorPolicy: 'all'});
+  const [loginUser] = useMutation(LOGIN_USER_MUTATION, { errorPolicy: 'all' });
+  const [signupUser] = useMutation(SIGNUP_USER_MUTATION, { errorPolicy: 'all' });
 
   const signin = async (username, password) =>
     loginUser({ variables: { username, password } }).then((res) => {

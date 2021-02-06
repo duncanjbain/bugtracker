@@ -6,69 +6,77 @@ import {
   CardTitle,
   CardHeader,
 } from '../ui/components/StyledDashboardCard';
+import {
+  StyledTable,
+  StyledTableHeader,
+  StyledTableRow,
+  StyledTableLink,
+} from '../ui/components/StyledTable';
 
 // eslint-disable-next-line arrow-body-style
 const DashboardMyBugsCard = () => {
   return (
-    <CardWrapper>
+    <CardWrapper gridArea="mybugs">
       <CardHeader>
         <CardTitle>
           <a href="https://localhost/bugs/user">My Bugs</a>
         </CardTitle>
         <StyledReloadIcon />
       </CardHeader>
-      <BugListTable>
-        <BugListTableRow>
-          <BugListTableHeader>Key</BugListTableHeader>
-          <BugListTableHeader>Summary</BugListTableHeader>
-          <BugListTableHeader>Priority</BugListTableHeader>
-          <BugListTableHeader>Due</BugListTableHeader>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>
-            <BugListTableLink href="https://localhost/#">
-              KEY-1
-            </BugListTableLink>
-          </td>
-          <td>
-            <BugListTableLink href="https://localhost/#">
-              First Example Bug
-            </BugListTableLink>
-          </td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-      </BugListTable>
+      <StyledTable>
+        <StyledTableRow>
+          <StyledTableHeader>Key</StyledTableHeader>
+          <StyledTableHeader>Summary</StyledTableHeader>
+          <StyledTableHeader>Priority</StyledTableHeader>
+          <StyledTableHeader>Due</StyledTableHeader>
+        </StyledTableRow>
+        <tbody>
+          <StyledTableRow>
+            <td>
+              <StyledTableLink href="https://localhost/#">
+                KEY-1
+              </StyledTableLink>
+            </td>
+            <td>
+              <StyledTableLink href="https://localhost/#">
+                First Example Bug
+              </StyledTableLink>
+            </td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </StyledTableRow>
+          <StyledTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </StyledTableRow>
+          <StyledTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </StyledTableRow>
+          <StyledTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </StyledTableRow>
+          <StyledTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </StyledTableRow>
+          <StyledTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </StyledTableRow>
+        </tbody>
+      </StyledTable>
     </CardWrapper>
   );
 };
@@ -80,27 +88,4 @@ const StyledReloadIcon = styled(ReloadIcon)`
   vertical-align: text-bottom;
   width: 16px;
   height: 16px;
-`;
-
-const BugListTable = styled.table`
-  border-collapse: collapse;
-`;
-
-const BugListTableHeader = styled.th`
-  text-align: left;
-`;
-
-const BugListTableRow = styled.tr`
-  &:hover {
-    background: ${(props) => props.theme.colors.light};
-  }
-`;
-
-const BugListTableLink = styled.a`
-  color: ${(props) => props.theme.colors.link};
-  text-decoration: none;
-  &:hover {
-    color: ${(props) => props.theme.colors.dark};
-    text-decoration: underline;
-  }
 `;
