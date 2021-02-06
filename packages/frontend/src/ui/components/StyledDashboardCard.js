@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const CardHeader = styled.div`
   display: flex;
-  align-items: center;
-  vertical-align: center;
+  justify-content: space-between;
 `;
 
 export const CardWrapper = styled.article`
