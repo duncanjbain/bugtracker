@@ -13,7 +13,11 @@ import { ReactComponent as ReloadIcon } from '../assets/svg/icons/refresh-ccw.sv
 const GET_PROJECTS = gql`
   query getUserProjects($userID: String!) {
     getUserProjects(userID: $userID) {
+      _id
       projectName
+      projectLead {
+        username
+      }
     }
   }
 `;
@@ -49,7 +53,7 @@ const DashboardProjectsCard = () => {
         <div>
           <ul>
             {data.getUserProjects.map((project) => (
-              <li>{project.projectName}</li>
+              <li key={project._id}>{project.projectName}</li>
             ))}
           </ul>
         </div>
