@@ -6,6 +6,12 @@ import {
   CardTitle,
   CardHeader,
 } from '../ui/components/StyledDashboardCard';
+import {
+  StyledTable,
+  StyledTableHeader,
+  StyledTableRow,
+  StyledTableLink,
+} from '../ui/components/StyledTable';
 
 // eslint-disable-next-line arrow-body-style
 const DashboardMyBugsCard = () => {
@@ -17,60 +23,60 @@ const DashboardMyBugsCard = () => {
         </CardTitle>
         <StyledReloadIcon />
       </CardHeader>
-      <BugListTable>
+      <StyledTable>
+        <StyledTableRow>
+          <StyledTableHeader>Key</StyledTableHeader>
+          <StyledTableHeader>Summary</StyledTableHeader>
+          <StyledTableHeader>Priority</StyledTableHeader>
+          <StyledTableHeader>Due</StyledTableHeader>
+        </StyledTableRow>
         <tbody>
-          <BugListTableRow>
-            <BugListTableHeader>Key</BugListTableHeader>
-            <BugListTableHeader>Summary</BugListTableHeader>
-            <BugListTableHeader>Priority</BugListTableHeader>
-            <BugListTableHeader>Due</BugListTableHeader>
-          </BugListTableRow>
-          <BugListTableRow>
+          <StyledTableRow>
             <td>
-              <BugListTableLink href="https://localhost/#">
+              <StyledTableLink href="https://localhost/#">
                 KEY-1
-              </BugListTableLink>
+              </StyledTableLink>
             </td>
             <td>
-              <BugListTableLink href="https://localhost/#">
+              <StyledTableLink href="https://localhost/#">
                 First Example Bug
-              </BugListTableLink>
+              </StyledTableLink>
             </td>
             <td>High</td>
             <td>25/01/2021</td>
-          </BugListTableRow>
-          <BugListTableRow>
+          </StyledTableRow>
+          <StyledTableRow>
             <td>KEY-1</td>
             <td>First Example Bug</td>
             <td>High</td>
             <td>25/01/2021</td>
-          </BugListTableRow>
-          <BugListTableRow>
+          </StyledTableRow>
+          <StyledTableRow>
             <td>KEY-1</td>
             <td>First Example Bug</td>
             <td>High</td>
             <td>25/01/2021</td>
-          </BugListTableRow>
-          <BugListTableRow>
+          </StyledTableRow>
+          <StyledTableRow>
             <td>KEY-1</td>
             <td>First Example Bug</td>
             <td>High</td>
             <td>25/01/2021</td>
-          </BugListTableRow>
-          <BugListTableRow>
+          </StyledTableRow>
+          <StyledTableRow>
             <td>KEY-1</td>
             <td>First Example Bug</td>
             <td>High</td>
             <td>25/01/2021</td>
-          </BugListTableRow>
-          <BugListTableRow>
+          </StyledTableRow>
+          <StyledTableRow>
             <td>KEY-1</td>
             <td>First Example Bug</td>
             <td>High</td>
             <td>25/01/2021</td>
-          </BugListTableRow>
+          </StyledTableRow>
         </tbody>
-      </BugListTable>
+      </StyledTable>
     </CardWrapper>
   );
 };
@@ -82,27 +88,4 @@ const StyledReloadIcon = styled(ReloadIcon)`
   vertical-align: text-bottom;
   width: 16px;
   height: 16px;
-`;
-
-const BugListTable = styled.table`
-  border-collapse: collapse;
-`;
-
-const BugListTableHeader = styled.th`
-  text-align: left;
-`;
-
-const BugListTableRow = styled.tr`
-  &:hover {
-    background: ${(props) => props.theme.colors.light};
-  }
-`;
-
-const BugListTableLink = styled.a`
-  color: ${(props) => props.theme.colors.link};
-  text-decoration: none;
-  &:hover {
-    color: ${(props) => props.theme.colors.dark};
-    text-decoration: underline;
-  }
 `;

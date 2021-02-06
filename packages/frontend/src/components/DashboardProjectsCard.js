@@ -18,6 +18,7 @@ const GET_PROJECTS = gql`
       projectName
       projectKey
       projectLead {
+        _id
         username
       }
     }
