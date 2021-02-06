@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
-import { ReactComponent as NotificationIcon } from '../assets/svg/icons/bell.svg';
-import { ReactComponent as SettingsIcon } from '../assets/svg/icons/settings.svg';
-import { useAuth } from '../context/AuthContext';
+import { ReactComponent as NotificationIcon } from '../../assets/svg/icons/bell.svg';
+import { ReactComponent as SettingsIcon } from '../../assets/svg/icons/settings.svg';
+import { useAuth } from '../../context/AuthContext';
 
 const DashboardNavbar = () => {
   const { logout } = useAuth();

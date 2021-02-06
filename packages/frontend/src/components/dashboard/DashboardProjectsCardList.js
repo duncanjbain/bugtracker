@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledTable, StyledTableHeader,  StyledTableRow, StyledTableLink} from '../ui/components/StyledTable'
+import { StyledTable, StyledTableHeader,  StyledTableRow, StyledTableLink} from '../../ui/components/StyledTable'
 
 const DashboardProjectsCardList = ({projects}) => (
         <StyledTable>

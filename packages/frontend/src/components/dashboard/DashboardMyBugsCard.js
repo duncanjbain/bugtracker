@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ReloadIcon } from '../assets/svg/icons/refresh-ccw.svg';
+import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
 import {
   CardWrapper,
   CardTitle,
   CardHeader,
-} from '../ui/components/StyledDashboardCard';
+} from '../../ui/components/StyledDashboardCard';
 import {
   StyledTable,
   StyledTableHeader,
   StyledTableRow,
   StyledTableLink,
-} from '../ui/components/StyledTable';
+} from '../../ui/components/StyledTable';
 
 // eslint-disable-next-line arrow-body-style
 const DashboardMyBugsCard = () => {
