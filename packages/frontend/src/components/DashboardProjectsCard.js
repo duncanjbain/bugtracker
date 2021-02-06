@@ -1,24 +1,82 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {useTheme} from 'styled-components';
+import { useQuery, gql } from '@apollo/client';
+import PulseLoader from "react-spinners/PulseLoader";
+import { useUser } from '../context/UserContext';
+import {
+  CardWrapper,
+  CardTitle,
+  CardHeader,
+} from '../ui/components/StyledDashboardCard';
+import { ReactComponent as ReloadIcon } from '../assets/svg/icons/refresh-ccw.svg';
 
-const CardWrapper = styled.article`
-  grid-area: projects;
-  display: flex;
-  margin-left: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-  color: #4a4a4a;
-  padding: 1rem;
-  height: auto;
+const GET_PROJECTS = gql`
+  query getUserProjects($userID: String!) {
+    getUserProjects(userID: $userID) {
+      projectName
+    }
+  }
 `;
 
-// eslint-disable-next-line arrow-body-style
+// eslint-disable-next-line consistent-return
 const DashboardProjectsCard = () => {
-  return (
-    <CardWrapper>
-      <h3>Projects</h3>
-    </CardWrapper>
-  );
+  const theme = useTheme
+  const user = useUser();
+  const { loading, data, refetch, networkStatus } = useQuery(GET_PROJECTS, {
+    // eslint-disable-next-line no-underscore-dangle
+    variables: { userID: user._id },
+    notifyOnNetworkStatusChange: true,
+  });
+  console.log(theme)
+  // eslint-disable-next-line no-undef
+  if (networkStatus === 4) return <PulseLoader loading="true" color={theme.colors.primary} />;
+  if (loading) {
+    return <p>Loading</p>;
+  }
+  if (data) {
+    return (
+      <CardWrapper gridArea="projects">
+        <CardHeader>
+          <CardTitle>My Projects</CardTitle>
+          <StyledButton
+            type="button"
+            aria-label="Reload projects"
+            onClick={() => refetch()}
+          >
+            <StyledReloadIcon />
+          </StyledButton>
+        </CardHeader>
+        <div>
+          <ul>
+            {data.getUserProjects.map((project) => (
+              <li>{project.projectName}</li>
+            ))}
+          </ul>
+        </div>
+      </CardWrapper>
+    );
+  }
 };
 
 export default DashboardProjectsCard;
+
+const StyledReloadIcon = styled(ReloadIcon)`
+  display: inline-block;
+  vertical-align: middle;
+  width: 1rem;
+  height: 1rem;
+  outline: none;
+  transition: transform 0.15s linear;
+`;
+
+const StyledButton = styled.button`
+    outline:none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    svg {
+      transform: scale(1.1);
+    }
+  }
+`;

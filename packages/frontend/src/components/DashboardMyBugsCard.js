@@ -10,7 +10,7 @@ import {
 // eslint-disable-next-line arrow-body-style
 const DashboardMyBugsCard = () => {
   return (
-    <CardWrapper>
+    <CardWrapper gridArea="mybugs">
       <CardHeader>
         <CardTitle>
           <a href="https://localhost/bugs/user">My Bugs</a>

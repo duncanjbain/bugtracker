@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import DashboardNavbar from './components/DashboardNavbar';
 import Projects from './pages/Projects';
 import UserProfile from './pages/UserProfile'
+import CreateProject from './pages/CreateProject'
 
 const RedirectHome = () => <Redirect to="/dashboard" />;
 
@@ -19,6 +20,9 @@ const AuthenticatedApp = () => (
     </Route>
     <Route path="/projects">
       <Projects />
+    </Route>
+    <Route path="/createproject">
+      <CreateProject />
     </Route>
     <Route path="/profile">
       <UserProfile />

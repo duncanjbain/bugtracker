@@ -1,16 +1,11 @@
 import styled from 'styled-components';
 
-export const CardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  vertical-align: center;
-`;
-
-export const CardWrapper = styled.article`
-  grid-area: ${(props) => props.gridArea};
+const SingleColumnFlex = styled.section`
+  width: 50vw;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  margin: 1.5rem;
+  margin-top: 2rem;
   border-radius: 3px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   border-top: 5px solid ${(props) => props.theme.colors.primary};
@@ -20,6 +15,4 @@ export const CardWrapper = styled.article`
   padding-right: 0.75rem;
 `;
 
-export const CardTitle = styled.h3`
-  font-weight: 600;
-`;
+export default SingleColumnFlex
