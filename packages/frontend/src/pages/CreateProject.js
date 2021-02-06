@@ -36,7 +36,6 @@ const CreateProject = () => {
       });
       history.push('/dashboard')
     } catch (error) {
-      console.log(error.message)
       addToast('A project with this key already exists!', {
         autoDismiss: true,
         appearance: 'error',

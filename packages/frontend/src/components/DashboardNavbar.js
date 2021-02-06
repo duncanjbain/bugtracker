@@ -27,10 +27,10 @@ const DashboardNavbar = () => {
       </NavLinks>
       <NavLinks>
         <NavItem>
-          <NavLink href="#">Search</NavLink>
+          <NavLink to="#">Search</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#">
+          <NavLink to="#">
             <StyledNotificationIcon
               alt="Bell Notification Icon"
               aria-label="Link to Notifications"
@@ -38,7 +38,7 @@ const DashboardNavbar = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#">
+          <NavLink to="#">
             <StyledSettingsIcon
               alt="Cog Wheel Settings Icon"
               aria-label="Link to Settings"
@@ -56,7 +56,9 @@ const DashboardNavbar = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink onClick={logout}>Logout</NavLink>
+          <NavLink to="/" onClick={logout}>
+            Logout
+          </NavLink>
         </NavItem>
       </NavLinks>
     </NavContainer>

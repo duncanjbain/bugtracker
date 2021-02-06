@@ -31,7 +31,7 @@ const DashboardProjectsCard = () => {
     variables: { userID: user._id },
     notifyOnNetworkStatusChange: true,
   });
-  console.log(theme)
+
   // eslint-disable-next-line no-undef
   if (networkStatus === 4) return <PulseLoader loading="true" color={theme.colors.primary} />;
   if (loading) {

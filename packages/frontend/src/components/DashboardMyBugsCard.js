@@ -18,56 +18,58 @@ const DashboardMyBugsCard = () => {
         <StyledReloadIcon />
       </CardHeader>
       <BugListTable>
-        <BugListTableRow>
-          <BugListTableHeader>Key</BugListTableHeader>
-          <BugListTableHeader>Summary</BugListTableHeader>
-          <BugListTableHeader>Priority</BugListTableHeader>
-          <BugListTableHeader>Due</BugListTableHeader>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>
-            <BugListTableLink href="https://localhost/#">
-              KEY-1
-            </BugListTableLink>
-          </td>
-          <td>
-            <BugListTableLink href="https://localhost/#">
-              First Example Bug
-            </BugListTableLink>
-          </td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
-        <BugListTableRow>
-          <td>KEY-1</td>
-          <td>First Example Bug</td>
-          <td>High</td>
-          <td>25/01/2021</td>
-        </BugListTableRow>
+        <tbody>
+          <BugListTableRow>
+            <BugListTableHeader>Key</BugListTableHeader>
+            <BugListTableHeader>Summary</BugListTableHeader>
+            <BugListTableHeader>Priority</BugListTableHeader>
+            <BugListTableHeader>Due</BugListTableHeader>
+          </BugListTableRow>
+          <BugListTableRow>
+            <td>
+              <BugListTableLink href="https://localhost/#">
+                KEY-1
+              </BugListTableLink>
+            </td>
+            <td>
+              <BugListTableLink href="https://localhost/#">
+                First Example Bug
+              </BugListTableLink>
+            </td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </BugListTableRow>
+          <BugListTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </BugListTableRow>
+          <BugListTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </BugListTableRow>
+          <BugListTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </BugListTableRow>
+          <BugListTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </BugListTableRow>
+          <BugListTableRow>
+            <td>KEY-1</td>
+            <td>First Example Bug</td>
+            <td>High</td>
+            <td>25/01/2021</td>
+          </BugListTableRow>
+        </tbody>
       </BugListTable>
     </CardWrapper>
   );

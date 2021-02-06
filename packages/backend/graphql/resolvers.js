@@ -133,7 +133,6 @@ const resolvers = {
       { Project, currentUser, User }
     ) => {
       const projectOwner = await User.findById(currentUser._id);
-      console.log(projectOwner);
       const foundProject = await Project.findOne({ projectKey });
       if (foundProject) {
         throw new AuthenticationError('A project with this key already exists');
