@@ -76,7 +76,9 @@ const resolvers = {
           { projectLead: foundUser._id },
           { projectMembers: foundUser._id },
         ],
-      }).populate('projectLead');
+      })
+        .populate('projectLead')
+        .populate('projectMembers');
       return foundProjects;
     },
   },

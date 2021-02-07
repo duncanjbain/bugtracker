@@ -46,7 +46,7 @@ const CreateProject = () => {
   return (
     <SingleColumnFlex>
       <CardHeader>
-        <CardTitle>Create new Project</CardTitle>
+        <CardTitle>Create a new project</CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>

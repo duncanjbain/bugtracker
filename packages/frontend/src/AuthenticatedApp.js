@@ -5,6 +5,7 @@ import DashboardNavbar from './components/dashboard/DashboardNavbar';
 import Projects from './pages/Projects';
 import UserProfile from './pages/UserProfile'
 import CreateProject from './pages/CreateProject'
+import CreateBug from './pages/CreateBug'
 
 const RedirectHome = () => <Redirect to="/dashboard" />;
 
@@ -23,6 +24,9 @@ const AuthenticatedApp = () => (
     </Route>
     <Route path="/createproject">
       <CreateProject />
+    </Route>
+    <Route path="/createbug">
+      <CreateBug />
     </Route>
     <Route path="/profile">
       <UserProfile />

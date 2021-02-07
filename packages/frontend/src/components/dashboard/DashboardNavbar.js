@@ -19,7 +19,7 @@ const DashboardNavbar = () => {
           <NavLink to="/projects">Projects</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/add">Add bug</NavLink>
+          <NavLink to="/createbug">Create bug</NavLink>
         </NavItem>
         <NavItem>
           <NavLink to="/createproject">Create project</NavLink>
