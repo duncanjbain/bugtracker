@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 // eslint-disable-next-line no-unused-vars
 import { useQuery, useMutation, gql } from '@apollo/client';
 import ReactMde from 'react-mde';
-import * as Showdown from 'showdown';
+import ReactMarkdown from "react-markdown"
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import SingleColumnFlex from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
@@ -19,13 +19,6 @@ const GET_USER_PROJECTS = gql`
     }
   }
 `;
-
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true,
-});
 
 const CreateBug = () => {
   const { register, handleSubmit, control } = useForm();
@@ -83,9 +76,9 @@ const CreateBug = () => {
                 onChange={setValue}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
-                generateMarkdownPreview={(markdown) =>
-                  Promise.resolve(converter.makeHtml(markdown))
-                }
+                generateMarkdownPreview={(markdown) => 
+                    Promise.resolve(<ReactMarkdown source={markdown} />)
+          }
               />
             }
             name="bugDescription"
