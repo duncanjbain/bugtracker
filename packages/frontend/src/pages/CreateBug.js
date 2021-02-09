@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 // eslint-disable-next-line no-unused-vars
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
 import ReactMde from 'react-mde';
-import ReactMarkdown from "react-markdown"
+import ReactMarkdown from 'react-markdown';
 import 'react-mde/lib/styles/css/react-mde-all.css';
+import '../components/tags.css';
+import { useUser } from '../context/UserContext';
 import SingleColumnFlex from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import { FormGroup, TextInput, InputLabel } from '../ui/components/StyledForm';
@@ -20,15 +22,83 @@ const GET_USER_PROJECTS = gql`
   }
 `;
 
+const GET_PROJECT_MEMBERS = gql`
+  query getProjectMembers($projectID: String!) {
+    getProjectMembers(projectID: $projectID) {
+      username
+    }
+  }
+`;
+
+const CREATE_NEW_BUG = gql`
+  mutation createBug(
+    $key: String!
+    $summary: String!
+    $description: String!
+    $priority: String!
+    $author: String!
+    $assignedUser: String!
+    $project: String!
+    $type: String!
+  ) {
+    createBug(
+      key: $key
+      summary: $summary
+      description: $description
+      priority: $priority
+      author: $author
+      assignedUser: $assignedUser
+      project: $project
+      type: $type
+    ) {
+      _id
+    }
+  }
+`;
+
 const CreateBug = () => {
+  const user = useUser();
+  const { data, loading } = useQuery(GET_USER_PROJECTS, {
+    variables: { userID: user._id },
+  });
+  // eslint-disable-next-line no-unused-vars
+  const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
+  const [createBug] = useMutation(CREATE_NEW_BUG);
   const { register, handleSubmit, control } = useForm();
 
   // eslint-disable-next-line no-unused-vars
   const onSubmit = async (formData) => {
     console.log(formData);
+    const {
+      bugKey,
+      projectName,
+      bugType,
+      bugSummary,
+      bugDescription,
+      bugPriority,
+      bugAssignedUser,
+      bugAuthor,
+    } = formData;
+
+    await createBug({
+      // eslint-disable-next-line no-underscore-dangle
+      variables: {
+        key: bugKey,
+        summary: bugSummary,
+        description: bugDescription,
+        priority: bugPriority,
+        author: bugAuthor,
+        assignedUser: bugAssignedUser,
+        project: projectName,
+        type: bugType,
+      },
+    });
   };
   const [value, setValue] = useState('**Hello world!!!**');
   const [selectedTab, setSelectedTab] = useState('write');
+  if (loading) {
+    return <p>Loading</p>;
+  }
 
   return (
     <SingleColumnFlex>
@@ -38,11 +108,32 @@ const CreateBug = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <InputLabel htmlFor="projectName">Project name</InputLabel>
-          <TextInput
+          <select
             id="projectName"
-            type="text"
-            placeholder="Enter a project name"
             name="projectName"
+            ref={register({ required: true })}
+            onChange={(event) =>
+              getMembers({ variables: { projectID: event.target.value } })
+            }
+          >
+            <option value="" disabled selected hidden>
+              Choose a project
+            </option>
+            {data &&
+              data.getUserProjects.map((project) => (
+                <option key={project._id} value={project._id}>
+                  {project.projectName}
+                </option>
+              ))}
+          </select>
+        </FormGroup>
+        <FormGroup>
+          <InputLabel htmlFor="bugKey">Bug key</InputLabel>
+          <TextInput
+            id="bugKey"
+            type="text"
+            placeholder="Bug key"
+            name="bugKey"
             ref={register({ required: true })}
           />
         </FormGroup>
@@ -76,9 +167,9 @@ const CreateBug = () => {
                 onChange={setValue}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
-                generateMarkdownPreview={(markdown) => 
-                    Promise.resolve(<ReactMarkdown source={markdown} />)
-          }
+                generateMarkdownPreview={(markdown) =>
+                  Promise.resolve(<ReactMarkdown source={markdown} />)
+                }
               />
             }
             name="bugDescription"
@@ -99,24 +190,26 @@ const CreateBug = () => {
           </select>
         </FormGroup>
         <FormGroup>
-          <InputLabel htmlFor="bugLabels">Labels</InputLabel>
-          <TextInput
-            id="bugLabels"
-            type="text"
-            placeholder="Enter labels"
-            name="bugLabels"
-            ref={register({ required: true })}
-          />
-        </FormGroup>
-        <FormGroup>
           <InputLabel htmlFor="bugAssignedUser">Assignee</InputLabel>
           <select
             id="bugAssignedUser"
             name="bugAssignedUser"
             ref={register({ required: true })}
           >
-            <option value="id1">Duncan Bain</option>
-            <option value="id2">Bain Duncan</option>
+            <option value="" disabled selected hidden>
+              Assign person
+            </option>
+            {dataMembers ? (
+              dataMembers.getProjectMembers.map((member) => (
+                <option key={member._id} value={member._id}>
+                  {member.username}
+                </option>
+              ))
+            ) : (
+              <option value="" disabled selected hidden>
+                Choose a project
+              </option>
+            )}
           </select>
         </FormGroup>
         <FormGroup>

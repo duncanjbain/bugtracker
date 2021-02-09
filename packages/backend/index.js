@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const User = require('./models/User');
 const Bug = require('./models/Bug');
 const Project = require('./models/Project');
-const BugLabel = require('./models/BugLabel');
+
 
 const { MONGODB_URI } = process.env;
 const typeDefs = require('./graphql/schema');
@@ -58,7 +58,6 @@ const apolloServer = new ApolloServer({
       User,
       Bug,
       Project,
-      BugLabel,
     };
   },
 });

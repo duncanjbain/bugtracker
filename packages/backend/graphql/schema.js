@@ -10,6 +10,7 @@ const typeDefs = gql`
     getAllProjects: [Project]
     getProject(projectID: String!): Project
     getUserProjects(userID: String!): [Project]
+    getProjectMembers(projectID: String!): [User]
   }
 
   type User {
@@ -51,14 +52,7 @@ const typeDefs = gql`
     priority: String!
     author: User!
     project: Project!
-    labels: [BugLabel]
-  }
-
-  type BugLabel {
-    _id: ID!
-    labelName: String!
-    labelDescription: String!
-    bugsWithLabel: [Bug]
+    assignedUser: User!
   }
 
   type Mutation {
@@ -83,8 +77,9 @@ const typeDefs = gql`
       description: String!
       priority: String!
       author: String!
+      assignedUser: String!
       project: String!
-      labels: [String!]
+      type: String!
     ): Bug
     updateExistingBug(
       _id: ID!
@@ -94,15 +89,9 @@ const typeDefs = gql`
       priority: String
       author: String
       project: String
-      labels: [String]
     ): Bug
     deleteExistingBug(_id: ID!): Bug
     createProject(projectKey: String!, projectName: String!): Project
-    createBugLabel(
-      labelName: String!
-      labelDescription: String!
-      bugsWithLabel: [String]
-    ): BugLabel
   }
 `;
 
