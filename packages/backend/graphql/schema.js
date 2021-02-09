@@ -52,7 +52,7 @@ const typeDefs = gql`
     priority: String!
     author: User!
     project: Project!
-    assignedUser: User!
+    assignee: User!
   }
 
   type Mutation {

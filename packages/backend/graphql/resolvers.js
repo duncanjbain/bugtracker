@@ -148,8 +148,12 @@ const resolvers = {
         projectKey,
         projectName,
         projectLead: currentUser._id,
-        projectMembers: [currentUser._id],
-      }).save();
+      });
+      newProject.projectMembers = [
+        ...newProject.projectMembers,
+        currentUser._id,
+      ];
+      await newProject.save();
       projectOwner.memberOfProjects = [
         ...projectOwner.memberOfProjects,
         newProject._id,
@@ -160,16 +164,21 @@ const resolvers = {
     },
     createBug: async (
       root,
-      { key, summary, description, priority, author, project },
+      { key, summary, description, priority, author, project, assignee },
       { Bug, User, Project }
     ) => {
       const foundBugKey = await Bug.findOne({ key });
       if (foundBugKey) {
         throw new UserInputError('Bug with this key already exists');
       }
-      const bugAuthor = await User.findOne({ username: author });
+      const bugAuthor = await User.findById(author);
       if (!bugAuthor) {
         throw new UserInputError('An author is required when creating a bug');
+      }
+
+      const foundAssignee = await User.findById(assignee);
+      if (!foundAssignee) {
+        throw new UserInputError('A user must be assigned when creating a bug');
       }
 
       const bugProject = await Project.findOne({ projectKey: project });
@@ -181,8 +190,9 @@ const resolvers = {
         summary,
         description,
         priority,
-        author: bugAuthor.id,
-        project: bugProject.id,
+        author: bugAuthor._id,
+        project: bugProject._id,
+        assignee: foundAssignee._id,
       }).save();
       bugProject.projectBugs.push(newBug.id);
       await bugProject.save();
