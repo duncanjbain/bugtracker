@@ -79,9 +79,9 @@ const resolvers = {
       return foundProjects;
     },
     getProjectMembers: async (root, { projectID }, { Project }) => {
-      const foundProject = await Project.findById(projectID).populate(
-        'projectMembers'
-      );
+      const foundProject = await Project.findById(projectID)
+        .populate('projectMembers')
+        .populate('projectLead');
       console.log(foundProject);
       return foundProject.projectMembers;
     },
@@ -148,6 +148,7 @@ const resolvers = {
         projectKey,
         projectName,
         projectLead: currentUser._id,
+        projectMembers: [currentUser._id],
       }).save();
       projectOwner.memberOfProjects = [
         ...projectOwner.memberOfProjects,

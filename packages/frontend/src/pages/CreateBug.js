@@ -116,7 +116,7 @@ const CreateBug = () => {
               getMembers({ variables: { projectID: event.target.value } })
             }
           >
-            <option value="" disabled selected hidden>
+            <option value="" selected>
               Choose a project
             </option>
             {data &&
@@ -144,7 +144,7 @@ const CreateBug = () => {
             name="bugType"
             ref={register({ required: true })}
           >
-            <option value="Defect">Defect</option>
+            <option selected value="Defect">Defect</option>
             <option value="Enhancement">Enhancement</option>
           </select>
         </FormGroup>
