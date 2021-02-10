@@ -25,6 +25,7 @@ const GET_USER_PROJECTS = gql`
 const GET_PROJECT_MEMBERS = gql`
   query getProjectMembers($projectID: String!) {
     getProjectMembers(projectID: $projectID) {
+      _id
       username
     }
   }
@@ -37,7 +38,7 @@ const CREATE_NEW_BUG = gql`
     $description: String!
     $priority: String!
     $author: String!
-    $assignedUser: String!
+    $assignee: String!
     $project: String!
     $type: String!
   ) {
@@ -47,7 +48,7 @@ const CREATE_NEW_BUG = gql`
       description: $description
       priority: $priority
       author: $author
-      assignedUser: $assignedUser
+      assignee: $assignee
       project: $project
       type: $type
     ) {
@@ -88,7 +89,7 @@ const CreateBug = () => {
         description: bugDescription,
         priority: bugPriority,
         author: bugAuthor,
-        assignedUser: bugAssignedUser,
+        assignee: bugAssignedUser,
         project: projectName,
         type: bugType,
       },
@@ -144,8 +145,8 @@ const CreateBug = () => {
             name="bugType"
             ref={register({ required: true })}
           >
-            <option selected value="Defect">Defect</option>
-            <option value="Enhancement">Enhancement</option>
+            <option selected value="defect">Defect</option>
+            <option value="enhancement">Enhancement</option>
           </select>
         </FormGroup>
         <FormGroup>
@@ -184,9 +185,9 @@ const CreateBug = () => {
             name="bugPriority"
             ref={register({ required: true })}
           >
-            <option value="id1">Low</option>
-            <option value="id2">Medium</option>
-            <option value="id3">High</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
           </select>
         </FormGroup>
         <FormGroup>
@@ -219,8 +220,17 @@ const CreateBug = () => {
             name="bugAuthor"
             ref={register({ required: true })}
           >
-            <option value="id1">Duncan Bain</option>
-            <option value="id2">Bain Duncan</option>
+            {dataMembers ? (
+              dataMembers.getProjectMembers.map((member) => (
+                <option key={member._id} value={member._id}>
+                  {member.username}
+                </option>
+              ))
+            ) : (
+              <option value="" disabled selected hidden>
+                Choose a project
+              </option>
+            )}
           </select>
         </FormGroup>
         <button style={{ margin: '0.5rem' }} type="submit">

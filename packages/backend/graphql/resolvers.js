@@ -164,24 +164,24 @@ const resolvers = {
     },
     createBug: async (
       root,
-      { key, summary, description, priority, author, project, assignee },
+      { key, summary, description, priority, author, project, assignee, type },
       { Bug, User, Project }
     ) => {
-      const foundBugKey = await Bug.findOne({ key });
+      const foundBugKey = await Bug.exists({ key });
       if (foundBugKey) {
         throw new UserInputError('Bug with this key already exists');
       }
-      const bugAuthor = await User.findById(author);
+      const bugAuthor = await User.exists({ _id: author });
       if (!bugAuthor) {
         throw new UserInputError('An author is required when creating a bug');
       }
 
-      const foundAssignee = await User.findById(assignee);
+      const foundAssignee = await User.exists({ _id: assignee });
       if (!foundAssignee) {
         throw new UserInputError('A user must be assigned when creating a bug');
       }
 
-      const bugProject = await Project.findOne({ projectKey: project });
+      const bugProject = await Project.exists({ _id: project });
       if (!bugProject) {
         throw new UserInputError('A project is required when creating a bug');
       }
@@ -190,13 +190,24 @@ const resolvers = {
         summary,
         description,
         priority,
+        type,
         author: bugAuthor._id,
         project: bugProject._id,
         assignee: foundAssignee._id,
       }).save();
-      bugProject.projectBugs.push(newBug.id);
-      await bugProject.save();
-      return { Bug: newBug, BugAuthor: bugAuthor };
+      await Project.findOneAndUpdate(
+        { _id: project },
+        { $addToSet: { projectBugs: newBug._id } }
+      );
+      await User.findOneAndUpdate(
+        { _id: assignee },
+        { $addToSet: { assignedBugs: newBug._id } }
+      );
+      await User.findOneAndUpdate(
+        { _id: author },
+        { $addToSet: { createdBugs: newBug._id } }
+      );
+      return newBug;
     },
     updateExistingBug: async (root, { _id, ...args }, { Bug }) =>
       Bug.findByIdAndUpdate(

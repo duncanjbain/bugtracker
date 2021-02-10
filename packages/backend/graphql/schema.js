@@ -77,7 +77,7 @@ const typeDefs = gql`
       description: String!
       priority: String!
       author: String!
-      assignedUser: String!
+      assignee: String!
       project: String!
       type: String!
     ): Bug

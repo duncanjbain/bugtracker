@@ -16,17 +16,16 @@ const BugSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['Defect', 'Enhancement'],
+    enum: ['defect', 'enhancement'],
     required: true,
   },
   priority: {
     type: String,
-    enum: ['Low', 'Medium', 'High'],
+    enum: ['low', 'medium', 'high'],
     required: true,
-    default: 'Medium',
   },
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  assignedUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
   created: {
     type: Date,
