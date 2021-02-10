@@ -55,10 +55,7 @@ const resolvers = {
       return Bug.find({});
     },
     getBug: async (root, { bugId }, { Bug }) =>
-      Bug.findOne({ _id: bugId })
-        .populate('author')
-        .populate('project')
-        .populate('labels'),
+      Bug.findOne({ _id: bugId }).populate('author').populate('project'),
     getAllProjects: async (root, args, { Project, currentUser }) => {
       if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
         throw new AuthenticationError(
@@ -76,8 +73,16 @@ const resolvers = {
           { projectLead: foundUser._id },
           { projectMembers: foundUser._id },
         ],
-      }).populate('projectLead');
+      })
+        .populate('projectLead')
+        .populate('projectMembers');
       return foundProjects;
+    },
+    getProjectMembers: async (root, { projectID }, { Project }) => {
+      const foundProject = await Project.findById(projectID)
+        .populate('projectMembers')
+        .populate('projectLead');
+      return foundProject.projectMembers;
     },
   },
   Mutation: {
@@ -142,7 +147,12 @@ const resolvers = {
         projectKey,
         projectName,
         projectLead: currentUser._id,
-      }).save();
+      });
+      newProject.projectMembers = [
+        ...newProject.projectMembers,
+        currentUser._id,
+      ];
+      await newProject.save();
       projectOwner.memberOfProjects = [
         ...projectOwner.memberOfProjects,
         newProject._id,
@@ -153,19 +163,24 @@ const resolvers = {
     },
     createBug: async (
       root,
-      { key, summary, description, priority, author, project, labels },
+      { key, summary, description, priority, author, project, assignee, type },
       { Bug, User, Project }
     ) => {
-      const foundBugKey = await Bug.findOne({ key });
+      const foundBugKey = await Bug.exists({ key });
       if (foundBugKey) {
         throw new UserInputError('Bug with this key already exists');
       }
-      const bugAuthor = await User.findOne({ username: author });
+      const bugAuthor = await User.exists({ _id: author });
       if (!bugAuthor) {
         throw new UserInputError('An author is required when creating a bug');
       }
 
-      const bugProject = await Project.findOne({ projectKey: project });
+      const foundAssignee = await User.exists({ _id: assignee });
+      if (!foundAssignee) {
+        throw new UserInputError('A user must be assigned when creating a bug');
+      }
+
+      const bugProject = await Project.exists({ _id: project });
       if (!bugProject) {
         throw new UserInputError('A project is required when creating a bug');
       }
@@ -174,13 +189,24 @@ const resolvers = {
         summary,
         description,
         priority,
-        author: bugAuthor.id,
-        project: bugProject.id,
-        labels,
+        type,
+        author: bugAuthor._id,
+        project: bugProject._id,
+        assignee: foundAssignee._id,
       }).save();
-      bugProject.projectBugs.push(newBug.id);
-      await bugProject.save();
-      return { Bug: newBug, BugAuthor: bugAuthor };
+      await Project.findOneAndUpdate(
+        { _id: project },
+        { $addToSet: { projectBugs: newBug._id } }
+      );
+      await User.findOneAndUpdate(
+        { _id: assignee },
+        { $addToSet: { assignedBugs: newBug._id } }
+      );
+      await User.findOneAndUpdate(
+        { _id: author },
+        { $addToSet: { createdBugs: newBug._id } }
+      );
+      return newBug;
     },
     updateExistingBug: async (root, { _id, ...args }, { Bug }) =>
       Bug.findByIdAndUpdate(
@@ -192,24 +218,6 @@ const resolvers = {
       ),
     deleteExistingBug: async (root, { _id }, { Bug }) =>
       Bug.findByIdAndRemove(_id),
-    createBugLabel: async (
-      root,
-      { labelName, labelDescription, bugsWithLabel },
-      { Bug, BugLabel }
-    ) => {
-      const foundLabel = await BugLabel.findOne({ labelName });
-      if (foundLabel) {
-        throw new UserInputError('This bug label already exists');
-      }
-      const foundBug = await Bug.findOne({ _id: bugsWithLabel });
-      const newBugLabel = await new BugLabel({
-        labelName,
-        labelDescription,
-        bugsWithLabel: [foundBug.id],
-      }).save();
-      await newBugLabel.populate('bugsWithLabel').execPopulate();
-      return newBugLabel;
-    },
   },
 };
 

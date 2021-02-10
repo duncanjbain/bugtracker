@@ -14,14 +14,19 @@ const BugSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    enum: ['defect', 'enhancement'],
+    required: true,
+  },
   priority: {
     type: String,
+    enum: ['low', 'medium', 'high'],
     required: true,
-    default: 'Medium',
   },
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
-  labels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BugLabel' }],
   created: {
     type: Date,
     default: Date.now,

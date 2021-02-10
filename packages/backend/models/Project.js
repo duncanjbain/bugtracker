@@ -14,19 +14,7 @@ const ProjectSchema = new mongoose.Schema({
     ref: 'User',
   },
   projectBugs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bug' }],
-  projectMembers: [
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
-      role: {
-        type: String,
-        enum: ['ADMIN', 'USER'],
-        default: 'USER',
-      },
-    },
-  ],
+  projectMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);

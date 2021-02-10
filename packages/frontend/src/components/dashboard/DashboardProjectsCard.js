@@ -2,14 +2,14 @@ import React from 'react';
 import styled, { useTheme } from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 import PulseLoader from 'react-spinners/PulseLoader';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import {
   CardWrapper,
   CardTitle,
   CardHeader,
-} from '../ui/components/StyledDashboardCard';
+} from '../../ui/components/StyledDashboardCard';
 import DashboardProjectsCardList from './DashboardProjectsCardList'
-import { ReactComponent as ReloadIcon } from '../assets/svg/icons/refresh-ccw.svg';
+import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
 
 const GET_PROJECTS = gql`
   query getUserProjects($userID: String!) {

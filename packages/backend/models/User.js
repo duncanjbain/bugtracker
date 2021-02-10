@@ -35,6 +35,8 @@ const UserSchema = new mongoose.Schema({
     default: 'USER',
   },
   memberOfProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
+  createdBugs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bug' }],
+  assignedBugs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bug' }],
 });
 
 UserSchema.pre('save', function (next) {
