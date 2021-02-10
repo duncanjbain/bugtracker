@@ -4,6 +4,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
 import ReactMde from 'react-mde';
 import ReactMarkdown from 'react-markdown';
+import { useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import '../components/tags.css';
 import { useUser } from '../context/UserContext';
@@ -59,6 +61,8 @@ const CREATE_NEW_BUG = gql`
 
 const CreateBug = () => {
   const user = useUser();
+  const history = useHistory();
+  const { addToast } = useToasts();
   const { data, loading } = useQuery(GET_USER_PROJECTS, {
     variables: { userID: user._id },
   });
@@ -69,7 +73,6 @@ const CreateBug = () => {
 
   // eslint-disable-next-line no-unused-vars
   const onSubmit = async (formData) => {
-    console.log(formData);
     const {
       bugKey,
       projectName,
@@ -81,20 +84,33 @@ const CreateBug = () => {
       bugAuthor,
     } = formData;
 
-    await createBug({
-      // eslint-disable-next-line no-underscore-dangle
-      variables: {
-        key: bugKey,
-        summary: bugSummary,
-        description: bugDescription,
-        priority: bugPriority,
-        author: bugAuthor,
-        assignee: bugAssignedUser,
-        project: projectName,
-        type: bugType,
-      },
-    });
+    try {
+      await createBug({
+        // eslint-disable-next-line no-underscore-dangle
+        variables: {
+          key: bugKey,
+          summary: bugSummary,
+          description: bugDescription,
+          priority: bugPriority,
+          author: bugAuthor,
+          assignee: bugAssignedUser,
+          project: projectName,
+          type: bugType,
+        },
+      });
+      addToast('Bug successfully created!', {
+        autoDismiss: true,
+        appearance: 'success',
+      });
+      history.push('/dashboard')
+    } catch (error) {
+      addToast(`Oh no! ${error}`, {
+        autoDismiss: true,
+        appearance: 'error',
+      });
+    }
   };
+
   const [value, setValue] = useState('**Hello world!!!**');
   const [selectedTab, setSelectedTab] = useState('write');
   if (loading) {

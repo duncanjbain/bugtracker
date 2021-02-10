@@ -82,7 +82,6 @@ const resolvers = {
       const foundProject = await Project.findById(projectID)
         .populate('projectMembers')
         .populate('projectLead');
-      console.log(foundProject);
       return foundProject.projectMembers;
     },
   },
