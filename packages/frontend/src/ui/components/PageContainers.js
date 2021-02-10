@@ -5,7 +5,7 @@ const SingleColumnFlex = styled.section`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   border-radius: 3px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   border-top: 5px solid ${(props) => props.theme.colors.primary};
