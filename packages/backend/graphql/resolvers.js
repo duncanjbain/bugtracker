@@ -67,11 +67,14 @@ const resolvers = {
         .populate('projectMembers')
         .populate('projectBugs');
     },
-    getProject: async (root, { projectID }, { Project }) =>
-      Project.findOne({ _id: projectID })
+    getProject: async (root, { searchKey }, { Project }) =>
+      Project.findOne({ projectKey: searchKey })
         .populate('projectLead')
         .populate('projectMembers')
-        .populate('projectBugs'),
+        .populate({
+          path: 'projectBugs',
+          populate: { path: 'assignee', model: 'User' },
+        }),
     getUserProjects: async (root, { userID }, { Project, User }) => {
       const foundUser = await User.findById(userID);
       const foundProjects = await Project.find({

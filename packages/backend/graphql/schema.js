@@ -8,7 +8,7 @@ const typeDefs = gql`
     getAllBugs: [Bug]
     getBug(bugId: String!): Bug
     getAllProjects: [Project]
-    getProject(projectID: String!): Project
+    getProject(searchKey: String!): Project
     getUserProjects(userID: String!): [Project]
     getProjectMembers(projectID: String!): [User]
   }
