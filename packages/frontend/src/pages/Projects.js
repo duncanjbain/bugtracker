@@ -4,16 +4,21 @@ import { gql, useQuery } from '@apollo/client';
 import PulseLoader from 'react-spinners/PulseLoader';
 import SingleColumnFlex from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
-import { StyledTable, StyledTableHeader,  StyledTableRow, StyledTableLink} from '../ui/components/StyledTable'
+import {
+  StyledTable,
+  StyledTableHeader,
+  StyledTableRow,
+  StyledTableLink,
+} from '../ui/components/StyledTable';
 
 const GET_ALL_PROJECTS = gql`
   query {
     getAllProjects {
       _id
       projectKey
-      projectName 
+      projectName
       projectLead {
-          username
+        username
       }
     }
   }
@@ -28,37 +33,52 @@ const Projects = () => {
       <div
         style={{
           display: 'flex',
-          'justify-content': 'center',
-          'align-items': 'center',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
         }}
       >
         <PulseLoader loading="true" color={theme.colors.primary} />
       </div>
     );
   }
-  console.log(data)
+  console.log(data);
 
   return (
-    <SingleColumnFlex style={{"width": "auto", "margin-left": "1.5rem", "margin-right": "1.5rem" }}>
+    <SingleColumnFlex
+      style={{
+        width: 'auto',
+        'margin-left': '1.5rem',
+        'margin-right': '1.5rem',
+      }}
+    >
       <CardHeader>
         <CardTitle>Projects</CardTitle>
       </CardHeader>
       <StyledTable>
-            <thead>
-                <StyledTableHeader>Key</StyledTableHeader>
-                <StyledTableHeader>Project Name</StyledTableHeader>
-                <StyledTableHeader>Project Lead</StyledTableHeader>
-            </thead>
-            <tbody>
-                {data.getAllProjects.map(project =>
-                <StyledTableRow>
-                    <td>{project.projectKey}</td>
-                    <td><StyledTableLink to={`/project/${project.projectKey}`}>{project.projectName}</StyledTableLink></td>
-                    <td><StyledTableLink to={`/user/${project.projectLead._id}`}>{project.projectLead.username}</StyledTableLink></td>
-                </StyledTableRow>
-                )}
-            </tbody>
-        </StyledTable>
+        <thead>
+          <StyledTableHeader>Key</StyledTableHeader>
+          <StyledTableHeader>Project Name</StyledTableHeader>
+          <StyledTableHeader>Project Lead</StyledTableHeader>
+        </thead>
+        <tbody>
+          {data.getAllProjects.map((project) => (
+            <StyledTableRow>
+              <td>{project.projectKey}</td>
+              <td>
+                <StyledTableLink to={`/project/${project.projectKey}`}>
+                  {project.projectName}
+                </StyledTableLink>
+              </td>
+              <td>
+                <StyledTableLink to={`/user/${project.projectLead._id}`}>
+                  {project.projectLead.username}
+                </StyledTableLink>
+              </td>
+            </StyledTableRow>
+          ))}
+        </tbody>
+      </StyledTable>
     </SingleColumnFlex>
   );
 };

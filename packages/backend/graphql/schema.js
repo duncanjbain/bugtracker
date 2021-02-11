@@ -53,6 +53,7 @@ const typeDefs = gql`
     author: User!
     project: Project!
     assignee: User!
+    type: String!
   }
 
   type Mutation {

@@ -7,6 +7,7 @@ import { useQuery, useMutation, gql } from '@apollo/client';
 import { useUser } from '../context/UserContext';
 import { FormGroup, TextInput, InputLabel } from '../ui/components/StyledForm';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
+import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 const GET_PROFILE = gql`
   query Profile {
@@ -67,7 +68,7 @@ const UserProfile = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />
   }
   return (
     <>

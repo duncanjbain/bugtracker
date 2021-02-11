@@ -9,6 +9,7 @@ import {
   StyledTableRow,
   StyledTableLink,
 } from '../ui/components/StyledTable';
+import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 const GET_PROJECT = gql`
   query GetProject($searchKey: String!) {
@@ -17,6 +18,8 @@ const GET_PROJECT = gql`
       projectBugs {
         key
         summary
+        type
+        priority
         assignee {
           username
         }
@@ -32,7 +35,7 @@ const ProjectDetails = () => {
   });
 
   if (loading) {
-    return <p>Loading</p>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -50,6 +53,8 @@ const ProjectDetails = () => {
         <thead>
           <StyledTableHeader>Key</StyledTableHeader>
           <StyledTableHeader>Bug Summary</StyledTableHeader>
+          <StyledTableHeader>Type</StyledTableHeader>
+          <StyledTableHeader>Priority</StyledTableHeader>
           <StyledTableHeader>Assignee</StyledTableHeader>
         </thead>
         <tbody>
@@ -60,7 +65,9 @@ const ProjectDetails = () => {
                   {bug.key}
                 </StyledTableLink>
               </td>
-              <td>{bug.summary}</td>
+              <td style={{ textTransform: 'capitalize' }}>{bug.summary}</td>
+              <td style={{ textTransform: 'capitalize' }}>{bug.type}</td>
+              <td style={{ textTransform: 'capitalize' }}>{bug.priority}</td>
               <td>
                 <StyledTableLink to={`/user/${bug.assignee._id}`}>
                   {bug.assignee.username}

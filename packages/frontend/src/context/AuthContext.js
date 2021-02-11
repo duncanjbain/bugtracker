@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
+import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 const WHOAMI_QUERY = gql`
   query {
@@ -48,9 +49,13 @@ const LOGIN_USER_MUTATION = gql`
 const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
-  const { loading, data, refetch } = useQuery(WHOAMI_QUERY, { errorPolicy: 'all'});
+  const { loading, data, refetch } = useQuery(WHOAMI_QUERY, {
+    errorPolicy: 'all',
+  });
   const [loginUser] = useMutation(LOGIN_USER_MUTATION, { errorPolicy: 'all' });
-  const [signupUser] = useMutation(SIGNUP_USER_MUTATION, { errorPolicy: 'all' });
+  const [signupUser] = useMutation(SIGNUP_USER_MUTATION, {
+    errorPolicy: 'all',
+  });
 
   const signin = async (username, password) =>
     loginUser({ variables: { username, password } }).then((res) => {
@@ -86,7 +91,7 @@ const AuthProvider = (props) => {
   };
 
   if (loading) {
-    return <p>Loading!</p>;
+    return <LoadingSpinner />
   }
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading

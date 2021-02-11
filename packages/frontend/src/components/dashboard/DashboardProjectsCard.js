@@ -1,14 +1,14 @@
 import React from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
-import PulseLoader from 'react-spinners/PulseLoader';
 import { useUser } from '../../context/UserContext';
 import {
   CardWrapper,
   CardTitle,
   CardHeader,
 } from '../../ui/components/StyledDashboardCard';
-import DashboardProjectsCardList from './DashboardProjectsCardList'
+import DashboardProjectsCardList from './DashboardProjectsCardList';
+import LoadingSpinner from '../../ui/components/LoadingSpinner';
 import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
 
 const GET_PROJECTS = gql`
@@ -27,7 +27,6 @@ const GET_PROJECTS = gql`
 
 // eslint-disable-next-line consistent-return
 const DashboardProjectsCard = () => {
-  const theme = useTheme();
   const user = useUser();
   const { loading, data, refetch, networkStatus } = useQuery(GET_PROJECTS, {
     // eslint-disable-next-line no-underscore-dangle
@@ -35,29 +34,24 @@ const DashboardProjectsCard = () => {
     notifyOnNetworkStatusChange: true,
   });
 
-  if (networkStatus === 4) {
+  if (networkStatus === 4 || loading ) {
     return (
-    <CardWrapper gridArea="projects">
-      <CardHeader>
-        <CardTitle>My Projects</CardTitle>
-        <StyledButton
-          type="button"
-          aria-label="Reload projects"
-          onClick={() => refetch()}
-        >
-          <StyledReloadIcon />
-        </StyledButton>
-      </CardHeader>
-      <div style={{"display":"flex", "justify-content": "center", "align-items":"center"}}>
-        <PulseLoader loading="true" color={theme.colors.primary} />
-      </div>
-    </CardWrapper>
-    )
+      <CardWrapper gridArea="projects">
+        <CardHeader>
+          <CardTitle>My Projects</CardTitle>
+          <StyledButton
+            type="button"
+            aria-label="Reload projects"
+            onClick={() => refetch()}
+          >
+            <StyledReloadIcon />
+          </StyledButton>
+        </CardHeader>
+        <LoadingSpinner />
+      </CardWrapper>
+    );
   }
 
-  if (loading) {
-    return <p>Loading</p>;
-  }
   if (data) {
     return (
       <CardWrapper gridArea="projects">
@@ -72,7 +66,7 @@ const DashboardProjectsCard = () => {
           </StyledButton>
         </CardHeader>
         <div>
-        <DashboardProjectsCardList projects={data.getUserProjects} />
+          <DashboardProjectsCardList projects={data.getUserProjects} />
         </div>
       </CardWrapper>
     );
