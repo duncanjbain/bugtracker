@@ -12,6 +12,7 @@ import { useUser } from '../context/UserContext';
 import SingleColumnFlex from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import { FormGroup, TextInput, InputLabel } from '../ui/components/StyledForm';
+import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 // eslint-disable-next-line no-unused-vars
 const GET_USER_PROJECTS = gql`
@@ -102,7 +103,7 @@ const CreateBug = () => {
         autoDismiss: true,
         appearance: 'success',
       });
-      history.push('/dashboard')
+      history.push('/dashboard');
     } catch (error) {
       addToast(`Oh no! ${error}`, {
         autoDismiss: true,
@@ -114,7 +115,7 @@ const CreateBug = () => {
   const [value, setValue] = useState('**Hello world!!!**');
   const [selectedTab, setSelectedTab] = useState('write');
   if (loading) {
-    return <p>Loading</p>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -161,7 +162,9 @@ const CreateBug = () => {
             name="bugType"
             ref={register({ required: true })}
           >
-            <option selected value="defect">Defect</option>
+            <option selected value="defect">
+              Defect
+            </option>
             <option value="enhancement">Enhancement</option>
           </select>
         </FormGroup>

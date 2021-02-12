@@ -57,15 +57,24 @@ const resolvers = {
     getBug: async (root, { bugId }, { Bug }) =>
       Bug.findOne({ _id: bugId }).populate('author').populate('project'),
     getAllProjects: async (root, args, { Project, currentUser }) => {
-      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+      if (!currentUser) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );
       }
-      return Project.find({}).populate('projectLead');
+      return Project.find({})
+        .populate('projectLead')
+        .populate('projectMembers')
+        .populate('projectBugs');
     },
-    getProject: async (root, { projectID }, { Project }) =>
-      Project.findOne({ _id: projectID }).populate('projectLead'),
+    getProject: async (root, { searchKey }, { Project }) =>
+      Project.findOne({ projectKey: searchKey })
+        .populate('projectLead')
+        .populate('projectMembers')
+        .populate({
+          path: 'projectBugs',
+          populate: { path: 'assignee', model: 'User' },
+        }),
     getUserProjects: async (root, { userID }, { Project, User }) => {
       const foundUser = await User.findById(userID);
       const foundProjects = await Project.find({
@@ -75,7 +84,8 @@ const resolvers = {
         ],
       })
         .populate('projectLead')
-        .populate('projectMembers');
+        .populate('projectMembers')
+        .populate('projectBugs');
       return foundProjects;
     },
     getProjectMembers: async (root, { projectID }, { Project }) => {
