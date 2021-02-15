@@ -7,10 +7,9 @@ const User = require('./models/User');
 const Bug = require('./models/Bug');
 const Project = require('./models/Project');
 
-
 const { MONGODB_URI } = process.env;
-const typeDefs = require('./graphql/schema');
-const resolvers = require('./graphql/resolvers');
+const typeDefs = require('./graphql/typedefs.js');
+const resolvers = require('./graphql/rootResolvers');
 
 const app = express();
 const path = '/graphql';
