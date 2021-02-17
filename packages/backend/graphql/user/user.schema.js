@@ -20,7 +20,7 @@ module.exports = gql`
 
   type Query {
     getWhoAmI: User
-    getUser: User
+    getUser(userId: ID!): User
     getAllUsers: [User]
   }
 

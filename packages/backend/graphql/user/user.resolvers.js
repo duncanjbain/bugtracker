@@ -13,7 +13,7 @@ module.exports = {
       if (!currentUser) {
         return null;
       }
-      return User.findById(currentUser.id);
+      return User.findById(currentUser._id);
     },
     getUser: async (root, { userId }, { User, currentUser }) => {
       if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
