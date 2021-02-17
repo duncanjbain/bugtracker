@@ -1,7 +1,7 @@
-obs:
+jobs:
   test:
     executor:
-      name: node/lts
+      name: node/default
     steps:
       - checkout
       - node/install-packages:
