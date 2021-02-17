@@ -2,6 +2,7 @@ jobs:
   test:
     executor:
       name: node/default
+      tag: '14.5'
     steps:
       - checkout
       - node/install-packages:
