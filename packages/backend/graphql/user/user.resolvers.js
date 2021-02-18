@@ -66,7 +66,7 @@ module.exports = {
       return { user: foundUser, token: createToken(foundUser) };
     },
     updateUser: async (root, { _id, ...args }, { User, currentUser }) => {
-      if (!_id === currentUser.id || !currentUser.siteRole.includes('ADMIN')) {
+      if (!_id === currentUser.id || currentUser.siteRole.includes('ADMIN')) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );

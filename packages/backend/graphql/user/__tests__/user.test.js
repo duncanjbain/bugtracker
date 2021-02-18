@@ -1,6 +1,7 @@
 const { createTestClient } = require('apollo-server-testing');
 const { ApolloServer } = require('apollo-server-express');
 
+const { createToken } = require('../../../utils/createToken');
 const User = require('../../../models/User');
 const Bug = require('../../../models/Bug');
 const Project = require('../../../models/Project');
@@ -50,17 +51,35 @@ query GetUser(
 const GET_WHOAMI = `
   query {
     getWhoAmI {
-      _id
+      username
+    }
+  }
+`;
+
+const LOGIN_USER_MUTATION = `
+  mutation LoginUser($username: String!, $password: String!) {
+    loginUser(username: $username, password: $password) {
+      user {
+        username
+      }
+    }
+  }
+`;
+
+const UPDATE_PROFILE = `
+  mutation UpdateUser($_id: ID!, $firstName: String) {
+    updateUser(_id: $_id, firstName: $firstName) {
+      firstName
     }
   }
 `;
 
 describe('user GraphQL queries', () => {
-  test('signup user', async () => {
+  test('can signup user', async () => {
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context: async ({ req }) => ({ User, Bug, Project }),
+      context: async ({ req }) => ({ User }),
     });
 
     const { mutate } = createTestClient(server);
@@ -68,20 +87,20 @@ describe('user GraphQL queries', () => {
     const response = await mutate({
       query: ADD_USER,
       variables: {
-        firstName: 'Duncan',
-        lastName: 'Bain',
-        username: 'duncanbain',
-        email: 'duncan@bain.io',
+        firstName: 'Firstname',
+        lastName: 'Lastname',
+        username: 'testusername',
+        email: 'test@email.com',
         password: 'password',
       },
     });
 
     expect(response.data.signupUser).toEqual({
       user: {
-        firstName: 'Duncan',
-        lastName: 'Bain',
-        username: 'duncanbain',
-        email: 'duncan@bain.io',
+        firstName: 'Firstname',
+        lastName: 'Lastname',
+        username: 'testusername',
+        email: 'test@email.com',
       },
     });
   });
@@ -90,14 +109,14 @@ describe('user GraphQL queries', () => {
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context: async ({ req }) => ({ User, Bug, Project }),
+      context: async ({ req }) => ({ User }),
     });
 
     const newUser = await new User({
-      firstName: 'Duncan',
-      lastName: 'Bain',
-      username: 'duncanbain',
-      email: 'duncan@bain.io',
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      username: 'testusername',
+      email: 'test@email.com',
       password: 'password',
     }).save();
 
@@ -106,10 +125,10 @@ describe('user GraphQL queries', () => {
     const response = await mutate({
       query: ADD_USER,
       variables: {
-        firstName: 'Duncan',
-        lastName: 'Bain',
-        username: 'duncanbain',
-        email: 'duncan@bain.io',
+        firstName: 'Firstname',
+        lastName: 'Lastname',
+        username: 'testusername',
+        email: 'test@email.com',
         password: 'password',
       },
     });
@@ -118,13 +137,13 @@ describe('user GraphQL queries', () => {
     );
   });
 
-  test('get user by ID', async () => {
+  test('can get user by ID', async () => {
     // add new user to database with admin role
     const newAdminUser = await new User({
-      firstName: 'Duncan',
-      lastName: 'Bain',
-      username: 'duncanbain',
-      email: 'duncan@bain.io',
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      username: 'testusername',
+      email: 'test@email.com',
       password: 'password',
       siteRole: 'ADMIN',
     }).save();
@@ -135,8 +154,6 @@ describe('user GraphQL queries', () => {
       resolvers,
       context: async ({ req }) => ({
         User,
-        Bug,
-        Project,
         currentUser: newAdminUser,
       }),
     });
@@ -151,19 +168,19 @@ describe('user GraphQL queries', () => {
     });
 
     expect(response.data.getUser).toEqual({
-      firstName: 'Duncan',
-      lastName: 'Bain',
-      username: 'duncanbain',
-      email: 'duncan@bain.io',
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      username: 'testusername',
+      email: 'test@email.com',
     });
   });
 
-  test('get user info from currentUser context', async () => {
+  test('can get user info from currentUser context', async () => {
     const newUser = await new User({
-      firstName: 'Duncan',
-      lastName: 'Bain',
-      username: 'duncanbain',
-      email: 'duncan@bain.io',
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      username: 'testusername',
+      email: 'test@email.com',
       password: 'password',
     }).save();
 
@@ -172,8 +189,6 @@ describe('user GraphQL queries', () => {
       resolvers,
       context: async ({ req }) => ({
         User,
-        Bug,
-        Project,
         currentUser: newUser,
       }),
     });
@@ -181,6 +196,66 @@ describe('user GraphQL queries', () => {
     const { query } = createTestClient(server);
 
     const response = await query({ query: GET_WHOAMI });
-    expect(JSON.stringify(response.data.getWhoAmI)).toBe(JSON.stringify({_id: newUser.id}));
+    expect(response.data.getWhoAmI.username).toBe('testusername');
+  });
+
+  test('can login user', async () => {
+    const newUser = await new User({
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      username: 'testusername',
+      email: 'test@email.com',
+      password: 'password',
+    }).save();
+
+    // create token to compare to returned token
+    const token = createToken(newUser);
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+        currentUser: newUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+    const response = await mutate({
+      query: LOGIN_USER_MUTATION,
+      variables: { username: 'testusername', password: 'password' },
+    });
+    expect(response.data.loginUser).toEqual({
+      user: { username: 'testusername' },
+    });
+  });
+
+  test('can update user', async () => {
+    const newUser = await new User({
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      username: 'testusername',
+      email: 'test@email.com',
+      password: 'password',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+        currentUser: newUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+
+    const response = await mutate({
+      query: UPDATE_PROFILE,
+      variables: { _id: newUser.id, firstName: 'New' },
+    });
+    expect(response.data.updateUser.firstName).toEqual('New');
   });
 });

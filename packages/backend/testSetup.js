@@ -22,6 +22,8 @@ beforeAll(async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    mongoose.set('useFindAndModify', false);
+    mongoose.set('useCreateIndex', true)
   });
 
 afterEach(async () => {
