@@ -1,11 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const { ApolloServer, AuthenticationError } = require('apollo-server-express');
-const jwt = require('jsonwebtoken');
+const { ApolloServer } = require('apollo-server-express');
 const User = require('./models/User');
 const Bug = require('./models/Bug');
 const Project = require('./models/Project');
+
+const { getCurrentUser } = require('./utils/getCurrentUser');
 
 const { MONGODB_URI } = process.env;
 const typeDefs = require('./graphql/typedefs.js');
@@ -13,7 +14,6 @@ const resolvers = require('./graphql/rootResolvers');
 
 const app = express();
 const path = '/graphql';
-const { JWT_SECRET } = process.env;
 
 mongoose
   .connect(MONGODB_URI, {
@@ -28,19 +28,6 @@ mongoose
   });
 mongoose.set('useFindAndModify', false);
 
-const getCurrentUser = async (req) => {
-  const auth = req.headers.authorization ? req.headers.authorization : null;
-  if (auth && auth.toLowerCase().startsWith('bearer ')) {
-    try {
-      const decodedToken = await jwt.verify(auth.substring(7), JWT_SECRET);
-      const currentUser = await User.findById(decodedToken.id);
-      return currentUser;
-    } catch (error) {
-      throw new AuthenticationError('Unable to authenticate');
-    }
-  }
-};
-
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
@@ -48,9 +35,8 @@ const apolloServer = new ApolloServer({
   // for development use
   introspection: true,
   playground: true,
-  //
   context: async ({ req }) => {
-    // pass User MongoDB model and currentUser into Apollo context
+    // pass User MongoDB models and currentUser into Apollo context
     const currentUser = await getCurrentUser(req);
     return {
       currentUser,

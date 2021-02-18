@@ -4,24 +4,8 @@ const {
 } = require('apollo-server-express');
 
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET } = process.env;
-
-const createToken = (user, secret) => {
-  const { id, email, username } = user;
-  return jwt.sign(
-    {
-      id,
-      email,
-      username,
-    },
-    secret,
-    {
-      expiresIn: '1d',
-    }
-  );
-};
+const { createToken } = require('../../utils/createToken');
 
 module.exports = {
   Query: {
@@ -29,7 +13,7 @@ module.exports = {
       if (!currentUser) {
         return null;
       }
-      return User.findById(currentUser.id);
+      return User.findById(currentUser._id);
     },
     getUser: async (root, { userId }, { User, currentUser }) => {
       if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
@@ -66,7 +50,7 @@ module.exports = {
         email,
         password,
       }).save();
-      return { user: newUser, token: createToken(newUser, JWT_SECRET) };
+      return { user: newUser, token: createToken(newUser) };
     },
     loginUser: async (root, { username, password }, { User }) => {
       const foundUser = await User.findOne({ username }).select('+password');
@@ -79,10 +63,10 @@ module.exports = {
         throw new AuthenticationError('Invalid email or password');
       }
 
-      return { user: foundUser, token: createToken(foundUser, JWT_SECRET) };
+      return { user: foundUser, token: createToken(foundUser) };
     },
     updateUser: async (root, { _id, ...args }, { User, currentUser }) => {
-      if (!_id === currentUser.id || !currentUser.siteRole.includes('ADMIN')) {
+      if (!_id === currentUser.id || currentUser.siteRole.includes('ADMIN')) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );

@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start_dev": "nodemon index.js",
     "start": "node index.js"
   },
@@ -31,9 +31,12 @@
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.2",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.4",
     "mongoose": "^5.11.8"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^1.2.3",
+    "apollo-server-testing": "^2.21.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
