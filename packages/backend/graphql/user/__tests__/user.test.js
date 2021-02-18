@@ -3,8 +3,6 @@ const { ApolloServer } = require('apollo-server-express');
 
 const { createToken } = require('../../../utils/createToken');
 const User = require('../../../models/User');
-const Bug = require('../../../models/Bug');
-const Project = require('../../../models/Project');
 const typeDefs = require('../../typedefs.js');
 const resolvers = require('../../rootResolvers');
 
