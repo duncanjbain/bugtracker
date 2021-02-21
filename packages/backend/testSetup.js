@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+const Project = require('./models/Project');
+const User = require('./models/User');
+const Bug = require('./models/Bug');
+
 async function dropAllCollections () {
   const collections = Object.keys(mongoose.connection.collections)
   for (const collectionName of collections) {
@@ -24,10 +28,20 @@ beforeAll(async () => {
     });
     mongoose.set('useFindAndModify', false);
     mongoose.set('useCreateIndex', true)
+    mongoose.set('useNewUrlParser', true);
   });
 
+
 afterEach(async () => {
-  await dropAllCollections();
+  await User.remove({})
+  await Project.remove({})
+  await Bug.remove({})
+})
+
+beforeEach(async () => {
+  await User.remove({})
+  await Project.remove({})
+  await Bug.remove({})
 })
 
   afterAll(async () => {

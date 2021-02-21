@@ -34,4 +34,8 @@ const BugSchema = new mongoose.Schema({
   },
 });
 
+BugSchema.virtual('id').get(function () {
+  return this._id.toString();
+});
+
 module.exports = mongoose.model('Bug', BugSchema);

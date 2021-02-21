@@ -3,8 +3,6 @@ const { ApolloServer } = require('apollo-server-express');
 
 const { createToken } = require('../../../utils/createToken');
 const User = require('../../../models/User');
-const Bug = require('../../../models/Bug');
-const Project = require('../../../models/Project');
 const typeDefs = require('../../typedefs.js');
 const resolvers = require('../../rootResolvers');
 
@@ -67,8 +65,8 @@ const LOGIN_USER_MUTATION = `
 `;
 
 const UPDATE_PROFILE = `
-  mutation UpdateUser($_id: ID!, $firstName: String) {
-    updateUser(_id: $_id, firstName: $firstName) {
+  mutation UpdateUser($id: ID!, $firstName: String) {
+    updateUser(id: $id, firstName: $firstName) {
       firstName
     }
   }
@@ -251,10 +249,9 @@ describe('user GraphQL queries', () => {
 
     const { mutate } = createTestClient(server);
 
-
     const response = await mutate({
       query: UPDATE_PROFILE,
-      variables: { _id: newUser.id, firstName: 'New' },
+      variables: { id: newUser.id, firstName: 'New' },
     });
     expect(response.data.updateUser.firstName).toEqual('New');
   });
