@@ -237,4 +237,6 @@ describe('project GraphQL queries', () => {
     const response = await query({query: GET_USER_PROJECTS, variables: { userID: firstUser.id}})
     expect(response.data.getUserProjects).toEqual([{projectName: "ProjectOne"}, {projectName: "ProjectTwo"}])
   });
+  
+
 });

@@ -30,13 +30,15 @@ module.exports = gql`
       type: String!
     ): Bug
     updateExistingBug(
-      _id: ID!
+      bugId: ID!
       key: String
       summary: String
       description: String
       priority: String
-      author: String
-      project: String
+      author: ID
+      assignee: ID
+      project: ID
+      type: String
     ): Bug
     deleteExistingBug(_id: ID!): Bug
   }

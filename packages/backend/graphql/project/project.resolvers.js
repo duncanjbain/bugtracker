@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 
+
 module.exports = {
   Query: {
     getAllProjects: async (root, args, { Project, currentUser }) => {
