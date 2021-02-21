@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
   type Project {
-    _id: ID!
+    id: ID!
     projectKey: String!
     projectName: String!
     projectLead: User!
@@ -12,14 +12,13 @@ module.exports = gql`
 
   type ProjectMember {
     user: User!
-    role: String!
   }
 
   type Query {
     getAllProjects: [Project]
     getProject(searchKey: String!): Project
-    getUserProjects(userID: String!): [Project]
-    getProjectMembers(projectID: String!): [User]
+    getUserProjects(userID: ID!): [Project]
+    getProjectMembers(projectID: ID!): [User]
   }
 
   type Mutation {

@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
   type User {
-    _id: ID!
+    id: ID!
     firstName: String!
     lastName: String!
     username: String!
@@ -34,7 +34,7 @@ module.exports = gql`
     ): AuthInfo
     loginUser(username: String!, password: String!): AuthInfo
     updateUser(
-      _id: ID!
+      id: ID!
       firstName: String
       lastName: String
       password: String

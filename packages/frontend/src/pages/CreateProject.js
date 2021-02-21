@@ -27,7 +27,6 @@ const CreateProject = () => {
 
     try {
       await createProject({
-        // eslint-disable-next-line no-underscore-dangle
         variables: { projectKey, projectName },
       });
       addToast('Project created!', {

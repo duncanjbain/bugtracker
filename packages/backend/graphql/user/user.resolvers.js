@@ -13,7 +13,7 @@ module.exports = {
       if (!currentUser) {
         return null;
       }
-      return User.findById(currentUser._id);
+      return User.findById(currentUser.id);
     },
     getUser: async (root, { userId }, { User, currentUser }) => {
       if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
@@ -65,14 +65,14 @@ module.exports = {
 
       return { user: foundUser, token: createToken(foundUser) };
     },
-    updateUser: async (root, { _id, ...args }, { User, currentUser }) => {
-      if (!_id === currentUser.id || currentUser.siteRole.includes('ADMIN')) {
+    updateUser: async (root, { id, ...args }, { User, currentUser }) => {
+      if (!id === currentUser.id || currentUser.siteRole.includes('ADMIN')) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );
       }
       return User.findByIdAndUpdate(
-        _id,
+        id,
         {
           $set: args,
         },

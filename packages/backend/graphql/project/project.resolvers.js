@@ -25,8 +25,8 @@ module.exports = {
       const foundUser = await User.findById(userID);
       const foundProjects = await Project.find({
         $or: [
-          { projectLead: foundUser._id },
-          { projectMembers: foundUser._id },
+          { projectLead: foundUser.id },
+          { projectMembers: foundUser.id },
         ],
       })
         .populate('projectLead')
@@ -47,7 +47,7 @@ module.exports = {
       { projectKey, projectName },
       { Project, currentUser, User }
     ) => {
-      const projectOwner = await User.findById(currentUser._id);
+      const projectOwner = await User.findById(currentUser.id);
       const foundProject = await Project.findOne({ projectKey });
       if (foundProject) {
         throw new AuthenticationError('A project with this key already exists');
@@ -56,16 +56,16 @@ module.exports = {
       const newProject = await new Project({
         projectKey,
         projectName,
-        projectLead: currentUser._id,
+        projectLead: currentUser.id,
       });
       newProject.projectMembers = [
         ...newProject.projectMembers,
-        currentUser._id,
+        currentUser.id,
       ];
       await newProject.save();
       projectOwner.memberOfProjects = [
         ...projectOwner.memberOfProjects,
-        newProject._id,
+        newProject.id,
       ];
       await projectOwner.save();
       await newProject.populate('projectLead').execPopulate();
