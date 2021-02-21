@@ -23,6 +23,32 @@ query GetBug($bugId: ID!) {
 }
 `;
 
+const CREATE_BUG = `
+mutation CreateBug(
+    $key: String!
+    $summary: String!
+    $description: String!
+    $priority: String!
+    $author: ID!
+    $project: ID!
+    $assignee: ID!
+    $type: String!
+) {
+    createBug(
+        key: $key
+        summary: $summary
+        description: $description
+        priority: $priority
+        author: $author
+        project: $project
+        assignee: $assignee
+        type: $type
+    ) {
+        key
+    }
+}
+`;
+
 describe('bug GraphQL queries', () => {
   test('can get all bugs', async () => {
     const newUser = await new User({
@@ -113,5 +139,49 @@ describe('bug GraphQL queries', () => {
     });
 
     expect(response.data.getBug).toEqual({ key: 'BUG01' });
+  });
+  test('can create new bug', async () => {
+    const newUser = await new User({
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      username: 'newuser',
+      email: 'newuser@email.com',
+      password: 'password',
+      siteRole: 'ADMIN',
+    }).save();
+
+    const firstNewProject = await new Project({
+      projectKey: 'KEY01',
+      projectName: 'ProjectOne',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        Project,
+        User,
+        Bug,
+        currentUser: newUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+    const response = await mutate({
+      query: CREATE_BUG,
+      variables: {
+        key: 'BUG01',
+        summary: 'First bug summary',
+        description: 'First bug description',
+        priority: 'medium',
+        type: 'defect',
+        author: newUser.id,
+        project: firstNewProject.id,
+        assignee: newUser.id,
+      },
+    });
+    console.log(response)
+    expect(response.data.createBug).toEqual({key: "BUG01"})
   });
 });
