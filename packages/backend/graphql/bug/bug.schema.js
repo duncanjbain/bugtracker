@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
   type Bug {
-    _id: ID!
+    id: ID!
     key: String!
     summary: String!
     description: String!
@@ -15,7 +15,7 @@ module.exports = gql`
 
   type Query {
     getAllBugs: [Bug]
-    getBug(bugId: String!): Bug
+    getBug(bugId: ID!): Bug
   }
 
   type Mutation {
@@ -24,19 +24,21 @@ module.exports = gql`
       summary: String!
       description: String!
       priority: String!
-      author: String!
-      assignee: String!
-      project: String!
+      author: ID!
+      assignee: ID!
+      project: ID!
       type: String!
     ): Bug
     updateExistingBug(
-      _id: ID!
+      bugId: ID!
       key: String
       summary: String
       description: String
       priority: String
-      author: String
-      project: String
+      author: ID
+      assignee: ID
+      project: ID
+      type: String
     ): Bug
     deleteExistingBug(_id: ID!): Bug
   }

@@ -1,4 +1,7 @@
-const { AuthenticationError } = require('apollo-server-express');
+const {
+  UserInputError,
+  AuthenticationError,
+} = require('apollo-server-express');
 
 module.exports = {
   Query: {
@@ -43,27 +46,27 @@ module.exports = {
         description,
         priority,
         type,
-        author: bugAuthor._id,
-        project: bugProject._id,
-        assignee: foundAssignee._id,
+        author: bugAuthor.id,
+        project: bugProject.id,
+        assignee: foundAssignee.id,
       }).save();
       await Project.findOneAndUpdate(
         { _id: project },
-        { $addToSet: { projectBugs: newBug._id } }
+        { $addToSet: { projectBugs: newBug.id } }
       );
       await User.findOneAndUpdate(
         { _id: assignee },
-        { $addToSet: { assignedBugs: newBug._id } }
+        { $addToSet: { assignedBugs: newBug.id } }
       );
       await User.findOneAndUpdate(
         { _id: author },
-        { $addToSet: { createdBugs: newBug._id } }
+        { $addToSet: { createdBugs: newBug.id } }
       );
       return newBug;
     },
-    updateExistingBug: async (root, { _id, ...args }, { Bug }) =>
+    updateExistingBug: async (root, { bugId, ...args }, { Bug }) =>
       Bug.findByIdAndUpdate(
-        _id,
+        bugId,
         {
           $set: args,
         },
