@@ -34,7 +34,7 @@ const DashboardProjectsCard = () => {
     notifyOnNetworkStatusChange: true,
   });
 
-  if (networkStatus === 4 || loading ) {
+  if (networkStatus === 4 || loading) {
     return (
       <CardWrapper gridArea="projects">
         <CardHeader>

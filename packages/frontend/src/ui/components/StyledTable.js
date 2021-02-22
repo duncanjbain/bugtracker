@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export const StyledTable = styled.table`
   border-collapse: collapse;
@@ -10,7 +10,7 @@ export const StyledTable = styled.table`
 
 export const StyledTableHeader = styled.th`
   text-align: left;
-  border-bottom: 2px solid ${props => props.theme.colors.dark};
+  border-bottom: 2px solid ${(props) => props.theme.colors.dark};
 `;
 
 export const StyledTableRow = styled.tr`

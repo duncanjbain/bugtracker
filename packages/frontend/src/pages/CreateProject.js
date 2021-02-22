@@ -33,7 +33,7 @@ const CreateProject = () => {
         autoDismiss: true,
         appearance: 'success',
       });
-      history.push('/dashboard')
+      history.push('/dashboard');
     } catch (error) {
       addToast('A project with this key already exists!', {
         autoDismiss: true,

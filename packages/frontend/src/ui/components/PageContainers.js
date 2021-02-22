@@ -15,4 +15,4 @@ const SingleColumnFlex = styled.section`
   padding-right: 0.75rem;
 `;
 
-export default SingleColumnFlex
+export default SingleColumnFlex;

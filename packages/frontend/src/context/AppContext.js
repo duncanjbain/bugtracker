@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => (
     <ApolloProvider client={client}>
       <AuthProvider>
         <UserProvider>
-          <ToastProvider       placement='bottom-left'>{children}</ToastProvider>
+          <ToastProvider placement="bottom-left">{children}</ToastProvider>
         </UserProvider>
       </AuthProvider>
     </ApolloProvider>

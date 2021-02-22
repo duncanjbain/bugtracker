@@ -1,12 +1,12 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "modern-css-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'modern-css-reset';
 
 const screenSize = {
-  sm: "320px",
-  md: "480px",
-  lg: "768px",
-  xl: "1024px",
-  "2xl": "1536px",
+  sm: '320px',
+  md: '480px',
+  lg: '768px',
+  xl: '1024px',
+  '2xl': '1536px',
 };
 
 export const theme = {
@@ -15,7 +15,7 @@ export const theme = {
     md: `min-width: ${screenSize.md}`,
     lg: `min-width: ${screenSize.lg}`,
     xl: `min-width: ${screenSize.xl}`,
-    "2xl": `min-width: ${screenSize["2xl"]}`,
+    '2xl': `min-width: ${screenSize['2xl']}`,
   },
   colors: {
     white: 'hsl(0, 0%, 100%)',
@@ -28,8 +28,7 @@ export const theme = {
     success: 'hsl(141, 53%, 53%)',
     warning: 'hsl(48, 100%, 67%)',
     danger: 'hsl(348, 100%, 61%)',
-
-  }
+  },
 };
 
 export const GlobalStyle = createGlobalStyle`

@@ -91,7 +91,7 @@ const AuthProvider = (props) => {
   };
 
   if (loading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading

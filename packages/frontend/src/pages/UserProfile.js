@@ -68,7 +68,7 @@ const UserProfile = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
   return (
     <>
