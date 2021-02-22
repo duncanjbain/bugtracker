@@ -23,7 +23,7 @@ const DashboardProjectsCardList = ({ projects }) => (
             </StyledTableLink>
           </td>
           <td>
-            <StyledTableLink to={`/user/${project.projectLead._id}`}>
+            <StyledTableLink to={`/user/${project.projectLead.id}`}>
               {project.projectLead.username}
             </StyledTableLink>
           </td>

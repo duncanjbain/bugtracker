@@ -18,7 +18,7 @@ import LoadingSpinner from '../ui/components/LoadingSpinner';
 const GET_USER_PROJECTS = gql`
   query getUserProjects($userID: String!) {
     getUserProjects(userID: $userID) {
-      _id
+      id
       projectName
       projectKey
     }
@@ -28,7 +28,7 @@ const GET_USER_PROJECTS = gql`
 const GET_PROJECT_MEMBERS = gql`
   query getProjectMembers($projectID: String!) {
     getProjectMembers(projectID: $projectID) {
-      _id
+      id
       username
     }
   }
@@ -55,7 +55,7 @@ const CREATE_NEW_BUG = gql`
       project: $project
       type: $type
     ) {
-      _id
+      id
     }
   }
 `;
@@ -65,7 +65,7 @@ const CreateBug = () => {
   const history = useHistory();
   const { addToast } = useToasts();
   const { data, loading } = useQuery(GET_USER_PROJECTS, {
-    variables: { userID: user._id },
+    variables: { userID: user.id },
   });
   // eslint-disable-next-line no-unused-vars
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
@@ -139,7 +139,7 @@ const CreateBug = () => {
             </option>
             {data &&
               data.getUserProjects.map((project) => (
-                <option key={project._id} value={project._id}>
+                <option key={project.id} value={project.id}>
                   {project.projectName}
                 </option>
               ))}
@@ -221,7 +221,7 @@ const CreateBug = () => {
             </option>
             {dataMembers ? (
               dataMembers.getProjectMembers.map((member) => (
-                <option key={member._id} value={member._id}>
+                <option key={member.id} value={member.id}>
                   {member.username}
                 </option>
               ))
@@ -241,7 +241,7 @@ const CreateBug = () => {
           >
             {dataMembers ? (
               dataMembers.getProjectMembers.map((member) => (
-                <option key={member._id} value={member._id}>
+                <option key={member.id} value={member.id}>
                   {member.username}
                 </option>
               ))

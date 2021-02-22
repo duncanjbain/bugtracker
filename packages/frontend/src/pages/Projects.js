@@ -14,7 +14,7 @@ import {
 const GET_ALL_PROJECTS = gql`
   query {
     getAllProjects {
-      _id
+      id
       projectKey
       projectName
       projectLead {
@@ -70,7 +70,7 @@ const Projects = () => {
                 </StyledTableLink>
               </td>
               <td>
-                <StyledTableLink to={`/user/${project.projectLead._id}`}>
+                <StyledTableLink to={`/user/${project.projectLead.id}`}>
                   {project.projectLead.username}
                 </StyledTableLink>
               </td>

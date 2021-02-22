@@ -24,20 +24,20 @@ const GET_PROFILE = gql`
 
 const UPDATE_PROFILE = gql`
   mutation UpdateProfile(
-    $_id: ID!
+    $id: ID!
     $firstName: String
     $lastName: String
     $email: String
     $password: String
   ) {
     updateUser(
-      _id: $_id
+      id: $id
       firstName: $firstName
       lastName: $lastName
       email: $email
       password: $password
     ) {
-      _id
+      id
     }
   }
 `;
@@ -59,7 +59,7 @@ const UserProfile = () => {
 
     await updateUser({
       // eslint-disable-next-line no-underscore-dangle
-      variables: { _id: user._id, ...falsyRemoved },
+      variables: { id: user.id, ...falsyRemoved },
     });
     addToast('Profile updated Successfully', {
       autoDismiss: true,

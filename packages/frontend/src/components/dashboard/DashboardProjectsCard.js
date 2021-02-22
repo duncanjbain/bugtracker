@@ -12,13 +12,13 @@ import LoadingSpinner from '../../ui/components/LoadingSpinner';
 import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
 
 const GET_PROJECTS = gql`
-  query getUserProjects($userID: String!) {
+  query getUserProjects($userID: ID!) {
     getUserProjects(userID: $userID) {
-      _id
+      id
       projectName
       projectKey
       projectLead {
-        _id
+        id
         username
       }
     }
@@ -30,7 +30,7 @@ const DashboardProjectsCard = () => {
   const user = useUser();
   const { loading, data, refetch, networkStatus } = useQuery(GET_PROJECTS, {
     // eslint-disable-next-line no-underscore-dangle
-    variables: { userID: user._id },
+    variables: { userID: user.id },
     notifyOnNetworkStatusChange: true,
   });
 

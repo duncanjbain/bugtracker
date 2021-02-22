@@ -6,7 +6,7 @@ import LoadingSpinner from '../ui/components/LoadingSpinner';
 const WHOAMI_QUERY = gql`
   query {
     getWhoAmI {
-      _id
+      id
       username
     }
   }
@@ -29,7 +29,7 @@ const SIGNUP_USER_MUTATION = gql`
     ) {
       token
       user {
-        _id
+        id
       }
     }
   }
@@ -40,7 +40,7 @@ const LOGIN_USER_MUTATION = gql`
     loginUser(username: $username, password: $password) {
       token
       user {
-        _id
+        id
       }
     }
   }

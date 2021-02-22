@@ -69,7 +69,7 @@ const ProjectDetails = () => {
               <td style={{ textTransform: 'capitalize' }}>{bug.type}</td>
               <td style={{ textTransform: 'capitalize' }}>{bug.priority}</td>
               <td>
-                <StyledTableLink to={`/user/${bug.assignee._id}`}>
+                <StyledTableLink to={`/user/${bug.assignee.id}`}>
                   {bug.assignee.username}
                 </StyledTableLink>
               </td>

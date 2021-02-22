@@ -10,7 +10,7 @@ import { FormGroup, TextInput, InputLabel } from '../ui/components/StyledForm';
 const CREATE_PROJECT = gql`
   mutation CreateProject($projectKey: String!, $projectName: String!) {
     createProject(projectKey: $projectKey, projectName: $projectName) {
-      _id
+      id
       projectName
     }
   }
