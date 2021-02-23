@@ -26,7 +26,7 @@ const GET_USER_PROJECTS = gql`
 `;
 
 const GET_PROJECT_MEMBERS = gql`
-  query getProjectMembers($projectID: String!) {
+  query getProjectMembers($projectID: ID!) {
     getProjectMembers(projectID: $projectID) {
       id
       username
