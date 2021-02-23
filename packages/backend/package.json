@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "test": "jest --runInBand",
+    "test": "jest --coverage && coveralls < coverage/lcov.info --runInBand",
     "start_dev": "nodemon index.js",
     "start": "node index.js"
   },
@@ -38,6 +38,7 @@
     "@shelf/jest-mongodb": "^1.2.3",
     "apollo-server-testing": "^2.21.0",
     "concurrently": "^6.0.0",
+    "coveralls": "^3.1.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
