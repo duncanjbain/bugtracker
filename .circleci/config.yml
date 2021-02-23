@@ -11,7 +11,7 @@ jobs:
           command: yarn test-backend
           name: Run yarn test-backend
       - coveralls/upload:
-        path_to_lcov: ./coverage/lcov.info
+          path_to_lcov: ./coverage/lcov.info
 orbs:
   node: circleci/node@4.1.0
   coveralls: coveralls/coveralls@1.0.4
