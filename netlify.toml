@@ -1,5 +1,7 @@
+[build.environment]
+NETLIFY_USE_YARN=true
+
 [build]
 base = "packages/frontend/"
 command = "yarn build"
 publish="build/"
-NETLIFY_USE_YARN=true
