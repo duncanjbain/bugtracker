@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   SignupFormContainer,
   FormGroup,
@@ -9,9 +11,17 @@ import {
 } from '../ui/components/StyledForm';
 import { useAuth } from '../context/AuthContext';
 
+const formValidationSchema = yup.object().shape({
+  username: yup.string().required('A username is required'),
+  password: yup.string().required('A password is required'),
+});
+
 const UserLogin = () => {
   const { signin } = useAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(formValidationSchema),
+  });
 
   const onSubmit = async (formData) => {
     const { username, password } = formData;
@@ -31,6 +41,7 @@ const UserLogin = () => {
             name="username"
             ref={register({ required: true })}
           />
+          {errors.username && <p>{errors.username.message}</p>}
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="password">Password</InputLabel>
@@ -41,6 +52,7 @@ const UserLogin = () => {
             name="password"
             ref={register({ required: true })}
           />
+          {errors.password && <p>{errors.password.message}</p>}
         </FormGroup>
 
         <SubmitButton type="submit">Log In</SubmitButton>
