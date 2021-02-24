@@ -10,13 +10,18 @@ jobs:
       - run:
           command: yarn test-backend
           name: Run yarn test-backend
-      - coveralls/upload:
-          path_to_lcov: ./coverage/lcov.info
 orbs:
   node: circleci/node@4.1.0
-  coveralls: coveralls/coveralls@1.0.4
 version: 2.1
 workflows:
   test_my_app:
     jobs:
       - test
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+jobs:
+  build:
+    steps:
+      - codecov/upload:
+          file: {{ coverage_report_filepath }}
