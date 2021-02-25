@@ -1,13 +1,31 @@
 import styled from 'styled-components';
 
+export const FormHeader = styled.h2`
+  margin-bottom: 2rem;
+`;
+
 export const SubmitButton = styled.button`
-  align-self: center;
+  width: 100%;
+  border-radius: 0.4rem;
+  height: 2.5rem;
+  background: ${(props) => props.theme.colors.link};
+  color: white;
+  outline: none;
+  border: none;
+  appearance: none;
+  user-select: none;
+  cursor: pointer;
+  transition: all 250ms ease 0s;
+  &:hover {
+    background: rgb(43, 108, 176);
+  }
 `;
 
 export const FormGroup = styled.div`
   justify-content: space-between;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5rem;
 `;
 
 export const SignupFormContainer = styled.div`
@@ -41,4 +59,9 @@ export const TextInput = styled.input`
       box-shadow: 0 0 0 3px hsla(348, 100%, 61%, 0.8);
     }
   }
+`;
+
+export const ValidationErrMessage = styled.div`
+  color: ${(props) => props.theme.colors.danger};
+  font-size: 1.5rem;
 `;

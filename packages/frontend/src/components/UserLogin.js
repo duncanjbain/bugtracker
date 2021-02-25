@@ -8,6 +8,8 @@ import {
   SubmitButton,
   TextInput,
   InputLabel,
+  ValidationErrMessage,
+  FormHeader,
 } from '../ui/components/StyledForm';
 import { useAuth } from '../context/AuthContext';
 
@@ -31,7 +33,7 @@ const UserLogin = () => {
   return (
     <SignupFormContainer>
       <main style={{ padding: '1rem' }}>
-        <h2>Log In</h2>
+        <FormHeader>Log In</FormHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormGroup>
             <InputLabel htmlFor="username">Username</InputLabel>
@@ -46,9 +48,9 @@ const UserLogin = () => {
               className={errors.username ? 'error' : ''}
             />
             {errors.username && (
-              <p id="username-error" role="alert">
+              <ValidationErrMessage id="username-error" role="alert">
                 {errors.username.message}
-              </p>
+              </ValidationErrMessage>
             )}
           </FormGroup>
           <FormGroup>
@@ -64,9 +66,9 @@ const UserLogin = () => {
               className={errors.password ? 'error' : ''}
             />
             {errors.password && (
-              <p id="password-error" role="alert">
+              <ValidationErrMessage id="password-error" role="alert">
                 {errors.password.message}
-              </p>
+              </ValidationErrMessage>
             )}
           </FormGroup>
 
