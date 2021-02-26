@@ -31,6 +31,7 @@ module.exports = gql`
     loginUser(email: String!, password: String!): AuthInfo
     updateUser(
       id: ID!
+      name: String
       password: String
       email: String
     ): User

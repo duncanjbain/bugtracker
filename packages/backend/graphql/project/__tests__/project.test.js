@@ -30,7 +30,7 @@ query GetProject(
 const GET_PROJECT_MEMBERS = `
   query GetProjectMembers($projectID: ID!) {
     getProjectMembers(projectID: $projectID) {
-      username
+      name
     }
   }
 `;
@@ -54,9 +54,7 @@ query GetUserProjects($userID: ID!) {
 describe('project GraphQL queries', () => {
   test('can create a project', async () => {
     const newAdminUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testadmin',
+      name: 'Test Admin',
       email: 'testadmin@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -84,9 +82,7 @@ describe('project GraphQL queries', () => {
 
   test('can get all projects', async () => {
     const newAdminUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testadmin',
+      name: 'Test Admin',
       email: 'testadmin@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -123,9 +119,7 @@ describe('project GraphQL queries', () => {
   });
   test('can get project from key', async () => {
     const newAdminUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testadmin',
+      name: 'Test Admin',
       email: 'testadmin@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -158,9 +152,7 @@ describe('project GraphQL queries', () => {
 
   test('can get all projects a user belongs to', async () => {
     const newAdminUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testadmin',
+      name: 'Test Admin',
       email: 'testadmin@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -196,15 +188,13 @@ describe('project GraphQL queries', () => {
       variables: { projectID: firstNewProject.id },
     });
     expect(response.data.getProjectMembers).toEqual([
-      { username: 'testadmin' },
+      { name: 'Test Admin' },
     ]);
   });
 
   test('can get all projects that a user belongs to', async () => {
     const firstUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'firstuser',
+      name: 'First User',
       email: 'first@email.com',
       password: 'password',
     }).save();
