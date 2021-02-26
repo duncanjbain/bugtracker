@@ -4,18 +4,23 @@ import styled from 'styled-components';
 import { useToasts } from 'react-toast-notifications';
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, gql } from '@apollo/client';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useUser } from '../context/UserContext';
-import { FormGroup, TextInput, InputLabel } from '../ui/components/StyledForm';
+import {
+  FormGroup,
+  TextInput,
+  InputLabel,
+  ValidationErrMessage,
+} from '../ui/components/StyledForm';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 const GET_PROFILE = gql`
   query Profile {
     getWhoAmI {
-      firstName
-      lastName
+      name
       email
-      username
       joinDate
       siteRole
     }
@@ -25,27 +30,32 @@ const GET_PROFILE = gql`
 const UPDATE_PROFILE = gql`
   mutation UpdateProfile(
     $id: ID!
-    $firstName: String
-    $lastName: String
+    $name: String
     $email: String
     $password: String
   ) {
-    updateUser(
-      id: $id
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      password: $password
-    ) {
+    updateUser(id: $id, name: $name, email: $email, password: $password) {
       id
     }
   }
 `;
 
+const profileValidationSchema = yup.object().shape({
+  name: yup.string(),
+  email: yup.string().email(),
+  newPassword: yup.string().min(6, 'Password must be 6 characters'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('newPassword'), null], 'Passwords must match'),
+});
+
 const UserProfile = () => {
   const user = useUser();
   const { addToast } = useToasts();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(profileValidationSchema),
+  });
   const { loading, data } = useQuery(GET_PROFILE);
   const [updateUser] = useMutation(UPDATE_PROFILE);
 
@@ -78,26 +88,23 @@ const UserProfile = () => {
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
           <FormGroup>
-            <InputLabel htmlFor="firstName">First name</InputLabel>
+            <InputLabel htmlFor="name">Name</InputLabel>
             <TextInput
-              id="firstName"
+              id="name"
               type="text"
-              placeholder={data.getWhoAmI.firstName}
+              placeholder={data.getWhoAmI.name}
               autocomplete="given-name"
-              name="firstName"
+              name="name"
               ref={register({ required: false })}
+              aria-required="true"
+              aria-invalid={errors.name ? 'true' : 'false'}
+              className={errors.name ? 'error' : ''}
             />
-          </FormGroup>
-          <FormGroup>
-            <InputLabel htmlFor="lastName">Last name</InputLabel>
-            <TextInput
-              id="lastName"
-              type="text"
-              placeholder={data.getWhoAmI.lastName}
-              autocomplete="family-name"
-              name="lastName"
-              ref={register({ required: false })}
-            />
+            {errors.name && (
+              <ValidationErrMessage id="name-error" role="alert">
+                {errors.name.message}
+              </ValidationErrMessage>
+            )}
           </FormGroup>
           <FormGroup>
             <InputLabel htmlFor="email">Email</InputLabel>
@@ -108,7 +115,15 @@ const UserProfile = () => {
               autocomplete="email"
               name="email"
               ref={register({ required: false })}
+              aria-required="true"
+              aria-invalid={errors.email ? 'true' : 'false'}
+              className={errors.email ? 'error' : ''}
             />
+            {errors.email && (
+              <ValidationErrMessage id="email-error" role="alert">
+                {errors.email.message}
+              </ValidationErrMessage>
+            )}
           </FormGroup>
           <FormGroup>
             <InputLabel htmlFor="newPassword">Password</InputLabel>
@@ -119,7 +134,34 @@ const UserProfile = () => {
               autocomplete="new-password"
               name="newPassword"
               ref={register({ required: false })}
+              aria-required="true"
+              aria-invalid={errors.password ? 'true' : 'false'}
+              className={errors.password ? 'error' : ''}
             />
+            {errors.newPassword && (
+              <ValidationErrMessage id="newPassword-error" role="alert">
+                {errors.newPassword.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+            <TextInput
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm new password"
+              autocomplete="new-password"
+              name="confirmPassword"
+              ref={register({ required: false })}
+              aria-required="true"
+              aria-invalid={errors.confirmPassword ? 'true' : 'false'}
+              className={errors.confirmPassword ? 'error' : ''}
+            />
+            {errors.confirmPassword && (
+              <ValidationErrMessage id="confirmPassword-error" role="alert">
+                {errors.confirmPassword.message}
+              </ValidationErrMessage>
+            )}
           </FormGroup>
           <UpdateButton style={{ padding: '0.5rem' }} type="submit">
             Update

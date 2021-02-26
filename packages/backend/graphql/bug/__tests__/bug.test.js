@@ -66,9 +66,7 @@ mutation UpdateExistingBug(
 describe('bug GraphQL queries', () => {
   test('can get all bugs', async () => {
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'newuser',
+      name: 'New User',
       email: 'newuser@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -110,9 +108,7 @@ describe('bug GraphQL queries', () => {
 
   test('can get bug by id', async () => {
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'newuser',
+      name: 'New User',
       email: 'newuser@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -156,9 +152,7 @@ describe('bug GraphQL queries', () => {
   });
   test('can create new bug', async () => {
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'newuser',
+      name: 'New User',
       email: 'newuser@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -201,9 +195,7 @@ describe('bug GraphQL queries', () => {
 
   test('can update existing bug', async () => {
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'newuser',
+      name: 'New User',
       email: 'newuser@email.com',
       password: 'password',
       siteRole: 'ADMIN',

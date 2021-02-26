@@ -21,7 +21,7 @@ const LandingPageContainer = styled.div`
   grid-template-columns: 0.75fr 1fr;
 `;
 
-const CallToAction = styled.div`
+const CallToAction = styled.aside`
   background-color: ${(props) => props.theme.colors.primary};
   padding: 1rem;
 `;

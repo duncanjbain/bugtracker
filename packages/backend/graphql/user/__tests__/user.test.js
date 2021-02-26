@@ -8,23 +8,17 @@ const resolvers = require('../../rootResolvers');
 
 const ADD_USER = `
 mutation SignupUser(
-  $firstName: String!
-  $lastName: String!
-  $username: String!
+  $name: String!
   $email: String!
   $password: String!
 ) {
   signupUser(
-    firstName: $firstName
-    lastName: $lastName
-    username: $username
+    name: $name
     email: $email
     password: $password
   ) {
     user {
-      firstName
-      lastName
-      username
+      name
       email
     }
   }
@@ -38,9 +32,7 @@ query GetUser(
   getUser(
     userId: $userId
   ) {
-      firstName
-      lastName
-      username
+      name
       email
     }
 }
@@ -49,25 +41,25 @@ query GetUser(
 const GET_WHOAMI = `
   query {
     getWhoAmI {
-      username
+      name
     }
   }
 `;
 
 const LOGIN_USER_MUTATION = `
-  mutation LoginUser($username: String!, $password: String!) {
-    loginUser(username: $username, password: $password) {
+  mutation LoginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
       user {
-        username
+        name
       }
     }
   }
 `;
 
 const UPDATE_PROFILE = `
-  mutation UpdateUser($id: ID!, $firstName: String) {
-    updateUser(id: $id, firstName: $firstName) {
-      firstName
+  mutation UpdateUser($id: ID!, $name: String) {
+    updateUser(id: $id, name: $name) {
+      name
     }
   }
 `;
@@ -85,9 +77,7 @@ describe('user GraphQL queries', () => {
     const response = await mutate({
       query: ADD_USER,
       variables: {
-        firstName: 'Firstname',
-        lastName: 'Lastname',
-        username: 'testusername',
+        name: 'Test User',
         email: 'test@email.com',
         password: 'password',
       },
@@ -95,9 +85,7 @@ describe('user GraphQL queries', () => {
 
     expect(response.data.signupUser).toEqual({
       user: {
-        firstName: 'Firstname',
-        lastName: 'Lastname',
-        username: 'testusername',
+        name: 'Test User',
         email: 'test@email.com',
       },
     });
@@ -111,9 +99,7 @@ describe('user GraphQL queries', () => {
     });
 
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testusername',
+      name: 'Test User',
       email: 'test@email.com',
       password: 'password',
     }).save();
@@ -123,9 +109,7 @@ describe('user GraphQL queries', () => {
     const response = await mutate({
       query: ADD_USER,
       variables: {
-        firstName: 'Firstname',
-        lastName: 'Lastname',
-        username: 'testusername',
+        name: 'Test User',
         email: 'test@email.com',
         password: 'password',
       },
@@ -138,9 +122,7 @@ describe('user GraphQL queries', () => {
   test('can get user by ID', async () => {
     // add new user to database with admin role
     const newAdminUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testusername',
+      name: 'Test User',
       email: 'test@email.com',
       password: 'password',
       siteRole: 'ADMIN',
@@ -166,18 +148,14 @@ describe('user GraphQL queries', () => {
     });
 
     expect(response.data.getUser).toEqual({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testusername',
+      name: 'Test User',
       email: 'test@email.com',
     });
   });
 
   test('can get user info from currentUser context', async () => {
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testusername',
+      name: 'Test User',
       email: 'test@email.com',
       password: 'password',
     }).save();
@@ -194,14 +172,12 @@ describe('user GraphQL queries', () => {
     const { query } = createTestClient(server);
 
     const response = await query({ query: GET_WHOAMI });
-    expect(response.data.getWhoAmI.username).toBe('testusername');
+    expect(response.data.getWhoAmI.name).toBe('Test User');
   });
 
   test('can login user', async () => {
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testusername',
+      name: 'Test User',
       email: 'test@email.com',
       password: 'password',
     }).save();
@@ -222,18 +198,16 @@ describe('user GraphQL queries', () => {
 
     const response = await mutate({
       query: LOGIN_USER_MUTATION,
-      variables: { username: 'testusername', password: 'password' },
+      variables: { email: 'test@email.com', password: 'password' },
     });
     expect(response.data.loginUser).toEqual({
-      user: { username: 'testusername' },
+      user: { name: 'Test User' },
     });
   });
 
   test('can update user', async () => {
     const newUser = await new User({
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      username: 'testusername',
+      name: 'Test User',
       email: 'test@email.com',
       password: 'password',
     }).save();
@@ -251,8 +225,9 @@ describe('user GraphQL queries', () => {
 
     const response = await mutate({
       query: UPDATE_PROFILE,
-      variables: { id: newUser.id, firstName: 'New' },
+      variables: { id: newUser.id, name: 'Updated User' },
     });
-    expect(response.data.updateUser.firstName).toEqual('New');
+    console.log(response)
+    expect(response.data.updateUser.name).toEqual('Updated User');
   });
 });

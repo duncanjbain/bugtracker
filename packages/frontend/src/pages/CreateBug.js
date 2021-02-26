@@ -16,7 +16,7 @@ import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 // eslint-disable-next-line no-unused-vars
 const GET_USER_PROJECTS = gql`
-  query getUserProjects($userID: String!) {
+  query getUserProjects($userID: ID!) {
     getUserProjects(userID: $userID) {
       id
       projectName
@@ -26,10 +26,10 @@ const GET_USER_PROJECTS = gql`
 `;
 
 const GET_PROJECT_MEMBERS = gql`
-  query getProjectMembers($projectID: String!) {
+  query getProjectMembers($projectID: ID!) {
     getProjectMembers(projectID: $projectID) {
       id
-      username
+      name
     }
   }
 `;
@@ -222,7 +222,7 @@ const CreateBug = () => {
             {dataMembers ? (
               dataMembers.getProjectMembers.map((member) => (
                 <option key={member.id} value={member.id}>
-                  {member.username}
+                  {member.name}
                 </option>
               ))
             ) : (
@@ -242,7 +242,7 @@ const CreateBug = () => {
             {dataMembers ? (
               dataMembers.getProjectMembers.map((member) => (
                 <option key={member.id} value={member.id}>
-                  {member.username}
+                  {member.name}
                 </option>
               ))
             ) : (

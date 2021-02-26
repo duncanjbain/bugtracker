@@ -33,27 +33,21 @@ module.exports = {
     },
   },
   Mutation: {
-    signupUser: async (
-      root,
-      { firstName, lastName, email, password, username },
-      { User }
-    ) => {
-      const foundUser = await User.findOne({ username });
+    signupUser: async (root, { name, email, password }, { User }) => {
+      const foundUser = await User.findOne({ email });
       if (foundUser) {
         throw new UserInputError('User with this username already exists');
       }
 
       const newUser = await new User({
-        firstName,
-        lastName,
-        username,
+        name,
         email,
         password,
       }).save();
       return { user: newUser, token: createToken(newUser) };
     },
-    loginUser: async (root, { username, password }, { User }) => {
-      const foundUser = await User.findOne({ username }).select('+password');
+    loginUser: async (root, { email, password }, { User }) => {
+      const foundUser = await User.findOne({ email }).select('+password');
       const isValidPassword = await bcrypt.compare(
         password,
         foundUser.password
