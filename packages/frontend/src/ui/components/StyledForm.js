@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FormHeader = styled.h2`
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const SubmitButton = styled.button`
@@ -13,22 +13,29 @@ export const SubmitButton = styled.button`
   outline: none;
   border: none;
   appearance: none;
-  user-select: none;
   cursor: pointer;
   transition: all 250ms ease 0s;
+  margin: 0.5rem;
   &:hover {
     background: rgb(43, 108, 176);
+  }
+  &:focus {
+    outline: 1px solid black;
   }
 `;
 
 export const FormGroup = styled.div`
-  justify-content: space-between;
+  justify-content: start;
   display: flex;
   flex-direction: column;
   margin-bottom: 1.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  height: 6rem;
 `;
 
-export const SignupFormContainer = styled.div`
+export const SignupFormContainer = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,7 +68,7 @@ export const TextInput = styled.input`
   }
 `;
 
-export const ValidationErrMessage = styled.div`
+export const ValidationErrMessage = styled.span`
   color: ${(props) => props.theme.colors.danger};
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 `;

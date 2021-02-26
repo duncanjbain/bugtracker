@@ -19,7 +19,7 @@ const GET_PROJECTS = gql`
       projectKey
       projectLead {
         id
-        username
+        name
       }
     }
   }

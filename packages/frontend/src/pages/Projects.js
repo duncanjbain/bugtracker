@@ -18,7 +18,8 @@ const GET_ALL_PROJECTS = gql`
       projectKey
       projectName
       projectLead {
-        username
+        id
+        name
       }
     }
   }
@@ -71,7 +72,7 @@ const Projects = () => {
               </td>
               <td>
                 <StyledTableLink to={`/user/${project.projectLead.id}`}>
-                  {project.projectLead.username}
+                  {project.projectLead.name}
                 </StyledTableLink>
               </td>
             </StyledTableRow>

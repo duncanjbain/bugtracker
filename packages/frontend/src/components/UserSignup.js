@@ -1,105 +1,123 @@
 import React from 'react';
-import { gql, useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { useHistory, Link } from 'react-router-dom';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuth } from '../context/AuthContext';
 import {
   SignupFormContainer,
   FormGroup,
   SubmitButton,
   TextInput,
   InputLabel,
+  ValidationErrMessage,
 } from '../ui/components/StyledForm';
 
-const ADD_USER = gql`
-  mutation SignupUser(
-    $firstName: String!
-    $lastName: String!
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    signupUser(
-      firstName: $firstName
-      lastName: $lastName
-      username: $username
-      email: $email
-      password: $password
-    ) {
-      user {
-        email
-      }
-      token
-    }
-  }
-`;
+const signupValidationSchema = yup.object().shape({
+  name: yup.string().required('A name is required'),
+  email: yup.string().email().required('An email address is required'),
+  password: yup
+    .string()
+    .min(6, 'Password must be 6 characters')
+    .required('A password is required'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+});
 
-const UserLogin = () => {
+const UserSignup = () => {
+  const { signUp } = useAuth();
   const history = useHistory();
   // eslint-disable-next-line no-unused-vars
-  const { register, handleSubmit, errors } = useForm();
-  const [addUser] = useMutation(ADD_USER);
+  const { register, handleSubmit, errors } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(signupValidationSchema),
+  });
+
   const onSubmit = async (data) => {
-    const { firstName, lastName, username, email, password } = data;
-    await addUser({
-      variables: { firstName, lastName, username, email, password },
-    });
+    signUp(data);
     history.push('/login');
   };
   return (
     <SignupFormContainer>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup>
-          <InputLabel htmlFor="firstName">First Name</InputLabel>
-          <TextInput
-            id="firstName"
-            type="text"
-            placeholder="First name"
-            name="firstName"
-            ref={register({ required: true, maxLength: 80 })}
-          />
-        </FormGroup>
-        <FormGroup>
-          <InputLabel htmlFor="lastName">Last Name</InputLabel>
-          <TextInput
-            id="lastName"
-            type="text"
-            placeholder="Last name"
-            name="lastName"
-            ref={register({ required: true, maxLength: 100 })}
-          />
-        </FormGroup>
-        <FormGroup>
-          <InputLabel htmlFor="username">Username</InputLabel>
-          <TextInput
-            id="username"
-            type="text"
-            placeholder="Username"
-            name="username"
-            ref={register({ required: true, maxLength: 100 })}
-          />
-        </FormGroup>
-        <FormGroup>
-          <InputLabel htmlFor="email">Email Address</InputLabel>
-          <TextInput
-            id="email"
-            type="text"
-            placeholder="Email"
-            name="email"
-            ref={register({ required: true, pattern: /^\S+@\S+$/i })}
-          />
-        </FormGroup>
-        <FormGroup>
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <TextInput
-            id="password"
-            type="text"
-            placeholder="Password"
-            name="password"
-            ref={register({ required: true })}
-          />
-        </FormGroup>
-
+        <div style={{ display: 'flex' }}>
+          <FormGroup>
+            <InputLabel htmlFor="name">Name</InputLabel>
+            <TextInput
+              id="name"
+              type="text"
+              placeholder="Name"
+              name="name"
+              ref={register({ required: true })}
+              aria-required="true"
+              aria-invalid={errors.name ? 'true' : 'false'}
+              className={errors.name ? 'error' : ''}
+            />
+            {errors.name && (
+              <ValidationErrMessage id="name-error" role="alert">
+                {errors.name.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <TextInput
+              id="email"
+              type="text"
+              placeholder="Email"
+              name="email"
+              ref={register({ required: true })}
+              aria-required="true"
+              aria-invalid={errors.email ? 'true' : 'false'}
+              className={errors.email ? 'error' : ''}
+            />
+            {errors.email && (
+              <ValidationErrMessage id="email-error" role="alert">
+                {errors.email.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FormGroup>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <TextInput
+              id="password"
+              type="text"
+              placeholder="Password"
+              name="password"
+              ref={register({ required: true })}
+              aria-required="true"
+              aria-invalid={errors.password ? 'true' : 'false'}
+              className={errors.password ? 'error' : ''}
+            />
+            {errors.password && (
+              <ValidationErrMessage id="password-error" role="alert">
+                {errors.password.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+            <TextInput
+              id="confirmPassword"
+              type="text"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              ref={register({ required: true })}
+              aria-required="true"
+              aria-invalid={errors.confirmPassword ? 'true' : 'false'}
+              className={errors.confirmPassword ? 'error' : ''}
+            />
+            {errors.confirmPassword && (
+              <ValidationErrMessage id="confirmPassword-error" role="alert">
+                {errors.confirmPassword.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+        </div>
         <SubmitButton type="submit">Sign Up</SubmitButton>
       </form>
       <p>
@@ -109,4 +127,4 @@ const UserLogin = () => {
   );
 };
 
-export default UserLogin;
+export default UserSignup;

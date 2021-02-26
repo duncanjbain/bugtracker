@@ -7,26 +7,14 @@ const WHOAMI_QUERY = gql`
   query {
     getWhoAmI {
       id
-      username
+      email
     }
   }
 `;
 
 const SIGNUP_USER_MUTATION = gql`
-  mutation SignupUser(
-    $firstName: String!
-    $lastName: String!
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    signupUser(
-      firstName: $firstName
-      lastName: $lastName
-      username: $username
-      email: $email
-      password: $password
-    ) {
+  mutation SignupUser($name: String!, $email: String!, $password: String!) {
+    signupUser(name: $name, email: $email, password: $password) {
       token
       user {
         id
@@ -36,8 +24,8 @@ const SIGNUP_USER_MUTATION = gql`
 `;
 
 const LOGIN_USER_MUTATION = gql`
-  mutation loginUser($username: String!, $password: String!) {
-    loginUser(username: $username, password: $password) {
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
       token
       user {
         id
@@ -57,8 +45,8 @@ const AuthProvider = (props) => {
     errorPolicy: 'all',
   });
 
-  const signin = async (username, password) =>
-    loginUser({ variables: { username, password } }).then((res) => {
+  const logIn = async (email, password) =>
+    loginUser({ variables: { email, password } }).then((res) => {
       if (res && res.data && res.data.loginUser && res.data.loginUser.token) {
         const { token } = res.data.loginUser;
         localStorage.setItem('AUTH_TOKEN', token);
@@ -69,9 +57,9 @@ const AuthProvider = (props) => {
       return res;
     });
 
-  const signup = (firstName, lastName, username, email, password) =>
+  const signUp = ({ name, email, password }) =>
     signupUser({
-      variables: { firstName, lastName, username, email, password },
+      variables: { name, email, password },
     }).then((res) => {
       if (res && res.data && res.data.signup && res.data.signup.token) {
         const { token } = res.data.signup;
@@ -95,7 +83,7 @@ const AuthProvider = (props) => {
   }
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <AuthContext.Provider value={{ data, signin, signup, logout }} {...props} />
+    <AuthContext.Provider value={{ data, logIn, signUp, logout }} {...props} />
   );
 };
 
