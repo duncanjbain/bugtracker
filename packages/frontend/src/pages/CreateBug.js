@@ -183,7 +183,7 @@ const CreateBug = () => {
             ref={register({ required: true })}
           />
         </FormGroup>
-        <FormGroup style={{ height: '25rem' }}>
+        <FormGroup style={{ height: '20rem' }}>
           <InputLabel htmlFor="bugDescription">Bug description</InputLabel>
           <Controller
             as={
@@ -192,8 +192,6 @@ const CreateBug = () => {
                 onChange={setValue}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
-                heightUnits="rem"
-                minEditorHeight="25"
                 generateMarkdownPreview={(markdown) =>
                   Promise.resolve(<ReactMarkdown source={markdown} />)
                 }

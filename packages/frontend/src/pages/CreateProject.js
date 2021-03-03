@@ -5,7 +5,12 @@ import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
 import SingleColumnFlex from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
-import { FormGroup, TextInput, InputLabel } from '../ui/components/StyledForm';
+import {
+  FormGroup,
+  TextInput,
+  InputLabel,
+  SubmitButton,
+} from '../ui/components/StyledForm';
 
 const CREATE_PROJECT = gql`
   mutation CreateProject($projectKey: String!, $projectName: String!) {
@@ -68,9 +73,7 @@ const CreateProject = () => {
             ref={register({ required: true })}
           />
         </FormGroup>
-        <button style={{ margin: '0.5rem' }} type="submit">
-          Create
-        </button>
+        <SubmitButton type="submit">Create project</SubmitButton>
       </form>
     </SingleColumnFlex>
   );
