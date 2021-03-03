@@ -24,9 +24,9 @@ const BugSchema = new mongoose.Schema({
     enum: ['low', 'medium', 'high'],
     required: true,
   },
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, },
+  assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, },
+  project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true, },
   created: {
     type: Date,
     default: Date.now,

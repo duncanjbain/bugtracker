@@ -21,7 +21,7 @@ const GET_PROJECT = gql`
         type
         priority
         assignee {
-          username
+          name
         }
       }
     }
@@ -47,7 +47,7 @@ const ProjectDetails = () => {
       }}
     >
       <CardHeader>
-        <CardTitle>Project - {data.getProject.projectName}</CardTitle>
+        <CardTitle>{data.getProject.projectName}</CardTitle>
       </CardHeader>
       <StyledTable>
         <thead>
@@ -65,12 +65,17 @@ const ProjectDetails = () => {
                   {bug.key}
                 </StyledTableLink>
               </td>
-              <td style={{ textTransform: 'capitalize' }}>{bug.summary}</td>
+              <td style={{ textTransform: 'capitalize' }}>
+                {' '}
+                <StyledTableLink to={`/bug/${bug.key}`}>
+                  {bug.summary}
+                </StyledTableLink>
+              </td>
               <td style={{ textTransform: 'capitalize' }}>{bug.type}</td>
               <td style={{ textTransform: 'capitalize' }}>{bug.priority}</td>
               <td>
                 <StyledTableLink to={`/user/${bug.assignee.id}`}>
-                  {bug.assignee.username}
+                  {bug.assignee.name}
                 </StyledTableLink>
               </td>
             </StyledTableRow>
