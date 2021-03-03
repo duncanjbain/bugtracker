@@ -40,9 +40,9 @@ const CREATE_NEW_BUG = gql`
     $summary: String!
     $description: String!
     $priority: String!
-    $author: String!
-    $assignee: String!
-    $project: String!
+    $author: ID!
+    $assignee: ID!
+    $project: ID!
     $type: String!
   ) {
     createBug(
