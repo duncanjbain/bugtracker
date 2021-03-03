@@ -46,9 +46,9 @@ module.exports = {
         description,
         priority,
         type,
-        author: bugAuthor.id,
-        project: bugProject.id,
-        assignee: foundAssignee.id,
+        author,
+        project,
+        assignee,
       }).save();
       await Project.findOneAndUpdate(
         { _id: project },
