@@ -11,7 +11,12 @@ import '../components/tags.css';
 import { useUser } from '../context/UserContext';
 import SingleColumnFlex from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
-import { FormGroup, TextInput, InputLabel } from '../ui/components/StyledForm';
+import {
+  FormGroup,
+  TextInput,
+  InputLabel,
+  SubmitButton,
+} from '../ui/components/StyledForm';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 // eslint-disable-next-line no-unused-vars
@@ -178,7 +183,7 @@ const CreateBug = () => {
             ref={register({ required: true })}
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup style={{ height: '25rem' }}>
           <InputLabel htmlFor="bugDescription">Bug description</InputLabel>
           <Controller
             as={
@@ -187,6 +192,8 @@ const CreateBug = () => {
                 onChange={setValue}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
+                heightUnits="rem"
+                minEditorHeight="25"
                 generateMarkdownPreview={(markdown) =>
                   Promise.resolve(<ReactMarkdown source={markdown} />)
                 }
@@ -252,9 +259,7 @@ const CreateBug = () => {
             )}
           </select>
         </FormGroup>
-        <button style={{ margin: '0.5rem' }} type="submit">
-          Create
-        </button>
+        <SubmitButton type="submit">Create bug</SubmitButton>
       </form>
     </SingleColumnFlex>
   );

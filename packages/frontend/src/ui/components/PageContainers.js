@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const SingleColumnFlex = styled.section`
   width: 50vw;
   margin: 0 auto;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
