@@ -74,8 +74,8 @@ const AuthProvider = (props) => {
   const history = useHistory();
   const logout = () => {
     localStorage.removeItem('AUTH_TOKEN');
-    refetch();
     history.push('/');
+    refetch();
   };
 
   if (loading) {

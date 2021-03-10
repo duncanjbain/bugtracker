@@ -56,9 +56,7 @@ const DashboardNavbar = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/" onClick={logout}>
-            Logout
-          </NavLink>
+          <NavLink onClick={logout}>Logout</NavLink>
         </NavItem>
       </NavLinks>
     </NavContainer>
