@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import {
   SignupFormContainer,
   FormGroup,
+  StyledForm,
   SubmitButton,
   TextInput,
   InputLabel,
@@ -29,97 +30,104 @@ const UserSignup = () => {
   const { signUp } = useAuth();
   const history = useHistory();
   // eslint-disable-next-line no-unused-vars
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setError } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(signupValidationSchema),
   });
 
   const onSubmit = async (data) => {
-    signUp(data);
+    const signup = signUp(data);
+    if (signup.errors) {
+      setError('signUpError', {
+        type: 'manual',
+        message: signup.errors[0].message,
+      });
+    }
     history.push('/login');
   };
   return (
     <SignupFormContainer>
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: 'flex' }}>
-          <FormGroup>
-            <InputLabel htmlFor="name">Name</InputLabel>
-            <TextInput
-              id="name"
-              type="text"
-              placeholder="Name"
-              name="name"
-              ref={register({ required: true })}
-              aria-required="true"
-              aria-invalid={errors.name ? 'true' : 'false'}
-              className={errors.name ? 'error' : ''}
-            />
-            {errors.name && (
-              <ValidationErrMessage id="name-error" role="alert">
-                {errors.name.message}
-              </ValidationErrMessage>
-            )}
-          </FormGroup>
-          <FormGroup>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <TextInput
-              id="email"
-              type="text"
-              placeholder="Email"
-              name="email"
-              ref={register({ required: true })}
-              aria-required="true"
-              aria-invalid={errors.email ? 'true' : 'false'}
-              className={errors.email ? 'error' : ''}
-            />
-            {errors.email && (
-              <ValidationErrMessage id="email-error" role="alert">
-                {errors.email.message}
-              </ValidationErrMessage>
-            )}
-          </FormGroup>
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FormGroup>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <TextInput
-              id="password"
-              type="text"
-              placeholder="Password"
-              name="password"
-              ref={register({ required: true })}
-              aria-required="true"
-              aria-invalid={errors.password ? 'true' : 'false'}
-              className={errors.password ? 'error' : ''}
-            />
-            {errors.password && (
-              <ValidationErrMessage id="password-error" role="alert">
-                {errors.password.message}
-              </ValidationErrMessage>
-            )}
-          </FormGroup>
-          <FormGroup>
-            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
-            <TextInput
-              id="confirmPassword"
-              type="text"
-              placeholder="Confirm Password"
-              name="confirmPassword"
-              ref={register({ required: true })}
-              aria-required="true"
-              aria-invalid={errors.confirmPassword ? 'true' : 'false'}
-              className={errors.confirmPassword ? 'error' : ''}
-            />
-            {errors.confirmPassword && (
-              <ValidationErrMessage id="confirmPassword-error" role="alert">
-                {errors.confirmPassword.message}
-              </ValidationErrMessage>
-            )}
-          </FormGroup>
-        </div>
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <FormGroup>
+          <InputLabel htmlFor="name">Name</InputLabel>
+          <TextInput
+            id="name"
+            type="text"
+            placeholder="Name"
+            name="name"
+            ref={register({ required: true })}
+            aria-required="true"
+            aria-invalid={errors.name ? 'true' : 'false'}
+            className={errors.name ? 'error' : ''}
+          />
+          {errors.name && (
+            <ValidationErrMessage id="name-error" role="alert">
+              {errors.name.message}
+            </ValidationErrMessage>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <InputLabel htmlFor="email">Email Address</InputLabel>
+          <TextInput
+            id="email"
+            type="text"
+            placeholder="Email"
+            name="email"
+            ref={register({ required: true })}
+            aria-required="true"
+            aria-invalid={errors.email ? 'true' : 'false'}
+            className={errors.email ? 'error' : ''}
+          />
+          {errors.email && (
+            <ValidationErrMessage id="email-error" role="alert">
+              {errors.email.message}
+            </ValidationErrMessage>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <TextInput
+            id="password"
+            type="text"
+            placeholder="Password"
+            name="password"
+            ref={register({ required: true })}
+            aria-required="true"
+            aria-invalid={errors.password ? 'true' : 'false'}
+            className={errors.password ? 'error' : ''}
+          />
+          {errors.password && (
+            <ValidationErrMessage id="password-error" role="alert">
+              {errors.password.message}
+            </ValidationErrMessage>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+          <TextInput
+            id="confirmPassword"
+            type="text"
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            ref={register({ required: true })}
+            aria-required="true"
+            aria-invalid={errors.confirmPassword ? 'true' : 'false'}
+            className={errors.confirmPassword ? 'error' : ''}
+          />
+          {errors.confirmPassword && (
+            <ValidationErrMessage id="confirmPassword-error" role="alert">
+              {errors.confirmPassword.message}
+            </ValidationErrMessage>
+          )}
+        </FormGroup>
         <SubmitButton type="submit">Sign Up</SubmitButton>
-      </form>
+        {errors.signUpError && (
+          <ValidationErrMessage id="signup-error" role="alert">
+            {errors.signUpError.message}
+          </ValidationErrMessage>
+        )}
+      </StyledForm>
       <p>
         Already have an account? Click <Link to="/login">here</Link> to log in.
       </p>

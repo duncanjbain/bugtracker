@@ -59,12 +59,10 @@ const AuthProvider = (props) => {
     signupUser({
       variables: { name, email, password },
     }).then((res) => {
-      if (res && res.data && res.data.signup && res.data.signup.token) {
-        const { token } = res.data.signup;
+      if (res && res.data && res.data.signupUser && res.data.signupUser.token) {
+        const { token } = res.data.signupUser;
         localStorage.setItem('AUTH_TOKEN', token);
         refetch();
-      } else {
-        throw Error('No token returned');
       }
       return res;
     });

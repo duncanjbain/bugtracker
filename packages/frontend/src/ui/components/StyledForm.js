@@ -14,6 +14,7 @@ export const SubmitButton = styled.button`
   border: none;
   appearance: none;
   cursor: pointer;
+  margin-bottom: 1rem;
   transition: all 250ms ease 0s;
   &:hover {
     background: rgb(43, 108, 176);
@@ -29,6 +30,7 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 40%;
 `;
 
 export const FormGroup = styled.fieldset`
@@ -37,7 +39,7 @@ export const FormGroup = styled.fieldset`
   flex-direction: column;
   margin: 1rem;
   width: 100%;
-  height: 9rem;
+  min-height: 9rem;
   border: 0;
   padding: 0;
   margin: 0;
