@@ -48,12 +48,15 @@ module.exports = {
     },
     loginUser: async (root, { email, password }, { User }) => {
       const foundUser = await User.findOne({ email }).select('+password');
+      if (!foundUser) {
+        throw new AuthenticationError('Invalid email or password');
+      }
       const isValidPassword = await bcrypt.compare(
         password,
         foundUser.password
       );
 
-      if (!foundUser || !isValidPassword) {
+      if (!isValidPassword) {
         throw new AuthenticationError('Invalid email or password');
       }
 

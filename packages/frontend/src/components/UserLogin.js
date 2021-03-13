@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { useAuth } from '../context/AuthContext';
 import {
   SignupFormContainer,
+  StyledForm,
   FormGroup,
   SubmitButton,
   TextInput,
@@ -41,7 +42,7 @@ const UserLogin = () => {
   return (
     <SignupFormContainer>
       <FormHeader>Log in.</FormHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <InputLabel htmlFor="email">Email</InputLabel>
           <TextInput
@@ -84,7 +85,7 @@ const UserLogin = () => {
             {errors.loginError.message}
           </ValidationErrMessage>
         )}
-      </form>
+      </StyledForm>
       <p style={{ marginTop: '2rem' }}>
         Don&apos;t have an account yet?{' '}
         <StyledLink to="/signup/">Sign up</StyledLink>

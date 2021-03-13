@@ -15,7 +15,6 @@ export const SubmitButton = styled.button`
   appearance: none;
   cursor: pointer;
   transition: all 250ms ease 0s;
-  margin-bottom: 1rem;
   &:hover {
     background: rgb(43, 108, 176);
   }
@@ -24,15 +23,24 @@ export const SubmitButton = styled.button`
   }
 `;
 
-export const FormGroup = styled.div`
+export const StyledForm = styled.form`
+  display: flex;
   justify-content: start;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
-  height: 6rem;
+  align-items: center;
+`;
+
+export const FormGroup = styled.fieldset`
+  justify-content: start;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  width: 100%;
+  height: 9rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
 `;
 
 export const SignupFormContainer = styled.main`
@@ -71,4 +79,5 @@ export const TextInput = styled.input`
 export const ValidationErrMessage = styled.span`
   color: ${(props) => props.theme.colors.danger};
   font-size: 1.2rem;
+  margin: 0.5rem;
 `;
