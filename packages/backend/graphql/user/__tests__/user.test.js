@@ -227,7 +227,6 @@ describe('user GraphQL queries', () => {
       query: UPDATE_PROFILE,
       variables: { id: newUser.id, name: 'Updated User' },
     });
-    console.log(response)
     expect(response.data.updateUser.name).toEqual('Updated User');
   });
 });

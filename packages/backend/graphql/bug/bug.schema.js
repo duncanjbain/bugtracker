@@ -13,9 +13,15 @@ module.exports = gql`
     type: String!
   }
 
+  type UsersBugs {
+    createdBugs: [Bug]
+    assignedBugs: [Bug]
+  }
+
   type Query {
     getAllBugs: [Bug]
     getBug(bugId: ID!): Bug
+    getUsersBugs(userId: ID!): UsersBugs
   }
 
   type Mutation {
