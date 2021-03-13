@@ -51,8 +51,6 @@ const AuthProvider = (props) => {
         const { token } = res.data.loginUser;
         localStorage.setItem('AUTH_TOKEN', token);
         refetch();
-      } else {
-        throw Error('No token returned');
       }
       return res;
     });

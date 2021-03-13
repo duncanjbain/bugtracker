@@ -22,14 +22,20 @@ const formValidationSchema = yup.object().shape({
 
 const UserLogin = () => {
   const { logIn } = useAuth();
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setError } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(formValidationSchema),
   });
 
   const onSubmit = async (formData) => {
     const { email, password } = formData;
-    logIn(email, password);
+    const login = await logIn(email, password);
+    if (login.errors) {
+      setError('loginError', {
+        type: 'manual',
+        message: login.errors[0].message,
+      });
+    }
   };
 
   return (
@@ -73,6 +79,11 @@ const UserLogin = () => {
           )}
         </FormGroup>
         <SubmitButton type="submit">Log In</SubmitButton>
+        {errors.loginError && (
+          <ValidationErrMessage id="login-error" role="alert">
+            {errors.loginError.message}
+          </ValidationErrMessage>
+        )}
       </form>
       <p style={{ marginTop: '2rem' }}>
         Don&apos;t have an account yet?{' '}
