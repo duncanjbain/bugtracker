@@ -29,7 +29,6 @@ const GET_PROJECTS = gql`
 const DashboardProjectsCard = () => {
   const user = useUser();
   const { loading, data, refetch, networkStatus } = useQuery(GET_PROJECTS, {
-    // eslint-disable-next-line no-underscore-dangle
     variables: { userID: user.id },
     notifyOnNetworkStatusChange: true,
   });

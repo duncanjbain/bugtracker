@@ -17,16 +17,24 @@ module.exports = {
     getBug: async (root, { bugId }, { Bug }) =>
       Bug.findOne({ _id: bugId }).populate('author').populate('project'),
     getUsersBugs: async (root, { userId }, { Bug, currentUser }) => {
-      if (!currentUser || (!currentUser.id === userId) || !currentUser.siteRole.includes('ADMIN')) {
+      if (!currentUser || !currentUser.id === userId) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );
       }
-      const foundUser = await User.findById(userId).populate('createdBugs').populate('assignedBugs');
+      const foundUser = await User.findById(userId)
+        .populate({
+          path: 'createdBugs',
+          populate: { path: 'project', model: 'Project' },
+        })
+        .populate({
+          path: 'assignedBugs',
+          populate: { path: 'project', model: 'Project' },
+        });
       return {
         createdBugs: foundUser.createdBugs,
-        assignedBugs: foundUser.assignedBugs
-      }
+        assignedBugs: foundUser.assignedBugs,
+      };
     },
   },
   Mutation: {
