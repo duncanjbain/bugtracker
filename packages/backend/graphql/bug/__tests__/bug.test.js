@@ -63,6 +63,23 @@ mutation UpdateExistingBug(
 }
 `;
 
+const GET_USERS_BUGS = `
+query GetUsersBugs($userId: ID!) {
+  getUsersBugs(userId: $userId) {
+    assignedBugs {
+      key
+      summary
+      id
+    }
+    createdBugs {
+      key
+      summary
+      id
+    }
+  }
+}
+`
+
 describe('bug GraphQL queries', () => {
   test('can get all bugs', async () => {
     const newUser = await new User({
@@ -240,4 +257,41 @@ describe('bug GraphQL queries', () => {
       summary: 'Updated bug summary',
     });
   });
+  test('can get users assigned and created bugs', async () => {
+    const newUser = await new User({
+      name: 'New User',
+      email: 'newuser@email.com',
+      password: 'password',
+      siteRole: 'ADMIN',
+    }).save();
+
+    const secondNewUser = await new User({
+      name: 'New User',
+      email: 'secondnewuser@email.com',
+      password: 'password',
+      siteRole: 'ADMIN',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        Project,
+        User,
+        Bug,
+        currentUser: newUser,
+      }),
+    });
+
+    const { query } = createTestClient(server);
+
+    const response = await query({
+      query: GET_USERS_BUGS,
+      variables: { userId: newUser.id },
+    });
+    expect(response.data.getUsersBugs).toEqual({
+      assignedBugs: [],
+      createdBugs: [],
+    });
+  })
 });

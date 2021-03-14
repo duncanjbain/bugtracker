@@ -9,6 +9,8 @@ module.exports = gql`
     joinDate: String!
     siteRole: String!
     memberOfProjects: [Project]
+    createdBugs: [Bug]
+    assignedBugs: [Bug]
   }
 
   type AuthInfo {
@@ -23,17 +25,8 @@ module.exports = gql`
   }
 
   type Mutation {
-    signupUser(
-      name: String!
-      email: String!
-      password: String!
-    ): AuthInfo
+    signupUser(name: String!, email: String!, password: String!): AuthInfo
     loginUser(email: String!, password: String!): AuthInfo
-    updateUser(
-      id: ID!
-      name: String
-      password: String
-      email: String
-    ): User
+    updateUser(id: ID!, name: String, password: String, email: String): User
   }
 `;

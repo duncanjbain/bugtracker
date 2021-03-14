@@ -2,6 +2,7 @@ const {
   UserInputError,
   AuthenticationError,
 } = require('apollo-server-express');
+const User = require('../../models/User');
 
 module.exports = {
   Query: {
@@ -15,13 +16,43 @@ module.exports = {
     },
     getBug: async (root, { bugId }, { Bug }) =>
       Bug.findOne({ _id: bugId }).populate('author').populate('project'),
+    getUsersBugs: async (root, { userId }, { Bug, currentUser }) => {
+      if (!currentUser || !currentUser.id === userId) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      const foundUser = await User.findById(userId)
+        .populate({
+          path: 'createdBugs',
+          populate: { path: 'project', model: 'Project' },
+        })
+        .populate({
+          path: 'assignedBugs',
+          populate: { path: 'project', model: 'Project' },
+        });
+      return {
+        createdBugs: foundUser.createdBugs,
+        assignedBugs: foundUser.assignedBugs,
+      };
+    },
   },
   Mutation: {
     createBug: async (
       root,
       { key, summary, description, priority, author, project, assignee, type },
-      { Bug, User, Project }
+      { Bug, User, Project, currentUser }
     ) => {
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
       const foundBugKey = await Bug.exists({ key });
       if (foundBugKey) {
         throw new UserInputError('Bug with this key already exists');
