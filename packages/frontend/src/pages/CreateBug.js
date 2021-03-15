@@ -9,7 +9,7 @@ import { useToasts } from 'react-toast-notifications';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import '../components/tags.css';
 import { useUser } from '../context/UserContext';
-import SingleColumnFlex from '../ui/components/PageContainers';
+import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import {
   FormGroup,

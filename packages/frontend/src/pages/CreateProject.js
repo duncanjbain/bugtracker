@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation, gql } from '@apollo/client';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
-import SingleColumnFlex from '../ui/components/PageContainers';
+import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import {
   FormGroup,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
-import SingleColumnFlex from '../ui/components/PageContainers';
+import { WideSingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import {
   StyledTable,
@@ -39,7 +39,7 @@ const ProjectDetails = () => {
   }
 
   return (
-    <SingleColumnFlex>
+    <WideSingleColumnFlex>
       <CardHeader>
         <CardTitle>{data.getProject.projectName}</CardTitle>
       </CardHeader>
@@ -78,7 +78,7 @@ const ProjectDetails = () => {
           </tbody>
         </StyledTable>
       </div>
-    </SingleColumnFlex>
+    </WideSingleColumnFlex>
   );
 };
 

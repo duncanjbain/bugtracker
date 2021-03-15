@@ -13,7 +13,7 @@ import {
   ValidationErrMessage,
   SubmitButton,
 } from '../ui/components/StyledForm';
-import SingleColumnFlex from '../ui/components/PageContainers';
+import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 

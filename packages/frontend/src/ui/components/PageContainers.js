@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SingleColumnFlex = styled.section`
+export const SingleColumnFlex = styled.section`
   width: 50vw;
   margin: 0 auto;
   margin-bottom: 2rem;
@@ -19,4 +19,6 @@ const SingleColumnFlex = styled.section`
   }
 `;
 
-export default SingleColumnFlex;
+export const WideSingleColumnFlex = styled(SingleColumnFlex)`
+  width: 95vw;
+`;

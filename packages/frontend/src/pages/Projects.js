@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from 'styled-components';
 import { gql, useQuery } from '@apollo/client';
 import PulseLoader from 'react-spinners/PulseLoader';
-import SingleColumnFlex from '../ui/components/PageContainers';
+import { WideSingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import {
   StyledTable,
@@ -45,7 +45,7 @@ const Projects = () => {
   }
 
   return (
-    <SingleColumnFlex>
+    <WideSingleColumnFlex>
       <CardHeader>
         <CardTitle>Projects</CardTitle>
       </CardHeader>
@@ -75,7 +75,7 @@ const Projects = () => {
           </tbody>
         </StyledTable>
       </div>
-    </SingleColumnFlex>
+    </WideSingleColumnFlex>
   );
 };
 
