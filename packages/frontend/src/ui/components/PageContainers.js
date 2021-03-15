@@ -14,6 +14,9 @@ const SingleColumnFlex = styled.section`
   padding-top: 0.25rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+  @media (${(props) => props.theme.media.lg}) {
+    width: 95vw;
+  }
 `;
 
 export default SingleColumnFlex;

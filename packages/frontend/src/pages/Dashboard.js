@@ -19,4 +19,7 @@ const DashboardWrapper = styled.main`
   grid-template-areas:
     'header header'
     'projects  mybugs';
+  @media (${(props) => props.theme.media.lg}) {
+    display: block;
+  }
 `;

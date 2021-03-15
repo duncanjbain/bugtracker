@@ -127,10 +127,11 @@ const UserSignup = () => {
             {errors.signUpError.message}
           </ValidationErrMessage>
         )}
+        <p style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          Already have an account? Click <Link to="/login">here</Link> to log
+          in.
+        </p>
       </StyledForm>
-      <p>
-        Already have an account? Click <Link to="/login">here</Link> to log in.
-      </p>
     </SignupFormContainer>
   );
 };

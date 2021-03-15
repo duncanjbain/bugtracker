@@ -19,6 +19,9 @@ const LandingPageContainer = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: 0.75fr 1fr;
+  @media (${(props) => props.theme.media.lg}) {
+    display: block;
+  }
 `;
 
 const CallToAction = styled.aside`

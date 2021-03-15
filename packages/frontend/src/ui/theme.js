@@ -11,11 +11,11 @@ const screenSize = {
 
 export const theme = {
   media: {
-    sm: `min-width: ${screenSize.sm}`,
-    md: `min-width: ${screenSize.md}`,
-    lg: `min-width: ${screenSize.lg}`,
-    xl: `min-width: ${screenSize.xl}`,
-    '2xl': `min-width: ${screenSize['2xl']}`,
+    sm: `max-width: ${screenSize.sm}`,
+    md: `max-width: ${screenSize.md}`,
+    lg: `max-width: ${screenSize.lg}`,
+    xl: `max-width: ${screenSize.xl}`,
+    '2xl': `max-width: ${screenSize['2xl']}`,
   },
   colors: {
     white: 'hsl(0, 0%, 100%)',
@@ -34,11 +34,11 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
 ${reset}
 
-body {
+html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                Roboto, Oxygen-Sans, Ubuntu, Cantarell,
                "Helvetica Neue", sans-serif;
-  font-size: clamp(100%, 1rem + 2vw, 20px);
+               font-size: min(max(1rem, 4vw), 22px);
 }
 
 `;

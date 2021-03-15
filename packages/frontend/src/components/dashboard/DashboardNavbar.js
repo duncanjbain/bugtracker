@@ -73,6 +73,11 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  @media (${(props) => props.theme.media.lg}) {
+    flex-wrap: wrap;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
 `;
 
 const NavLinks = styled.ul`
@@ -81,10 +86,18 @@ const NavLinks = styled.ul`
   margin: 0;
   padding: 0;
   align-items: center;
+  @media (${(props) => props.theme.media.lg}) {
+    padding: 0.25rem;
+    justify-content: space-between;
+    width: 100%;
+  }
 `;
 
 const NavItem = styled.li`
   padding: 0.5rem;
+  @media (${(props) => props.theme.media.lg}) {
+    padding: 0.25rem;
+  }
 `;
 
 const NavLink = styled(Link)`
@@ -98,6 +111,9 @@ const NavLink = styled(Link)`
     color: ${(props) => props.theme.colors.white};
     background-color: #00b89c;
     transition: all 0.15s ease-in;
+  }
+  @media (${(props) => props.theme.media.lg}) {
+    padding: 0;
   }
 `;
 

@@ -31,6 +31,9 @@ export const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   width: 40%;
+  @media (${(props) => props.theme.media.lg}) {
+    width: 80%;
+  }
 `;
 
 export const FormGroup = styled.fieldset`

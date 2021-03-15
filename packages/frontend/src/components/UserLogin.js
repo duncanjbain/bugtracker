@@ -85,11 +85,11 @@ const UserLogin = () => {
             {errors.loginError.message}
           </ValidationErrMessage>
         )}
+        <p style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          Don&apos;t have an account yet?{' '}
+          <StyledLink to="/signup/">Sign up</StyledLink>
+        </p>
       </StyledForm>
-      <p style={{ marginTop: '2rem' }}>
-        Don&apos;t have an account yet?{' '}
-        <StyledLink to="/signup/">Sign up</StyledLink>
-      </p>
     </SignupFormContainer>
   );
 };

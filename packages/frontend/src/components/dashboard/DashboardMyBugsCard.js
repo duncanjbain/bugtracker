@@ -69,9 +69,7 @@ const DashboardMyBugsCard = () => {
     return (
       <CardWrapper gridArea="mybugs">
         <CardHeader>
-          <CardTitle>
-            <a href="https://localhost/bugs/user">My Bugs</a>
-          </CardTitle>
+          <CardTitle>My Bugs</CardTitle>
           <StyledButton
             type="button"
             aria-label="Reload projects"

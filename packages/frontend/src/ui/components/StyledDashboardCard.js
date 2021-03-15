@@ -17,6 +17,10 @@ export const CardWrapper = styled.article`
   padding-top: 0.25rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+  @media (${(props) => props.theme.media.lg}) {
+    margin: 1rem auto 1rem auto;
+    width: 95vw;
+  }
 `;
 
 export const CardTitle = styled.h3`

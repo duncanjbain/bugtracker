@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
-import styled from 'styled-components';
 import { useToasts } from 'react-toast-notifications';
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, gql } from '@apollo/client';
@@ -12,7 +11,9 @@ import {
   TextInput,
   InputLabel,
   ValidationErrMessage,
+  SubmitButton,
 } from '../ui/components/StyledForm';
+import SingleColumnFlex from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 
@@ -82,7 +83,7 @@ const UserProfile = () => {
   }
   return (
     <>
-      <ProfileContainer>
+      <SingleColumnFlex>
         <CardHeader>
           <CardTitle>Profile</CardTitle>
         </CardHeader>
@@ -163,32 +164,13 @@ const UserProfile = () => {
               </ValidationErrMessage>
             )}
           </FormGroup>
-          <UpdateButton style={{ padding: '0.5rem' }} type="submit">
+          <SubmitButton style={{ padding: '0.5rem' }} type="submit">
             Update
-          </UpdateButton>
+          </SubmitButton>
         </form>
-      </ProfileContainer>
+      </SingleColumnFlex>
     </>
   );
 };
 
 export default UserProfile;
-
-const ProfileContainer = styled.section`
-  width: 50vw;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
-  border-radius: 3px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-  border-top: 5px solid ${(props) => props.theme.colors.primary};
-  color: #4a4a4a;
-  padding-top: 0.25rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-`;
-
-const UpdateButton = styled.button`
-  margin: 0.5rem;
-`;
