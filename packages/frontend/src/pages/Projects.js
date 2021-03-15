@@ -45,40 +45,36 @@ const Projects = () => {
   }
 
   return (
-    <SingleColumnFlex
-      style={{
-        width: 'auto',
-        'margin-left': '1.5rem',
-        'margin-right': '1.5rem',
-      }}
-    >
+    <SingleColumnFlex>
       <CardHeader>
         <CardTitle>Projects</CardTitle>
       </CardHeader>
-      <StyledTable>
-        <thead>
-          <StyledTableHeader>Key</StyledTableHeader>
-          <StyledTableHeader>Project Name</StyledTableHeader>
-          <StyledTableHeader>Project Lead</StyledTableHeader>
-        </thead>
-        <tbody>
-          {data.getAllProjects.map((project) => (
-            <StyledTableRow>
-              <td>{project.projectKey}</td>
-              <td>
-                <StyledTableLink to={`/project/${project.projectKey}`}>
-                  {project.projectName}
-                </StyledTableLink>
-              </td>
-              <td>
-                <StyledTableLink to={`/user/${project.projectLead.id}`}>
-                  {project.projectLead.name}
-                </StyledTableLink>
-              </td>
-            </StyledTableRow>
-          ))}
-        </tbody>
-      </StyledTable>
+      <div style={{ overflow: 'auto' }}>
+        <StyledTable>
+          <thead>
+            <StyledTableHeader>Key</StyledTableHeader>
+            <StyledTableHeader>Project Name</StyledTableHeader>
+            <StyledTableHeader>Project Lead</StyledTableHeader>
+          </thead>
+          <tbody>
+            {data.getAllProjects.map((project) => (
+              <StyledTableRow>
+                <td>{project.projectKey}</td>
+                <td>
+                  <StyledTableLink to={`/project/${project.projectKey}`}>
+                    {project.projectName}
+                  </StyledTableLink>
+                </td>
+                <td>
+                  <StyledTableLink to={`/user/${project.projectLead.id}`}>
+                    {project.projectLead.name}
+                  </StyledTableLink>
+                </td>
+              </StyledTableRow>
+            ))}
+          </tbody>
+        </StyledTable>
+      </div>
     </SingleColumnFlex>
   );
 };

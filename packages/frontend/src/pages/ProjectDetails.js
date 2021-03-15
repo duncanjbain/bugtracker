@@ -39,49 +39,45 @@ const ProjectDetails = () => {
   }
 
   return (
-    <SingleColumnFlex
-      style={{
-        width: 'auto',
-        'margin-left': '1.5rem',
-        'margin-right': '1.5rem',
-      }}
-    >
+    <SingleColumnFlex>
       <CardHeader>
         <CardTitle>{data.getProject.projectName}</CardTitle>
       </CardHeader>
-      <StyledTable>
-        <thead>
-          <StyledTableHeader>Key</StyledTableHeader>
-          <StyledTableHeader>Bug Summary</StyledTableHeader>
-          <StyledTableHeader>Type</StyledTableHeader>
-          <StyledTableHeader>Priority</StyledTableHeader>
-          <StyledTableHeader>Assignee</StyledTableHeader>
-        </thead>
-        <tbody>
-          {data.getProject.projectBugs.map((bug) => (
-            <StyledTableRow>
-              <td>
-                <StyledTableLink to={`/bug/${bug.key}`}>
-                  {bug.key}
-                </StyledTableLink>
-              </td>
-              <td style={{ textTransform: 'capitalize' }}>
-                {' '}
-                <StyledTableLink to={`/bug/${bug.key}`}>
-                  {bug.summary}
-                </StyledTableLink>
-              </td>
-              <td style={{ textTransform: 'capitalize' }}>{bug.type}</td>
-              <td style={{ textTransform: 'capitalize' }}>{bug.priority}</td>
-              <td>
-                <StyledTableLink to={`/user/${bug.assignee.id}`}>
-                  {bug.assignee.name}
-                </StyledTableLink>
-              </td>
-            </StyledTableRow>
-          ))}
-        </tbody>
-      </StyledTable>
+      <div style={{ overflow: 'auto' }}>
+        <StyledTable>
+          <thead>
+            <StyledTableHeader>Key</StyledTableHeader>
+            <StyledTableHeader>Bug Summary</StyledTableHeader>
+            <StyledTableHeader>Type</StyledTableHeader>
+            <StyledTableHeader>Priority</StyledTableHeader>
+            <StyledTableHeader>Assignee</StyledTableHeader>
+          </thead>
+          <tbody>
+            {data.getProject.projectBugs.map((bug) => (
+              <StyledTableRow>
+                <td>
+                  <StyledTableLink to={`/bug/${bug.key}`}>
+                    {bug.key}
+                  </StyledTableLink>
+                </td>
+                <td style={{ textTransform: 'capitalize' }}>
+                  {' '}
+                  <StyledTableLink to={`/bug/${bug.key}`}>
+                    {bug.summary}
+                  </StyledTableLink>
+                </td>
+                <td style={{ textTransform: 'capitalize' }}>{bug.type}</td>
+                <td style={{ textTransform: 'capitalize' }}>{bug.priority}</td>
+                <td>
+                  <StyledTableLink to={`/user/${bug.assignee.id}`}>
+                    {bug.assignee.name}
+                  </StyledTableLink>
+                </td>
+              </StyledTableRow>
+            ))}
+          </tbody>
+        </StyledTable>
+      </div>
     </SingleColumnFlex>
   );
 };
