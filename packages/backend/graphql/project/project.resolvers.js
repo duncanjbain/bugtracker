@@ -21,6 +21,9 @@ module.exports = {
         .populate({
           path: 'projectBugs',
           populate: { path: 'assignee', model: 'User' },
+        }).populate({
+          path: 'projectBugs',
+          populate: { path: 'author', model: 'User' },
         }),
     getUserProjects: async (root, { userID }, { Project, User }) => {
       const foundUser = await User.findById(userID);

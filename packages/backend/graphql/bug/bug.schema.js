@@ -11,6 +11,7 @@ module.exports = gql`
     project: Project!
     assignee: User!
     type: String!
+    created: String!
   }
 
   type UsersBugs {

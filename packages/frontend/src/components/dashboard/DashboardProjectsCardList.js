@@ -4,6 +4,7 @@ import {
   StyledTableHeader,
   StyledTableRow,
   StyledTableLink,
+  StyledTableCell,
 } from '../../ui/components/StyledTable';
 
 const DashboardProjectsCardList = ({ projects }) => (
@@ -18,17 +19,17 @@ const DashboardProjectsCardList = ({ projects }) => (
     <tbody>
       {projects.map((project) => (
         <StyledTableRow key={project.projectKey}>
-          <td>{project.projectKey}</td>
-          <td>
+          <StyledTableCell>{project.projectKey}</StyledTableCell>
+          <StyledTableCell>
             <StyledTableLink to={`/project/${project.projectKey}`}>
               {project.projectName}
             </StyledTableLink>
-          </td>
-          <td>
+          </StyledTableCell>
+          <StyledTableCell>
             <StyledTableLink to={`/user/${project.projectLead.id}`}>
               {project.projectLead.name}
             </StyledTableLink>
-          </td>
+          </StyledTableCell>
         </StyledTableRow>
       ))}
     </tbody>

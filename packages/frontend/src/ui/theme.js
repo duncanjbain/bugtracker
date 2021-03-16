@@ -38,7 +38,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                Roboto, Oxygen-Sans, Ubuntu, Cantarell,
                "Helvetica Neue", sans-serif;
-               font-size: min(max(1rem, 4vw), 22px);
+               font-size: min(max(1rem, 4vw), 18px);
 }
 
 `;

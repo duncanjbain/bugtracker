@@ -4,6 +4,7 @@ import {
   StyledTableHeader,
   StyledTableRow,
   StyledTableLink,
+  StyledTableCell,
 } from '../../ui/components/StyledTable';
 
 const DashboardBugsList = ({ title, bugs }) => (
@@ -21,18 +22,18 @@ const DashboardBugsList = ({ title, bugs }) => (
       <tbody>
         {bugs.map((bug) => (
           <StyledTableRow key={bug.key}>
-            <td>
+            <StyledTableCell>
               <StyledTableLink to={`/bug/${bug.key}`}>
                 {bug.key}
               </StyledTableLink>
-            </td>
-            <td>
+            </StyledTableCell>
+            <StyledTableCell>
               <StyledTableLink to={`/project/${bug.project.projectKey}`}>
                 {bug.project.projectName}
               </StyledTableLink>
-            </td>
-            <td>{bug.summary}</td>
-            <td>{bug.priority}</td>
+            </StyledTableCell>
+            <StyledTableCell>{bug.summary}</StyledTableCell>
+            <StyledTableCell>{bug.priority}</StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>
