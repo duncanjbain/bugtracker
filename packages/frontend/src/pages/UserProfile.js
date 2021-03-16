@@ -44,7 +44,9 @@ const UPDATE_PROFILE = gql`
 const profileValidationSchema = yup.object().shape({
   name: yup.string(),
   email: yup.string().email(),
-  newPassword: yup.string().min(6, 'Password must be 6 characters'),
+  newPassword: yup
+    .string()
+    .matches(/^(|.{6,})$/, 'Password must be 6 characters'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('newPassword'), null], 'Passwords must match'),
@@ -54,7 +56,7 @@ const UserProfile = () => {
   const user = useUser();
   const { addToast } = useToasts();
   const { register, handleSubmit, errors } = useForm({
-    mode: 'onBlur',
+    mode: 'onSubmit',
     resolver: yupResolver(profileValidationSchema),
   });
   const { loading, data } = useQuery(GET_PROFILE);
@@ -69,7 +71,6 @@ const UserProfile = () => {
     );
 
     await updateUser({
-      // eslint-disable-next-line no-underscore-dangle
       variables: { id: user.id, ...falsyRemoved },
     });
     addToast('Profile updated Successfully', {
@@ -97,7 +98,7 @@ const UserProfile = () => {
               autocomplete="given-name"
               name="name"
               ref={register({ required: false })}
-              aria-required="true"
+              aria-required="false"
               aria-invalid={errors.name ? 'true' : 'false'}
               className={errors.name ? 'error' : ''}
             />
@@ -116,7 +117,7 @@ const UserProfile = () => {
               autocomplete="email"
               name="email"
               ref={register({ required: false })}
-              aria-required="true"
+              aria-required="false"
               aria-invalid={errors.email ? 'true' : 'false'}
               className={errors.email ? 'error' : ''}
             />
@@ -135,7 +136,7 @@ const UserProfile = () => {
               autocomplete="new-password"
               name="newPassword"
               ref={register({ required: false })}
-              aria-required="true"
+              aria-required="false"
               aria-invalid={errors.password ? 'true' : 'false'}
               className={errors.password ? 'error' : ''}
             />
@@ -154,7 +155,7 @@ const UserProfile = () => {
               autocomplete="new-password"
               name="confirmPassword"
               ref={register({ required: false })}
-              aria-required="true"
+              aria-required="false"
               aria-invalid={errors.confirmPassword ? 'true' : 'false'}
               className={errors.confirmPassword ? 'error' : ''}
             />
