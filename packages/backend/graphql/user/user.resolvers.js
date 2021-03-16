@@ -16,7 +16,7 @@ module.exports = {
       return User.findById(currentUser.id);
     },
     getUser: async (root, { userId }, { User, currentUser }) => {
-      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+      if (!currentUser) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );
@@ -24,7 +24,7 @@ module.exports = {
       return User.findById(userId);
     },
     getAllUsers: async (root, args, { User, currentUser }) => {
-      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+      if (!currentUser) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );
@@ -63,7 +63,8 @@ module.exports = {
       return { user: foundUser, token: createToken(foundUser) };
     },
     updateUser: async (root, { id, ...args }, { User, currentUser }) => {
-      if (!id === currentUser.id || currentUser.siteRole.includes('ADMIN')) {
+      console.log(id,currentUser.id);
+      if (!id === currentUser.id) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );

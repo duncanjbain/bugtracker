@@ -30,10 +30,6 @@ const UserSchema = new mongoose.Schema({
   assignedBugs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bug' }],
 });
 
-UserSchema.virtual('id').get(function () {
-  return this._id.toString();
-});
-
 UserSchema.pre('save', function (next) {
   const user = this;
 

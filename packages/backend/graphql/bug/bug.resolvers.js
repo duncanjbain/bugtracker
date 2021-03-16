@@ -7,7 +7,7 @@ const User = require('../../models/User');
 module.exports = {
   Query: {
     getAllBugs: async (root, args, { Bug, currentUser }) => {
-      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+      if (!currentUser) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );
@@ -43,12 +43,7 @@ module.exports = {
       { key, summary, description, priority, author, project, assignee, type },
       { Bug, User, Project, currentUser }
     ) => {
-      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
-        throw new AuthenticationError(
-          'You do not have permission for this request'
-        );
-      }
-      if (!currentUser || !currentUser.siteRole.includes('ADMIN')) {
+      if (!currentUser) {
         throw new AuthenticationError(
           'You do not have permission for this request'
         );

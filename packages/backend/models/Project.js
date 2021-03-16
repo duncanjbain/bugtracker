@@ -17,8 +17,4 @@ const ProjectSchema = new mongoose.Schema({
   projectMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
-ProjectSchema.virtual('id').get(function () {
-  return this._id.toString();
-});
-
 module.exports = mongoose.model('Project', ProjectSchema);
