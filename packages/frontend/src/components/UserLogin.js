@@ -8,7 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import {
   SignupFormContainer,
   StyledForm,
-  FormGroup,
+  LoginFormGroup,
   SubmitButton,
   TextInput,
   InputLabel,
@@ -43,7 +43,7 @@ const UserLogin = () => {
     <SignupFormContainer>
       <FormHeader>Log in.</FormHeader>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup>
+        <LoginFormGroup>
           <InputLabel htmlFor="email">Email</InputLabel>
           <TextInput
             id="email"
@@ -60,8 +60,8 @@ const UserLogin = () => {
               {errors.email.message}
             </ValidationErrMessage>
           )}
-        </FormGroup>
-        <FormGroup>
+        </LoginFormGroup>
+        <LoginFormGroup>
           <InputLabel htmlFor="password">Password</InputLabel>
           <TextInput
             id="password"
@@ -78,7 +78,7 @@ const UserLogin = () => {
               {errors.password.message}
             </ValidationErrMessage>
           )}
-        </FormGroup>
+        </LoginFormGroup>
         <SubmitButton type="submit">Log In</SubmitButton>
         {errors.loginError && (
           <ValidationErrMessage id="login-error" role="alert">

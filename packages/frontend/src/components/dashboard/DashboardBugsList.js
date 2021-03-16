@@ -11,14 +11,16 @@ const DashboardBugsList = ({ title, bugs }) => (
     <h4>{title}</h4>
     <StyledTable>
       <thead>
-        <StyledTableHeader>Key</StyledTableHeader>
-        <StyledTableHeader>Project</StyledTableHeader>
-        <StyledTableHeader>Summary</StyledTableHeader>
-        <StyledTableHeader>Priority</StyledTableHeader>
+        <tr>
+          <StyledTableHeader>Key</StyledTableHeader>
+          <StyledTableHeader>Project</StyledTableHeader>
+          <StyledTableHeader>Summary</StyledTableHeader>
+          <StyledTableHeader>Priority</StyledTableHeader>
+        </tr>
       </thead>
       <tbody>
         {bugs.map((bug) => (
-          <StyledTableRow>
+          <StyledTableRow key={bug.key}>
             <td>
               <StyledTableLink to={`/bug/${bug.key}`}>
                 {bug.key}

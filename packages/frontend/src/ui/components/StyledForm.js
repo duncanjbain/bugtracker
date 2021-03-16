@@ -42,7 +42,19 @@ export const FormGroup = styled.fieldset`
   flex-direction: column;
   margin: 1rem;
   width: 100%;
-  min-height: 9rem;
+  min-height: 5rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+`;
+
+export const LoginFormGroup = styled.fieldset`
+  justify-content: start;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  width: 100%;
+  min-height: 7rem;
   border: 0;
   padding: 0;
   margin: 0;
@@ -56,14 +68,13 @@ export const SignupFormContainer = styled.main`
 `;
 
 export const InputLabel = styled.label`
-  font-size: 1.5rem;
   font-weight: 400;
   padding-right: 0.5rem;
   margin-bottom: 0.5rem;
 `;
 
 export const TextInput = styled.input`
-  padding: 0.5rem;
+  padding: 0.25rem;
   width: 100%;
   border: 2px solid ${(props) => props.theme.colors.dark};
   border-radius: 4px;
@@ -83,6 +94,5 @@ export const TextInput = styled.input`
 
 export const ValidationErrMessage = styled.span`
   color: ${(props) => props.theme.colors.danger};
-  font-size: 1.2rem;
   margin: 0.5rem;
 `;

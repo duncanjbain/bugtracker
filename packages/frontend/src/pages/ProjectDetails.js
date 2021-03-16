@@ -46,15 +46,17 @@ const ProjectDetails = () => {
       <div style={{ overflow: 'auto' }}>
         <StyledTable>
           <thead>
-            <StyledTableHeader>Key</StyledTableHeader>
-            <StyledTableHeader>Bug Summary</StyledTableHeader>
-            <StyledTableHeader>Type</StyledTableHeader>
-            <StyledTableHeader>Priority</StyledTableHeader>
-            <StyledTableHeader>Assignee</StyledTableHeader>
+            <tr>
+              <StyledTableHeader>Key</StyledTableHeader>
+              <StyledTableHeader>Bug Summary</StyledTableHeader>
+              <StyledTableHeader>Type</StyledTableHeader>
+              <StyledTableHeader>Priority</StyledTableHeader>
+              <StyledTableHeader>Assignee</StyledTableHeader>
+            </tr>
           </thead>
           <tbody>
             {data.getProject.projectBugs.map((bug) => (
-              <StyledTableRow>
+              <StyledTableRow key={bug.key}>
                 <td>
                   <StyledTableLink to={`/bug/${bug.key}`}>
                     {bug.key}

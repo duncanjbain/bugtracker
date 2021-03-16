@@ -52,13 +52,15 @@ const Projects = () => {
       <div style={{ overflow: 'auto' }}>
         <StyledTable>
           <thead>
-            <StyledTableHeader>Key</StyledTableHeader>
-            <StyledTableHeader>Project Name</StyledTableHeader>
-            <StyledTableHeader>Project Lead</StyledTableHeader>
+            <tr>
+              <StyledTableHeader>Key</StyledTableHeader>
+              <StyledTableHeader>Project Name</StyledTableHeader>
+              <StyledTableHeader>Project Lead</StyledTableHeader>
+            </tr>
           </thead>
           <tbody>
             {data.getAllProjects.map((project) => (
-              <StyledTableRow>
+              <StyledTableRow key={project.projectKey}>
                 <td>{project.projectKey}</td>
                 <td>
                   <StyledTableLink to={`/project/${project.projectKey}`}>
