@@ -182,7 +182,7 @@ const CreateBug = () => {
             ref={register({ required: true })}
           />
         </FormGroup>
-        <FormGroup style={{ height: '20rem' }}>
+        <FormGroup>
           <InputLabel htmlFor="bugDescription">Bug description</InputLabel>
           <Controller
             as={
