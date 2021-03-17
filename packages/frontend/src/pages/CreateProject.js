@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useMutation, gql } from '@apollo/client';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import {
@@ -10,6 +12,7 @@ import {
   TextInput,
   InputLabel,
   SubmitButton,
+  ValidationErrMessage,
 } from '../ui/components/StyledForm';
 
 const CREATE_PROJECT = gql`
@@ -21,10 +24,18 @@ const CREATE_PROJECT = gql`
   }
 `;
 
+const createProjectValidationSchema = yup.object().shape({
+  projectName: yup.string().required('A project name is required'),
+  projectKey: yup.string().required('A project key is required'),
+});
+
 const CreateProject = () => {
   const { addToast } = useToasts();
   const history = useHistory();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(createProjectValidationSchema),
+  });
   const [createProject] = useMutation(CREATE_PROJECT);
 
   const onSubmit = async (formData) => {
@@ -61,7 +72,15 @@ const CreateProject = () => {
             placeholder="Enter a project name"
             name="projectName"
             ref={register({ required: true })}
+            aria-required="true"
+            aria-invalid={errors.projectName ? 'true' : 'false'}
+            className={errors.projectName ? 'error' : ''}
           />
+          {errors.projectName && (
+            <ValidationErrMessage id="projectName-error" role="alert">
+              {errors.projectName.message}
+            </ValidationErrMessage>
+          )}
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="projectKey">Project key</InputLabel>
@@ -72,6 +91,11 @@ const CreateProject = () => {
             name="projectKey"
             ref={register({ required: true })}
           />
+          {errors.projectKey && (
+            <ValidationErrMessage id="projectKey-error" role="alert">
+              {errors.projectKey.message}
+            </ValidationErrMessage>
+          )}
         </FormGroup>
         <SubmitButton type="submit">Create project</SubmitButton>
       </form>

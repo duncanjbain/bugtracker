@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-this-in-sfc */
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 // eslint-disable-next-line no-unused-vars
 import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
-import ReactMde from 'react-mde';
-import ReactMarkdown from 'react-markdown';
 import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
-import 'react-mde/lib/styles/css/react-mde-all.css';
+import MDEditor from '@uiw/react-md-editor';
 import '../components/tags.css';
 import { useUser } from '../context/UserContext';
 import { SingleColumnFlex } from '../ui/components/PageContainers';
@@ -76,6 +76,7 @@ const CreateBug = () => {
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
   const [createBug] = useMutation(CREATE_NEW_BUG);
   const { register, handleSubmit, control } = useForm();
+  const [value, setValue] = React.useState('');
 
   // eslint-disable-next-line no-unused-vars
   const onSubmit = async (formData) => {
@@ -117,8 +118,6 @@ const CreateBug = () => {
     }
   };
 
-  const [value, setValue] = useState('**Hello world!!!**');
-  const [selectedTab, setSelectedTab] = useState('write');
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -183,18 +182,16 @@ const CreateBug = () => {
             ref={register({ required: true })}
           />
         </FormGroup>
-        <FormGroup style={{ height: '20rem' }}>
+        <FormGroup>
           <InputLabel htmlFor="bugDescription">Bug description</InputLabel>
           <Controller
             as={
-              <ReactMde
+              <MDEditor
                 value={value}
                 onChange={setValue}
-                selectedTab={selectedTab}
-                onTabChange={setSelectedTab}
-                generateMarkdownPreview={(markdown) =>
-                  Promise.resolve(<ReactMarkdown source={markdown} />)
-                }
+                preview="edit"
+                height="250"
+                visiableDragbar="false"
               />
             }
             name="bugDescription"
