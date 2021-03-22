@@ -7,6 +7,7 @@ import UserProfile from './pages/UserProfile';
 import CreateProject from './pages/CreateProject';
 import CreateBug from './pages/CreateBug';
 import ProjectDetails from './pages/ProjectDetails';
+import BugDetails from './pages/BugDetails';
 
 const RedirectHome = () => <Redirect to="/dashboard" />;
 
@@ -31,6 +32,9 @@ const AuthenticatedApp = () => (
       </Route>
       <Route path="/createbug">
         <CreateBug />
+      </Route>
+      <Route path="/bug/:bugKey">
+        <BugDetails />
       </Route>
       <Route path="/profile">
         <UserProfile />

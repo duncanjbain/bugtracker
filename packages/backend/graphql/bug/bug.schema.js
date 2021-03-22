@@ -23,6 +23,7 @@ module.exports = gql`
     getAllBugs: [Bug]
     getBug(bugId: ID!): Bug
     getUsersBugs(userId: ID!): UsersBugs
+    getBugByKey(bugKey: String!): Bug
   }
 
   type Mutation {
@@ -47,6 +48,6 @@ module.exports = gql`
       project: ID
       type: String
     ): Bug
-    deleteExistingBug(_id: ID!): Bug
+    deleteExistingBug(bugId: ID!): Bug
   }
 `;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 `;
 
 export const CardWrapper = styled.article`

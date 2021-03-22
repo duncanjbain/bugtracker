@@ -32,7 +32,11 @@ const DashboardBugsList = ({ title, bugs }) => (
                 {bug.project.projectName}
               </StyledTableLink>
             </StyledTableCell>
-            <StyledTableCell>{bug.summary}</StyledTableCell>
+            <StyledTableCell>
+              <StyledTableLink to={`/bug/${bug.key}`}>
+                {bug.summary}
+              </StyledTableLink>
+            </StyledTableCell>
             <StyledTableCell>{bug.priority}</StyledTableCell>
           </StyledTableRow>
         ))}
