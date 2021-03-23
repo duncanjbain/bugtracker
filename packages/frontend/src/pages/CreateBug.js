@@ -7,7 +7,6 @@ import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import MDEditor from '@uiw/react-md-editor';
-import '../components/tags.css';
 import { useUser } from '../context/UserContext';
 import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';

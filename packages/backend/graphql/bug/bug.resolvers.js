@@ -16,6 +16,8 @@ module.exports = {
     },
     getBug: async (root, { bugId }, { Bug }) =>
       Bug.findOne({ _id: bugId }).populate('author').populate('project'),
+    getBugByKey: async (root, { bugKey }, { Bug }) =>
+      Bug.findOne({ key: bugKey }).populate('author').populate('project').populate('assignee'),
     getUsersBugs: async (root, { userId }, { Bug, currentUser }) => {
       if (!currentUser || !currentUser.id === userId) {
         throw new AuthenticationError(
@@ -98,7 +100,13 @@ module.exports = {
         },
         { new: true }
       ),
-    deleteExistingBug: async (root, { _id }, { Bug }) =>
-      Bug.findByIdAndRemove(_id),
+    deleteExistingBug: async (root, { bugId }, { Bug, currentUser }) => {
+      if (!currentUser) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      Bug.findByIdAndRemove(bugId)
+    }
   },
 };
