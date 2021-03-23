@@ -1,7 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import MDEditor from '@uiw/react-md-editor';
+import styled from 'styled-components';
 
 import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
@@ -17,13 +18,16 @@ const GET_BUG = gql`
       priority
       author {
         name
+        id
       }
       project {
         id
         projectName
+        projectKey
       }
       assignee {
         name
+        id
       }
       type
       created
@@ -51,42 +55,42 @@ const BugDetails = () => {
       <CardHeader>
         <CardTitle>Bug Details</CardTitle>
       </CardHeader>
-      <h3 style={{ margin: '0px', marginBottom: '1rem' }}>
-        {data.getBugByKey.summary}
-      </h3>
-      <div>
-        <h4 style={{ margin: '0px', marginBottom: '0.5rem' }}>Description</h4>
-        <article
-          style={{
-            border: '1px solid',
-            borderColor: 'hsl(0, 0%, 96%)',
-            padding: '1rem',
-            marginBottom: '1rem',
-          }}
+      <div style={{ marginBottom: '1rem' }}>
+        <StyledBreadCrumbLink to="/projects">Projects</StyledBreadCrumbLink>
+        <span> / </span>
+        <StyledBreadCrumbLink
+          to={`/project/${data.getBugByKey.project.projectKey}`}
         >
+          {data.getBugByKey.project.projectKey}
+        </StyledBreadCrumbLink>
+        <span> / </span>
+        <StyledBreadCrumbLink to={`/bug/${data.getBugByKey.key}`}>
+          {data.getBugByKey.key}
+        </StyledBreadCrumbLink>
+      </div>
+      <StyledSummary>{data.getBugByKey.summary}</StyledSummary>
+      <div>
+        <StyledDescription>Description</StyledDescription>
+        <StyledArticle>
           <MDEditor.Markdown source={data.getBugByKey.description} />
-        </article>
+        </StyledArticle>
       </div>
       <div>
-        <p style={{ marginBottom: '1rem' }}>
-          Assigned to {data.getBugByKey.assignee.name}
-        </p>
-        <p style={{ marginBottom: '1rem' }}>Labels: None</p>
-        <p style={{ marginBottom: '1rem' }}>
-          Authored by {data.getBugByKey.author.name}
-        </p>
-        <hr
-          style={{
-            color: `${(props) => props.theme.colors.dark}`,
-            backgroundColor: `${(props) => props.theme.colors.dark}`,
-            height: 0.5,
-            borderColor: `${(props) => props.theme.colors.dark}`,
-            marginBottom: '1rem',
-          }}
-        />
+        <StyledInfo>
+          Assigned to{' '}
+          <StyledLink to={`/user/${data.getBugByKey.assignee.id}`}>
+            {data.getBugByKey.assignee.name}
+          </StyledLink>
+        </StyledInfo>
+        <StyledInfo>
+          Authored by{' '}
+          <StyledLink to={`/user/${data.getBugByKey.author.id}`}>
+            {data.getBugByKey.author.name}
+          </StyledLink>
+        </StyledInfo>
       </div>
       <div>
-        <p style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+        <StyledInfo>
           Created{' '}
           {createdOn.toLocaleDateString('en-GB', {
             weekday: 'long',
@@ -99,10 +103,62 @@ const BugDetails = () => {
             hour: '2-digit',
             minute: '2-digit',
           })}
-        </p>
+        </StyledInfo>
       </div>
     </SingleColumnFlex>
   );
 };
 
 export default BugDetails;
+
+const StyledDescription = styled.h4`
+  margin: 0px;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+`;
+
+const StyledInfo = styled.p`
+  margin-bottom: 1rem;
+`;
+
+const StyledSummary = styled.h3`
+  margin: 0px;
+  margin-bottom: 1rem;
+`;
+
+const StyledArticle = styled.article`
+  border: 1px solid;
+  border-color: hsl(0, 0%, 96%);
+  padding: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${(props) => props.theme.colors.link};
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.colors.dark};
+    text-decoration: underline;
+  }
+  &:visited {
+    text-decoration: none;
+  }
+`;
+
+const StyledBreadCrumbLink = styled(Link)`
+  &:first-child {
+    padding-right: 0.5rem;
+    padding-left: 0;
+  }
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: ${(props) => props.theme.colors.link};
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.colors.dark};
+    text-decoration: underline;
+  }
+  &:visited {
+    text-decoration: none;
+  }
+`;
