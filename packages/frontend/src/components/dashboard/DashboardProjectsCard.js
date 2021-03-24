@@ -35,7 +35,7 @@ const DashboardProjectsCard = () => {
 
   if (networkStatus === 4 || loading) {
     return (
-      <CardWrapper gridArea="projects">
+      <CardWrapper>
         <CardHeader>
           <CardTitle>My Projects</CardTitle>
           <StyledButton
@@ -53,7 +53,7 @@ const DashboardProjectsCard = () => {
 
   if (data) {
     return (
-      <CardWrapper gridArea="projects">
+      <CardWrapper>
         <CardHeader>
           <CardTitle>My Projects</CardTitle>
           <StyledButton

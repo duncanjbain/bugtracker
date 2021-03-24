@@ -7,7 +7,6 @@ export const CardHeader = styled.div`
 `;
 
 export const CardWrapper = styled.article`
-  grid-area: ${(props) => props.gridArea};
   display: flex;
   flex-direction: column;
   margin: 1.5rem;
