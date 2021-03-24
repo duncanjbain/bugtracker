@@ -66,7 +66,6 @@ const DashboardNavbar = () => {
 export default DashboardNavbar;
 
 const NavContainer = styled.nav`
-  grid-area: header;
   display: flex;
   padding-left: 1rem;
   padding-right: 1rem;

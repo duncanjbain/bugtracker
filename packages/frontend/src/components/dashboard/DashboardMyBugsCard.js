@@ -50,7 +50,7 @@ const DashboardMyBugsCard = () => {
   });
   if (networkStatus === 4 || loading) {
     return (
-      <CardWrapper gridArea="mybugs">
+      <CardWrapper>
         <CardHeader>
           <CardTitle>My Bugs</CardTitle>
           <StyledButton
@@ -67,7 +67,7 @@ const DashboardMyBugsCard = () => {
   }
   if (data) {
     return (
-      <CardWrapper gridArea="mybugs">
+      <CardWrapper>
         <CardHeader>
           <CardTitle>My Bugs</CardTitle>
           <StyledButton

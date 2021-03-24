@@ -5,21 +5,14 @@ import DashboardProjectsCard from '../components/dashboard/DashboardProjectsCard
 
 const Dashboard = () => (
   <DashboardWrapper>
-    <DashboardMyBugsCard />
     <DashboardProjectsCard />
+    <DashboardMyBugsCard />
   </DashboardWrapper>
 );
 
 export default Dashboard;
 
 const DashboardWrapper = styled.main`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    'header header'
-    'projects  mybugs';
-  @media (${(props) => props.theme.media.lg}) {
-    display: block;
-  }
+  display: flex;
+  flex-direction: column;
 `;
