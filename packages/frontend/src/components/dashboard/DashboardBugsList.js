@@ -16,6 +16,7 @@ const DashboardBugsList = ({ title, bugs }) => (
           <StyledTableHeader>Key</StyledTableHeader>
           <StyledTableHeader>Project</StyledTableHeader>
           <StyledTableHeader>Summary</StyledTableHeader>
+          <StyledTableHeader>Type</StyledTableHeader>
           <StyledTableHeader>Priority</StyledTableHeader>
         </tr>
       </thead>
@@ -37,7 +38,12 @@ const DashboardBugsList = ({ title, bugs }) => (
                 {bug.summary}
               </StyledTableLink>
             </StyledTableCell>
-            <StyledTableCell>{bug.priority}</StyledTableCell>
+            <StyledTableCell style={{ textTransform: 'capitalize' }}>
+              {bug.type}
+            </StyledTableCell>
+            <StyledTableCell style={{ textTransform: 'capitalize' }}>
+              {bug.priority}
+            </StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>

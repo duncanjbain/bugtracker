@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export const StyledTable = styled.table`
   border-collapse: collapse;
   width: 100%;
-  margin-top: 1rem;
   margin-bottom: 1rem;
 `;
 

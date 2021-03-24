@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 import { useUser } from '../../context/UserContext';
 import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
-import DashboardProjectsCardList from './DashboardBugsList';
+import DashboardBugsList from './DashboardBugsList';
 import {
   CardWrapper,
   CardTitle,
@@ -20,6 +20,7 @@ const GET_USERS_BUGS = gql`
         summary
         id
         priority
+        type
         project {
           projectName
           projectKey
@@ -30,6 +31,7 @@ const GET_USERS_BUGS = gql`
         summary
         id
         priority
+        type
         project {
           projectName
           projectKey
@@ -78,11 +80,11 @@ const DashboardMyBugsCard = () => {
             <StyledReloadIcon />
           </StyledButton>
         </CardHeader>
-        <DashboardProjectsCardList
+        <DashboardBugsList
           title="Created by me"
           bugs={data.getUsersBugs.createdBugs}
         />
-        <DashboardProjectsCardList
+        <DashboardBugsList
           title="Assigned to me"
           bugs={data.getUsersBugs.assignedBugs}
         />

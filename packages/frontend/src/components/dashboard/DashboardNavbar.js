@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
-import { ReactComponent as NotificationIcon } from '../../assets/svg/icons/bell.svg';
-import { ReactComponent as SettingsIcon } from '../../assets/svg/icons/settings.svg';
 import { useAuth } from '../../context/AuthContext';
 
 const DashboardNavbar = () => {
@@ -27,26 +25,8 @@ const DashboardNavbar = () => {
       </NavLinks>
       <NavLinks>
         <NavItem>
-          <NavLink to="#">Search</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="#">
-            <StyledNotificationIcon
-              alt="Bell Notification Icon"
-              aria-label="Link to Notifications"
-            />
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="#">
-            <StyledSettingsIcon
-              alt="Cog Wheel Settings Icon"
-              aria-label="Link to Settings"
-            />
-          </NavLink>
-        </NavItem>
-        <NavItem>
           <NavLink to="/profile">
+            <span style={{ marginRight: '0.5rem' }}>Profile</span>
             <Avatar
               name="Duncan Bain"
               round
@@ -87,7 +67,7 @@ const NavLinks = styled.ul`
   align-items: center;
   @media (${(props) => props.theme.media.lg}) {
     padding: 0.25rem;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
   }
 `;
@@ -112,16 +92,6 @@ const NavLink = styled(Link)`
     transition: all 0.15s ease-in;
   }
   @media (${(props) => props.theme.media.lg}) {
-    padding: 0;
+    padding: 0.25rem;
   }
-`;
-
-const StyledNotificationIcon = styled(NotificationIcon)`
-  display: inline-block;
-  vertical-align: text-bottom;
-`;
-
-const StyledSettingsIcon = styled(SettingsIcon)`
-  display: inline-block;
-  vertical-align: text-bottom;
 `;
