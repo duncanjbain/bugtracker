@@ -2,7 +2,6 @@
 /* eslint-disable react/no-this-in-sfc */
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-// eslint-disable-next-line no-unused-vars
 import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
@@ -18,7 +17,6 @@ import {
 } from '../ui/components/StyledForm';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 
-// eslint-disable-next-line no-unused-vars
 const GET_USER_PROJECTS = gql`
   query getUserProjects($userID: ID!) {
     getUserProjects(userID: $userID) {
@@ -71,13 +69,12 @@ const CreateBug = () => {
   const { data, loading } = useQuery(GET_USER_PROJECTS, {
     variables: { userID: user.id },
   });
-  // eslint-disable-next-line no-unused-vars
+
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
   const [createBug] = useMutation(CREATE_NEW_BUG);
   const { register, handleSubmit, control } = useForm();
   const [value, setValue] = React.useState('');
 
-  // eslint-disable-next-line no-unused-vars
   const onSubmit = async (formData) => {
     const {
       bugKey,
@@ -92,7 +89,6 @@ const CreateBug = () => {
 
     try {
       await createBug({
-        // eslint-disable-next-line no-underscore-dangle
         variables: {
           key: bugKey,
           summary: bugSummary,
