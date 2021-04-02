@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useMutation, useLazyQuery, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
@@ -10,6 +10,9 @@ import {
   TextInput,
   InputLabel,
   SubmitButton,
+  WarnButton,
+  SuccessButton,
+  DangerButton,
 } from '../../ui/components/StyledForm';
 
 const UPDATE_EXISTING_BUG = gql`
@@ -40,6 +43,14 @@ const UPDATE_EXISTING_BUG = gql`
   }
 `;
 
+const DELETE_BUG = gql`
+  mutation DeleteBug($bugId: ID!) {
+    deleteExistingBug(bugId: $bugId) {
+      id
+    }
+  }
+`;
+
 const GET_PROJECT_MEMBERS = gql`
   query getProjectMembers($projectID: ID!) {
     getProjectMembers(projectID: $projectID) {
@@ -53,8 +64,11 @@ const EditBugDetails = ({ bug }) => {
   const history = useHistory();
   const { addToast } = useToasts();
   const { register, handleSubmit, control } = useForm();
-  const [value, setValue] = React.useState(bug.description);
+  const [value, setValue] = useState(bug.description);
+  // eslint-disable-next-line no-unused-vars
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
+  const [deleteExistingBug] = useMutation(DELETE_BUG);
   const [updateExistingBug] = useMutation(UPDATE_EXISTING_BUG);
   const [getMembers, { data: dataMembers }] = useLazyQuery(
     GET_PROJECT_MEMBERS,
@@ -64,6 +78,22 @@ const EditBugDetails = ({ bug }) => {
       errorPolicy: 'all',
     }
   );
+
+  const handleDelete = async (bugId) => {
+    try {
+      await deleteExistingBug({ variables: { bugId } });
+      addToast('Bug successfully deleted!', {
+        autoDismiss: true,
+        appearance: 'success',
+      });
+      history.push('/dashboard');
+    } catch (error) {
+      addToast(`Oh no! ${error}`, {
+        autoDismiss: true,
+        appearance: 'error',
+      });
+    }
+  };
 
   const onSubmit = async (formData) => {
     // stolen from https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript/24190282
@@ -197,6 +227,22 @@ const EditBugDetails = ({ bug }) => {
         </select>
       </FormGroup>
       <SubmitButton type="submit">Update Bug</SubmitButton>
+      {!confirmDelete && (
+        <WarnButton type="button" onClick={() => setConfirmDelete(true)}>
+          Delete Bug
+        </WarnButton>
+      )}
+      {confirmDelete && (
+        <div>
+          <p>Are you sure?</p>
+          <DangerButton type="button" onClick={() => handleDelete(bug.id)}>
+            Yes
+          </DangerButton>
+          <SuccessButton type="button" onClick={() => setConfirmDelete(false)}>
+            No
+          </SuccessButton>
+        </div>
+      )}
     </form>
   );
 };

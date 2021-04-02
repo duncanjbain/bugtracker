@@ -24,6 +24,30 @@ export const SubmitButton = styled.button`
   }
 `;
 
+export const DangerButton = styled(SubmitButton)`
+  background: ${(props) => props.theme.colors.danger};
+  color: white;
+  &:hover {
+    background: hsl(348, 100%, 51%);
+  }
+`;
+
+export const WarnButton = styled(SubmitButton)`
+  background: ${(props) => props.theme.colors.warning};
+  color: black;
+  &:hover {
+    background: hsl(48, 100%, 47%);
+  }
+`;
+
+export const SuccessButton = styled(SubmitButton)`
+  background: ${(props) => props.theme.colors.success};
+  color: white;
+  &:hover {
+    background: hsl(141, 53%, 43%);
+  }
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   justify-content: start;
