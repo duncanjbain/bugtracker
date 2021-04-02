@@ -38,6 +38,14 @@ query GetUser(
 }
 `;
 
+const GET_ALL_USERS = `
+query {
+  getAllUsers {
+    name
+  }
+}
+`
+
 const GET_WHOAMI = `
   query {
     getWhoAmI {
@@ -152,6 +160,38 @@ describe('user GraphQL queries', () => {
       email: 'test@email.com',
     });
   });
+
+  test('can get all users', async() => {
+    const firstUser = await new User({
+      name: 'First User',
+      email: 'firstuser@email.com',
+      password: 'password',
+    }).save();
+
+    const secondUser = await new User({
+      name: 'Second User',
+      email: 'seconduser@email.com',
+      password: 'password',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+        currentUser: firstUser,
+      }),
+    });
+
+    const { query } = createTestClient(server);
+
+    const response = await query({
+      query: GET_ALL_USERS,
+    });
+
+    expect(response.data.getAllUsers).toEqual([{name:"First User"}, {name:"Second User"}])
+
+  })
 
   test('can get user info from currentUser context', async () => {
     const newUser = await new User({
