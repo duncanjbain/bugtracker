@@ -29,7 +29,7 @@ const GET_BUG_BY_KEY = `
       key
     }
   }
-`
+`;
 
 const CREATE_BUG = `
 mutation CreateBug(
@@ -71,6 +71,14 @@ mutation UpdateExistingBug(
 }
 `;
 
+const DELETE_EXISTING_BUG = `
+mutation DeleteExistingBug($bugId: ID!) {
+  deleteExistingBug(bugId: $bugId) {
+    id
+  }
+}
+`;
+
 const GET_USERS_BUGS = `
 query GetUsersBugs($userId: ID!) {
   getUsersBugs(userId: $userId) {
@@ -86,7 +94,7 @@ query GetUsersBugs($userId: ID!) {
     }
   }
 }
-`
+`;
 
 describe('bug GraphQL queries', () => {
   test('can get all bugs', async () => {
@@ -130,8 +138,8 @@ describe('bug GraphQL queries', () => {
 
     expect(response.data.getAllBugs).toEqual([{ key: 'BUG01' }]);
   });
-  
-  test('can get bug by key', async() => {
+
+  test('can get bug by key', async () => {
     const newUser = await new User({
       name: 'New User',
       email: 'newuser@email.com',
@@ -174,7 +182,7 @@ describe('bug GraphQL queries', () => {
     });
 
     expect(response.data.getBugByKey).toEqual({ key: 'BUG01' });
-  })
+  });
 
   test('can get bug by id', async () => {
     const newUser = await new User({
@@ -346,5 +354,51 @@ describe('bug GraphQL queries', () => {
       assignedBugs: [],
       createdBugs: [],
     });
-  })
+  });
+
+  test('can delete existing bug', async () => {
+    const newUser = await new User({
+      name: 'New User',
+      email: 'newuser@email.com',
+      password: 'password',
+      siteRole: 'ADMIN',
+    }).save();
+
+    const firstNewProject = await new Project({
+      projectKey: 'KEY01',
+      projectName: 'ProjectOne',
+      projectMembers: [newUser.id],
+    }).save();
+
+    const newBug = await new Bug({
+      key: 'BUG01',
+      summary: 'First bug summary',
+      description: 'First bug description',
+      priority: 'medium',
+      type: 'defect',
+      author: newUser.id,
+      project: firstNewProject.id,
+      assignee: newUser.id,
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        Project,
+        User,
+        Bug,
+        currentUser: newUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+    const response = await mutate({
+      query: DELETE_EXISTING_BUG,
+      variables: { bugId: newBug.id },
+    });
+
+    expect(response.data.deleteExistingBug).toEqual({ id: newBug.id });
+  });
 });

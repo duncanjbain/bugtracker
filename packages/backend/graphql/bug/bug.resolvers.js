@@ -106,7 +106,7 @@ module.exports = {
           'You do not have permission for this request'
         );
       }
-      Bug.findByIdAndRemove(bugId)
+      return Bug.findByIdAndRemove(bugId)
     }
   },
 };
