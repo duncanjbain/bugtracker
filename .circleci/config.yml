@@ -12,8 +12,7 @@ jobs:
           name: Run yarn test-backend
       - codecov/upload:
           file: packages/backend/coverage/coverage-final.json
-          flags:
-            - backend
+          flags: backend
 orbs:
   node: circleci/node@4.1.0
   codecov: codecov/codecov@1.0.2
