@@ -225,6 +225,38 @@ describe('user GraphQL queries', () => {
     ]);
   });
 
+  test('must be authenticated to get all users', async () => {
+    const firstUser = await new User({
+      name: 'First User',
+      email: 'firstuser@email.com',
+      password: 'password',
+    }).save();
+
+    const secondUser = await new User({
+      name: 'Second User',
+      email: 'seconduser@email.com',
+      password: 'password',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+      }),
+    });
+
+    const { query } = createTestClient(server);
+
+    const response = await query({
+      query: GET_ALL_USERS,
+    });
+
+    expect(response.errors[0].message).toEqual(
+      'You do not have permission for this request'
+    );
+  });
+
   test('can get user info from currentUser context', async () => {
     const newUser = await new User({
       name: 'Test User',
@@ -259,7 +291,6 @@ describe('user GraphQL queries', () => {
     const { query } = createTestClient(server);
 
     const response = await query({ query: GET_WHOAMI });
-    console.log(response);
     expect(response.data.getWhoAmI).toBe(null);
   });
 
@@ -396,7 +427,6 @@ describe('user GraphQL queries', () => {
       query: UPDATE_PROFILE,
       variables: { id: secondUser.id, name: 'Updated User' },
     });
-    console.log(response);
     expect(response.errors[0].message).toEqual(
       'You do not have permission for this request'
     );
