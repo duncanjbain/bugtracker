@@ -44,7 +44,7 @@ query {
     name
   }
 }
-`
+`;
 
 const GET_WHOAMI = `
   query {
@@ -161,7 +161,37 @@ describe('user GraphQL queries', () => {
     });
   });
 
-  test('can get all users', async() => {
+  test('must be authenticated to get user by ID', async () => {
+    // add new user to database with admin role
+    const newUser = await new User({
+      name: 'Test User',
+      email: 'test@email.com',
+      password: 'password',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+      }),
+    });
+
+    const { query } = createTestClient(server);
+
+    const response = await query({
+      query: GET_USER,
+      variables: {
+        userId: newUser.id,
+      },
+    });
+
+    expect(response.errors[0].message).toEqual(
+      'You do not have permission for this request'
+    );
+  });
+
+  test('can get all users', async () => {
     const firstUser = await new User({
       name: 'First User',
       email: 'firstuser@email.com',
@@ -189,9 +219,11 @@ describe('user GraphQL queries', () => {
       query: GET_ALL_USERS,
     });
 
-    expect(response.data.getAllUsers).toEqual([{name:"First User"}, {name:"Second User"}])
-
-  })
+    expect(response.data.getAllUsers).toEqual([
+      { name: 'First User' },
+      { name: 'Second User' },
+    ]);
+  });
 
   test('can get user info from currentUser context', async () => {
     const newUser = await new User({
@@ -213,6 +245,22 @@ describe('user GraphQL queries', () => {
 
     const response = await query({ query: GET_WHOAMI });
     expect(response.data.getWhoAmI.name).toBe('Test User');
+  });
+
+  test('no user info returned if no context user is set', async () => {
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+      }),
+    });
+
+    const { query } = createTestClient(server);
+
+    const response = await query({ query: GET_WHOAMI });
+    console.log(response);
+    expect(response.data.getWhoAmI).toBe(null);
   });
 
   test('can login user', async () => {
@@ -245,6 +293,56 @@ describe('user GraphQL queries', () => {
     });
   });
 
+  test('cant login without correct email', async () => {
+    const newUser = await new User({
+      name: 'Test User',
+      email: 'test@email.com',
+      password: 'password',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+        currentUser: newUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+    const response = await mutate({
+      query: LOGIN_USER_MUTATION,
+      variables: { email: 'wrong@email.com', password: 'password' },
+    });
+    expect(response.errors[0].message).toEqual('Invalid email or password');
+  });
+
+  test('cant login without correct password', async () => {
+    const newUser = await new User({
+      name: 'Test User',
+      email: 'test@email.com',
+      password: 'password',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+        currentUser: newUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+    const response = await mutate({
+      query: LOGIN_USER_MUTATION,
+      variables: { email: 'test@email.com', password: 'wrong password' },
+    });
+    expect(response.errors[0].message).toEqual('Invalid email or password');
+  });
+
   test('can update user', async () => {
     const newUser = await new User({
       name: 'Test User',
@@ -268,5 +366,39 @@ describe('user GraphQL queries', () => {
       variables: { id: newUser.id, name: 'Updated User' },
     });
     expect(response.data.updateUser.name).toEqual('Updated User');
+  });
+
+  test('cant update user info unless you are the user', async () => {
+    const newUser = await new User({
+      name: 'Test User',
+      email: 'test@email.com',
+      password: 'password',
+    }).save();
+
+    const secondUser = await new User({
+      name: 'Second User',
+      email: 'seconduser@email.com',
+      password: 'password',
+    }).save();
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        User,
+        currentUser: newUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+    const response = await mutate({
+      query: UPDATE_PROFILE,
+      variables: { id: secondUser.id, name: 'Updated User' },
+    });
+    console.log(response);
+    expect(response.errors[0].message).toEqual(
+      'You do not have permission for this request'
+    );
   });
 });
