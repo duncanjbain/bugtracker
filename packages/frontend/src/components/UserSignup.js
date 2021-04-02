@@ -48,7 +48,7 @@ const UserSignup = () => {
   return (
     <SignupFormContainer>
       <h2>Sign Up</h2>
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={handleSubmit(onSubmit)} autocomplete="on">
         <FormGroup>
           <InputLabel htmlFor="name">Name</InputLabel>
           <TextInput
@@ -89,7 +89,7 @@ const UserSignup = () => {
           <InputLabel htmlFor="password">Password</InputLabel>
           <TextInput
             id="password"
-            type="text"
+            type="password"
             placeholder="Password"
             name="password"
             ref={register({ required: true })}
@@ -107,7 +107,7 @@ const UserSignup = () => {
           <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
           <TextInput
             id="confirmPassword"
-            type="text"
+            type="password"
             placeholder="Confirm Password"
             name="confirmPassword"
             ref={register({ required: true })}
