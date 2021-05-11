@@ -17,35 +17,46 @@ const DashboardBugsList = ({ title, bugs }) => (
           <StyledTableHeader>Project</StyledTableHeader>
           <StyledTableHeader>Summary</StyledTableHeader>
           <StyledTableHeader>Type</StyledTableHeader>
+          <StyledTableHeader>Due On</StyledTableHeader>
           <StyledTableHeader>Priority</StyledTableHeader>
         </tr>
       </thead>
       <tbody>
-        {bugs.map((bug) => (
-          <StyledTableRow key={bug.key}>
-            <StyledTableCell>
-              <StyledTableLink to={`/bug/${bug.key}`}>
-                {bug.key}
-              </StyledTableLink>
-            </StyledTableCell>
-            <StyledTableCell>
-              <StyledTableLink to={`/project/${bug.project.projectKey}`}>
-                {bug.project.projectName}
-              </StyledTableLink>
-            </StyledTableCell>
-            <StyledTableCell>
-              <StyledTableLink to={`/bug/${bug.key}`}>
-                {bug.summary}
-              </StyledTableLink>
-            </StyledTableCell>
-            <StyledTableCell style={{ textTransform: 'capitalize' }}>
-              {bug.type}
-            </StyledTableCell>
-            <StyledTableCell style={{ textTransform: 'capitalize' }}>
-              {bug.priority}
-            </StyledTableCell>
-          </StyledTableRow>
-        ))}
+        {bugs.map((bug) => {
+          const dueOn = new Date(parseInt(bug.dateDue, 10));
+          return (
+            <StyledTableRow key={bug.key}>
+              <StyledTableCell>
+                <StyledTableLink to={`/bug/${bug.key}`}>
+                  {bug.key}
+                </StyledTableLink>
+              </StyledTableCell>
+              <StyledTableCell>
+                <StyledTableLink to={`/project/${bug.project.projectKey}`}>
+                  {bug.project.projectName}
+                </StyledTableLink>
+              </StyledTableCell>
+              <StyledTableCell>
+                <StyledTableLink to={`/bug/${bug.key}`}>
+                  {bug.summary}
+                </StyledTableLink>
+              </StyledTableCell>
+              <StyledTableCell style={{ textTransform: 'capitalize' }}>
+                {bug.type}
+              </StyledTableCell>
+              <StyledTableCell>
+                {dueOn.toLocaleDateString('en-GB', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </StyledTableCell>
+              <StyledTableCell style={{ textTransform: 'capitalize' }}>
+                {bug.priority}
+              </StyledTableCell>
+            </StyledTableRow>
+          );
+        })}
       </tbody>
     </StyledTable>
   </div>

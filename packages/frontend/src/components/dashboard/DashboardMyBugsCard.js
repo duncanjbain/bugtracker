@@ -21,6 +21,7 @@ const GET_USERS_BUGS = gql`
         id
         priority
         type
+        dateDue
         project {
           projectName
           projectKey
@@ -32,6 +33,7 @@ const GET_USERS_BUGS = gql`
         id
         priority
         type
+        dateDue
         project {
           projectName
           projectKey
