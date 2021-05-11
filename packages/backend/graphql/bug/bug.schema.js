@@ -12,6 +12,7 @@ module.exports = gql`
     assignee: User!
     type: String!
     created: String!
+    dateDue: String!
   }
 
   type UsersBugs {
@@ -36,6 +37,7 @@ module.exports = gql`
       assignee: ID!
       project: ID!
       type: String!
+      dateDue: String!
     ): Bug
     updateExistingBug(
       bugId: ID!
@@ -47,6 +49,7 @@ module.exports = gql`
       assignee: ID
       project: ID
       type: String
+      dateDue: String
     ): Bug
     deleteExistingBug(bugId: ID!): Bug
   }

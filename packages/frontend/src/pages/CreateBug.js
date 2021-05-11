@@ -1,11 +1,15 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-this-in-sfc */
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import MDEditor from '@uiw/react-md-editor';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import enGB from 'date-fns/locale/en-GB';
+
+import 'react-datepicker/dist/react-datepicker.css';
 import { useUser } from '../context/UserContext';
 import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
@@ -46,6 +50,7 @@ const CREATE_NEW_BUG = gql`
     $assignee: ID!
     $project: ID!
     $type: String!
+    $dateDue: String!
   ) {
     createBug(
       key: $key
@@ -56,6 +61,7 @@ const CREATE_NEW_BUG = gql`
       assignee: $assignee
       project: $project
       type: $type
+      dateDue: $dateDue
     ) {
       id
     }
@@ -70,10 +76,14 @@ const CreateBug = () => {
     variables: { userID: user.id },
   });
 
+  // eslint-disable-next-line no-unused-vars
+  const [dateDueState, setDateDueState] = useState(new Date(Date.now()));
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
   const [createBug] = useMutation(CREATE_NEW_BUG);
-  const { register, handleSubmit, control } = useForm();
-  const [value, setValue] = React.useState('');
+  const { register, handleSubmit, control, setValue } = useForm();
+  const [descriptionValue, setDescriptionValue] = React.useState('');
+
+  registerLocale('enGB', enGB); // register it with the name you want
 
   const onSubmit = async (formData) => {
     const {
@@ -85,6 +95,7 @@ const CreateBug = () => {
       bugPriority,
       bugAssignedUser,
       bugAuthor,
+      bugDateDue,
     } = formData;
 
     try {
@@ -98,6 +109,7 @@ const CreateBug = () => {
           assignee: bugAssignedUser,
           project: projectName,
           type: bugType,
+          dateDue: bugDateDue,
         },
       });
       addToast('Bug successfully created!', {
@@ -111,6 +123,13 @@ const CreateBug = () => {
         appearance: 'error',
       });
     }
+  };
+
+  const handleDateChange = (dateChange) => {
+    setValue('dateDue', dateChange, {
+      shouldDirty: true,
+    });
+    setDateDueState(dateChange);
   };
 
   if (loading) {
@@ -182,14 +201,33 @@ const CreateBug = () => {
           <Controller
             as={
               <MDEditor
-                value={value}
-                onChange={setValue}
+                value={descriptionValue}
+                onChange={setDescriptionValue}
                 preview="edit"
                 height="250"
                 visiableDragbar="false"
               />
             }
             name="bugDescription"
+            control={control}
+            defaultValue=""
+          />
+        </FormGroup>
+        <FormGroup>
+          <InputLabel htmlFor="bugDateDue">Due date</InputLabel>
+          <Controller
+            render={() => (
+              <DatePicker
+                selected={dateDueState}
+                value={dateDueState}
+                onChange={handleDateChange}
+                placeholderText="Select date"
+                locale="enGB"
+                dateFormat="dd/MM/yyyy"
+                todayButton="Today"
+              />
+            )}
+            name="bugDateDue"
             control={control}
             defaultValue=""
           />
