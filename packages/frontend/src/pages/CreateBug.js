@@ -126,7 +126,7 @@ const CreateBug = () => {
   };
 
   const handleDateChange = (dateChange) => {
-    setValue('dateDue', dateChange, {
+    setValue('bugDateDue', dateChange, {
       shouldDirty: true,
     });
     setDateDueState(dateChange);

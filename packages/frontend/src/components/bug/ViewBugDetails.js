@@ -6,6 +6,7 @@ import { SubmitButton } from '../../ui/components/StyledForm';
 
 const ViewBugDetails = ({ bug, setEditMode }) => {
   const createdOn = new Date(parseInt(bug.created, 10));
+  const dueOn = new Date(parseInt(bug.dateDue, 10));
   return (
     <>
       <StyledSummary>{bug.summary}</StyledSummary>
@@ -27,6 +28,17 @@ const ViewBugDetails = ({ bug, setEditMode }) => {
           <StyledLink to={`/user/${bug.author.id}`}>
             {bug.author.name}
           </StyledLink>
+        </StyledInfo>
+      </div>
+      <div>
+        <StyledInfo>
+          Due On{' '}
+          {dueOn.toLocaleDateString('en-GB', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
         </StyledInfo>
       </div>
       <div>

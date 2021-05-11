@@ -33,7 +33,7 @@ const BugSchema = new mongoose.Schema({
     required: true,
   },
   dateDue: {
-    type: String,
+    type: Date,
     required: true
   }
 });
