@@ -76,14 +76,13 @@ const CreateBug = () => {
     variables: { userID: user.id },
   });
 
-  // eslint-disable-next-line no-unused-vars
   const [dateDueState, setDateDueState] = useState(new Date(Date.now()));
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
   const [createBug] = useMutation(CREATE_NEW_BUG);
   const { register, handleSubmit, control, setValue } = useForm();
   const [descriptionValue, setDescriptionValue] = React.useState('');
 
-  registerLocale('enGB', enGB); // register it with the name you want
+  registerLocale('enGB', enGB);
 
   const onSubmit = async (formData) => {
     const {
@@ -97,7 +96,7 @@ const CreateBug = () => {
       bugAuthor,
       bugDateDue,
     } = formData;
-
+    console.log(formData);
     try {
       await createBug({
         variables: {
@@ -229,7 +228,6 @@ const CreateBug = () => {
             )}
             name="bugDateDue"
             control={control}
-            defaultValue=""
           />
         </FormGroup>
         <FormGroup>

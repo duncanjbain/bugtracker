@@ -4,6 +4,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { useMutation, useLazyQuery, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import enGB from 'date-fns/locale/en-GB';
 import MDEditor from '@uiw/react-md-editor';
 import {
   FormGroup,
@@ -26,6 +28,7 @@ const UPDATE_EXISTING_BUG = gql`
     $assignee: ID
     $project: ID
     $type: String
+    $dateDue: String
   ) {
     updateExistingBug(
       bugId: $bugId
@@ -37,6 +40,7 @@ const UPDATE_EXISTING_BUG = gql`
       assignee: $assignee
       project: $project
       type: $type
+      dateDue: $dateDue
     ) {
       id
     }
@@ -63,10 +67,12 @@ const GET_PROJECT_MEMBERS = gql`
 const EditBugDetails = ({ bug }) => {
   const history = useHistory();
   const { addToast } = useToasts();
-  const { register, handleSubmit, control } = useForm();
-  const [value, setValue] = useState(bug.description);
-  // eslint-disable-next-line no-unused-vars
+  const { register, handleSubmit, control, setValue } = useForm();
+  const [descriptionValue, setDescriptionValue] = useState(bug.description);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [dateDueState, setDateDueState] = useState(
+    new Date(parseInt(bug.dateDue, 10))
+  );
 
   const [deleteExistingBug] = useMutation(DELETE_BUG);
   const [updateExistingBug] = useMutation(UPDATE_EXISTING_BUG);
@@ -78,6 +84,8 @@ const EditBugDetails = ({ bug }) => {
       errorPolicy: 'all',
     }
   );
+
+  registerLocale('enGB', enGB);
 
   const handleDelete = async (bugId) => {
     try {
@@ -94,7 +102,12 @@ const EditBugDetails = ({ bug }) => {
       });
     }
   };
-
+  const handleDateChange = (dateChange) => {
+    setValue('dateDue', dateChange, {
+      shouldDirty: true,
+    });
+    setDateDueState(dateChange);
+  };
   const onSubmit = async (formData) => {
     // stolen from https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript/24190282
     const falsyRemoved = Object.entries(formData).reduce(
@@ -102,7 +115,8 @@ const EditBugDetails = ({ bug }) => {
       (a, [k, v]) => (v ? ((a[k] = v), a) : a),
       {}
     );
-
+    console.log(formData);
+    console.log(falsyRemoved);
     try {
       await updateExistingBug({
         variables: { bugId: bug.id, ...falsyRemoved },
@@ -156,8 +170,8 @@ const EditBugDetails = ({ bug }) => {
         <Controller
           as={
             <MDEditor
-              value={value}
-              onChange={setValue}
+              value={descriptionValue}
+              onChange={setDescriptionValue}
               preview="edit"
               height="250"
               visiableDragbar="false"
@@ -166,6 +180,25 @@ const EditBugDetails = ({ bug }) => {
           name="description"
           control={control}
           defaultValue={bug.description}
+        />
+      </FormGroup>
+      <FormGroup>
+        <InputLabel htmlFor="dateDue">Due date</InputLabel>
+        <Controller
+          render={() => (
+            <DatePicker
+              selected={dateDueState}
+              value={dateDueState}
+              onChange={handleDateChange}
+              placeholderText="Select date"
+              locale="enGB"
+              dateFormat="dd/MM/yyyy"
+              todayButton="Today"
+            />
+          )}
+          name="dateDue"
+          control={control}
+          defaultValue=""
         />
       </FormGroup>
       <FormGroup>
