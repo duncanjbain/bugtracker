@@ -41,6 +41,7 @@ mutation CreateBug(
     $project: ID!
     $assignee: ID!
     $type: String!
+    $dateDue: String!
 ) {
     createBug(
         key: $key
@@ -51,6 +52,7 @@ mutation CreateBug(
         project: $project
         assignee: $assignee
         type: $type
+        dateDue: $dateDue
     ) {
         key
     }
@@ -119,6 +121,7 @@ describe('bug GraphQL queries', () => {
       author: newUser.id,
       project: firstNewProject.id,
       assignee: newUser.id,
+      dateDue: new Date(Date.now()),
     }).save();
 
     const server = new ApolloServer({
@@ -161,6 +164,7 @@ describe('bug GraphQL queries', () => {
       author: newUser.id,
       project: firstNewProject.id,
       assignee: newUser.id,
+      dateDue: new Date(Date.now()),
     }).save();
 
     const server = new ApolloServer({
@@ -206,6 +210,7 @@ describe('bug GraphQL queries', () => {
       author: newUser.id,
       project: firstNewProject.id,
       assignee: newUser.id,
+      dateDue: new Date(Date.now()),
     }).save();
 
     const server = new ApolloServer({
@@ -265,9 +270,10 @@ describe('bug GraphQL queries', () => {
         author: newUser.id,
         project: firstNewProject.id,
         assignee: newUser.id,
+        dateDue: "2021-06-03T20:08:43.000+00:00",
       },
     });
-
+    console.log(response)
     expect(response.data.createBug).toEqual({ key: 'BUG01' });
   });
 
@@ -294,6 +300,7 @@ describe('bug GraphQL queries', () => {
       author: newUser.id,
       project: firstNewProject.id,
       assignee: newUser.id,
+      dateDue: new Date(Date.now()),
     }).save();
 
     const server = new ApolloServer({
@@ -379,6 +386,7 @@ describe('bug GraphQL queries', () => {
       author: newUser.id,
       project: firstNewProject.id,
       assignee: newUser.id,
+      dateDue: new Date(Date.now()),
     }).save();
 
     const server = new ApolloServer({

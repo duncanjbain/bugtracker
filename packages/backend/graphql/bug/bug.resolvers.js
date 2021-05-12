@@ -68,6 +68,7 @@ module.exports = {
       if (!bugProject) {
         throw new UserInputError('A project is required when creating a bug');
       }
+
       const newBug = await new Bug({
         key,
         summary,
