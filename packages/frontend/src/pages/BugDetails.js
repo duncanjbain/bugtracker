@@ -32,6 +32,7 @@ const GET_BUG = gql`
       }
       type
       created
+      dateDue
     }
   }
 `;

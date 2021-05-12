@@ -32,6 +32,10 @@ const BugSchema = new mongoose.Schema({
     default: Date.now,
     required: true,
   },
+  dateDue: {
+    type: Date,
+    required: true
+  }
 });
 
 module.exports = mongoose.model('Bug', BugSchema);

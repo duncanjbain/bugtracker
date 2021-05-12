@@ -42,7 +42,7 @@ module.exports = {
   Mutation: {
     createBug: async (
       root,
-      { key, summary, description, priority, author, project, assignee, type },
+      { key, summary, description, priority, author, project, assignee, type, dateDue },
       { Bug, User, Project, currentUser }
     ) => {
       if (!currentUser) {
@@ -77,6 +77,7 @@ module.exports = {
         author,
         project,
         assignee,
+        dateDue,
       }).save();
       await Project.findOneAndUpdate(
         { _id: project },
