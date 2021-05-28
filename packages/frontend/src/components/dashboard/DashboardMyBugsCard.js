@@ -9,6 +9,7 @@ import {
   CardTitle,
   CardHeader,
 } from '../../ui/components/StyledDashboardCard';
+import { StyledLink } from '../../ui/typography';
 
 import LoadingSpinner from '../../ui/components/LoadingSpinner';
 
@@ -82,14 +83,23 @@ const DashboardMyBugsCard = () => {
             <StyledReloadIcon />
           </StyledButton>
         </CardHeader>
-        <DashboardBugsList
-          title="Created by me"
-          bugs={data.getUsersBugs.createdBugs}
-        />
-        <DashboardBugsList
-          title="Assigned to me"
-          bugs={data.getUsersBugs.assignedBugs}
-        />
+        {data.getUsersBugs.length > 0 ? (
+          <>
+            <DashboardBugsList
+              title="Created by me"
+              bugs={data.getUsersBugs.createdBugs}
+            />
+            <DashboardBugsList
+              title="Assigned to me"
+              bugs={data.getUsersBugs.assignedBugs}
+            />
+          </>
+        ) : (
+          <p>
+            Your projects do not have any bugs to track! Try adding some{' '}
+            <StyledLink to="/createbug">here</StyledLink>!
+          </p>
+        )}
       </CardWrapper>
     );
   }
