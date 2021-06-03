@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 import { useUser } from '../../context/UserContext';
 import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
-import DashboardBugsList from '../table/BugsTableList';
+import BugsTableList from '../table/BugsTableList';
 import {
   CardWrapper,
   CardTitle,
@@ -85,11 +85,11 @@ const DashboardMyBugsCard = () => {
         </CardHeader>
         {data.getUsersBugs.assignedBugs || data.getUsersBugs.createdBugs ? (
           <>
-            <DashboardBugsList
+            <BugsTableList
               title="Created by me"
               bugs={data.getUsersBugs.createdBugs}
             />
-            <DashboardBugsList
+            <BugsTableList
               title="Assigned to me"
               bugs={data.getUsersBugs.assignedBugs}
             />

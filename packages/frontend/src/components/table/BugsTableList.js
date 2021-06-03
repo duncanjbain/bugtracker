@@ -10,7 +10,7 @@ import SortIcon from './SortIcon';
 
 import useSortTable from '../../hooks/useSortTable';
 
-const DashboardBugsList = ({ title, bugs }) => {
+const BugsTableList = ({ title, bugs }) => {
   const { items, requestSort, sortConfig } = useSortTable(bugs);
 
   const getSortOrder = (name) => {
@@ -106,4 +106,4 @@ const DashboardBugsList = ({ title, bugs }) => {
   );
 };
 
-export default DashboardBugsList;
+export default BugsTableList;
