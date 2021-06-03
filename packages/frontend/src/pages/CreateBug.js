@@ -96,7 +96,6 @@ const CreateBug = () => {
       bugAuthor,
       bugDateDue,
     } = formData;
-    console.log(formData);
     try {
       await createBug({
         variables: {

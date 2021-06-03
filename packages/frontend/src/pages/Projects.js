@@ -39,7 +39,6 @@ const Projects = () => {
       </div>
     );
   }
-  console.log(data);
 
   return (
     <WideSingleColumnFlex>

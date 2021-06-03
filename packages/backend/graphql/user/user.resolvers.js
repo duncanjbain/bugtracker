@@ -63,7 +63,6 @@ module.exports = {
       return { user: foundUser, token: createToken(foundUser) };
     },
     updateUser: async (root, { id, ...args }, { User, currentUser }) => {
-      console.log(id,currentUser.id);
       if (id != currentUser.id) {
         throw new AuthenticationError(
           'You do not have permission for this request'
