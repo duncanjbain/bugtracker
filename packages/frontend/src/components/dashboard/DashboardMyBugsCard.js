@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 import { useUser } from '../../context/UserContext';
 import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
-import DashboardBugsList from './DashboardBugsList';
+import DashboardBugsList from '../table/BugsTableList';
 import {
   CardWrapper,
   CardTitle,
@@ -83,7 +83,7 @@ const DashboardMyBugsCard = () => {
             <StyledReloadIcon />
           </StyledButton>
         </CardHeader>
-        {data.getUsersBugs.length > 0 ? (
+        {data.getUsersBugs.assignedBugs || data.getUsersBugs.createdBugs ? (
           <>
             <DashboardBugsList
               title="Created by me"

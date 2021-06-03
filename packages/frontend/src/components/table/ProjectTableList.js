@@ -21,7 +21,6 @@ const ProjectTableList = ({ projects }) => {
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
-
   return (
     <StyledTable>
       <thead>
