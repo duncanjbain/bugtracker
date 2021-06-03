@@ -6,11 +6,11 @@ import {
   StyledTableLink,
   StyledTableCell,
 } from '../../ui/components/StyledTable';
-import SortButton from './SortButton';
+import SortIcon from './SortIcon';
 
 import useSortTable from '../../hooks/useSortTable';
 
-const DashboardProjectsCardList = ({ projects }) => {
+const ProjectTableList = ({ projects }) => {
   const { items, requestSort, sortConfig } = useSortTable(projects);
 
   const getSortOrder = (name) => {
@@ -21,19 +21,30 @@ const DashboardProjectsCardList = ({ projects }) => {
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
+  console.log(items);
+
   return (
     <StyledTable>
       <thead>
         <tr>
           <StyledTableHeader>
-            Key
+            Key{' '}
             <button type="button" onClick={() => requestSort('projectKey')}>
-              Sort
+              <SortIcon sortOrder={getSortOrder('projectKey')} />
             </button>
-            <SortButton sortOrder={getSortOrder('projectKey')} />
           </StyledTableHeader>
-          <StyledTableHeader>Project Name</StyledTableHeader>
-          <StyledTableHeader>Project Lead</StyledTableHeader>
+          <StyledTableHeader>
+            Project Name{' '}
+            <button type="button" onClick={() => requestSort('projectName')}>
+              <SortIcon sortOrder={getSortOrder('projectName')} />
+            </button>
+          </StyledTableHeader>
+          <StyledTableHeader>
+            Project Lead{' '}
+            <button type="button" onClick={() => requestSort('projectLead')}>
+              <SortIcon sortOrder={getSortOrder('projectLead')} />
+            </button>
+          </StyledTableHeader>
         </tr>
       </thead>
       <tbody>
@@ -57,4 +68,4 @@ const DashboardProjectsCardList = ({ projects }) => {
   );
 };
 
-export default DashboardProjectsCardList;
+export default ProjectTableList;

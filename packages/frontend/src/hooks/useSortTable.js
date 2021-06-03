@@ -20,13 +20,13 @@ const useSortTable = (items, config = null) => {
   }, [items, sortConfig]);
 
   const requestSort = (key) => {
-    let direction = 'ascending';
+    let direction = 'descending';
     if (
       sortConfig &&
       sortConfig.key === key &&
-      sortConfig.direction === 'ascending'
+      sortConfig.direction === 'descending'
     ) {
-      direction = 'descending';
+      direction = 'ascending';
     }
     setSortConfig({ key, direction });
   };

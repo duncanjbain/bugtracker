@@ -8,7 +8,7 @@ import {
   CardHeader,
 } from '../../ui/components/StyledDashboardCard';
 import { StyledLink } from '../../ui/typography';
-import DashboardProjectsCardList from './DashboardProjectsCardList';
+import ProjectTableList from '../table/ProjectTableList';
 import LoadingSpinner from '../../ui/components/LoadingSpinner';
 import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
 
@@ -67,7 +67,7 @@ const DashboardProjectsCard = () => {
         </CardHeader>
         <div>
           {data.getUserProjects.length > 0 ? (
-            <DashboardProjectsCardList projects={data.getUserProjects} />
+            <ProjectTableList projects={data.getUserProjects} />
           ) : (
             <p>
               You currently do not have any projects added! Try addding one{' '}
