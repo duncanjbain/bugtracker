@@ -11,6 +11,7 @@ import SortIcon from './SortIcon';
 import useSortTable from '../../hooks/useSortTable';
 
 const BugsTableList = ({ title, bugs }) => {
+  console.log(bugs);
   const { items, requestSort, sortConfig } = useSortTable(bugs);
 
   const getSortOrder = (name) => {
