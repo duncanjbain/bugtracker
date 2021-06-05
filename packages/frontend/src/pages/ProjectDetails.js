@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { WideSingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
+import { StyledLink } from '../ui/typography';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 import BugsTableList from '../components/table/BugsTableList';
 
@@ -52,12 +53,21 @@ const ProjectDetails = () => {
       <CardHeader>
         <CardTitle>{data.getProject.projectName}</CardTitle>
       </CardHeader>
-      <div style={{ overflowX: 'scroll' }}>
-        <BugsTableList
-          bugs={data.getProject.projectBugs}
-          title="Project Bugs"
-        />
-      </div>
+      {data.getProject.projectBugs > 0 ? (
+        <div style={{ overflowX: 'scroll' }}>
+          <BugsTableList
+            bugs={data.getProject.projectBugs}
+            title="Project Bugs"
+          />
+        </div>
+      ) : (
+        <div>
+          <p>
+            This project does not have any bugs to track! Try adding some{' '}
+            <StyledLink to="/createbug">here</StyledLink>!
+          </p>
+        </div>
+      )}
     </WideSingleColumnFlex>
   );
 };

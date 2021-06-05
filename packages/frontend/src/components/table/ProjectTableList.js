@@ -7,7 +7,7 @@ import {
   StyledTableCell,
 } from '../../ui/components/StyledTable';
 import SortIcon from './SortIcon';
-
+import { SortButton } from '../../ui/components/SortButton';
 import useSortTable from '../../hooks/useSortTable';
 
 const ProjectTableList = ({ projects }) => {
@@ -27,21 +27,27 @@ const ProjectTableList = ({ projects }) => {
         <tr>
           <StyledTableHeader>
             Key{' '}
-            <button type="button" onClick={() => requestSort('projectKey')}>
+            <SortButton type="button" onClick={() => requestSort('projectKey')}>
               <SortIcon sortOrder={getSortOrder('projectKey')} />
-            </button>
+            </SortButton>
           </StyledTableHeader>
           <StyledTableHeader>
             Project Name{' '}
-            <button type="button" onClick={() => requestSort('projectName')}>
+            <SortButton
+              type="button"
+              onClick={() => requestSort('projectName')}
+            >
               <SortIcon sortOrder={getSortOrder('projectName')} />
-            </button>
+            </SortButton>
           </StyledTableHeader>
           <StyledTableHeader>
             Project Lead{' '}
-            <button type="button" onClick={() => requestSort('projectLead')}>
+            <SortButton
+              type="button"
+              onClick={() => requestSort('projectLead')}
+            >
               <SortIcon sortOrder={getSortOrder('projectLead')} />
-            </button>
+            </SortButton>
           </StyledTableHeader>
         </tr>
       </thead>

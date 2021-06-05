@@ -7,6 +7,7 @@ import {
   StyledTableCell,
 } from '../../ui/components/StyledTable';
 import SortIcon from './SortIcon';
+import { SortButton } from '../../ui/components/SortButton';
 
 import useSortTable from '../../hooks/useSortTable';
 
@@ -29,39 +30,39 @@ const BugsTableList = ({ title, bugs }) => {
           <tr>
             <StyledTableHeader>
               Key{' '}
-              <button type="button" onClick={() => requestSort('key')}>
+              <SortButton type="button" onClick={() => requestSort('key')}>
                 <SortIcon sortOrder={getSortOrder('key')} />
-              </button>
+              </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Project{' '}
-              <button type="button" onClick={() => requestSort('project')}>
+              <SortButton type="button" onClick={() => requestSort('project')}>
                 <SortIcon sortOrder={getSortOrder('project')} />
-              </button>
+              </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Summary{' '}
-              <button type="button" onClick={() => requestSort('summary')}>
+              <SortButton type="button" onClick={() => requestSort('summary')}>
                 <SortIcon sortOrder={getSortOrder('summary')} />
-              </button>
+              </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Type{' '}
-              <button type="button" onClick={() => requestSort('type')}>
+              <SortButton type="button" onClick={() => requestSort('type')}>
                 <SortIcon sortOrder={getSortOrder('type')} />
-              </button>
+              </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Due On{' '}
-              <button type="button" onClick={() => requestSort('dateDue')}>
+              <SortButton type="button" onClick={() => requestSort('dateDue')}>
                 <SortIcon sortOrder={getSortOrder('dateDue')} />
-              </button>
+              </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Priority{' '}
-              <button type="button" onClick={() => requestSort('priority')}>
+              <SortButton type="button" onClick={() => requestSort('priority')}>
                 <SortIcon sortOrder={getSortOrder('priority')} />
-              </button>
+              </SortButton>
             </StyledTableHeader>
           </tr>
         </thead>
