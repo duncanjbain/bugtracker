@@ -4,13 +4,8 @@ import { gql, useQuery } from '@apollo/client';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { WideSingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
-import {
-  StyledTable,
-  StyledTableHeader,
-  StyledTableRow,
-  StyledTableLink,
-  StyledTableCell,
-} from '../ui/components/StyledTable';
+import ProjectTableList from '../components/table/ProjectTableList';
+import { StyledLink } from '../ui/typography';
 
 const GET_ALL_PROJECTS = gql`
   query {
@@ -51,32 +46,16 @@ const Projects = () => {
         <CardTitle>Projects</CardTitle>
       </CardHeader>
       <div style={{ overflow: 'auto' }}>
-        <StyledTable>
-          <thead>
-            <tr>
-              <StyledTableHeader>Key</StyledTableHeader>
-              <StyledTableHeader>Project Name</StyledTableHeader>
-              <StyledTableHeader>Project Lead</StyledTableHeader>
-            </tr>
-          </thead>
-          <tbody>
-            {data.getAllProjects.map((project) => (
-              <StyledTableRow key={project.projectKey}>
-                <StyledTableCell>{project.projectKey}</StyledTableCell>
-                <StyledTableCell>
-                  <StyledTableLink to={`/project/${project.projectKey}`}>
-                    {project.projectName}
-                  </StyledTableLink>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <StyledTableLink to={`/user/${project.projectLead.id}`}>
-                    {project.projectLead.name}
-                  </StyledTableLink>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </tbody>
-        </StyledTable>
+        <div>
+          {data.getAllProjects.length > 0 ? (
+            <ProjectTableList projects={data.getAllProjects} />
+          ) : (
+            <p>
+              You currently do not have any projects added! Try addding one{' '}
+              <StyledLink to="/createproject">here</StyledLink>!
+            </p>
+          )}
+        </div>
       </div>
     </WideSingleColumnFlex>
   );

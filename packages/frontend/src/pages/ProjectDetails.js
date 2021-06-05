@@ -3,20 +3,16 @@ import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { WideSingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
-import {
-  StyledTable,
-  StyledTableHeader,
-  StyledTableRow,
-  StyledTableLink,
-  StyledTableCell,
-} from '../ui/components/StyledTable';
+import { StyledLink } from '../ui/typography';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
+import BugsTableList from '../components/table/BugsTableList';
 
 const GET_PROJECT = gql`
   query GetProject($searchKey: String!) {
     getProject(searchKey: $searchKey) {
       projectName
       id
+      projectKey
       projectBugs {
         id
         key
@@ -31,6 +27,10 @@ const GET_PROJECT = gql`
           name
           id
         }
+        project {
+          projectName
+          projectKey
+        }
       }
     }
   }
@@ -40,6 +40,8 @@ const ProjectDetails = () => {
   const { projectKey } = useParams();
   const { data, loading } = useQuery(GET_PROJECT, {
     variables: { searchKey: projectKey },
+    notifyOnNetworkStatusChange: true,
+    errorPolicy: 'all',
   });
 
   if (loading) {
@@ -51,53 +53,21 @@ const ProjectDetails = () => {
       <CardHeader>
         <CardTitle>{data.getProject.projectName}</CardTitle>
       </CardHeader>
-      <div style={{ overflowX: 'scroll' }}>
-        <StyledTable>
-          <thead>
-            <tr>
-              <StyledTableHeader>Key</StyledTableHeader>
-              <StyledTableHeader>Bug Summary</StyledTableHeader>
-              <StyledTableHeader>Type</StyledTableHeader>
-              <StyledTableHeader>Priority</StyledTableHeader>
-              <StyledTableHeader>Created by</StyledTableHeader>
-              <StyledTableHeader>Assignee</StyledTableHeader>
-            </tr>
-          </thead>
-          <tbody>
-            {data.getProject.projectBugs.map((bug) => (
-              <StyledTableRow key={bug.key}>
-                <StyledTableCell>
-                  <StyledTableLink to={`/bug/${bug.key}`}>
-                    {bug.key}
-                  </StyledTableLink>
-                </StyledTableCell>
-                <StyledTableCell style={{ textTransform: 'capitalize' }}>
-                  {' '}
-                  <StyledTableLink to={`/bug/${bug.key}`}>
-                    {bug.summary}
-                  </StyledTableLink>
-                </StyledTableCell>
-                <StyledTableCell style={{ textTransform: 'capitalize' }}>
-                  {bug.type}
-                </StyledTableCell>
-                <StyledTableCell style={{ textTransform: 'capitalize' }}>
-                  {bug.priority}
-                </StyledTableCell>
-                <StyledTableCell>
-                  <StyledTableLink to={`/user/${bug.author.id}`}>
-                    {bug.author.name}
-                  </StyledTableLink>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <StyledTableLink to={`/user/${bug.assignee.id}`}>
-                    {bug.assignee.name}
-                  </StyledTableLink>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </tbody>
-        </StyledTable>
-      </div>
+      {data.getProject.projectBugs > 0 ? (
+        <div style={{ overflowX: 'scroll' }}>
+          <BugsTableList
+            bugs={data.getProject.projectBugs}
+            title="Project Bugs"
+          />
+        </div>
+      ) : (
+        <div>
+          <p>
+            This project does not have any bugs to track! Try adding some{' '}
+            <StyledLink to="/createbug">here</StyledLink>!
+          </p>
+        </div>
+      )}
     </WideSingleColumnFlex>
   );
 };

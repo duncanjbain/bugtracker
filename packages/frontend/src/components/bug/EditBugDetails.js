@@ -115,8 +115,7 @@ const EditBugDetails = ({ bug }) => {
       (a, [k, v]) => (v ? ((a[k] = v), a) : a),
       {}
     );
-    console.log(formData);
-    console.log(falsyRemoved);
+
     try {
       await updateExistingBug({
         variables: { bugId: bug.id, ...falsyRemoved },

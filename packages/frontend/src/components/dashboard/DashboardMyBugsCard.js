@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 import { useUser } from '../../context/UserContext';
 import { ReactComponent as ReloadIcon } from '../../assets/svg/icons/refresh-ccw.svg';
-import DashboardBugsList from './DashboardBugsList';
+import BugsTableList from '../table/BugsTableList';
 import {
   CardWrapper,
   CardTitle,
   CardHeader,
 } from '../../ui/components/StyledDashboardCard';
+import { StyledLink } from '../../ui/typography';
 
 import LoadingSpinner from '../../ui/components/LoadingSpinner';
 
@@ -82,14 +83,23 @@ const DashboardMyBugsCard = () => {
             <StyledReloadIcon />
           </StyledButton>
         </CardHeader>
-        <DashboardBugsList
-          title="Created by me"
-          bugs={data.getUsersBugs.createdBugs}
-        />
-        <DashboardBugsList
-          title="Assigned to me"
-          bugs={data.getUsersBugs.assignedBugs}
-        />
+        {data.getUsersBugs.assignedBugs || data.getUsersBugs.createdBugs ? (
+          <>
+            <BugsTableList
+              title="Created by me"
+              bugs={data.getUsersBugs.createdBugs}
+            />
+            <BugsTableList
+              title="Assigned to me"
+              bugs={data.getUsersBugs.assignedBugs}
+            />
+          </>
+        ) : (
+          <p>
+            Your projects do not have any bugs to track! Try adding some{' '}
+            <StyledLink to="/createbug">here</StyledLink>!
+          </p>
+        )}
       </CardWrapper>
     );
   }
