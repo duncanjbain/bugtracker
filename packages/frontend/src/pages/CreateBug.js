@@ -79,7 +79,11 @@ const CreateBug = () => {
   const [dateDueState, setDateDueState] = useState(new Date(Date.now()));
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
   const [createBug] = useMutation(CREATE_NEW_BUG);
-  const { register, handleSubmit, control, setValue } = useForm();
+  const { register, handleSubmit, control, setValue } = useForm({
+    defaultValues: {
+      bugDateDue: dateDueState,
+    },
+  });
   const [descriptionValue, setDescriptionValue] = React.useState('');
 
   registerLocale('enGB', enGB);
@@ -214,10 +218,10 @@ const CreateBug = () => {
         <FormGroup>
           <InputLabel htmlFor="bugDateDue">Due date</InputLabel>
           <Controller
-            render={() => (
+            render={(props) => (
               <DatePicker
                 selected={dateDueState}
-                value={dateDueState}
+                value={props.value}
                 onChange={handleDateChange}
                 placeholderText="Select date"
                 locale="enGB"
