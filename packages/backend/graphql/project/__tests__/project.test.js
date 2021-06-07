@@ -51,6 +51,14 @@ query GetUserProjects($userID: ID!) {
 }
 `
 
+const ADD_USER_TO_PROJECT = `
+mutation AddUserToProject($projectKey: String!, $userId: ID!){
+  addUserToProject(projectKey: $projectKey, userId: $userId) {
+    projectName
+  }
+}
+`
+
 describe('project GraphQL queries', () => {
   test('can create a project', async () => {
     const newAdminUser = await new User({
@@ -226,6 +234,41 @@ describe('project GraphQL queries', () => {
 
     const response = await query({query: GET_USER_PROJECTS, variables: { userID: firstUser.id}})
     expect(response.data.getUserProjects).toEqual([{projectName: "ProjectOne"}, {projectName: "ProjectTwo"}])
+  });
+
+  test('can add user to project', async () => {
+    const firstUser = await new User({
+      name: 'First User',
+      email: 'first@email.com',
+      password: 'password',
+    }).save();
+
+    const secondUser = await new User({
+      name: 'Second User',
+      email: 'second@email.com',
+      password: 'password',
+    }).save();
+
+    const firstNewProject = await new Project({
+      projectKey: 'KEY01',
+      projectName: 'ProjectOne',
+      projectMembers: [firstUser.id],
+    }).save();
+    
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async ({ req }) => ({
+        Project,
+        User,
+        currentUser: firstUser,
+      }),
+    });
+
+    const { mutate } = createTestClient(server);
+
+    const response = await mutate({query: ADD_USER_TO_PROJECT, variables: { projectKey: 'KEY01', userId: secondUser.id}})
+    expect(response.data.addUserToProject).toEqual({projectName: "ProjectOne"})
   });
   
 
