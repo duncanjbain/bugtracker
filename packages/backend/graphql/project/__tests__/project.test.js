@@ -28,8 +28,8 @@ query GetProject(
 `;
 
 const GET_PROJECT_MEMBERS = `
-  query GetProjectMembers($projectID: ID!) {
-    getProjectMembers(projectID: $projectID) {
+  query GetProjectMembers($projectKey: String!) {
+    getProjectMembers(projectKey: $projectKey) {
       name
     }
   }
@@ -185,7 +185,7 @@ describe('project GraphQL queries', () => {
 
     const response = await query({
       query: GET_PROJECT_MEMBERS,
-      variables: { projectID: firstNewProject.id },
+      variables: { projectKey: firstNewProject.projectKey },
     });
     expect(response.data.getProjectMembers).toEqual([
       { name: 'Test Admin' },

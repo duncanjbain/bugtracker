@@ -32,8 +32,8 @@ const GET_USER_PROJECTS = gql`
 `;
 
 const GET_PROJECT_MEMBERS = gql`
-  query getProjectMembers($projectID: ID!) {
-    getProjectMembers(projectID: $projectID) {
+  query getProjectMembers($projectKey: String!) {
+    getProjectMembers(projectKey: $projectKey) {
       id
       name
     }
@@ -151,7 +151,7 @@ const CreateBug = () => {
             name="projectName"
             ref={register({ required: true })}
             onChange={(event) =>
-              getMembers({ variables: { projectID: event.target.value } })
+              getMembers({ variables: { projectKey: event.target.value } })
             }
           >
             <option value="" selected>

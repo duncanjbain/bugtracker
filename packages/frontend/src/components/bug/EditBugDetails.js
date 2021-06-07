@@ -56,8 +56,8 @@ const DELETE_BUG = gql`
 `;
 
 const GET_PROJECT_MEMBERS = gql`
-  query getProjectMembers($projectID: ID!) {
-    getProjectMembers(projectID: $projectID) {
+  query getProjectMembers($projectKey: String!) {
+    getProjectMembers(projectKey: $projectKey) {
       id
       name
     }
@@ -79,7 +79,7 @@ const EditBugDetails = ({ bug }) => {
   const [getMembers, { data: dataMembers }] = useLazyQuery(
     GET_PROJECT_MEMBERS,
     {
-      variables: { projectId: bug.project.id },
+      variables: { projectKey: bug.project.projectKey },
       notifyOnNetworkStatusChange: true,
       errorPolicy: 'all',
     }
@@ -219,7 +219,7 @@ const EditBugDetails = ({ bug }) => {
           name="assignee"
           ref={register({ required: true })}
           onClick={() =>
-            getMembers({ variables: { projectID: bug.project.id } })
+            getMembers({ variables: { projectKey: bug.project.projectKey } })
           }
         >
           <option key={bug.assignee.id} value={bug.assignee.id} selected>
@@ -242,7 +242,7 @@ const EditBugDetails = ({ bug }) => {
           name="author"
           ref={register({ required: true })}
           onClick={() =>
-            getMembers({ variables: { projectID: bug.project.id } })
+            getMembers({ variables: { projectKey: bug.project.projectKey } })
           }
         >
           <option key={bug.assignee.id} value={bug.assignee.id} selected>

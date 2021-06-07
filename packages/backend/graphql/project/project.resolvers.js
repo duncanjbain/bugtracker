@@ -39,8 +39,8 @@ module.exports = {
         .populate('projectBugs');
       return foundProjects;
     },
-    getProjectMembers: async (root, { projectID }, { Project }) => {
-      const foundProject = await Project.findById(projectID)
+    getProjectMembers: async (root, { projectKey }, { Project }) => {
+      const foundProject = await Project.findOne({projectKey})
         .populate('projectMembers')
         .populate('projectLead');
       return foundProject.projectMembers;

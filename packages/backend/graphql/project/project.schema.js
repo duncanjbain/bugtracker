@@ -14,7 +14,7 @@ module.exports = gql`
     getAllProjects: [Project]
     getProject(searchKey: String!): Project
     getUserProjects(userID: ID!): [Project]
-    getProjectMembers(projectID: ID!): [User]
+    getProjectMembers(projectKey: String!): [User]
   }
 
   type Mutation {
