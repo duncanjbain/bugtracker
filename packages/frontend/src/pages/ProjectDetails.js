@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from 'react-avatar';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { WideSingleColumnFlex } from '../ui/components/PageContainers';
@@ -13,6 +14,10 @@ const GET_PROJECT = gql`
       projectName
       id
       projectKey
+      projectLead {
+        name
+        id
+      }
       projectBugs {
         id
         key
@@ -53,6 +58,23 @@ const ProjectDetails = () => {
       <CardHeader>
         <CardTitle>{data.getProject.projectName}</CardTitle>
       </CardHeader>
+      <div>
+        <div>
+          <p>
+            Project Lead -{' '}
+            {
+              <Avatar
+                name={data.getProject.projectLead.name}
+                round
+                textSizeRatio="1"
+                size="30px"
+                alt="Initials of Name Avatar Icon"
+              />
+            }{' '}
+            {data.getProject.projectLead.name}
+          </p>
+        </div>
+      </div>
       {data.getProject.projectBugs > 0 ? (
         <div style={{ overflowX: 'scroll' }}>
           <BugsTableList
