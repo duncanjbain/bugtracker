@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useUser } from '../../context/UserContext';
 
 const DashboardNavbar = () => {
   const { logout } = useAuth();
-
+  const user = useUser();
+  console.log(user);
   return (
     <NavContainer>
       <NavLinks>
@@ -28,7 +30,8 @@ const DashboardNavbar = () => {
           <NavLink to="/profile">
             <span style={{ marginRight: '0.5rem' }}>Profile</span>
             <Avatar
-              name="Duncan Bain"
+              name={user.name}
+              textSizeRatio="1"
               round
               size="30px"
               alt="Initials of Name Avatar Icon"

@@ -8,6 +8,7 @@ const WHOAMI_QUERY = gql`
     getWhoAmI {
       id
       email
+      name
     }
   }
 `;
