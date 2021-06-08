@@ -1,9 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Avatar from 'react-avatar';
+import styled from 'styled-components';
 import { gql, useQuery } from '@apollo/client';
 import { SingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
+import { StyledLink } from '../ui/typography';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 
 const GET_USER = gql`
@@ -43,7 +45,7 @@ const UserInfo = () => {
         <CardTitle>User Information</CardTitle>
       </CardHeader>
       <div>
-        <div>
+        <ListContainer>
           <h4>
             Name:{' '}
             <Avatar
@@ -55,38 +57,68 @@ const UserInfo = () => {
             />{' '}
             {data.getUser.name}
           </h4>
-        </div>
-        <div>
+        </ListContainer>
+        <ListContainer>
           <h4>Member of Projects:</h4>
-          <ul>
+          <StyledList>
             {data.getUser.memberOfProjects.length > 0 ? (
               data.getUser.memberOfProjects.map((project) => (
-                <li>{project.projectName}</li>
+                <StyledListItem key={project.projectKey}>
+                  <StyledLink to={`/project/${project.projectKey}`}>
+                    {project.projectName}
+                  </StyledLink>
+                </StyledListItem>
               ))
             ) : (
               <p>This user is not a member of any projects.</p>
             )}
-          </ul>
-        </div>
-        <div>
+          </StyledList>
+        </ListContainer>
+        <ListContainer>
           <h4>Created Bugs</h4>
-          {data.getUser.createdBugs.length > 0 ? (
-            data.getUser.createdBugs.map((bug) => <li>{bug.summary}</li>)
-          ) : (
-            <p>This user has no created bugs.</p>
-          )}
-        </div>
-        <div>
+          <StyledList>
+            {data.getUser.createdBugs.length > 0 ? (
+              data.getUser.createdBugs.map((bug) => (
+                <StyledListItem key={bug.key}>
+                  <StyledLink to={`/bug/${bug.key}`}>{bug.summary}</StyledLink>
+                </StyledListItem>
+              ))
+            ) : (
+              <p>This user has no created bugs.</p>
+            )}
+          </StyledList>
+        </ListContainer>
+        <ListContainer>
           <h4>Assigned Bugs</h4>
-          {data.getUser.assignedBugs.length > 0 ? (
-            data.getUser.assignedBugs.map((bug) => <li>{bug.summary}</li>)
-          ) : (
-            <p>This user has no assigned bugs.</p>
-          )}
-        </div>
+          <StyledList>
+            {data.getUser.assignedBugs.length > 0 ? (
+              data.getUser.assignedBugs.map((bug) => (
+                <StyledLink to={`/bug/${bug.key}`}>{bug.summary}</StyledLink>
+              ))
+            ) : (
+              <p>This user has no assigned bugs.</p>
+            )}
+          </StyledList>
+        </ListContainer>
       </div>
     </SingleColumnFlex>
   );
 };
 
 export default UserInfo;
+
+const ListContainer = styled.div`
+  margin-bottom: 0.5rem;
+`;
+
+const StyledList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const StyledListItem = styled.li`
+  padding: 0.25rem;
+`;
