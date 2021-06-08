@@ -42,7 +42,6 @@ const GET_PROJECT = gql`
   }
 `;
 
-// eslint-disable-next-line no-unused-vars
 const GET_PROJECT_MEMBERS = gql`
   query GetProjectMembers($projectKey: String!) {
     getProjectMembers(projectKey: $projectKey) {
@@ -69,6 +68,8 @@ const ProjectDetails = () => {
   if (getProject.loading || getProjectMembers.loading) {
     return <LoadingSpinner />;
   }
+
+  console.log(getProject);
 
   return (
     <WideSingleColumnFlex>
@@ -107,7 +108,7 @@ const ProjectDetails = () => {
           </ProjectMembersList>
         </ProjectMembersListContainer>
       </div>
-      {getProject.data.getProject.projectBugs > 0 ? (
+      {getProject.data.getProject.projectBugs.length > 0 ? (
         <div style={{ overflowX: 'scroll' }}>
           <BugsTableList
             bugs={getProject.data.getProject.projectBugs}
