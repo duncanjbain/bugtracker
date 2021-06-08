@@ -21,7 +21,7 @@ module.exports = {
           'You do not have permission for this request'
         );
       }
-      return User.findById(userId);
+      return User.findById(userId).populate('memberOfProjects').populate('createdBugs').populate('assignedBugs').exec();
     },
     getAllUsers: async (root, args, { User, currentUser }) => {
       if (!currentUser) {

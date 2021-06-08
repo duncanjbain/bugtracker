@@ -8,7 +8,6 @@ import { useUser } from '../../context/UserContext';
 const DashboardNavbar = () => {
   const { logout } = useAuth();
   const user = useUser();
-  console.log(user);
   return (
     <NavContainer>
       <NavLinks>
@@ -31,7 +30,7 @@ const DashboardNavbar = () => {
             <span style={{ marginRight: '0.5rem' }}>Profile</span>
             <Avatar
               name={user.name}
-              textSizeRatio="1"
+              textSizeRatio={1}
               round
               size="30px"
               alt="Initials of Name Avatar Icon"

@@ -8,6 +8,7 @@ import CreateProject from './pages/CreateProject';
 import CreateBug from './pages/CreateBug';
 import ProjectDetails from './pages/ProjectDetails';
 import BugDetails from './pages/BugDetails';
+import UserInfo from './pages/UserInfo';
 
 const RedirectHome = () => <Redirect to="/dashboard" />;
 
@@ -38,6 +39,9 @@ const AuthenticatedApp = () => (
       </Route>
       <Route path="/profile">
         <UserProfile />
+      </Route>
+      <Route path="/user/:userId">
+        <UserInfo />
       </Route>
       <Route exact path="/*">
         <RedirectHome />

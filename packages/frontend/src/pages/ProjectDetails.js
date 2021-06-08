@@ -70,7 +70,6 @@ const ProjectDetails = () => {
     return <LoadingSpinner />;
   }
 
-  console.log(getProjectMembers);
   return (
     <WideSingleColumnFlex>
       <CardHeader>
@@ -83,7 +82,7 @@ const ProjectDetails = () => {
             <Avatar
               name={getProject.data.getProject.projectLead.name}
               round
-              textSizeRatio="1"
+              textSizeRatio={1}
               size="30px"
               alt="Initials of Name Avatar Icon"
             />
