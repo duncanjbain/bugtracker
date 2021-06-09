@@ -1,13 +1,24 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Avatar from 'react-avatar';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+import { useForm, Controller } from 'react-hook-form';
 import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import { WideSingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import { StyledLink } from '../ui/typography';
 import LoadingSpinner from '../ui/components/LoadingSpinner';
 import BugsTableList from '../components/table/BugsTableList';
+import {
+  FormGroup,
+  TextInput,
+  InputLabel,
+  SmallSubmitButton,
+  SmallSuccessButton,
+} from '../ui/components/StyledForm';
+import AddUserForm from '../components/project/AddUserForm';
 
 const GET_PROJECT = gql`
   query GetProject($searchKey: String!) {
@@ -51,19 +62,6 @@ const GET_PROJECT_MEMBERS = gql`
   }
 `;
 
-const GET_ALL_USERS = gql`
-  query getAllUsers {
-    getAllUsers {
-      id
-      name
-      memberOfProjects {
-        projectKey
-        projectName
-      }
-    }
-  }
-`;
-
 const ProjectDetails = () => {
   const { projectKey } = useParams();
   const getProject = useQuery(GET_PROJECT, {
@@ -77,19 +75,6 @@ const ProjectDetails = () => {
     notifyOnNetworkStatusChange: true,
     errorPolicy: 'all',
   });
-
-  const [getAllUsers, { data: dataUsers }] = useLazyQuery(GET_ALL_USERS, {
-    notifyOnNetworkStatusChange: true,
-    errorPolicy: 'all',
-  });
-
-  const [isListShown, setListShown] = useState(false);
-
-  const handleUserList = () => {
-    getAllUsers();
-    console.log('users', dataUsers);
-    setListShown(true);
-  };
 
   if (getProject.loading || getProjectMembers.loading) {
     return <LoadingSpinner />;
@@ -126,32 +111,14 @@ const ProjectDetails = () => {
                   size="30px"
                   alt="Initials of Name Avatar Icon"
                 />{' '}
-                {member.name}
+                <p>{member.name}</p>
               </ProjectMemberListItem>
             ))}
-            <ProjectMemberListItem>
-              <button onClick={() => handleUserList()} type="button">
-                Add user to project
-              </button>
-              {isListShown && dataUsers ? (
-                <select>
-                  {dataUsers.getAllUsers
-                    .filter((allUser) =>
-                      getProjectMembers.data.getProjectMembers.every(
-                        (projectMember) =>
-                          !projectMember.name.includes(allUser.name)
-                      )
-                    )
-                    .map((filteredUser) => (
-                      <option key={filteredUser.id} value={filteredUser.id}>
-                        {filteredUser.name}
-                      </option>
-                    ))}
-                </select>
-              ) : null}
-            </ProjectMemberListItem>
           </ProjectMembersList>
         </ProjectMembersListContainer>
+        <AddUserForm
+          projectMembers={getProjectMembers.data.getProjectMembers}
+        />
       </div>
       {getProject.data.getProject.projectBugs.length > 0 ? (
         <div style={{ overflowX: 'scroll' }}>
@@ -179,6 +146,7 @@ const ProjectMembersListContainer = styled.div`
   flex-direction: row;
   margin-bottom: 0.75rem;
   width: 100%;
+  align-items: center;
 `;
 
 const ProjectLeadItem = styled.div`
@@ -192,10 +160,10 @@ const ProjectMembersList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  flex: 1;
 `;
 
 const ProjectMemberListItem = styled.li`
   margin-left: 0.75rem;
   margin-right: 0.75rem;
+  display: flex;
 `;
