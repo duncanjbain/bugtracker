@@ -48,6 +48,7 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
     setListShown(true);
   };
 
+  console.log(refetch);
   const onSubmit = async (formData) => {
     try {
       await addUserToProject({
