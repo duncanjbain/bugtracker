@@ -48,7 +48,6 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
     setListShown(true);
   };
 
-  console.log(refetch);
   const onSubmit = async (formData) => {
     try {
       await addUserToProject({
@@ -57,7 +56,7 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
           projectKey,
         },
       });
-      addToast('Bug successfully updated!', {
+      addToast('User successfully added!', {
         autoDismiss: true,
         appearance: 'success',
       });
@@ -67,7 +66,6 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
         autoDismiss: true,
         appearance: 'error',
       });
-      console.log(error);
     }
   };
 
