@@ -1,5 +1,4 @@
-const { AuthenticationError } = require('apollo-server-express');
-
+const { AuthenticationError, UserInputError } = require('apollo-server-express');
 
 module.exports = {
   Query: {
@@ -21,28 +20,27 @@ module.exports = {
         .populate({
           path: 'projectBugs',
           populate: { path: 'assignee', model: 'User' },
-        }).populate({
+        })
+        .populate({
           path: 'projectBugs',
           populate: { path: 'author', model: 'User' },
-        }).populate({
+        })
+        .populate({
           path: 'projectBugs',
           populate: { path: 'project', model: 'Project' },
         }),
     getUserProjects: async (root, { userID }, { Project, User }) => {
       const foundUser = await User.findById(userID);
       const foundProjects = await Project.find({
-        $or: [
-          { projectLead: foundUser.id },
-          { projectMembers: foundUser.id },
-        ],
+        $or: [{ projectLead: foundUser.id }, { projectMembers: foundUser.id }],
       })
         .populate('projectLead')
         .populate('projectMembers')
         .populate('projectBugs');
       return foundProjects;
     },
-    getProjectMembers: async (root, { projectID }, { Project }) => {
-      const foundProject = await Project.findById(projectID)
+    getProjectMembers: async (root, { projectKey }, { Project }) => {
+      const foundProject = await Project.findOne({projectKey})
         .populate('projectMembers')
         .populate('projectLead');
       return foundProject.projectMembers;
@@ -77,6 +75,32 @@ module.exports = {
       await projectOwner.save();
       await newProject.populate('projectLead').execPopulate();
       return newProject;
+    },
+    addUserToProject: async (
+      root,
+      { projectKey, userId },
+      { Project, User, currentUser }
+    ) => {
+      if (!currentUser) {
+        throw new AuthenticationError(
+          'You do not have permission for this request'
+        );
+      }
+      const foundProject = await Project.findOne({ projectKey });
+      const foundUser = await User.findById(userId);
+      const updatedProject = await Project.updateOne({_id: foundProject.id}, {
+        $addToSet: { projectMembers: userId },
+      });
+      const updatedUser = await User.updateOne({_id: userId }, {
+        $addToSet: { memberOfProjects: foundProject.id },
+      });
+      if(updatedProject.nModified===0) {
+          throw new UserInputError('User already belongs to this project');
+      }
+      if(updatedUser.nModified===0) {
+        throw new UserInputError('User alreaduy belongs to this project');
+    }
+    return await Project.findOne({projectKey});
     },
   },
 };

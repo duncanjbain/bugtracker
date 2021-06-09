@@ -96,8 +96,7 @@ const UserProfile = () => {
               type="text"
               placeholder={data.getWhoAmI.name}
               autocomplete="given-name"
-              name="name"
-              ref={register({ required: false })}
+              {...register('name', { required: false })}
               aria-required="false"
               aria-invalid={errors.name ? 'true' : 'false'}
               className={errors.name ? 'error' : ''}
@@ -115,8 +114,7 @@ const UserProfile = () => {
               type="email"
               placeholder={data.getWhoAmI.email}
               autocomplete="email"
-              name="email"
-              ref={register({ required: false })}
+              {...register('email', { required: false })}
               aria-required="false"
               aria-invalid={errors.email ? 'true' : 'false'}
               className={errors.email ? 'error' : ''}
@@ -134,8 +132,7 @@ const UserProfile = () => {
               type="password"
               placeholder="Enter new password"
               autocomplete="new-password"
-              name="newPassword"
-              ref={register({ required: false })}
+              {...register('newPassword', { required: false })}
               aria-required="false"
               aria-invalid={errors.password ? 'true' : 'false'}
               className={errors.password ? 'error' : ''}
@@ -153,8 +150,7 @@ const UserProfile = () => {
               type="password"
               placeholder="Confirm new password"
               autocomplete="new-password"
-              name="confirmPassword"
-              ref={register({ required: false })}
+              {...register('confirmPassword', { required: false })}
               aria-required="false"
               aria-invalid={errors.confirmPassword ? 'true' : 'false'}
               className={errors.confirmPassword ? 'error' : ''}

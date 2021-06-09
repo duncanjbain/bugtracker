@@ -7,21 +7,18 @@ module.exports = gql`
     projectName: String!
     projectLead: User!
     projectBugs: [Bug]
-    projectMembers: [ProjectMember]
-  }
-
-  type ProjectMember {
-    user: User!
+    projectMembers: [User]
   }
 
   type Query {
     getAllProjects: [Project]
     getProject(searchKey: String!): Project
     getUserProjects(userID: ID!): [Project]
-    getProjectMembers(projectID: ID!): [User]
+    getProjectMembers(projectKey: String!): [User]
   }
 
   type Mutation {
     createProject(projectKey: String!, projectName: String!): Project
+    addUserToProject(projectKey: String!, userId: ID!): Project
   }
 `;

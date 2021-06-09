@@ -24,6 +24,12 @@ export const SubmitButton = styled.button`
   }
 `;
 
+export const SmallSubmitButton = styled(SubmitButton)`
+  width: auto;
+  margin-bottom: 0;
+  height: auto;
+`;
+
 export const DangerButton = styled(SubmitButton)`
   background: ${(props) => props.theme.colors.danger};
   color: white;
@@ -41,6 +47,14 @@ export const WarnButton = styled(SubmitButton)`
 `;
 
 export const SuccessButton = styled(SubmitButton)`
+  background: ${(props) => props.theme.colors.success};
+  color: white;
+  &:hover {
+    background: hsl(141, 53%, 43%);
+  }
+`;
+
+export const SmallSuccessButton = styled(SmallSubmitButton)`
   background: ${(props) => props.theme.colors.success};
   color: white;
   &:hover {
