@@ -29,7 +29,7 @@ module.exports = {
           'You do not have permission for this request'
         );
       }
-      return User.find({});
+      return User.find({}).populate('memberOfProjects').exec();
     },
   },
   Mutation: {

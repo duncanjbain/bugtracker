@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from 'react-avatar';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import { WideSingleColumnFlex } from '../ui/components/PageContainers';
 import { CardTitle, CardHeader } from '../ui/components/StyledDashboardCard';
 import { StyledLink } from '../ui/typography';
@@ -51,6 +51,19 @@ const GET_PROJECT_MEMBERS = gql`
   }
 `;
 
+const GET_ALL_USERS = gql`
+  query getAllUsers {
+    getAllUsers {
+      id
+      name
+      memberOfProjects {
+        projectKey
+        projectName
+      }
+    }
+  }
+`;
+
 const ProjectDetails = () => {
   const { projectKey } = useParams();
   const getProject = useQuery(GET_PROJECT, {
@@ -65,11 +78,22 @@ const ProjectDetails = () => {
     errorPolicy: 'all',
   });
 
+  const [getAllUsers, { data: dataUsers }] = useLazyQuery(GET_ALL_USERS, {
+    notifyOnNetworkStatusChange: true,
+    errorPolicy: 'all',
+  });
+
+  const [isListShown, setListShown] = useState(false);
+
+  const handleUserList = () => {
+    getAllUsers();
+    console.log('users', dataUsers);
+    setListShown(true);
+  };
+
   if (getProject.loading || getProjectMembers.loading) {
     return <LoadingSpinner />;
   }
-
-  console.log(getProject);
 
   return (
     <WideSingleColumnFlex>
@@ -105,6 +129,27 @@ const ProjectDetails = () => {
                 {member.name}
               </ProjectMemberListItem>
             ))}
+            <ProjectMemberListItem>
+              <button onClick={() => handleUserList()} type="button">
+                Add user to project
+              </button>
+              {isListShown && dataUsers ? (
+                <select>
+                  {dataUsers.getAllUsers
+                    .filter((allUser) =>
+                      getProjectMembers.data.getProjectMembers.every(
+                        (projectMember) =>
+                          !projectMember.name.includes(allUser.name)
+                      )
+                    )
+                    .map((filteredUser) => (
+                      <option key={filteredUser.id} value={filteredUser.id}>
+                        {filteredUser.name}
+                      </option>
+                    ))}
+                </select>
+              ) : null}
+            </ProjectMemberListItem>
           </ProjectMembersList>
         </ProjectMembersListContainer>
       </div>
