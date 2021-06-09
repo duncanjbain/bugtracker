@@ -82,6 +82,9 @@ const ProjectDetails = () => {
 
   return (
     <WideSingleColumnFlex>
+      <button type="button" onClick={getProjectMembers.refetch}>
+        Refetch
+      </button>
       <CardHeader>
         <CardTitle>{getProject.data.getProject.projectName}</CardTitle>
       </CardHeader>
@@ -118,6 +121,7 @@ const ProjectDetails = () => {
         </ProjectMembersListContainer>
         <AddUserForm
           projectMembers={getProjectMembers.data.getProjectMembers}
+          projectKey={getProject.data.getProject.projectKey}
         />
       </div>
       {getProject.data.getProject.projectBugs.length > 0 ? (
@@ -125,6 +129,7 @@ const ProjectDetails = () => {
           <BugsTableList
             bugs={getProject.data.getProject.projectBugs}
             title="Project Bugs"
+            refetch={getProjectMembers.refetch}
           />
         </div>
       ) : (

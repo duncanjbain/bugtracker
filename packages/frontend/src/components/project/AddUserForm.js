@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery, useMutation } from '@apollo/client';
+import { useForm } from 'react-hook-form';
+import { useToasts } from 'react-toast-notifications';
 import styled from 'styled-components';
 import {
   SmallSubmitButton,
@@ -20,16 +22,52 @@ const GET_ALL_USERS = gql`
   }
 `;
 
-const AddUserForm = ({ projectMembers }) => {
+const ADD_USER_TO_PROJECT = gql`
+  mutation AddUserToProject($projectKey: String!, $userId: ID!) {
+    addUserToProject(projectKey: $projectKey, userId: $userId) {
+      projectName
+    }
+  }
+`;
+
+const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
+  const { addToast } = useToasts();
   const [isListShown, setListShown] = useState(false);
   const [isShowAddButton, setShowAddButton] = useState(false);
+
+  const { register, handleSubmit } = useForm();
+
   const [getAllUsers, { data }] = useLazyQuery(GET_ALL_USERS, {
     notifyOnNetworkStatusChange: true,
     errorPolicy: 'all',
   });
+
+  const [addUserToProject] = useMutation(ADD_USER_TO_PROJECT);
   const handleUserList = () => {
     getAllUsers();
     setListShown(true);
+  };
+
+  const onSubmit = async (formData) => {
+    try {
+      await addUserToProject({
+        variables: {
+          userId: formData.userSelect,
+          projectKey,
+        },
+      });
+      addToast('Bug successfully updated!', {
+        autoDismiss: true,
+        appearance: 'success',
+      });
+      refetch();
+    } catch (error) {
+      addToast(`Oh no! ${error}`, {
+        autoDismiss: true,
+        appearance: 'error',
+      });
+      console.log(error);
+    }
   };
 
   return (
@@ -38,7 +76,7 @@ const AddUserForm = ({ projectMembers }) => {
         Add User
       </SmallSubmitButton>
       <AddUserFormContainer>
-        <StyledUserForm>
+        <StyledUserForm onSubmit={handleSubmit(onSubmit)}>
           {isListShown && data ? (
             <label>
               Select User
@@ -46,6 +84,7 @@ const AddUserForm = ({ projectMembers }) => {
                 name="userSelect"
                 id="userSelect"
                 onChange={() => setShowAddButton(true)}
+                ref={register({ required: true })}
               >
                 <option value="" disabled selected>
                   Select User
