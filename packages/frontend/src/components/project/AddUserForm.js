@@ -81,10 +81,9 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
             <label>
               Select User
               <select
-                name="userSelect"
+                {...register('userSelect', { required: true })}
                 id="userSelect"
                 onChange={() => setShowAddButton(true)}
-                ref={register({ required: true })}
               >
                 <option value="" disabled selected>
                   Select User

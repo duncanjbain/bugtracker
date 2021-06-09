@@ -148,8 +148,7 @@ const CreateBug = () => {
           <InputLabel htmlFor="projectName">Project name</InputLabel>
           <select
             id="projectName"
-            name="projectName"
-            ref={register({ required: true })}
+            {...register('projectName', { required: true })}
             onChange={(event) =>
               getMembers({ variables: { projectKey: event.target.value } })
             }
@@ -171,17 +170,12 @@ const CreateBug = () => {
             id="bugKey"
             type="text"
             placeholder="Bug key"
-            name="bugKey"
-            ref={register({ required: true })}
+            {...register('bugKey', { required: true })}
           />
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="bugType">Bug type</InputLabel>
-          <select
-            id="bugType"
-            name="bugType"
-            ref={register({ required: true })}
-          >
+          <select id="bugType" {...register('bugType', { required: true })}>
             <option selected value="defect">
               Defect
             </option>
@@ -194,8 +188,7 @@ const CreateBug = () => {
             id="bugSummary"
             type="text"
             placeholder="Enter a short summary of the bug"
-            name="bugSummary"
-            ref={register({ required: true })}
+            {...register('bugSummary', { required: true })}
           />
         </FormGroup>
         <FormGroup>
@@ -237,8 +230,7 @@ const CreateBug = () => {
           <InputLabel htmlFor="bugPriority">Priority</InputLabel>
           <select
             id="bugPriority"
-            name="bugPriority"
-            ref={register({ required: true })}
+            {...register('bugPriority', { required: true })}
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -249,8 +241,7 @@ const CreateBug = () => {
           <InputLabel htmlFor="bugAssignedUser">Assignee</InputLabel>
           <select
             id="bugAssignedUser"
-            name="bugAssignedUser"
-            ref={register({ required: true })}
+            {...register('bugAssignedUser', { required: true })}
           >
             <option value="" disabled selected hidden>
               Assign person
@@ -270,11 +261,7 @@ const CreateBug = () => {
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="bugAuthor">Author</InputLabel>
-          <select
-            id="bugAuthor"
-            name="bugAuthor"
-            ref={register({ required: true })}
-          >
+          <select id="bugAuthor" {...register('bugAuthor', { required: true })}>
             {dataMembers ? (
               dataMembers.getProjectMembers.map((member) => (
                 <option key={member.id} value={member.id}>

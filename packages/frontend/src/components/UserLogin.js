@@ -49,8 +49,7 @@ const UserLogin = () => {
             id="email"
             type="text"
             placeholder="Email"
-            name="email"
-            ref={register({ required: true })}
+            {...register('email', { required: true })}
             aria-required="true"
             aria-invalid={errors.email ? 'true' : 'false'}
             className={errors.email ? 'error' : ''}
@@ -67,8 +66,7 @@ const UserLogin = () => {
             id="password"
             type="password"
             placeholder="Password"
-            name="password"
-            ref={register({ required: true })}
+            {...register('password', { required: true })}
             aria-required="true"
             aria-invalid={errors.password ? 'true' : 'false'}
             className={errors.password ? 'error' : ''}

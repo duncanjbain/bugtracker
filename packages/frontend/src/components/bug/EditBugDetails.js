@@ -141,13 +141,12 @@ const EditBugDetails = ({ bug }) => {
           id="key"
           type="text"
           placeholder={bug.key}
-          name="key"
-          ref={register({ required: false })}
+          {...register('key', { required: false })}
         />
       </FormGroup>
       <FormGroup>
         <InputLabel htmlFor="type">Bug type</InputLabel>
-        <select id="type" name="type" ref={register({ required: false })}>
+        <select id="type" {...register('type', { required: false })}>
           <option selected value="defect">
             Defect
           </option>
@@ -160,8 +159,7 @@ const EditBugDetails = ({ bug }) => {
           id="summary"
           type="text"
           placeholder={bug.summary}
-          name="summary"
-          ref={register({ required: false })}
+          {...register('summary', { required: false })}
         />
       </FormGroup>
       <FormGroup>
@@ -202,11 +200,7 @@ const EditBugDetails = ({ bug }) => {
       </FormGroup>
       <FormGroup>
         <InputLabel htmlFor="priority">Priority</InputLabel>
-        <select
-          id="priority"
-          name="priority"
-          ref={register({ required: false })}
-        >
+        <select id="priority" {...register('priority', { required: false })}>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
@@ -216,8 +210,7 @@ const EditBugDetails = ({ bug }) => {
         <InputLabel htmlFor="assignee">Assignee</InputLabel>
         <select
           id="assignee"
-          name="assignee"
-          ref={register({ required: true })}
+          {...register('assignee', { required: true })}
           onClick={() =>
             getMembers({ variables: { projectKey: bug.project.projectKey } })
           }
@@ -239,8 +232,7 @@ const EditBugDetails = ({ bug }) => {
         <InputLabel htmlFor="author">Author</InputLabel>
         <select
           id="author"
-          name="author"
-          ref={register({ required: true })}
+          {...register('author', { required: true })}
           onClick={() =>
             getMembers({ variables: { projectKey: bug.project.projectKey } })
           }

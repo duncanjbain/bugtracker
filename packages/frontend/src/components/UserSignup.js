@@ -55,8 +55,7 @@ const UserSignup = () => {
             id="name"
             type="text"
             placeholder="Name"
-            name="name"
-            ref={register({ required: true })}
+            {...register('name', { required: true })}
             aria-required="true"
             aria-invalid={errors.name ? 'true' : 'false'}
             className={errors.name ? 'error' : ''}
@@ -73,8 +72,7 @@ const UserSignup = () => {
             id="email"
             type="text"
             placeholder="Email"
-            name="email"
-            ref={register({ required: true })}
+            {...register('email', { required: true })}
             aria-required="true"
             aria-invalid={errors.email ? 'true' : 'false'}
             className={errors.email ? 'error' : ''}
@@ -91,8 +89,7 @@ const UserSignup = () => {
             id="password"
             type="password"
             placeholder="Password"
-            name="password"
-            ref={register({ required: true })}
+            {...register('password', { required: true })}
             aria-required="true"
             aria-invalid={errors.password ? 'true' : 'false'}
             className={errors.password ? 'error' : ''}
@@ -109,8 +106,7 @@ const UserSignup = () => {
             id="confirmPassword"
             type="password"
             placeholder="Confirm Password"
-            name="confirmPassword"
-            ref={register({ required: true })}
+            {...register('confirmPassword', { required: true })}
             aria-required="true"
             aria-invalid={errors.confirmPassword ? 'true' : 'false'}
             className={errors.confirmPassword ? 'error' : ''}

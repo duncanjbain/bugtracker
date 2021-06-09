@@ -38,6 +38,7 @@
       ],
       "import/imports-first": ["error", "absolute-first"],
       "import/newline-after-import": "error",
+      "react/jsx-props-no-spreading": "warn",
       "react/prop-types": 0,
       "no-console": 0
     }

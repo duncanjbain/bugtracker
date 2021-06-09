@@ -70,8 +70,7 @@ const CreateProject = () => {
             id="projectName"
             type="text"
             placeholder="Enter a project name"
-            name="projectName"
-            ref={register({ required: true })}
+            {...register('projectName', { required: true })}
             aria-required="true"
             aria-invalid={errors.projectName ? 'true' : 'false'}
             className={errors.projectName ? 'error' : ''}
@@ -88,8 +87,7 @@ const CreateProject = () => {
             id="lastName"
             type="text"
             placeholder="Enter a project key"
-            name="projectKey"
-            ref={register({ required: true })}
+            {...register('projectKey', { required: true })}
           />
           {errors.projectKey && (
             <ValidationErrMessage id="projectKey-error" role="alert">
