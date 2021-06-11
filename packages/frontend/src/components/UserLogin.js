@@ -23,7 +23,12 @@ const formValidationSchema = yup.object().shape({
 
 const UserLogin = () => {
   const { logIn } = useAuth();
-  const { register, handleSubmit, errors, setError } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(formValidationSchema),
   });
