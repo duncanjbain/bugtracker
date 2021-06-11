@@ -6,7 +6,7 @@ const screenSize = {
   md: '480px',
   lg: '768px',
   xl: '1024px',
-  '2xl': '1536px',
+  xxl: '1536px',
 };
 
 export const theme = {
@@ -15,7 +15,7 @@ export const theme = {
     md: `max-width: ${screenSize.md}`,
     lg: `max-width: ${screenSize.lg}`,
     xl: `max-width: ${screenSize.xl}`,
-    '2xl': `max-width: ${screenSize['2xl']}`,
+    xxl: `max-width: ${screenSize.xxl}`,
   },
   colors: {
     white: 'hsl(0, 0%, 100%)',
