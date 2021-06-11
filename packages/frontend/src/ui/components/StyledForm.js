@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FormHeader = styled.h2`
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 `;
 
@@ -69,8 +70,8 @@ export const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   width: 40%;
-  @media (${(props) => props.theme.media.lg}) {
-    width: 80%;
+  @media (${(props) => props.theme.media.xxl}) {
+    width: 90%;
   }
 `;
 
