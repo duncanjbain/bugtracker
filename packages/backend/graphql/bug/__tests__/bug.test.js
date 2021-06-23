@@ -268,7 +268,7 @@ describe('bug GraphQL queries', () => {
         priority: 'medium',
         type: 'defect',
         author: newUser.id,
-        project: firstNewProject.id,
+        project: firstNewProject.projectKey,
         assignee: newUser.id,
         dateDue: "2021-06-03T20:08:43.000+00:00",
       },

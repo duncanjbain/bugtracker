@@ -32,7 +32,11 @@ const createProjectValidationSchema = yup.object().shape({
 const CreateProject = () => {
   const { addToast } = useToasts();
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(createProjectValidationSchema),
   });

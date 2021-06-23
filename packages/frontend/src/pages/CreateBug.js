@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-this-in-sfc */
 import React, { useState } from 'react';
@@ -77,18 +78,27 @@ const CreateBug = () => {
   });
 
   const [dateDueState, setDateDueState] = useState(new Date(Date.now()));
+  const [descriptionValueState, setDescriptionValueState] = useState('');
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
   const [createBug] = useMutation(CREATE_NEW_BUG);
-  const { register, handleSubmit, control, setValue } = useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { isSubmitting, isSubmitSuccessful, errors },
+  } = useForm({
     defaultValues: {
       bugDateDue: dateDueState,
+      descriptionValue: descriptionValueState,
     },
   });
-  const [descriptionValue, setDescriptionValue] = React.useState('');
+
+  console.log(isSubmitting, isSubmitSuccessful, errors);
 
   registerLocale('enGB', enGB);
-
-  const onSubmit = async (formData) => {
+  const onSubmit = (formData) => {
+    console.log('submit');
     const {
       bugKey,
       projectName,
@@ -101,7 +111,7 @@ const CreateBug = () => {
       bugDateDue,
     } = formData;
     try {
-      await createBug({
+      createBug({
         variables: {
           key: bugKey,
           summary: bugSummary,
@@ -130,8 +140,17 @@ const CreateBug = () => {
   const handleDateChange = (dateChange) => {
     setValue('bugDateDue', dateChange, {
       shouldDirty: true,
+      shouldValidate: true,
     });
     setDateDueState(dateChange);
+  };
+
+  const handleDescriptionChange = (descriptionChange) => {
+    setValue('bugDescription', descriptionChange, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setDescriptionValueState(descriptionChange);
   };
 
   if (loading) {
@@ -158,7 +177,7 @@ const CreateBug = () => {
             </option>
             {data &&
               data.getUserProjects.map((project) => (
-                <option key={project.id} value={project.id}>
+                <option key={project.projectKey} value={project.projectKey}>
                   {project.projectName}
                 </option>
               ))}
@@ -194,28 +213,29 @@ const CreateBug = () => {
         <FormGroup>
           <InputLabel htmlFor="bugDescription">Bug description</InputLabel>
           <Controller
-            as={
+            render={({ field: { value } }) => (
               <MDEditor
-                value={descriptionValue}
-                onChange={setDescriptionValue}
+                value={value}
+                onChange={(event) => handleDescriptionChange(event)}
                 preview="edit"
                 height="250"
                 visiableDragbar="false"
               />
-            }
+            )}
             name="bugDescription"
             control={control}
             defaultValue=""
+            rules={{ required: true }}
           />
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="bugDateDue">Due date</InputLabel>
           <Controller
-            render={(props) => (
+            render={({ field: { value } }) => (
               <DatePicker
                 selected={dateDueState}
-                value={props.value}
-                onChange={handleDateChange}
+                value={value}
+                onChange={(event) => handleDateChange(event)}
                 placeholderText="Select date"
                 locale="enGB"
                 dateFormat="dd/MM/yyyy"
@@ -224,6 +244,7 @@ const CreateBug = () => {
             )}
             name="bugDateDue"
             control={control}
+            rules={{ required: true }}
           />
         </FormGroup>
         <FormGroup>
@@ -243,36 +264,29 @@ const CreateBug = () => {
             id="bugAssignedUser"
             {...register('bugAssignedUser', { required: true })}
           >
-            <option value="" disabled selected hidden>
-              Assign person
+            <option value="" disabled selected>
+              Bug Assignee
             </option>
-            {dataMembers ? (
+            {dataMembers &&
               dataMembers.getProjectMembers.map((member) => (
                 <option key={member.id} value={member.id}>
                   {member.name}
                 </option>
-              ))
-            ) : (
-              <option value="" disabled selected hidden>
-                Choose a project
-              </option>
-            )}
+              ))}
           </select>
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="bugAuthor">Author</InputLabel>
           <select id="bugAuthor" {...register('bugAuthor', { required: true })}>
-            {dataMembers ? (
+            <option value="" disabled selected>
+              Bug Author
+            </option>
+            {dataMembers &&
               dataMembers.getProjectMembers.map((member) => (
                 <option key={member.id} value={member.id}>
                   {member.name}
                 </option>
-              ))
-            ) : (
-              <option value="" disabled selected hidden>
-                Choose a project
-              </option>
-            )}
+              ))}
           </select>
         </FormGroup>
         <SubmitButton type="submit">Create bug</SubmitButton>
