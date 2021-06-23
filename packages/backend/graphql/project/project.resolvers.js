@@ -40,9 +40,8 @@ module.exports = {
       return foundProjects;
     },
     getProjectMembers: async (root, { projectKey }, { Project }) => {
-      const foundProject = await Project.findOne({projectKey})
-        .populate('projectMembers')
-        .populate('projectLead');
+      const foundProject = await Project.findOne({ projectKey: projectKey })
+        .populate('projectMembers');
       return foundProject.projectMembers;
     },
   },

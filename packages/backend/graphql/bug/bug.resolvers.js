@@ -64,7 +64,7 @@ module.exports = {
         throw new UserInputError('A user must be assigned when creating a bug');
       }
 
-      const bugProject = await Project.exists({ _id: project });
+      const bugProject = await Project.findOne({ projectKey: project });
       if (!bugProject) {
         throw new UserInputError('A project is required when creating a bug');
       }
@@ -76,12 +76,12 @@ module.exports = {
         priority,
         type,
         author,
-        project,
+        project: bugProject._id,
         assignee,
         dateDue,
       }).save();
       await Project.findOneAndUpdate(
-        { _id: project },
+        { projectKey: project },
         { $addToSet: { projectBugs: newBug.id } }
       );
       await User.findOneAndUpdate(
