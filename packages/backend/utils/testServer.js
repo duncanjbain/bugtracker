@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
@@ -9,7 +8,6 @@ const Project = require('../models/Project');
 
 const { getCurrentUser } = require('./getCurrentUser');
 
-const { MONGODB_URI } = process.env;
 const typeDefs = require('../graphql/typedefs.js');
 const resolvers = require('../graphql/rootResolvers');
 

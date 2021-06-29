@@ -30,7 +30,12 @@ const UserSignup = () => {
   const { signUp } = useAuth();
   const history = useHistory();
   // eslint-disable-next-line no-unused-vars
-  const { register, handleSubmit, errors, setError } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(signupValidationSchema),
   });
