@@ -32,7 +32,8 @@
     "graphql-tools": "^7.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.4",
-    "mongoose": "^5.11.8"
+    "mongoose": "^5.11.8",
+    "node-pre-gyp": "^0.17.0"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.2.3",

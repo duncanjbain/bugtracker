@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
@@ -69,3 +70,14 @@ const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}${path}`);
 });
+
+const seedDb = async () => {
+  const newUser = await new User({
+    name: 'Test User',
+    email: 'test@test.com',
+    password: 'testing',
+  }).save();
+  console.log(newUser);
+};
+
+seedDb();
