@@ -123,7 +123,7 @@ describe('user GraphQL queries', () => {
       },
     });
     expect(response.errors[0].message).toEqual(
-      'User with this username already exists'
+      'Account with this email already exists'
     );
   });
 
