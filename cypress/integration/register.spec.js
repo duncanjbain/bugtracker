@@ -33,6 +33,14 @@ describe("Register Page", () => {
         cy.get("[data-cy=confirmPassword-input]").click().type("wrong123");
         cy.get("[data-cy=submit-register]").click();
         cy.get('#confirmPassword-error').contains("Passwords must match");
+      });
+      it("form validation - must have unique email", () => {
+        cy.get("[data-cy=name-input]").click().type("User name");
+        cy.get("[data-cy=email-input]").click().type("test@test.com");
+        cy.get("[data-cy=password-input]").click().type("correct123");
+        cy.get("[data-cy=confirmPassword-input]").click().type("correct123");
+        cy.get("[data-cy=submit-register]").click();
+        cy.get('#signup-error').contains("Account with this email already exists");
       })
       it("form validation - successfully register", () => {
         cy.get("[data-cy=name-input]").click().type("Test User");
