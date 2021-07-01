@@ -41,12 +41,13 @@ const UserSignup = () => {
   });
 
   const onSubmit = async (data) => {
-    const signup = signUp(data);
+    const signup = await signUp(data);
     if (signup.errors) {
       setError('signUpError', {
         type: 'manual',
         message: signup.errors[0].message,
       });
+      return;
     }
     history.push('/login');
   };

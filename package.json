@@ -8,8 +8,10 @@
   "scripts": {
     "start-backend": "yarn workspace backend run start_dev",
     "start-frontend": "yarn workspace frontend run start_dev",
+    "start:backend-test": "yarn workspace backend run start:test",
     "dev": "concurrently \"yarn start-backend\" \"yarn start-frontend\"",
-    "test-backend": "yarn workspace backend test"
+    "test-backend": "yarn workspace backend test",
+    "start:e2e": "concurrently \"yarn start:backend-test\" \"yarn start-frontend\""
   },
   "devDependencies": {
     "concurrently": "^6.2.0",
