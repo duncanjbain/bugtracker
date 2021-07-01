@@ -16,8 +16,21 @@ jobs:
 orbs:
   node: circleci/node@4.1.0
   codecov: codecov/codecov@1.0.2
+  cypress: cypress-io/cypress@1
 version: 2.1
 workflows:
   test_my_app:
     jobs:
       - test
+  build: 
+    jobs:
+      - cypress/install:
+          build: yarn run build # run a custom app build step
+          yarn: true
+      - cypress/run:
+          requires:
+            - cypress/install
+          parallel: true # split all specs across machines
+          parallelism: 4 # use 4 CircleCI machines to finish quickly
+          yarn: true
+          start: yarn start:e2e # start server before running tests
