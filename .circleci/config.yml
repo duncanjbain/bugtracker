@@ -17,16 +17,16 @@ jobs:
 orbs:
   node: circleci/node@4.5.1
   codecov: codecov/codecov@1.0.2
-  cypress: cypress-io/cypress@1.28.0
+  cypress: cypress-io/cypress@1
 version: 2.1
 workflows:
   build: 
     jobs:
       - cypress/install:
-          executor: cypress/base:14.16.0
+          executor: cypress/base-14-7-0
           yarn: true
       - cypress/run:
-          executor: cypress/base:14.16.0
+          executor: cypress/base-14-7-0
           requires:
             - cypress/install
           yarn: true
