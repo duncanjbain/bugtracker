@@ -33,5 +33,3 @@ workflows:
   test_my_app:
     jobs:
       - test
-      - cypress/install
-      - cypress/run
