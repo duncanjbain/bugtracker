@@ -1,14 +1,4 @@
-build: 
-    jobs:
-      - cypress/install:
-          executor: cypress/base-14
-          yarn: true
-      - cypress/run:
-          executor: cypress/base-14
-          requires:
-            - cypress/install
-          yarn: true
-          start: yarn start:e2e # start server before running tests
+
 jobs:
   test:
     executor:
@@ -30,6 +20,18 @@ orbs:
   cypress: cypress-io/cypress@1.28.0
 version: 2.1
 workflows:
+  build: 
+    jobs:
+      - cypress/install:
+          executor: cypress/base-14
+          yarn: true
+      - cypress/run:
+          executor: cypress/base-14
+          requires:
+            - cypress/install
+          yarn: true
+          wait-on: http-get://localhost:3000/
+          start: yarn start:e2e # start server before running tests
   test_my_app:
     jobs:
       - test
