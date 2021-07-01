@@ -25,10 +25,10 @@ workflows:
   build: 
     jobs:
       - cypress/install:
+          executor: cypress/base-14
           build: yarn run build # run a custom app build step
           yarn: true
       - cypress/run:
-          executor: cypress/base-14
           requires:
             - cypress/install
           yarn: true
