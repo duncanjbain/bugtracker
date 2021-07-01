@@ -1,3 +1,14 @@
+build: 
+    jobs:
+      - cypress/install:
+          executor: cypress/base-14
+          yarn: true
+      - cypress/run:
+          executor: cypress/base-14
+          requires:
+            - cypress/install
+          yarn: true
+          start: yarn start:e2e # start server before running tests
 jobs:
   test:
     executor:
@@ -22,14 +33,3 @@ workflows:
   test_my_app:
     jobs:
       - test
-  build: 
-    jobs:
-      - cypress/install:
-          executor: cypress/base-14
-          yarn: true
-      - cypress/run:
-          executor: cypress/base-14
-          requires:
-            - cypress/install
-          yarn: true
-          start: yarn start:e2e # start server before running tests
