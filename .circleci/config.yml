@@ -23,10 +23,10 @@ workflows:
   build: 
     jobs:
       - cypress/install:
-          executor: cypress/base-14
+          executor: cypress/base:manjaro-node14.12.0
           yarn: true
       - cypress/run:
-          executor: cypress/base-14
+          executor: cypress/base:manjaro-node14.12.0
           requires:
             - cypress/install
           yarn: true
