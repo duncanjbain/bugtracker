@@ -49,13 +49,16 @@ const UserLogin = () => {
       <FormHeader>Log in.</FormHeader>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <LoginFormGroup>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel data-cy="email-label" htmlFor="email">
+            Email
+          </InputLabel>
           <TextInput
             id="email"
             type="text"
             placeholder="Email"
             {...register('email', { required: true })}
             aria-required="true"
+            data-cy="email-input"
             aria-invalid={errors.email ? 'true' : 'false'}
             className={errors.email ? 'error' : ''}
           />
@@ -66,10 +69,13 @@ const UserLogin = () => {
           )}
         </LoginFormGroup>
         <LoginFormGroup>
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel data-cy="password-label" htmlFor="password">
+            Password
+          </InputLabel>
           <TextInput
             id="password"
             type="password"
+            data-cy="password-input"
             placeholder="Password"
             {...register('password', { required: true })}
             aria-required="true"
@@ -82,7 +88,9 @@ const UserLogin = () => {
             </ValidationErrMessage>
           )}
         </LoginFormGroup>
-        <SubmitButton type="submit">Log In</SubmitButton>
+        <SubmitButton type="submit" data-cy="submit-login">
+          Log In
+        </SubmitButton>
         {errors.loginError && (
           <ValidationErrMessage id="login-error" role="alert">
             {errors.loginError.message}
@@ -90,7 +98,9 @@ const UserLogin = () => {
         )}
         <p style={{ marginTop: '1rem', marginBottom: '1rem' }}>
           Don&apos;t have an account yet?{' '}
-          <StyledLink to="/signup/">Sign up</StyledLink>
+          <StyledLink data-cy="signup-link" to="/signup/">
+            Sign up
+          </StyledLink>
         </p>
       </StyledForm>
     </SignupFormContainer>

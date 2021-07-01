@@ -4,7 +4,7 @@ import { ReactComponent as BugFixLogo } from '../assets/svg/undraw_bug_fixing.sv
 
 const LandingPage = ({ RightSide }) => (
   <LandingPageContainer>
-    <CallToAction>
+    <CallToAction data-cy="cta-container">
       <CtaHeader>Bug Tracker</CtaHeader>
       <CtaSubHeader>Track, manage and squash those bugs!</CtaSubHeader>
       <StyledBugFixLogo />

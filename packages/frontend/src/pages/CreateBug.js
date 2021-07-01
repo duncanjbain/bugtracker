@@ -81,24 +81,15 @@ const CreateBug = () => {
   const [descriptionValueState, setDescriptionValueState] = useState('');
   const [getMembers, { data: dataMembers }] = useLazyQuery(GET_PROJECT_MEMBERS);
   const [createBug] = useMutation(CREATE_NEW_BUG);
-  const {
-    register,
-    handleSubmit,
-    control,
-    setValue,
-    formState: { isSubmitting, isSubmitSuccessful, errors },
-  } = useForm({
+  const { register, handleSubmit, control, setValue } = useForm({
     defaultValues: {
       bugDateDue: dateDueState,
       descriptionValue: descriptionValueState,
     },
   });
 
-  console.log(isSubmitting, isSubmitSuccessful, errors);
-
   registerLocale('enGB', enGB);
   const onSubmit = (formData) => {
-    console.log('submit');
     const {
       bugKey,
       projectName,

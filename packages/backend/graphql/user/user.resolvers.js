@@ -36,7 +36,7 @@ module.exports = {
     signupUser: async (root, { name, email, password }, { User }) => {
       const foundUser = await User.findOne({ email });
       if (foundUser) {
-        throw new UserInputError('User with this username already exists');
+        throw new UserInputError('Account with this email already exists');
       }
 
       const newUser = await new User({
