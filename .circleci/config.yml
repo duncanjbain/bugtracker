@@ -30,6 +30,7 @@ workflows:
           requires:
             - cypress/install
           yarn: true
+          record: true
           wait-on: http-get://localhost:3000/
           start: yarn start:e2e # start server before running tests
   test_my_app:
