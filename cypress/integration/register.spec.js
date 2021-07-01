@@ -48,7 +48,6 @@ describe("Register Page", () => {
         cy.get("[data-cy=password-input]").click().type("testingpassword");
         cy.get("[data-cy=confirmPassword-input]").click().type("testingpassword");
         cy.get("[data-cy=submit-register]").click();
-        cy.wait(5000)
         cy.location("pathname").should("include", "dashboard");
       })
 })
