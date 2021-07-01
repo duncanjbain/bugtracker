@@ -1,3 +1,14 @@
+build: 
+    jobs:
+      - cypress/install:
+          executor: cypress/base-14
+          yarn: true
+      - cypress/run:
+          executor: cypress/base-14
+          requires:
+            - cypress/install
+          yarn: true
+          start: yarn start:e2e # start server before running tests
 jobs:
   test:
     executor:
@@ -14,21 +25,11 @@ jobs:
           file: packages/backend/coverage/coverage-final.json
           flags: backend
 orbs:
-  node: circleci/node@4.1.0
+  node: circleci/node@4.5.1
   codecov: codecov/codecov@1.0.2
-  cypress: cypress-io/cypress@1
+  cypress: cypress-io/cypress@1.28.0
 version: 2.1
 workflows:
   test_my_app:
     jobs:
       - test
-  build: 
-    jobs:
-      - cypress/install:
-          executor: cypress/base-14
-          yarn: true
-      - cypress/run:
-          requires:
-            - cypress/install
-          yarn: true
-          start: yarn start:e2e # start server before running tests
