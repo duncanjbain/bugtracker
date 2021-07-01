@@ -30,6 +30,8 @@ workflows:
           requires:
             - cypress/install
           yarn: true
+          parallel: true
+          parallelism: 4
           record: true
           wait-on: http-get://localhost:3000/
           start: yarn start:e2e # start server before running tests
