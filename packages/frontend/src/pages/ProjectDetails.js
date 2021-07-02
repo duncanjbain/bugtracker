@@ -83,10 +83,12 @@ const ProjectDetails = () => {
   return (
     <WideSingleColumnFlex>
       <CardHeader>
-        <CardTitle>{getProject.data.getProject.projectName}</CardTitle>
+        <CardTitle data-cy="projectTitle">
+          {getProject.data.getProject.projectName}
+        </CardTitle>
       </CardHeader>
       <div>
-        <ProjectMembersListContainer>
+        <ProjectMembersListContainer data-cy="projectLead-container">
           <h4>Project Lead</h4>
           <ProjectLeadItem>
             <Avatar
@@ -99,7 +101,7 @@ const ProjectDetails = () => {
             {getProject.data.getProject.projectLead.name}
           </ProjectLeadItem>
         </ProjectMembersListContainer>
-        <ProjectMembersListContainer>
+        <ProjectMembersListContainer data-cy="projectMembers-container">
           <h4>Project Members</h4>
           <ProjectMembersList>
             {getProjectMembers.data.getProjectMembers.map((member) => (

@@ -56,12 +56,18 @@ const ProjectTableList = ({ projects }) => {
           <StyledTableRow key={project.projectKey}>
             <StyledTableCell>{project.projectKey}</StyledTableCell>
             <StyledTableCell>
-              <StyledTableLink to={`/project/${project.projectKey}`}>
+              <StyledTableLink
+                data-cy={`projectTable-projectLink-${project.projectKey}`}
+                to={`/project/${project.projectKey}`}
+              >
                 {project.projectName}
               </StyledTableLink>
             </StyledTableCell>
             <StyledTableCell>
-              <StyledTableLink to={`/user/${project.projectLead.id}`}>
+              <StyledTableLink
+                data-cy={`projectTable-projectLeadLink-${project.projectLead.id}`}
+                to={`/user/${project.projectLead.id}`}
+              >
                 {project.projectLead.name}
               </StyledTableLink>
             </StyledTableCell>
