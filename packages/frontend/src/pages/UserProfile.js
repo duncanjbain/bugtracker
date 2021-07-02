@@ -55,7 +55,11 @@ const profileValidationSchema = yup.object().shape({
 const UserProfile = () => {
   const user = useUser();
   const { addToast } = useToasts();
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: 'onSubmit',
     resolver: yupResolver(profileValidationSchema),
   });

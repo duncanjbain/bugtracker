@@ -9,24 +9,32 @@ const DashboardNavbar = () => {
   const { logout } = useAuth();
   const user = useUser();
   return (
-    <NavContainer>
+    <NavContainer data-cy="nav-container">
       <NavLinks>
         <NavItem>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink data-cy="nav-dashboard" to="/dashboard">
+            Dashboard
+          </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/projects">Projects</NavLink>
+          <NavLink data-cy="nav-projects" to="/projects">
+            Projects
+          </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/createbug">Create bug</NavLink>
+          <NavLink data-cy="nav-bugs" to="/createbug">
+            Create bug
+          </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/createproject">Create project</NavLink>
+          <NavLink data-cy="nav-createproject" to="/createproject">
+            Create project
+          </NavLink>
         </NavItem>
       </NavLinks>
       <NavLinks>
         <NavItem>
-          <NavLink to="/profile">
+          <NavLink data-cy="nav-profile" to="/profile">
             <span style={{ marginRight: '0.5rem' }}>Profile</span>
             <Avatar
               name={user.name}

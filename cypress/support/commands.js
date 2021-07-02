@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("login", (options = {}) => {
+Cypress.Commands.add("login", () => {
   const LOGIN_USER_MUTATION = `
     mutation loginUser {
       loginUser(email: "test@test.com", password: "testing") {
@@ -49,5 +49,7 @@ Cypress.Commands.add("login", (options = {}) => {
       //
       // we can now login as this newly created user
       window.localStorage.setItem("AUTH_TOKEN", body.data.loginUser.token);
+      cy.log(body)
+      cy.log(window.localStorage.AUTH_TOKEN)
     });
 });
