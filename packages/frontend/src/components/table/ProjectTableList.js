@@ -22,7 +22,7 @@ const ProjectTableList = ({ projects }) => {
   };
 
   return (
-    <StyledTable>
+    <StyledTable data-cy="projectTable">
       <thead>
         <tr>
           <StyledTableHeader>

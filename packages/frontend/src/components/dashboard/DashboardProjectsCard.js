@@ -54,7 +54,7 @@ const DashboardProjectsCard = () => {
 
   if (data) {
     return (
-      <CardWrapper>
+      <CardWrapper data-cy="projectcard-container">
         <CardHeader>
           <CardTitle>My Projects</CardTitle>
           <StyledButton
@@ -71,7 +71,10 @@ const DashboardProjectsCard = () => {
           ) : (
             <p>
               You currently do not have any projects added! Try addding one{' '}
-              <StyledLink to="/createproject">here</StyledLink>!
+              <StyledLink data-cy="createproject-link" to="/createproject">
+                here
+              </StyledLink>
+              !
             </p>
           )}
         </div>

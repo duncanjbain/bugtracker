@@ -38,7 +38,6 @@ describe("Login Page", () => {
     cy.get("[data-cy=email-input]").click().type("test@test.com");
     cy.get("[data-cy=password-input]").click().type("testing");
     cy.get("[data-cy=submit-login]").click();
-    cy.wait(5000)
     cy.location("pathname").should("include", "dashboard");
   });
 });

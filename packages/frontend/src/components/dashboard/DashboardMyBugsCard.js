@@ -71,6 +71,7 @@ const DashboardMyBugsCard = () => {
     );
   }
   if (data) {
+    console.log(data);
     return (
       <CardWrapper>
         <CardHeader>
@@ -83,7 +84,8 @@ const DashboardMyBugsCard = () => {
             <StyledReloadIcon />
           </StyledButton>
         </CardHeader>
-        {data.getUsersBugs.assignedBugs || data.getUsersBugs.createdBugs ? (
+        {data.getUsersBugs.assignedBugs.length > 0 ||
+        data.getUsersBugs.createdBugs.length > 0 ? (
           <>
             <BugsTableList
               title="Created by me"

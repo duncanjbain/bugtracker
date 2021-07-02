@@ -23,3 +23,33 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("login", () => {
+  const LOGIN_USER_MUTATION = `
+    mutation loginUser {
+      loginUser(email: "test@test.com", password: "testing") {
+        token
+        user {
+          id
+        }
+      }
+    }
+  `;
+
+  // create the user first in the DB
+  cy.request({
+    url: "http://localhost:4000/graphql",
+    method: "POST",
+    body: { query: LOGIN_USER_MUTATION },
+  })
+    .its("body")
+    .then((body) => {
+      // assuming the server sends back the user details
+      // including a randomly generated password
+      //
+      // we can now login as this newly created user
+      window.localStorage.setItem("AUTH_TOKEN", body.data.loginUser.token);
+      cy.log(body)
+      cy.log(window.localStorage.AUTH_TOKEN)
+    });
+});
