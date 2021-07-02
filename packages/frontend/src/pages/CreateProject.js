@@ -69,10 +69,13 @@ const CreateProject = () => {
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
-          <InputLabel htmlFor="projectName">Project name</InputLabel>
+          <InputLabel data-cy="projectName-label" htmlFor="projectName">
+            Project name
+          </InputLabel>
           <TextInput
             id="projectName"
             type="text"
+            data-cy="projectName-input"
             placeholder="Enter a project name"
             {...register('projectName', { required: true })}
             aria-required="true"
@@ -86,10 +89,13 @@ const CreateProject = () => {
           )}
         </FormGroup>
         <FormGroup>
-          <InputLabel htmlFor="projectKey">Project key</InputLabel>
+          <InputLabel data-cy="projectKey-label" htmlFor="projectKey">
+            Project key
+          </InputLabel>
           <TextInput
             id="lastName"
             type="text"
+            data-cy="projectKey-input"
             placeholder="Enter a project key"
             {...register('projectKey', { required: true })}
           />
@@ -99,7 +105,9 @@ const CreateProject = () => {
             </ValidationErrMessage>
           )}
         </FormGroup>
-        <SubmitButton type="submit">Create project</SubmitButton>
+        <SubmitButton data-cy="form-submit" type="submit">
+          Create project
+        </SubmitButton>
       </form>
     </SingleColumnFlex>
   );
