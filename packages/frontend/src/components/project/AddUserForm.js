@@ -71,7 +71,11 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
 
   return (
     <>
-      <SmallSubmitButton onClick={() => handleUserList()} type="button">
+      <SmallSubmitButton
+        data-cy="addUser-button"
+        onClick={() => handleUserList()}
+        type="button"
+      >
         Add User
       </SmallSubmitButton>
       <AddUserFormContainer>
@@ -83,6 +87,7 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
                 {...register('userSelect', { required: true })}
                 id="userSelect"
                 onChange={() => setShowAddButton(true)}
+                data-cy="user-select"
               >
                 <option value="" disabled selected>
                   Select User
@@ -103,7 +108,9 @@ const AddUserForm = ({ projectMembers, projectKey, refetch }) => {
             </label>
           ) : null}
           {isShowAddButton ? (
-            <SmallSuccessButton type="submit">Add</SmallSuccessButton>
+            <SmallSuccessButton data-cy="submit-user" type="submit">
+              Add
+            </SmallSuccessButton>
           ) : null}
         </StyledUserForm>
       </AddUserFormContainer>

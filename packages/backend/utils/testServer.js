@@ -72,12 +72,23 @@ app.listen(PORT, () => {
 });
 
 const seedDb = async () => {
-  const newUser = await new User({
+  await new User({
     name: 'Test User',
     email: 'test@test.com',
     password: 'testing',
   }).save();
-  console.log(newUser);
+  await new User({
+    name: 'Second User',
+    email: 'secondtest@test.com',
+    password: 'testing',
+  }).save();
+  await new User({
+    name: 'Third User',
+    email: 'third@test.com',
+    password: 'testing',
+  }).save();
 };
 
 seedDb();
+
+module.exports = mongoose;

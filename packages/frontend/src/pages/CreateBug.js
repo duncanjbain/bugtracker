@@ -162,6 +162,7 @@ const CreateBug = () => {
             onChange={(event) =>
               getMembers({ variables: { projectKey: event.target.value } })
             }
+            data-cy="projectName-select"
           >
             <option value="" selected>
               Choose a project
@@ -180,12 +181,17 @@ const CreateBug = () => {
             id="bugKey"
             type="text"
             placeholder="Bug key"
+            data-cy="bugKey-input"
             {...register('bugKey', { required: true })}
           />
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="bugType">Bug type</InputLabel>
-          <select id="bugType" {...register('bugType', { required: true })}>
+          <select
+            data-cy="bugType-select"
+            id="bugType"
+            {...register('bugType', { required: true })}
+          >
             <option selected value="defect">
               Defect
             </option>
@@ -197,6 +203,7 @@ const CreateBug = () => {
           <TextInput
             id="bugSummary"
             type="text"
+            data-cy="bugSummary-textInput"
             placeholder="Enter a short summary of the bug"
             {...register('bugSummary', { required: true })}
           />
@@ -213,6 +220,7 @@ const CreateBug = () => {
                 visiableDragbar="false"
               />
             )}
+            data-cy="bugDescription-textInput"
             name="bugDescription"
             control={control}
             defaultValue=""
@@ -233,6 +241,7 @@ const CreateBug = () => {
                 todayButton="Today"
               />
             )}
+            data-cy="bugDateDue-selector"
             name="bugDateDue"
             control={control}
             rules={{ required: true }}
@@ -243,6 +252,7 @@ const CreateBug = () => {
           <select
             id="bugPriority"
             {...register('bugPriority', { required: true })}
+            data-cy="bugPriority-select"
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -253,6 +263,7 @@ const CreateBug = () => {
           <InputLabel htmlFor="bugAssignedUser">Assignee</InputLabel>
           <select
             id="bugAssignedUser"
+            data-cy="bugAssignedUser-select"
             {...register('bugAssignedUser', { required: true })}
           >
             <option value="" disabled selected>
@@ -268,7 +279,11 @@ const CreateBug = () => {
         </FormGroup>
         <FormGroup>
           <InputLabel htmlFor="bugAuthor">Author</InputLabel>
-          <select id="bugAuthor" {...register('bugAuthor', { required: true })}>
+          <select
+            data-cy="bugAuthor-select"
+            id="bugAuthor"
+            {...register('bugAuthor', { required: true })}
+          >
             <option value="" disabled selected>
               Bug Author
             </option>
@@ -280,7 +295,9 @@ const CreateBug = () => {
               ))}
           </select>
         </FormGroup>
-        <SubmitButton type="submit">Create bug</SubmitButton>
+        <SubmitButton data-cy="createBug-submit" type="submit">
+          Create bug
+        </SubmitButton>
       </form>
     </SingleColumnFlex>
   );

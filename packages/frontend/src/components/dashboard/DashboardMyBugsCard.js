@@ -71,9 +71,8 @@ const DashboardMyBugsCard = () => {
     );
   }
   if (data) {
-    console.log(data);
     return (
-      <CardWrapper>
+      <CardWrapper data-cy="bugscard-container">
         <CardHeader>
           <CardTitle>My Bugs</CardTitle>
           <StyledButton
