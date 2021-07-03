@@ -29,7 +29,7 @@ describe("Projects", () => {
         cy.get('[data-cy=addUser-button]').click()
         cy.get('[data-cy=user-select]').select('Second User')
         cy.get('[data-cy=submit-user]').click()
-        cy.get('[data-cy=projectMembers-container]').contains('Second User')
+        cy.get(':nth-child(2) > p').contains('Second User')
     })
     it('project - can add a bug to created project', () => {
         cy.visit('/createbug')

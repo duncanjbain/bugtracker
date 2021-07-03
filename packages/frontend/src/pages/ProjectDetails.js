@@ -103,7 +103,7 @@ const ProjectDetails = () => {
         </ProjectMembersListContainer>
         <ProjectMembersListContainer data-cy="projectMembers-container">
           <h4>Project Members</h4>
-          <ProjectMembersList>
+          <ProjectMembersList data-cy="projectMembers-list">
             {getProjectMembers.data.getProjectMembers.map((member) => (
               <ProjectMemberListItem>
                 <Avatar
