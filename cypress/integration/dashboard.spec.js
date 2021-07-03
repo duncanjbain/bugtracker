@@ -1,6 +1,6 @@
 describe("Dashboard Page", () => {
     beforeEach(() => {
-        cy.login();
+        cy.login('test@test.com','testing');
         cy.visit('/dashboard')
     })
 
@@ -15,9 +15,14 @@ describe("Dashboard Page", () => {
 
         cy.get("[data-cy=nav-profile]").click().location("pathname").should("include", "/profile");
     })
+    it('can log out', () => {
+        cy.get("[data-cy=nav-logout]").click()
+        cy.contains('Log In')
+    })
 
-    it('projects - card has no projects initially displayed', () => {
-        cy.get("[data-cy=projectcard-container]").contains('You currently do not have any projects added! Try addding one here!')
+    it('cards are displayed', () => {
+        cy.get("[data-cy=projectcard-container]").contains('My Projects')
+        cy.get("[data-cy=bugscard-container]").contains('My Bugs')
         cy.get('[data-cy=createproject-link]').click().location("pathname").should("include", "/createproject")
     })
 

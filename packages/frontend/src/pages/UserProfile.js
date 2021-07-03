@@ -73,7 +73,6 @@ const UserProfile = () => {
       (a, [k, v]) => (v ? ((a[k] = v), a) : a),
       {}
     );
-
     await updateUser({
       variables: { id: user.id, ...falsyRemoved },
     });
@@ -94,11 +93,14 @@ const UserProfile = () => {
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
           <FormGroup>
-            <InputLabel htmlFor="name">Name</InputLabel>
+            <InputLabel data-cy="name-label" htmlFor="name">
+              Name
+            </InputLabel>
             <TextInput
               id="name"
               type="text"
               placeholder={data.getWhoAmI.name}
+              data-cy="name-input"
               autocomplete="given-name"
               {...register('name', { required: false })}
               aria-required="false"
@@ -112,10 +114,13 @@ const UserProfile = () => {
             )}
           </FormGroup>
           <FormGroup>
-            <InputLabel htmlFor="email">Email</InputLabel>
+            <InputLabel data-cy="email-label" htmlFor="email">
+              Email
+            </InputLabel>
             <TextInput
               id="email"
               type="email"
+              data-cy="email-input"
               placeholder={data.getWhoAmI.email}
               autocomplete="email"
               {...register('email', { required: false })}
@@ -130,11 +135,14 @@ const UserProfile = () => {
             )}
           </FormGroup>
           <FormGroup>
-            <InputLabel htmlFor="newPassword">Password</InputLabel>
+            <InputLabel data-cy="password-label" htmlFor="newPassword">
+              Password
+            </InputLabel>
             <TextInput
               id="newPassword"
               type="password"
               placeholder="Enter new password"
+              data-cy="password-input"
               autocomplete="new-password"
               {...register('newPassword', { required: false })}
               aria-required="false"
@@ -148,11 +156,17 @@ const UserProfile = () => {
             )}
           </FormGroup>
           <FormGroup>
-            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+            <InputLabel
+              data-cy="confirmpassword-label"
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
+            </InputLabel>
             <TextInput
               id="confirmPassword"
               type="password"
               placeholder="Confirm new password"
+              data-cy="confirmPassword-input"
               autocomplete="new-password"
               {...register('confirmPassword', { required: false })}
               aria-required="false"
@@ -165,7 +179,11 @@ const UserProfile = () => {
               </ValidationErrMessage>
             )}
           </FormGroup>
-          <SubmitButton style={{ padding: '0.5rem' }} type="submit">
+          <SubmitButton
+            data-cy="profile-submit"
+            style={{ padding: '0.5rem' }}
+            type="submit"
+          >
             Update
           </SubmitButton>
         </form>

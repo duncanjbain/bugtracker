@@ -46,7 +46,9 @@ const DashboardNavbar = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink onClick={logout}>Logout</NavLink>
+          <NavLink data-cy="nav-logout" onClick={logout}>
+            Logout
+          </NavLink>
         </NavItem>
       </NavLinks>
     </NavContainer>
