@@ -82,6 +82,13 @@ const seedDb = async () => {
     email: 'secondtest@test.com',
     password: 'testing',
   }).save();
+  await new User({
+    name: 'Third User',
+    email: 'third@test.com',
+    password: 'testing',
+  }).save();
 };
 
 seedDb();
+
+module.exports = mongoose;
