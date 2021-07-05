@@ -1,27 +1,26 @@
-
-jobs:
-  test:
-    executor:
-      name: node/default
-      tag: "14.5"
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - run:
-          command: yarn test-backend
-          name: Run yarn test-backend
-      - codecov/upload:
-          file: packages/backend/coverage/coverage-final.json
-          flags: backend
+version: 2.1
 orbs:
   node: circleci/node@4.5.1
   codecov: codecov/codecov@1.0.2
   cypress: cypress-io/cypress@1
-version: 2.1
-workflows:
-  build: 
-    jobs:
+commands:
+  back-end-report-coverage:
+    description: |
+      Send backend report coverage to Codecov.
+    steps:
+      - codecov/upload:
+          file: packages/backend/coverage/coverage-final.json
+          flags: backend
+  front-end-report-coverage:
+    description: |
+      Send frontend end report coverage to Codecov.
+    steps:
+      - codecov/upload:
+          file: coverage/coverage-final.json     
+          flags: fontend 
+
+test-frontend-workflow: &test-frontend-workflow
+  jobs:
       - cypress/install:
           executor: cypress/base-14-7-0
           yarn: true
@@ -35,11 +34,24 @@ workflows:
           record: true
           wait-on: http-get://localhost:3000/
           start: yarn start:e2e # start server before running tests
-      - codecov/upload:
-          file: coverage/coverage-final.json
-          flags: frontend
-  test_my_app:
-    jobs:
-      - test
- 
-      
+          post-steps:
+            - front-end-report-coverage
+test-backend-workflow: &test-backend-workflow
+  jobs:
+    test_backend:
+      executor:
+        name: node/default
+        tag: "14.5"
+      steps:
+        - checkout
+        - node/install-packages:
+            pkg-manager: yarn
+        - run:
+            command: yarn test-backend
+            name: Run yarn test-backend
+      post-steps:
+          - back-end-report-coverage
+
+workflows:
+  test-frontend-workflow:
+    <<: *test-frontend-workflow
