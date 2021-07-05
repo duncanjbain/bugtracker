@@ -14,7 +14,10 @@
     "start:e2e": "concurrently \"yarn start:backend-test\" \"yarn start-frontend\""
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.8",
     "concurrently": "^6.2.0",
+    "istanbul-lib-coverage": "^3.0.0",
+    "nyc": "^15.1.0",
     "wait-on": "^6.0.0"
   }
 }
