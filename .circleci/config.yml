@@ -37,7 +37,7 @@ workflows:
           start: yarn start:e2e # start server before running tests
       - codecov/upload:
           file: packages/backend/coverage/coverage-final.json
-          flags: coverage/coverage-final.json
+          flags: frontend
   test_my_app:
     jobs:
       - test
