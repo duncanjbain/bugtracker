@@ -288,7 +288,7 @@ const EditBugDetails = ({ bug }) => {
             Yes
           </DangerButton>
           <SuccessButton
-            delete-cy="delete-abort"
+            data-cy="delete-abort"
             type="button"
             onClick={() => setConfirmDelete(false)}
           >
