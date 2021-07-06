@@ -265,19 +265,33 @@ const EditBugDetails = ({ bug }) => {
               ))}
         </select>
       </FormGroup>
-      <SubmitButton type="submit">Update Bug</SubmitButton>
+      <SubmitButton data-cy="update-button" type="submit">
+        Update Bug
+      </SubmitButton>
       {!confirmDelete && (
-        <WarnButton type="button" onClick={() => setConfirmDelete(true)}>
+        <WarnButton
+          data-cy="delete-button"
+          type="button"
+          onClick={() => setConfirmDelete(true)}
+        >
           Delete Bug
         </WarnButton>
       )}
       {confirmDelete && (
         <div>
           <p>Are you sure?</p>
-          <DangerButton type="button" onClick={() => handleDelete(bug.id)}>
+          <DangerButton
+            data-cy="delete-confirm"
+            type="button"
+            onClick={() => handleDelete(bug.id)}
+          >
             Yes
           </DangerButton>
-          <SuccessButton type="button" onClick={() => setConfirmDelete(false)}>
+          <SuccessButton
+            delete-cy="delete-abort"
+            type="button"
+            onClick={() => setConfirmDelete(false)}
+          >
             No
           </SuccessButton>
         </div>
