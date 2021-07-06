@@ -68,8 +68,10 @@ const EditBugDetails = ({ bug }) => {
   const history = useHistory();
   const { addToast } = useToasts();
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [dateDueState, setDateDueState] = useState(new Date(Date.now()));
-  const [descriptionValueState, setDescriptionValueState] = useState('');
+  const [dateDueState, setDateDueState] = useState(bug.bugDueDate);
+  const [descriptionValueState, setDescriptionValueState] = useState(
+    bug.description
+  );
   const [deleteExistingBug] = useMutation(DELETE_BUG);
   const [updateExistingBug] = useMutation(UPDATE_EXISTING_BUG);
   const [getMembers, { data: dataMembers }] = useLazyQuery(
@@ -80,14 +82,14 @@ const EditBugDetails = ({ bug }) => {
       errorPolicy: 'all',
     }
   );
-
   registerLocale('enGB', enGB);
   const { register, handleSubmit, control, setValue } = useForm({
     defaultValues: {
       bugDateDue: dateDueState,
-      descriptionValue: descriptionValueState,
+      description: descriptionValueState,
     },
   });
+
   const handleDelete = async (bugId) => {
     try {
       await deleteExistingBug({ variables: { bugId } });
@@ -103,6 +105,7 @@ const EditBugDetails = ({ bug }) => {
       });
     }
   };
+
   const handleDateChange = (dateChange) => {
     setValue('bugDateDue', dateChange, {
       shouldDirty: true,
@@ -112,12 +115,14 @@ const EditBugDetails = ({ bug }) => {
   };
 
   const handleDescriptionChange = (descriptionChange) => {
-    setValue('bugDescription', descriptionChange, {
+    setValue('description', descriptionChange, {
       shouldDirty: true,
       shouldValidate: true,
     });
     setDescriptionValueState(descriptionChange);
+    console.log(descriptionChange);
   };
+
   const onSubmit = async (formData) => {
     // stolen from https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript/24190282
     const falsyRemoved = Object.entries(formData).reduce(
@@ -125,7 +130,7 @@ const EditBugDetails = ({ bug }) => {
       (a, [k, v]) => (v ? ((a[k] = v), a) : a),
       {}
     );
-
+    console.log(formData);
     try {
       await updateExistingBug({
         variables: { bugId: bug.id, ...falsyRemoved },
@@ -185,9 +190,8 @@ const EditBugDetails = ({ bug }) => {
             />
           )}
           data-cy="bugDescription-textInput"
-          name="bugDescription"
+          name="description"
           control={control}
-          defaultValue=""
         />
       </FormGroup>
       <FormGroup>
@@ -205,7 +209,7 @@ const EditBugDetails = ({ bug }) => {
             />
           )}
           data-cy="bugDateDue-selector"
-          name="bugDateDue"
+          name="dateDue"
           control={control}
         />
       </FormGroup>

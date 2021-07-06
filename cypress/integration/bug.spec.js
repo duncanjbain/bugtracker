@@ -19,6 +19,11 @@ describe("Bugs", () => {
       })
     cy.log(createdOn)
     cy.get('[data-cy=bug-date-created]').contains(createdOn)
-
   });
+
+  it('bug - can update bug details', () => {
+    cy.visit("/bug/BUG01");
+    cy.get('[data-cy=edit-bug-button]').click()
+    
+  })
 });
