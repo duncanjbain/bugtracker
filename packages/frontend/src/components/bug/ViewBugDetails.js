@@ -9,29 +9,32 @@ const ViewBugDetails = ({ bug, setEditMode }) => {
   const dueOn = new Date(parseInt(bug.dateDue, 10));
   return (
     <>
-      <StyledSummary>{bug.summary}</StyledSummary>
+      <StyledSummary data-cy="bug-summary">{bug.summary}</StyledSummary>
       <div>
         <StyledDescription>Description</StyledDescription>
-        <StyledArticle>
+        <StyledArticle data-cy="bug-description">
           <MDEditor.Markdown source={bug.description} />
         </StyledArticle>
       </div>
       <div>
         <StyledInfo>
           Assigned to{' '}
-          <StyledLink to={`/user/${bug.assignee.id}`}>
+          <StyledLink
+            data-cy="bug-assignee-link"
+            to={`/user/${bug.assignee.id}`}
+          >
             {bug.assignee.name}
           </StyledLink>
         </StyledInfo>
         <StyledInfo>
           Authored by{' '}
-          <StyledLink to={`/user/${bug.author.id}`}>
+          <StyledLink data-cy="bug-author-link" to={`/user/${bug.author.id}`}>
             {bug.author.name}
           </StyledLink>
         </StyledInfo>
       </div>
       <div>
-        <StyledInfo>
+        <StyledInfo data-cy="bug-date-due">
           Due On{' '}
           {dueOn.toLocaleDateString('en-GB', {
             weekday: 'long',
@@ -42,7 +45,7 @@ const ViewBugDetails = ({ bug, setEditMode }) => {
         </StyledInfo>
       </div>
       <div>
-        <StyledInfo>
+        <StyledInfo data-cy="bug-date-created">
           Created{' '}
           {createdOn.toLocaleDateString('en-GB', {
             weekday: 'long',
@@ -58,7 +61,11 @@ const ViewBugDetails = ({ bug, setEditMode }) => {
         </StyledInfo>
       </div>
 
-      <SubmitButton type="button" onClick={() => setEditMode(true)}>
+      <SubmitButton
+        data-cy="edit-bug-button"
+        type="button"
+        onClick={() => setEditMode(true)}
+      >
         Edit
       </SubmitButton>
     </>

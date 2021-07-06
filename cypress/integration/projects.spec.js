@@ -45,6 +45,5 @@ describe("Projects", () => {
         cy.get('[data-cy=createBug-submit]').click()
         cy.location("pathname").should("include", "dashboard");
         cy.get('.react-toast-notifications__toast__content').contains('Bug successfully created!')
-
     })
 })

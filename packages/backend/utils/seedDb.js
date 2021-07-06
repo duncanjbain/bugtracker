@@ -41,7 +41,7 @@ module.exports = seedDb = async () => {
         author: ProjectUser.id,
         project: firstNewProject.id,
         assignee: ProjectUser.id,
-        dateDue: new Date(Date.now()),
+        dateDue: new Date('January 1, 2021 08:00:00'),
       }).save();
 
       const secondBug = await new Bug({
@@ -53,7 +53,7 @@ module.exports = seedDb = async () => {
         author: ProjectUser.id,
         project: firstNewProject.id,
         assignee: ProjectUser.id,
-        dateDue: new Date(Date.now()),
+        dateDue: new Date('January 2, 2021 08:00:00'),
       }).save();
 
       const thirdBug = await new Bug({
@@ -65,7 +65,7 @@ module.exports = seedDb = async () => {
         author: ProjectUser.id,
         project: firstNewProject.id,
         assignee: ProjectUser.id,
-        dateDue: new Date(Date.now()),
+        dateDue: new Date('January 3, 2021 08:00:00'),
       }).save();
 
       await User.findOneAndUpdate(

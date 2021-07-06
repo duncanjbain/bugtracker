@@ -55,7 +55,7 @@ const BugDetails = () => {
   return (
     <SingleColumnFlex>
       <CardHeader>
-        <CardTitle>Bug Details</CardTitle>
+        <CardTitle data-cy="bug-details-header">Bug Details</CardTitle>
       </CardHeader>
       <div style={{ marginBottom: '1rem' }}>
         <StyledBreadCrumbLink to="/projects">Projects</StyledBreadCrumbLink>
