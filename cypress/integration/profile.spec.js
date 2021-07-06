@@ -29,5 +29,4 @@ describe("Profile", () => {
         cy.get('[data-cy=password-input]').type('updated')
         cy.get('[data-cy=confirmPassword-input]').type('updated')
     })
-
 })

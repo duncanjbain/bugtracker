@@ -6,6 +6,7 @@ const { ApolloServer } = require('apollo-server-express');
 const User = require('../models/User');
 const Bug = require('../models/Bug');
 const Project = require('../models/Project');
+const seedDb = require('./seedDb.js')
 
 const { getCurrentUser } = require('./getCurrentUser');
 
@@ -70,24 +71,6 @@ const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}${path}`);
 });
-
-const seedDb = async () => {
-  await new User({
-    name: 'Test User',
-    email: 'test@test.com',
-    password: 'testing',
-  }).save();
-  await new User({
-    name: 'Second User',
-    email: 'secondtest@test.com',
-    password: 'testing',
-  }).save();
-  await new User({
-    name: 'Third User',
-    email: 'third@test.com',
-    password: 'testing',
-  }).save();
-};
 
 seedDb();
 

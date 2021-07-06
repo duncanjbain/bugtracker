@@ -67,13 +67,11 @@ const GET_PROJECT_MEMBERS = gql`
 const EditBugDetails = ({ bug }) => {
   const history = useHistory();
   const { addToast } = useToasts();
-  const { register, handleSubmit, control, setValue } = useForm();
-  const [descriptionValue, setDescriptionValue] = useState(bug.description);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [dateDueState, setDateDueState] = useState(
-    new Date(parseInt(bug.dateDue, 10))
+  const [dateDueState, setDateDueState] = useState(bug.bugDueDate);
+  const [descriptionValueState, setDescriptionValueState] = useState(
+    bug.description
   );
-
   const [deleteExistingBug] = useMutation(DELETE_BUG);
   const [updateExistingBug] = useMutation(UPDATE_EXISTING_BUG);
   const [getMembers, { data: dataMembers }] = useLazyQuery(
@@ -84,8 +82,13 @@ const EditBugDetails = ({ bug }) => {
       errorPolicy: 'all',
     }
   );
-
   registerLocale('enGB', enGB);
+  const { register, handleSubmit, control, setValue } = useForm({
+    defaultValues: {
+      bugDateDue: dateDueState,
+      description: descriptionValueState,
+    },
+  });
 
   const handleDelete = async (bugId) => {
     try {
@@ -102,12 +105,24 @@ const EditBugDetails = ({ bug }) => {
       });
     }
   };
+
   const handleDateChange = (dateChange) => {
-    setValue('dateDue', dateChange, {
+    setValue('bugDateDue', dateChange, {
       shouldDirty: true,
+      shouldValidate: true,
     });
     setDateDueState(dateChange);
   };
+
+  const handleDescriptionChange = (descriptionChange) => {
+    setValue('description', descriptionChange, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setDescriptionValueState(descriptionChange);
+    console.log(descriptionChange);
+  };
+
   const onSubmit = async (formData) => {
     // stolen from https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript/24190282
     const falsyRemoved = Object.entries(formData).reduce(
@@ -115,7 +130,7 @@ const EditBugDetails = ({ bug }) => {
       (a, [k, v]) => (v ? ((a[k] = v), a) : a),
       {}
     );
-
+    console.log(formData);
     try {
       await updateExistingBug({
         variables: { bugId: bug.id, ...falsyRemoved },
@@ -165,37 +180,37 @@ const EditBugDetails = ({ bug }) => {
       <FormGroup>
         <InputLabel htmlFor="description">Bug description</InputLabel>
         <Controller
-          as={
+          render={({ field: { value } }) => (
             <MDEditor
-              value={descriptionValue}
-              onChange={setDescriptionValue}
+              value={value}
+              onChange={(event) => handleDescriptionChange(event)}
               preview="edit"
               height="250"
               visiableDragbar="false"
             />
-          }
+          )}
+          data-cy="bugDescription-textInput"
           name="description"
           control={control}
-          defaultValue={bug.description}
         />
       </FormGroup>
       <FormGroup>
         <InputLabel htmlFor="dateDue">Due date</InputLabel>
         <Controller
-          render={() => (
+          render={({ field: { value } }) => (
             <DatePicker
               selected={dateDueState}
-              value={dateDueState}
-              onChange={handleDateChange}
+              value={value}
+              onChange={(event) => handleDateChange(event)}
               placeholderText="Select date"
               locale="enGB"
               dateFormat="dd/MM/yyyy"
               todayButton="Today"
             />
           )}
+          data-cy="bugDateDue-selector"
           name="dateDue"
           control={control}
-          defaultValue=""
         />
       </FormGroup>
       <FormGroup>
@@ -250,19 +265,33 @@ const EditBugDetails = ({ bug }) => {
               ))}
         </select>
       </FormGroup>
-      <SubmitButton type="submit">Update Bug</SubmitButton>
+      <SubmitButton data-cy="update-button" type="submit">
+        Update Bug
+      </SubmitButton>
       {!confirmDelete && (
-        <WarnButton type="button" onClick={() => setConfirmDelete(true)}>
+        <WarnButton
+          data-cy="delete-button"
+          type="button"
+          onClick={() => setConfirmDelete(true)}
+        >
           Delete Bug
         </WarnButton>
       )}
       {confirmDelete && (
         <div>
           <p>Are you sure?</p>
-          <DangerButton type="button" onClick={() => handleDelete(bug.id)}>
+          <DangerButton
+            data-cy="delete-confirm"
+            type="button"
+            onClick={() => handleDelete(bug.id)}
+          >
             Yes
           </DangerButton>
-          <SuccessButton type="button" onClick={() => setConfirmDelete(false)}>
+          <SuccessButton
+            data-cy="delete-abort"
+            type="button"
+            onClick={() => setConfirmDelete(false)}
+          >
             No
           </SuccessButton>
         </div>
