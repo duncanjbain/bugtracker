@@ -67,13 +67,9 @@ const GET_PROJECT_MEMBERS = gql`
 const EditBugDetails = ({ bug }) => {
   const history = useHistory();
   const { addToast } = useToasts();
-  const { register, handleSubmit, control, setValue } = useForm();
-  const [descriptionValue, setDescriptionValue] = useState(bug.description);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [dateDueState, setDateDueState] = useState(
-    new Date(parseInt(bug.dateDue, 10))
-  );
-
+  const [dateDueState, setDateDueState] = useState(new Date(Date.now()));
+  const [descriptionValueState, setDescriptionValueState] = useState('');
   const [deleteExistingBug] = useMutation(DELETE_BUG);
   const [updateExistingBug] = useMutation(UPDATE_EXISTING_BUG);
   const [getMembers, { data: dataMembers }] = useLazyQuery(
@@ -86,7 +82,12 @@ const EditBugDetails = ({ bug }) => {
   );
 
   registerLocale('enGB', enGB);
-
+  const { register, handleSubmit, control, setValue } = useForm({
+    defaultValues: {
+      bugDateDue: dateDueState,
+      descriptionValue: descriptionValueState,
+    },
+  });
   const handleDelete = async (bugId) => {
     try {
       await deleteExistingBug({ variables: { bugId } });
@@ -103,10 +104,19 @@ const EditBugDetails = ({ bug }) => {
     }
   };
   const handleDateChange = (dateChange) => {
-    setValue('dateDue', dateChange, {
+    setValue('bugDateDue', dateChange, {
       shouldDirty: true,
+      shouldValidate: true,
     });
     setDateDueState(dateChange);
+  };
+
+  const handleDescriptionChange = (descriptionChange) => {
+    setValue('bugDescription', descriptionChange, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setDescriptionValueState(descriptionChange);
   };
   const onSubmit = async (formData) => {
     // stolen from https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript/24190282
@@ -165,37 +175,38 @@ const EditBugDetails = ({ bug }) => {
       <FormGroup>
         <InputLabel htmlFor="description">Bug description</InputLabel>
         <Controller
-          as={
+          render={({ field: { value } }) => (
             <MDEditor
-              value={descriptionValue}
-              onChange={setDescriptionValue}
+              value={value}
+              onChange={(event) => handleDescriptionChange(event)}
               preview="edit"
               height="250"
               visiableDragbar="false"
             />
-          }
-          name="description"
+          )}
+          data-cy="bugDescription-textInput"
+          name="bugDescription"
           control={control}
-          defaultValue={bug.description}
+          defaultValue=""
         />
       </FormGroup>
       <FormGroup>
         <InputLabel htmlFor="dateDue">Due date</InputLabel>
         <Controller
-          render={() => (
+          render={({ field: { value } }) => (
             <DatePicker
               selected={dateDueState}
-              value={dateDueState}
-              onChange={handleDateChange}
+              value={value}
+              onChange={(event) => handleDateChange(event)}
               placeholderText="Select date"
               locale="enGB"
               dateFormat="dd/MM/yyyy"
               todayButton="Today"
             />
           )}
-          name="dateDue"
+          data-cy="bugDateDue-selector"
+          name="bugDateDue"
           control={control}
-          defaultValue=""
         />
       </FormGroup>
       <FormGroup>
