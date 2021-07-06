@@ -72,6 +72,10 @@ app.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}${path}`);
 });
 
-seedDb();
+if(process.env.NODE_ENV==="test") {
+  seedDb();
+  console.log('db seeded')
+}
+
 
 module.exports = mongoose;

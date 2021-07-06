@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest --coverage --runInBand",
-    "start:test": "nodemon utils/testServer.js",
+    "start:test": "NODE_ENV=test nodemon utils/testServer.js",
+    "start:memory": "nodemon utils/testServer.js",
     "start_dev": "nodemon index.js",
     "start": "node index.js"
   },
