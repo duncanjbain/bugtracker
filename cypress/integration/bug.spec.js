@@ -19,7 +19,7 @@ describe("Bugs", () => {
       })
     cy.log(createdOn)
     cy.get('[data-cy=bug-date-created]').contains(createdOn)
-    cy.get('[data-cy=edit-bug-button]').contains('Edit Bug')
+    cy.get('[data-cy=edit-bug-button]').contains('Edit')
     cy.get('[data-cy=edit-bug-button]').click()
     cy.get('[data-cy=delete-button]').contains('Delete Bug')
     cy.get('[data-cy=delete-button]').click()

@@ -29,7 +29,4 @@ describe("Profile", () => {
         cy.get('[data-cy=password-input]').type('updated')
         cy.get('[data-cy=confirmPassword-input]').type('updated')
     })
-    it('can view user profile from user profile')
-    cy.login('project@test.com','testing');
-    cy.visit('/profile')
 })
