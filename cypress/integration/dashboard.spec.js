@@ -23,7 +23,6 @@ describe("Dashboard Page", () => {
     it('cards are displayed', () => {
         cy.get("[data-cy=projectcard-container]").contains('My Projects')
         cy.get("[data-cy=bugscard-container]").contains('My Bugs')
-        cy.get('[data-cy=createproject-link]').click().location("pathname").should("include", "/createproject")
     })
 
 })
