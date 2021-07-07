@@ -54,7 +54,10 @@ const DashboardProjectsCard = () => {
 
   if (data) {
     return (
-      <CardWrapper data-cy="projectcard-container">
+      <CardWrapper
+        data-cy="projectcard-container"
+        style={{ overflowX: 'scroll' }}
+      >
         <CardHeader>
           <CardTitle>My Projects</CardTitle>
           <StyledButton
