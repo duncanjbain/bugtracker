@@ -13,7 +13,6 @@ import {
   TextInput,
   InputLabel,
   ValidationErrMessage,
-  FormHeader,
 } from '../ui/components/StyledForm';
 
 const formValidationSchema = yup.object().shape({
@@ -46,48 +45,50 @@ const UserLogin = () => {
 
   return (
     <SignupFormContainer>
-      <FormHeader>Log in.</FormHeader>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <LoginFormGroup>
-          <InputLabel data-cy="email-label" htmlFor="email">
-            Email
-          </InputLabel>
-          <TextInput
-            id="email"
-            type="text"
-            placeholder="Email"
-            {...register('email', { required: true })}
-            aria-required="true"
-            data-cy="email-input"
-            aria-invalid={errors.email ? 'true' : 'false'}
-            className={errors.email ? 'error' : ''}
-          />
-          {errors.email && (
-            <ValidationErrMessage id="email-error" role="alert">
-              {errors.email.message}
-            </ValidationErrMessage>
-          )}
-        </LoginFormGroup>
-        <LoginFormGroup>
-          <InputLabel data-cy="password-label" htmlFor="password">
-            Password
-          </InputLabel>
-          <TextInput
-            id="password"
-            type="password"
-            data-cy="password-input"
-            placeholder="Password"
-            {...register('password', { required: true })}
-            aria-required="true"
-            aria-invalid={errors.password ? 'true' : 'false'}
-            className={errors.password ? 'error' : ''}
-          />
-          {errors.password && (
-            <ValidationErrMessage id="password-error" role="alert">
-              {errors.password.message}
-            </ValidationErrMessage>
-          )}
-        </LoginFormGroup>
+        <fieldset style={{ width: '100%', border: 'none' }}>
+          <StyledLoginFormLegend>Log In</StyledLoginFormLegend>
+          <LoginFormGroup>
+            <InputLabel data-cy="email-label" htmlFor="email">
+              Email
+            </InputLabel>
+            <TextInput
+              id="email"
+              type="text"
+              placeholder="Email"
+              {...register('email', { required: true })}
+              aria-required="true"
+              data-cy="email-input"
+              aria-invalid={errors.email ? 'true' : 'false'}
+              className={errors.email ? 'error' : ''}
+            />
+            {errors.email && (
+              <ValidationErrMessage id="email-error" role="alert">
+                {errors.email.message}
+              </ValidationErrMessage>
+            )}
+          </LoginFormGroup>
+          <LoginFormGroup>
+            <InputLabel data-cy="password-label" htmlFor="password">
+              Password
+            </InputLabel>
+            <TextInput
+              id="password"
+              type="password"
+              data-cy="password-input"
+              placeholder="Password"
+              {...register('password', { required: true })}
+              aria-required="true"
+              aria-invalid={errors.password ? 'true' : 'false'}
+              className={errors.password ? 'error' : ''}
+            />
+            {errors.password && (
+              <ValidationErrMessage id="password-error" role="alert">
+                {errors.password.message}
+              </ValidationErrMessage>
+            )}
+          </LoginFormGroup>
+        </fieldset>
         <SubmitButton type="submit" data-cy="submit-login">
           Log In
         </SubmitButton>
@@ -116,4 +117,10 @@ const StyledLink = styled(Link)`
     color: ${(props) => props.theme.colors.dark};
     text-decoration: underline;
   }
+`;
+
+export const StyledLoginFormLegend = styled.h2`
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
 `;

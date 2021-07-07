@@ -75,7 +75,7 @@ export const StyledForm = styled.form`
   }
 `;
 
-export const FormGroup = styled.fieldset`
+export const FormGroup = styled.div`
   justify-content: start;
   display: flex;
   flex-direction: column;
@@ -87,7 +87,7 @@ export const FormGroup = styled.fieldset`
   margin: 0;
 `;
 
-export const LoginFormGroup = styled.fieldset`
+export const LoginFormGroup = styled.div`
   justify-content: start;
   display: flex;
   flex-direction: column;

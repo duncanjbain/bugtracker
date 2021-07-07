@@ -68,43 +68,46 @@ const CreateProject = () => {
         <CardTitle>Create a new project</CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup>
-          <InputLabel data-cy="projectName-label" htmlFor="projectName">
-            Project name
-          </InputLabel>
-          <TextInput
-            id="projectName"
-            type="text"
-            data-cy="projectName-input"
-            placeholder="Enter a project name"
-            {...register('projectName', { required: true })}
-            aria-required="true"
-            aria-invalid={errors.projectName ? 'true' : 'false'}
-            className={errors.projectName ? 'error' : ''}
-          />
-          {errors.projectName && (
-            <ValidationErrMessage id="projectName-error" role="alert">
-              {errors.projectName.message}
-            </ValidationErrMessage>
-          )}
-        </FormGroup>
-        <FormGroup>
-          <InputLabel data-cy="projectKey-label" htmlFor="projectKey">
-            Project key
-          </InputLabel>
-          <TextInput
-            id="lastName"
-            type="text"
-            data-cy="projectKey-input"
-            placeholder="Enter a project key"
-            {...register('projectKey', { required: true })}
-          />
-          {errors.projectKey && (
-            <ValidationErrMessage id="projectKey-error" role="alert">
-              {errors.projectKey.message}
-            </ValidationErrMessage>
-          )}
-        </FormGroup>
+        <fieldset style={{ marginBottom: '0.5rem' }}>
+          <legend>Project Details</legend>
+          <FormGroup>
+            <InputLabel data-cy="projectName-label" htmlFor="projectName">
+              Project name
+            </InputLabel>
+            <TextInput
+              id="projectName"
+              type="text"
+              data-cy="projectName-input"
+              placeholder="Enter a project name"
+              {...register('projectName', { required: true })}
+              aria-required="true"
+              aria-invalid={errors.projectName ? 'true' : 'false'}
+              className={errors.projectName ? 'error' : ''}
+            />
+            {errors.projectName && (
+              <ValidationErrMessage id="projectName-error" role="alert">
+                {errors.projectName.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputLabel data-cy="projectKey-label" htmlFor="projectKey">
+              Project key
+            </InputLabel>
+            <TextInput
+              id="projectKey"
+              type="text"
+              data-cy="projectKey-input"
+              placeholder="Enter a project key"
+              {...register('projectKey', { required: true })}
+            />
+            {errors.projectKey && (
+              <ValidationErrMessage id="projectKey-error" role="alert">
+                {errors.projectKey.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+        </fieldset>
         <SubmitButton data-cy="form-submit" type="submit">
           Create project
         </SubmitButton>
