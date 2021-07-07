@@ -56,7 +56,7 @@ const UserSignup = () => {
     <SignupFormContainer>
       <StyledForm onSubmit={handleSubmit(onSubmit)} autocomplete="on">
         <fieldset style={{ width: '100%', border: 'none' }}>
-          <legend>
+          <legend style={{ textAlign: 'center' }}>
             <StyledSignupFormLegend>Sign Up</StyledSignupFormLegend>
           </legend>
           <FormGroup>
