@@ -47,7 +47,9 @@ const UserLogin = () => {
     <SignupFormContainer>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <fieldset style={{ width: '100%', border: 'none' }}>
-          <StyledLoginFormLegend>Log In</StyledLoginFormLegend>
+          <legend>
+            <StyledLoginFormLegend>Log In</StyledLoginFormLegend>
+          </legend>
           <LoginFormGroup>
             <InputLabel data-cy="email-label" htmlFor="email">
               Email

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useHistory, Link } from 'react-router-dom';
 import * as yup from 'yup';
@@ -53,88 +54,95 @@ const UserSignup = () => {
   };
   return (
     <SignupFormContainer>
-      <h2>Sign Up</h2>
       <StyledForm onSubmit={handleSubmit(onSubmit)} autocomplete="on">
-        <FormGroup>
-          <InputLabel data-cy="name-label" htmlFor="name">
-            Name
-          </InputLabel>
-          <TextInput
-            id="name"
-            type="text"
-            data-cy="name-input"
-            placeholder="Name"
-            {...register('name', { required: true })}
-            aria-required="true"
-            aria-invalid={errors.name ? 'true' : 'false'}
-            className={errors.name ? 'error' : ''}
-          />
-          {errors.name && (
-            <ValidationErrMessage id="name-error" role="alert">
-              {errors.name.message}
-            </ValidationErrMessage>
-          )}
-        </FormGroup>
-        <FormGroup>
-          <InputLabel data-cy="email-label" tmlFor="email">
-            Email Address
-          </InputLabel>
-          <TextInput
-            id="email"
-            type="text"
-            data-cy="email-input"
-            placeholder="Email"
-            {...register('email', { required: true })}
-            aria-required="true"
-            aria-invalid={errors.email ? 'true' : 'false'}
-            className={errors.email ? 'error' : ''}
-          />
-          {errors.email && (
-            <ValidationErrMessage id="email-error" role="alert">
-              {errors.email.message}
-            </ValidationErrMessage>
-          )}
-        </FormGroup>
-        <FormGroup>
-          <InputLabel data-cy="password-label" htmlFor="password">
-            Password
-          </InputLabel>
-          <TextInput
-            id="password"
-            type="password"
-            data-cy="password-input"
-            placeholder="Password"
-            {...register('password', { required: true })}
-            aria-required="true"
-            aria-invalid={errors.password ? 'true' : 'false'}
-            className={errors.password ? 'error' : ''}
-          />
-          {errors.password && (
-            <ValidationErrMessage id="password-error" role="alert">
-              {errors.password.message}
-            </ValidationErrMessage>
-          )}
-        </FormGroup>
-        <FormGroup>
-          <InputLabel data-cy="confirmPassword-label" htmlFor="confirmPassword">
-            Confirm Password
-          </InputLabel>
-          <TextInput
-            id="confirmPassword"
-            type="password"
-            data-cy="confirmPassword-input"
-            placeholder="Confirm Password"
-            {...register('confirmPassword', { required: true })}
-            aria-required="true"
-            aria-invalid={errors.confirmPassword ? 'true' : 'false'}
-            className={errors.confirmPassword ? 'error' : ''}
-          />
-          {errors.confirmPassword && (
-            <ValidationErrMessage id="confirmPassword-error" role="alert">
-              {errors.confirmPassword.message}
-            </ValidationErrMessage>
-          )}
-        </FormGroup>
+        <fieldset style={{ width: '100%', border: 'none' }}>
+          <legend>
+            <StyledSignupFormLegend>Sign Up</StyledSignupFormLegend>
+          </legend>
+          <FormGroup>
+            <InputLabel data-cy="name-label" htmlFor="name">
+              Name
+            </InputLabel>
+            <TextInput
+              id="name"
+              type="text"
+              data-cy="name-input"
+              placeholder="Name"
+              {...register('name', { required: true })}
+              aria-required="true"
+              aria-invalid={errors.name ? 'true' : 'false'}
+              className={errors.name ? 'error' : ''}
+            />
+            {errors.name && (
+              <ValidationErrMessage id="name-error" role="alert">
+                {errors.name.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputLabel data-cy="email-label" htmlFor="email">
+              Email Address
+            </InputLabel>
+            <TextInput
+              id="email"
+              type="text"
+              data-cy="email-input"
+              placeholder="Email"
+              {...register('email', { required: true })}
+              aria-required="true"
+              aria-invalid={errors.email ? 'true' : 'false'}
+              className={errors.email ? 'error' : ''}
+            />
+            {errors.email && (
+              <ValidationErrMessage id="email-error" role="alert">
+                {errors.email.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputLabel data-cy="password-label" htmlFor="password">
+              Password
+            </InputLabel>
+            <TextInput
+              id="password"
+              type="password"
+              data-cy="password-input"
+              placeholder="Password"
+              {...register('password', { required: true })}
+              aria-required="true"
+              aria-invalid={errors.password ? 'true' : 'false'}
+              className={errors.password ? 'error' : ''}
+            />
+            {errors.password && (
+              <ValidationErrMessage id="password-error" role="alert">
+                {errors.password.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputLabel
+              data-cy="confirmPassword-label"
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
+            </InputLabel>
+            <TextInput
+              id="confirmPassword"
+              type="password"
+              data-cy="confirmPassword-input"
+              placeholder="Confirm Password"
+              {...register('confirmPassword', { required: true })}
+              aria-required="true"
+              aria-invalid={errors.confirmPassword ? 'true' : 'false'}
+              className={errors.confirmPassword ? 'error' : ''}
+            />
+            {errors.confirmPassword && (
+              <ValidationErrMessage id="confirmPassword-error" role="alert">
+                {errors.confirmPassword.message}
+              </ValidationErrMessage>
+            )}
+          </FormGroup>
+        </fieldset>
         <SubmitButton data-cy="submit-register" type="submit">
           Sign Up
         </SubmitButton>
@@ -144,11 +152,10 @@ const UserSignup = () => {
           </ValidationErrMessage>
         )}
         <p style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-          Already have an account? Click{' '}
+          Already have an account?{' '}
           <Link data-cy="login-link" to="/login">
-            here
-          </Link>{' '}
-          to log in.
+            Log in!
+          </Link>
         </p>
       </StyledForm>
     </SignupFormContainer>
@@ -156,3 +163,9 @@ const UserSignup = () => {
 };
 
 export default UserSignup;
+
+export const StyledSignupFormLegend = styled.h2`
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+`;
