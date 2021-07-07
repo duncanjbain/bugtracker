@@ -72,7 +72,7 @@ const DashboardMyBugsCard = () => {
   }
   if (data) {
     return (
-      <CardWrapper data-cy="bugscard-container" style={{ overflowX: 'scroll' }}>
+      <CardWrapper data-cy="bugscard-container">
         <CardHeader>
           <CardTitle>My Bugs</CardTitle>
           <StyledButton

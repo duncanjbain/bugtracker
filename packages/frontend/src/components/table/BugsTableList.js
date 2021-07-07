@@ -22,7 +22,7 @@ const BugsTableList = ({ title, bugs }) => {
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
   return (
-    <div>
+    <div style={{ overflowX: 'scroll' }}>
       <h4>{title}</h4>
       <StyledTable>
         <thead>
