@@ -9,7 +9,7 @@ describe("Register Page", () => {
         cy.get("[data-cy=password-label]").contains("Password");
         cy.get('[data-cy=confirmPassword-label]').contains("Confirm Password");
         cy.get("[data-cy=submit-register]").contains("Sign Up");
-        cy.get("[data-cy=login-link]").contains("here");
+        cy.get("[data-cy=login-link]").contains("Log in!");
         cy.get("[data-cy=login-link]")
           .should("have.attr", "href")
           .and("equal", "/login");
