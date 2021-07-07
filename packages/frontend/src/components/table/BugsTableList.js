@@ -29,37 +29,61 @@ const BugsTableList = ({ title, bugs }) => {
           <tr>
             <StyledTableHeader>
               Key{' '}
-              <SortButton type="button" onClick={() => requestSort('key')}>
+              <SortButton
+                aria-label="Sort Button"
+                type="button"
+                onClick={() => requestSort('key')}
+              >
                 <SortIcon sortOrder={getSortOrder('key')} />
               </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Project{' '}
-              <SortButton type="button" onClick={() => requestSort('project')}>
+              <SortButton
+                aria-label="Sort Button"
+                type="button"
+                onClick={() => requestSort('project')}
+              >
                 <SortIcon sortOrder={getSortOrder('project')} />
               </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Summary{' '}
-              <SortButton type="button" onClick={() => requestSort('summary')}>
+              <SortButton
+                aria-label="Sort Button"
+                type="button"
+                onClick={() => requestSort('summary')}
+              >
                 <SortIcon sortOrder={getSortOrder('summary')} />
               </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Type{' '}
-              <SortButton type="button" onClick={() => requestSort('type')}>
+              <SortButton
+                aria-label="Sort Button"
+                type="button"
+                onClick={() => requestSort('type')}
+              >
                 <SortIcon sortOrder={getSortOrder('type')} />
               </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Due On{' '}
-              <SortButton type="button" onClick={() => requestSort('dateDue')}>
+              <SortButton
+                aria-label="Sort Button"
+                type="button"
+                onClick={() => requestSort('dateDue')}
+              >
                 <SortIcon sortOrder={getSortOrder('dateDue')} />
               </SortButton>
             </StyledTableHeader>
             <StyledTableHeader>
               Priority{' '}
-              <SortButton type="button" onClick={() => requestSort('priority')}>
+              <SortButton
+                aria-label="Sort Button"
+                type="button"
+                onClick={() => requestSort('priority')}
+              >
                 <SortIcon sortOrder={getSortOrder('priority')} />
               </SortButton>
             </StyledTableHeader>

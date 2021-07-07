@@ -27,26 +27,38 @@ const ProjectTableList = ({ projects }) => {
         <tr>
           <StyledTableHeader>
             Key{' '}
-            <SortButton type="button" onClick={() => requestSort('projectKey')}>
+            <SortButton
+              aria-label="Sort Button"
+              type="button"
+              onClick={() => requestSort('projectKey')}
+            >
               <SortIcon sortOrder={getSortOrder('projectKey')} />
             </SortButton>
           </StyledTableHeader>
           <StyledTableHeader>
             Project Name{' '}
             <SortButton
+              aria-label="Sort Button"
               type="button"
               onClick={() => requestSort('projectName')}
             >
-              <SortIcon sortOrder={getSortOrder('projectName')} />
+              <SortIcon
+                aria-label="Sort Button"
+                sortOrder={getSortOrder('projectName')}
+              />
             </SortButton>
           </StyledTableHeader>
           <StyledTableHeader>
             Project Lead{' '}
             <SortButton
+              aria-label="Sort Button"
               type="button"
               onClick={() => requestSort('projectLead')}
             >
-              <SortIcon sortOrder={getSortOrder('projectLead')} />
+              <SortIcon
+                aria-label="Sort Button"
+                sortOrder={getSortOrder('projectLead')}
+              />
             </SortButton>
           </StyledTableHeader>
         </tr>
