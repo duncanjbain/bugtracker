@@ -6,7 +6,6 @@
 - [Introduction](#introduction)
 - [Stack](#stack)
 - [Installation and Deployment](#contributors)
-- [Acknowledgments](#acknowledgments)
 
 ## Introduction
 Bug Tracker is a bug and issue tracker created with React, Node.JS, GraphQL and MongoDB.
