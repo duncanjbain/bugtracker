@@ -1,6 +1,6 @@
 {
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/theme.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/theme.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/theme.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/theme.js",
     "statementMap": {
       "0": {
         "start": {
@@ -36,17 +36,17 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11
+      "0": 13,
+      "1": 13,
+      "2": 13
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "eba1036a687f87bdc948feeaaa812b211622061d"
+    "hash": "9cee191c076b435b632376448695916323f3e1b7"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/LoadingSpinner.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/LoadingSpinner.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/LoadingSpinner.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/LoadingSpinner.js",
     "statementMap": {
       "0": {
         "start": {
@@ -97,18 +97,18 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 26
+      "0": 13,
+      "1": 84
     },
     "f": {
-      "0": 26
+      "0": 84
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8e13274e93d3ac0ce342dc542545d2b4e54e8099"
+    "hash": "654c8c2b395957cb6d6590461de44f91c14719d0"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/context/AuthContext.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/context/AuthContext.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/context/AuthContext.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/context/AuthContext.js",
     "statementMap": {
       "0": {
         "start": {
@@ -824,47 +824,47 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 11,
-      "4": 11,
-      "5": 83,
-      "6": 82,
-      "7": 82,
-      "8": 82,
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 13,
+      "4": 13,
+      "5": 91,
+      "6": 78,
+      "7": 78,
+      "8": 78,
       "9": 0,
       "10": 0,
       "11": 0,
       "12": 0,
       "13": 0,
       "14": 0,
-      "15": 82,
-      "16": 3,
-      "17": 3,
-      "18": 1,
-      "19": 1,
-      "20": 1,
-      "21": 3,
-      "22": 82,
-      "23": 82,
+      "15": 78,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 78,
+      "23": 78,
       "24": 0,
       "25": 0,
       "26": 0,
-      "27": 82,
-      "28": 44,
-      "29": 38,
-      "30": 11,
-      "31": 110
+      "27": 78,
+      "28": 52,
+      "29": 26,
+      "30": 13,
+      "31": 78
     },
     "f": {
-      "0": 83,
+      "0": 91,
       "1": 0,
       "2": 0,
-      "3": 3,
-      "4": 3,
+      "3": 0,
+      "4": 0,
       "5": 0,
-      "6": 110
+      "6": 78
     },
     "b": {
       "0": [
@@ -878,25 +878,25 @@
         0
       ],
       "2": [
-        1,
-        2
+        0,
+        0
       ],
       "3": [
-        3,
-        3,
-        3,
-        1
+        0,
+        0,
+        0,
+        0
       ],
       "4": [
-        44,
-        38
+        52,
+        26
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f45f32c0cf8c5bf2b09953c51a0dc5d401dd9e18"
+    "hash": "bd0608c263478c8dca41608347a2b9d2cc54ca33"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/context/UserContext.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/context/UserContext.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/context/UserContext.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/context/UserContext.js",
     "statementMap": {
       "0": {
         "start": {
@@ -1048,28 +1048,28 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 37,
-      "3": 36,
-      "4": 11,
-      "5": 31
+      "0": 13,
+      "1": 13,
+      "2": 39,
+      "3": 26,
+      "4": 13,
+      "5": 233
     },
     "f": {
-      "0": 37,
-      "1": 31
+      "0": 39,
+      "1": 233
     },
     "b": {
       "0": [
-        36,
+        26,
         0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "9d1d06f11d0022d4eaf7fa2c661a7d6ca80b585c"
+    "hash": "60e6893c7bfb194cfa4d72c48e35a509e13775bc"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/StyledTable.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/StyledTable.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/StyledTable.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/StyledTable.js",
     "statementMap": {
       "0": {
         "start": {
@@ -1262,28 +1262,28 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 0,
-      "3": 11,
-      "4": 0,
-      "5": 11,
-      "6": 11,
-      "7": 0,
-      "8": 0
+      "0": 13,
+      "1": 13,
+      "2": 30,
+      "3": 13,
+      "4": 10,
+      "5": 13,
+      "6": 13,
+      "7": 20,
+      "8": 20
     },
     "f": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 0
+      "0": 30,
+      "1": 10,
+      "2": 20,
+      "3": 20
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ec9325ca1c687fafe4a5ceb13c9582c32d39fd48"
+    "hash": "76233d0ebd32598f19c0795085174c5e09b09469"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/table/SortIcon.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/table/SortIcon.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/table/SortIcon.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/table/SortIcon.js",
     "statementMap": {
       "0": {
         "start": {
@@ -1467,33 +1467,33 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 0,
+      "0": 13,
+      "1": 30,
       "2": 0,
-      "3": 0,
+      "3": 30,
       "4": 0,
-      "5": 0,
-      "6": 11,
-      "7": 11
+      "5": 30,
+      "6": 13,
+      "7": 13
     },
     "f": {
-      "0": 0
+      "0": 30
     },
     "b": {
       "0": [
         0,
-        0
+        30
       ],
       "1": [
         0,
-        0
+        30
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "fd3671f640e7f07a1b0e778d2bcc5393e696ca2b"
+    "hash": "e711a229fb876aa593e8b5eaa5d80c6850ef6631"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/SortButton.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/SortButton.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/SortButton.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/SortButton.js",
     "statementMap": {
       "0": {
         "start": {
@@ -1509,15 +1509,15 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 11
+      "0": 13
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "d5ea04251d9bd6d0a477029e71dccdb1d3d1e830"
+    "hash": "20d99f19f027777d14dd3cd5bb23dc7632779bca"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/hooks/useSortTable.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/hooks/useSortTable.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/hooks/useSortTable.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/hooks/useSortTable.js",
     "statementMap": {
       "0": {
         "start": {
@@ -2089,38 +2089,38 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
+      "0": 13,
+      "1": 10,
+      "2": 10,
+      "3": 10,
+      "4": 10,
       "5": 0,
       "6": 0,
       "7": 0,
       "8": 0,
       "9": 0,
       "10": 0,
-      "11": 0,
-      "12": 0,
+      "11": 10,
+      "12": 10,
       "13": 0,
       "14": 0,
       "15": 0,
       "16": 0,
-      "17": 0
+      "17": 10
     },
     "f": {
-      "0": 0,
-      "1": 0,
+      "0": 10,
+      "1": 10,
       "2": 0,
       "3": 0
     },
     "b": {
       "0": [
-        0
+        10
       ],
       "1": [
         0,
-        0
+        10
       ],
       "2": [
         0,
@@ -2149,10 +2149,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f9eef201dd6439f3356b698674f05b2dac34671e"
+    "hash": "51105efa1b8bc038c27b38d78a32907b93eed69a"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/table/BugsTableList.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/table/BugsTableList.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/table/BugsTableList.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/table/BugsTableList.js",
     "statementMap": {
       "0": {
         "start": {
@@ -2598,7 +2598,7 @@
       }
     },
     "s": {
-      "0": 11,
+      "0": 13,
       "1": 0,
       "2": 0,
       "3": 0,
@@ -2636,10 +2636,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "7255abfd6272c04773264944968b0ae048971a12"
+    "hash": "dee997c61958ba0a9db11ed3722f9e1558a1817e"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/StyledDashboardCard.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/StyledDashboardCard.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/StyledDashboardCard.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/StyledDashboardCard.js",
     "statementMap": {
       "0": {
         "start": {
@@ -2744,22 +2744,22 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 4,
-      "3": 4,
-      "4": 11
+      "0": 13,
+      "1": 13,
+      "2": 58,
+      "3": 58,
+      "4": 13
     },
     "f": {
-      "0": 4,
-      "1": 4
+      "0": 58,
+      "1": 58
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "954bb21f4b506d45a45a348729f1fd28e217b4ce"
+    "hash": "6a75ac372a61fce54b5543aa142ef04d076c57ab"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/typography.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/typography.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/typography.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/typography.js",
     "statementMap": {
       "0": {
         "start": {
@@ -2844,20 +2844,20 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 0,
-      "2": 0
+      "0": 13,
+      "1": 24,
+      "2": 24
     },
     "f": {
-      "0": 0,
-      "1": 0
+      "0": 24,
+      "1": 24
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "d1d79df1be7215687fe05c7599a1f184092ee22c"
+    "hash": "82fcfda6b5f29882924136a5238d4e32b5fe4302"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/dashboard/DashboardMyBugsCard.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/dashboard/DashboardMyBugsCard.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/dashboard/DashboardMyBugsCard.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/dashboard/DashboardMyBugsCard.js",
     "statementMap": {
       "0": {
         "start": {
@@ -3237,51 +3237,51 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 2,
-      "3": 2,
-      "4": 2,
-      "5": 2,
+      "0": 13,
+      "1": 13,
+      "2": 56,
+      "3": 54,
+      "4": 54,
+      "5": 34,
       "6": 0,
-      "7": 0,
-      "8": 0,
+      "7": 20,
+      "8": 12,
       "9": 0,
-      "10": 11,
-      "11": 11
+      "10": 13,
+      "11": 13
     },
     "f": {
-      "0": 2,
+      "0": 56,
       "1": 0,
       "2": 0
     },
     "b": {
       "0": [
-        2,
-        0
+        34,
+        20
       ],
       "1": [
-        2,
-        2
+        54,
+        54
       ],
       "2": [
-        0,
-        0
+        12,
+        8
       ],
       "3": [
         0,
-        0
+        12
       ],
       "4": [
-        0,
-        0
+        12,
+        12
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c05e3d3579ac8bd13c017969da43cd282eaa4775"
+    "hash": "315c01c665d4eab48766fc6a3dce1f8c5e8fa725"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/table/ProjectTableList.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/table/ProjectTableList.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/table/ProjectTableList.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/table/ProjectTableList.js",
     "statementMap": {
       "0": {
         "start": {
@@ -3615,29 +3615,29 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
+      "0": 13,
+      "1": 10,
+      "2": 10,
+      "3": 30,
+      "4": 30,
       "5": 0,
-      "6": 0,
+      "6": 10,
       "7": 0,
       "8": 0,
       "9": 0,
-      "10": 0
+      "10": 10
     },
     "f": {
-      "0": 0,
-      "1": 0,
+      "0": 10,
+      "1": 30,
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 0
+      "5": 10
     },
     "b": {
       "0": [
-        0,
+        30,
         0
       ],
       "1": [
@@ -3646,10 +3646,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "cd7caec399287d67f6b5b09aefed0ed4ef62f412"
+    "hash": "a3e3f2a47a26113fb036bcf3ff6f414bf447e26e"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/dashboard/DashboardProjectsCard.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/dashboard/DashboardProjectsCard.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/dashboard/DashboardProjectsCard.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/dashboard/DashboardProjectsCard.js",
     "statementMap": {
       "0": {
         "start": {
@@ -3993,47 +3993,47 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 2,
-      "3": 2,
-      "4": 2,
-      "5": 2,
+      "0": 13,
+      "1": 13,
+      "2": 45,
+      "3": 44,
+      "4": 44,
+      "5": 30,
       "6": 0,
-      "7": 0,
-      "8": 0,
+      "7": 14,
+      "8": 10,
       "9": 0,
-      "10": 11,
-      "11": 11
+      "10": 13,
+      "11": 13
     },
     "f": {
-      "0": 2,
+      "0": 45,
       "1": 0,
       "2": 0
     },
     "b": {
       "0": [
-        2,
-        0
+        30,
+        14
       ],
       "1": [
-        2,
-        2
+        44,
+        44
       ],
       "2": [
-        0,
-        0
+        10,
+        4
       ],
       "3": [
-        0,
+        10,
         0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ed7f0c83aea2c31fc1a197cb73dcdfe48e1e1c89"
+    "hash": "369fb8722273cd6fe26cde1d286b36e640b940cb"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/Dashboard.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/Dashboard.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/Dashboard.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/Dashboard.js",
     "statementMap": {
       "0": {
         "start": {
@@ -4094,19 +4094,19 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 2,
-      "2": 11
+      "0": 13,
+      "1": 21,
+      "2": 13
     },
     "f": {
-      "0": 2
+      "0": 21
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c9b16286d5f0345b76901fe424b124d3d724604c"
+    "hash": "6c7ed8908459334a5701e75cd20c9b531214fac3"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/dashboard/DashboardNavbar.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/dashboard/DashboardNavbar.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/dashboard/DashboardNavbar.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/dashboard/DashboardNavbar.js",
     "statementMap": {
       "0": {
         "start": {
@@ -4421,36 +4421,36 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 3,
-      "2": 2,
-      "3": 2,
-      "4": 11,
-      "5": 2,
-      "6": 11,
-      "7": 4,
-      "8": 11,
-      "9": 12,
-      "10": 11,
-      "11": 12,
-      "12": 12,
-      "13": 12
+      "0": 13,
+      "1": 39,
+      "2": 26,
+      "3": 26,
+      "4": 13,
+      "5": 26,
+      "6": 13,
+      "7": 52,
+      "8": 13,
+      "9": 156,
+      "10": 13,
+      "11": 156,
+      "12": 156,
+      "13": 156
     },
     "f": {
-      "0": 3,
-      "1": 2,
-      "2": 4,
-      "3": 12,
-      "4": 12,
-      "5": 12,
-      "6": 12
+      "0": 39,
+      "1": 26,
+      "2": 52,
+      "3": 156,
+      "4": 156,
+      "5": 156,
+      "6": 156
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "9021a3d0539c6b3e8df57be9d7dd031a9a39a33d"
+    "hash": "7a1316180b48a1ef7cc33c402cfae6ba3a5a4fba"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/PageContainers.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/PageContainers.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/PageContainers.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/PageContainers.js",
     "statementMap": {
       "0": {
         "start": {
@@ -4545,21 +4545,21 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 0,
-      "2": 0,
-      "3": 11
+      "0": 13,
+      "1": 102,
+      "2": 102,
+      "3": 13
     },
     "f": {
-      "0": 0,
-      "1": 0
+      "0": 102,
+      "1": 102
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "11b51bfd3ba555348c06d1077bf7bbafc3dc5173"
+    "hash": "6b8743ea479146c877d59b08c748646ec70b0a15"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/Projects.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/Projects.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/Projects.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/Projects.js",
     "statementMap": {
       "0": {
         "start": {
@@ -4733,8 +4733,8 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
+      "0": 13,
+      "1": 13,
       "2": 0,
       "3": 0,
       "4": 0,
@@ -4755,10 +4755,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "3868c0fbb24bea8b2b3b82a2dbd8ee2d9c0a0fc8"
+    "hash": "adec5a998b707ceee7a8484a41fbf52156e97f26"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/StyledForm.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/ui/components/StyledForm.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/StyledForm.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/ui/components/StyledForm.js",
     "statementMap": {
       "0": {
         "start": {
@@ -5245,49 +5245,49 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 70,
-      "3": 11,
-      "4": 11,
+      "0": 13,
+      "1": 13,
+      "2": 146,
+      "3": 13,
+      "4": 13,
       "5": 0,
-      "6": 11,
+      "6": 13,
       "7": 0,
-      "8": 11,
+      "8": 13,
       "9": 0,
-      "10": 11,
-      "11": 0,
-      "12": 11,
-      "13": 70,
-      "14": 11,
-      "15": 11,
-      "16": 11,
-      "17": 11,
-      "18": 11,
-      "19": 276,
-      "20": 276,
-      "21": 276,
-      "22": 11,
-      "23": 44
+      "10": 13,
+      "11": 16,
+      "12": 13,
+      "13": 0,
+      "14": 13,
+      "15": 13,
+      "16": 13,
+      "17": 13,
+      "18": 13,
+      "19": 180,
+      "20": 180,
+      "21": 180,
+      "22": 13,
+      "23": 8
     },
     "f": {
-      "0": 70,
+      "0": 146,
       "1": 0,
       "2": 0,
       "3": 0,
-      "4": 0,
-      "5": 70,
-      "6": 276,
-      "7": 276,
-      "8": 276,
-      "9": 44
+      "4": 16,
+      "5": 0,
+      "6": 180,
+      "7": 180,
+      "8": 180,
+      "9": 8
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8ead1522b8c89d081b82d3e51c12f1b65631c73a"
+    "hash": "af5b0c1cfe9eaa22c4538c8936e92014e5df7da8"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/UserProfile.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/UserProfile.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/UserProfile.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/UserProfile.js",
     "statementMap": {
       "0": {
         "start": {
@@ -6041,10 +6041,10 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 11,
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 13,
       "4": 0,
       "5": 0,
       "6": 0,
@@ -6123,10 +6123,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "86f97840398c75225a23f1138a821b1375f7c87a"
+    "hash": "74450d106e9d9b5428cb199abdadd23dabfc7bc0"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/CreateProject.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/CreateProject.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/CreateProject.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/CreateProject.js",
     "statementMap": {
       "0": {
         "start": {
@@ -6476,49 +6476,49 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0,
-      "8": 0,
-      "9": 0,
-      "10": 0,
-      "11": 0,
-      "12": 0,
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 28,
+      "4": 28,
+      "5": 28,
+      "6": 28,
+      "7": 28,
+      "8": 2,
+      "9": 2,
+      "10": 2,
+      "11": 2,
+      "12": 2,
       "13": 0,
-      "14": 0
+      "14": 28
     },
     "f": {
-      "0": 0,
-      "1": 0
+      "0": 28,
+      "1": 2
     },
     "b": {
       "0": [
-        0,
-        0
+        4,
+        24
       ],
       "1": [
-        0,
-        0
+        4,
+        24
       ],
       "2": [
-        0,
-        0
+        28,
+        4
       ],
       "3": [
-        0,
-        0
+        28,
+        4
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "49bac9bd413e03657731234e3f953274a86be88f"
+    "hash": "1c03b8845d58fc3060656c2c8db64c56810e68a8"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/CreateBug.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/CreateBug.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/CreateBug.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/CreateBug.js",
     "statementMap": {
       "0": {
         "start": {
@@ -7338,82 +7338,82 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 11,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0,
-      "8": 0,
-      "9": 0,
-      "10": 0,
-      "11": 0,
-      "12": 0,
-      "13": 0,
-      "14": 0,
-      "15": 0,
-      "16": 0,
-      "17": 0,
-      "18": 0,
-      "19": 0,
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 13,
+      "4": 67,
+      "5": 66,
+      "6": 66,
+      "7": 66,
+      "8": 66,
+      "9": 66,
+      "10": 66,
+      "11": 66,
+      "12": 66,
+      "13": 66,
+      "14": 66,
+      "15": 1,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "19": 1,
       "20": 0,
-      "21": 0,
-      "22": 0,
-      "23": 0,
-      "24": 0,
-      "25": 0,
-      "26": 0,
-      "27": 0,
-      "28": 0,
-      "29": 0,
-      "30": 0,
-      "31": 0,
-      "32": 0,
-      "33": 0,
-      "34": 0,
-      "35": 0,
-      "36": 0,
-      "37": 0
+      "21": 66,
+      "22": 1,
+      "23": 1,
+      "24": 66,
+      "25": 25,
+      "26": 25,
+      "27": 66,
+      "28": 4,
+      "29": 62,
+      "30": 1,
+      "31": 62,
+      "32": 114,
+      "33": 25,
+      "34": 66,
+      "35": 1,
+      "36": 116,
+      "37": 116
     },
     "f": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0,
-      "8": 0,
-      "9": 0,
-      "10": 0,
-      "11": 0
+      "0": 67,
+      "1": 1,
+      "2": 1,
+      "3": 25,
+      "4": 1,
+      "5": 62,
+      "6": 114,
+      "7": 25,
+      "8": 66,
+      "9": 1,
+      "10": 116,
+      "11": 116
     },
     "b": {
       "0": [
-        0,
-        0
+        4,
+        62
       ],
       "1": [
-        0,
-        0
+        62,
+        62
       ],
       "2": [
-        0,
-        0
+        62,
+        58
       ],
       "3": [
-        0,
-        0
+        62,
+        58
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "40a4154bf7923479338ff0b85f172d68c668267c"
+    "hash": "51f34b180123ee6c8cbf93f875572308256642d5"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/project/AddUserForm.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/project/AddUserForm.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/project/AddUserForm.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/project/AddUserForm.js",
     "statementMap": {
       "0": {
         "start": {
@@ -7981,62 +7981,62 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0,
-      "8": 0,
-      "9": 0,
-      "10": 0,
-      "11": 0,
-      "12": 0,
-      "13": 0,
-      "14": 0,
-      "15": 0,
-      "16": 0,
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 40,
+      "4": 40,
+      "5": 40,
+      "6": 40,
+      "7": 40,
+      "8": 40,
+      "9": 40,
+      "10": 2,
+      "11": 2,
+      "12": 40,
+      "13": 2,
+      "14": 2,
+      "15": 2,
+      "16": 2,
       "17": 0,
-      "18": 0,
-      "19": 0,
-      "20": 0,
-      "21": 0,
-      "22": 0,
-      "23": 0,
-      "24": 11,
-      "25": 11
+      "18": 40,
+      "19": 2,
+      "20": 2,
+      "21": 80,
+      "22": 80,
+      "23": 60,
+      "24": 13,
+      "25": 13
     },
     "f": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0
+      "0": 40,
+      "1": 2,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 80,
+      "6": 80,
+      "7": 60
     },
     "b": {
       "0": [
-        0,
-        0
+        20,
+        20
       ],
       "1": [
-        0,
-        0
+        40,
+        28
       ],
       "2": [
-        0,
-        0
+        16,
+        24
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "62daaf056930d1670cac95910274451edb9a730f"
+    "hash": "bd12e7c66ce5249bc2792d1c6e46343fb72c450e"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/ProjectDetails.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/ProjectDetails.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/ProjectDetails.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/ProjectDetails.js",
     "statementMap": {
       "0": {
         "start": {
@@ -8340,44 +8340,44 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0,
-      "8": 0,
-      "9": 0,
-      "10": 11,
-      "11": 11,
-      "12": 11,
-      "13": 11
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 56,
+      "4": 52,
+      "5": 52,
+      "6": 52,
+      "7": 36,
+      "8": 16,
+      "9": 24,
+      "10": 13,
+      "11": 13,
+      "12": 13,
+      "13": 13
     },
     "f": {
-      "0": 0,
-      "1": 0
+      "0": 56,
+      "1": 24
     },
     "b": {
       "0": [
-        0,
-        0
+        36,
+        16
       ],
       "1": [
-        0,
-        0
+        52,
+        36
       ],
       "2": [
         0,
-        0
+        16
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "5370ab9a373509597d4b86ecf529ce896f5f72f0"
+    "hash": "14d02483bbfa44a0666aae2ffd8cf47cbaab9cc9"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/bug/ViewBugDetails.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/bug/ViewBugDetails.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/bug/ViewBugDetails.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/bug/ViewBugDetails.js",
     "statementMap": {
       "0": {
         "start": {
@@ -8600,16 +8600,16 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
+      "0": 13,
       "1": 0,
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 11,
-      "6": 11,
-      "7": 11,
-      "8": 11,
-      "9": 11,
+      "5": 13,
+      "6": 13,
+      "7": 13,
+      "8": 13,
+      "9": 13,
       "10": 0,
       "11": 0
     },
@@ -8621,10 +8621,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "061d1c790a2e9624702b0181ad4d049916d89af0"
+    "hash": "a8e4f031f43cb63e7c994cdae7528f4cd5d7731d"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/bug/EditBugDetails.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/bug/EditBugDetails.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/bug/EditBugDetails.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/bug/EditBugDetails.js",
     "statementMap": {
       "0": {
         "start": {
@@ -9768,10 +9768,10 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 11,
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 13,
       "4": 0,
       "5": 0,
       "6": 0,
@@ -9863,10 +9863,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "5777ad3ca63bcbee06b771977e3d6c6dad3b1edf"
+    "hash": "353b0b46d57b631d3e6ccb241700846890309c5a"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/BugDetails.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/BugDetails.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/BugDetails.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/BugDetails.js",
     "statementMap": {
       "0": {
         "start": {
@@ -10164,15 +10164,15 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
+      "0": 13,
+      "1": 13,
       "2": 0,
       "3": 0,
       "4": 0,
       "5": 0,
       "6": 0,
       "7": 0,
-      "8": 11,
+      "8": 13,
       "9": 0,
       "10": 0
     },
@@ -10196,10 +10196,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f9e8b60603abc07ad306aff8b708ca3f499c2f39"
+    "hash": "d57804e820e5a5d7cdeb07304e3c8684e03f5c21"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/UserInfo.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/UserInfo.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/UserInfo.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/UserInfo.js",
     "statementMap": {
       "0": {
         "start": {
@@ -10577,8 +10577,8 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
+      "0": 13,
+      "1": 13,
       "2": 0,
       "3": 0,
       "4": 0,
@@ -10587,9 +10587,9 @@
       "7": 0,
       "8": 0,
       "9": 0,
-      "10": 11,
-      "11": 11,
-      "12": 11
+      "10": 13,
+      "11": 13,
+      "12": 13
     },
     "f": {
       "0": 0,
@@ -10616,10 +10616,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "501867407735c258c5ee85de06af23d9f739e769"
+    "hash": "ccb194b72f4b4660d836de53056f6ca1facc2b38"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/AuthenticatedApp.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/AuthenticatedApp.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/AuthenticatedApp.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/AuthenticatedApp.js",
     "statementMap": {
       "0": {
         "start": {
@@ -10714,21 +10714,21 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 2,
-      "2": 11,
-      "3": 3
+      "0": 13,
+      "1": 0,
+      "2": 13,
+      "3": 39
     },
     "f": {
-      "0": 2,
-      "1": 3
+      "0": 0,
+      "1": 39
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c2bc6d4a2e81a5e9ba6dcb5bdd88d1bb357146cf"
+    "hash": "a99befecf63b0be4a8c920894cfc2f2c46d49d40"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/pages/LandingPage.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/pages/LandingPage.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/pages/LandingPage.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/pages/LandingPage.js",
     "statementMap": {
       "0": {
         "start": {
@@ -10965,31 +10965,31 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 24,
-      "2": 11,
-      "3": 24,
-      "4": 11,
-      "5": 24,
-      "6": 11,
-      "7": 24,
-      "8": 11,
-      "9": 24,
-      "10": 11
+      "0": 13,
+      "1": 0,
+      "2": 13,
+      "3": 0,
+      "4": 13,
+      "5": 0,
+      "6": 13,
+      "7": 0,
+      "8": 13,
+      "9": 0,
+      "10": 13
     },
     "f": {
-      "0": 24,
-      "1": 24,
-      "2": 24,
-      "3": 24,
-      "4": 24
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8a5e7e6864aca8e1bbed9fa29fbf1e501c8b3b9e"
+    "hash": "d90c76d29fc2746c11f2bdc9136cbb5b4d5af174"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/UserSignup.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/UserSignup.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/UserSignup.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/UserSignup.js",
     "statementMap": {
       "0": {
         "start": {
@@ -11679,87 +11679,87 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 68,
-      "3": 68,
-      "4": 68,
-      "5": 68,
-      "6": 3,
-      "7": 3,
-      "8": 2,
-      "9": 2,
-      "10": 1,
-      "11": 68,
-      "12": 11
+      "0": 13,
+      "1": 13,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 13
     },
     "f": {
-      "0": 68,
-      "1": 3
+      "0": 0,
+      "1": 0
     },
     "b": {
       "0": [
-        2,
-        1
+        0,
+        0
       ],
       "1": [
-        8,
-        60
+        0,
+        0
       ],
       "2": [
-        8,
-        60
+        0,
+        0
       ],
       "3": [
-        68,
-        8
+        0,
+        0
       ],
       "4": [
-        12,
-        56
+        0,
+        0
       ],
       "5": [
-        12,
-        56
+        0,
+        0
       ],
       "6": [
-        68,
-        12
+        0,
+        0
       ],
       "7": [
-        8,
-        60
+        0,
+        0
       ],
       "8": [
-        8,
-        60
+        0,
+        0
       ],
       "9": [
-        68,
-        8
+        0,
+        0
       ],
       "10": [
-        8,
-        60
+        0,
+        0
       ],
       "11": [
-        8,
-        60
+        0,
+        0
       ],
       "12": [
-        68,
-        8
+        0,
+        0
       ],
       "13": [
-        68,
-        8
+        0,
+        0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "013f5f7028d229de5591fdd5751a0c9538fec206"
+    "hash": "4fd26c9d6d6980894ecff805e40bb376c2f8231b"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/components/UserLogin.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/components/UserLogin.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/components/UserLogin.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/components/UserLogin.js",
     "statementMap": {
       "0": {
         "start": {
@@ -12291,26 +12291,26 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 2,
-      "3": 2,
-      "4": 2,
+      "0": 13,
+      "1": 13,
+      "2": 0,
+      "3": 0,
+      "4": 0,
       "5": 0,
       "6": 0,
       "7": 0,
       "8": 0,
-      "9": 2,
-      "10": 11,
-      "11": 2,
-      "12": 2,
-      "13": 11
+      "9": 0,
+      "10": 13,
+      "11": 0,
+      "12": 0,
+      "13": 13
     },
     "f": {
-      "0": 2,
+      "0": 0,
       "1": 0,
-      "2": 2,
-      "3": 2
+      "2": 0,
+      "3": 0
     },
     "b": {
       "0": [
@@ -12319,38 +12319,38 @@
       ],
       "1": [
         0,
-        2
+        0
       ],
       "2": [
         0,
-        2
+        0
       ],
       "3": [
-        2,
+        0,
         0
       ],
       "4": [
         0,
-        2
+        0
       ],
       "5": [
         0,
-        2
+        0
       ],
       "6": [
-        2,
+        0,
         0
       ],
       "7": [
-        2,
+        0,
         0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "bff101b71580b582c92841e318666b146b439bf9"
+    "hash": "019c97cb2c209dba991eff91bba1af38be3a3069"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/UnauthenticatedApp.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/UnauthenticatedApp.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/UnauthenticatedApp.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/UnauthenticatedApp.js",
     "statementMap": {
       "0": {
         "start": {
@@ -12401,18 +12401,18 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 22
+      "0": 13,
+      "1": 0
     },
     "f": {
-      "0": 22
+      "0": 0
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f56069c55ec78c79d0c2050b8b5a3fa6ee33330e"
+    "hash": "18884ad21ab96a49016da3a03a3c00973836952b"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/App.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/App.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/App.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/App.js",
     "statementMap": {
       "0": {
         "start": {
@@ -12500,23 +12500,23 @@
       }
     },
     "s": {
-      "0": 25,
-      "1": 24
+      "0": 39,
+      "1": 26
     },
     "f": {
-      "0": 25
+      "0": 39
     },
     "b": {
       "0": [
-        2,
-        22
+        26,
+        0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "5f9d400daff765afd7a99c0f82a9e07019d99281"
+    "hash": "c221a6dc79431daaca48085c96bac73f8d785db6"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/apolloClient.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/apolloClient.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/apolloClient.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/apolloClient.js",
     "statementMap": {
       "0": {
         "start": {
@@ -12756,39 +12756,39 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 17,
-      "3": 17,
-      "4": 3,
-      "5": 3,
-      "6": 3,
+      "0": 13,
+      "1": 13,
+      "2": 50,
+      "3": 50,
+      "4": 50,
+      "5": 50,
+      "6": 50,
       "7": 0,
-      "8": 17,
-      "9": 11
+      "8": 50,
+      "9": 13
     },
     "f": {
-      "0": 17
+      "0": 50
     },
     "b": {
       "0": [
-        3,
-        14
+        50,
+        0
       ],
       "1": [
         0,
-        3
+        50
       ],
       "2": [
-        3,
-        14
+        50,
+        0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8e4944a0e4d139db5e64730caa196d2ff9722fe1"
+    "hash": "1eba18ebe965795a6b9fdcd21deba4af5b7dad32"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/context/AppContext.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/context/AppContext.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/context/AppContext.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/context/AppContext.js",
     "statementMap": {
       "0": {
         "start": {
@@ -12839,18 +12839,18 @@
     },
     "branchMap": {},
     "s": {
-      "0": 11,
-      "1": 22
+      "0": 13,
+      "1": 26
     },
     "f": {
-      "0": 22
+      "0": 26
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c7cc8094df74738e76fb83a310b28e37c82baebd"
+    "hash": "1f65a187569eb68df9fe47110f09d24f7f64d3b1"
   },
-  "/home/duncan/coding/bugtracker/packages/frontend/src/index.js": {
-    "path": "/home/duncan/coding/bugtracker/packages/frontend/src/index.js",
+  "/home/duncan/projects/bugtracker/packages/frontend/src/index.js": {
+    "path": "/home/duncan/projects/bugtracker/packages/frontend/src/index.js",
     "statementMap": {
       "0": {
         "start": {
@@ -12866,11 +12866,11 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 11
+      "0": 13
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ad87ef7f03769814e52be13275ff579ff4dd0fd6"
+    "hash": "9b6cab67f092cfdc81ccd26a1f6f20d5a05f3fc3"
   }
 }

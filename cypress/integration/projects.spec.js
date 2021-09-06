@@ -38,7 +38,7 @@ describe("Projects", () => {
         cy.get('[data-cy=bugType-select]').select('Enhancement')
         cy.get('[data-cy=bugSummary-textInput').type('Test Bug Summary')
         cy.get('.w-md-editor-text-input').type('Test bug description text')
-        cy.get('.react-datepicker__input-container > input').click().get('.react-datepicker__day--001').click()
+        cy.get('.react-datepicker__input-container > input').click().get('.react-datepicker__day--006').click()
         cy.get('[data-cy=bugPriority-select]').select('High')
         cy.get('[data-cy=bugAssignedUser-select]').select('Test User')
         cy.get('[data-cy=bugAuthor-select]').select('Second User')
